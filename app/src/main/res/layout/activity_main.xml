@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center|clip_vertical|center_horizontal"
         android:text="Smart Meeting Assistant"
+        android:textColor="@color/colorBlack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
