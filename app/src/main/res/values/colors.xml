@@ -5,11 +5,26 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="colorRed">#772432</color>
+    <!--Farver til knapper og og kontrast farver -->
+
     <color name="colorDarkBlue">#004165</color>
+    <!--Farver til knapper og og kontrast farver -->
+
     <color name="colorYellow">#F2DF74</color>
+    <!--Farver til knapper og og kontrast farver -->
+
     <color name="colorDarkGrey">#404040</color>
+    <!--Farver til knapper og og kontrast farver -->
+
     <color name="colorLightGrey">#A9B2B1</color>
+    <!--Bruges primært som baggrundsbillede i kombination med lightBlue-->
+
     <color name="colorBlack">#000000</color>
+    <!--  Bruges primært til skrift/fonts  -->
+
     <color name="colorWhite">#ffffff</color>
+    <!--  Bruges primært til skrift/fonts  -->
+
     <color name="colorLightBlue">#5E9FAA</color>
+    <!--  Standard brand color             -->
 </resources>
