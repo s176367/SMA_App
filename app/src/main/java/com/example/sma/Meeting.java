@@ -1,34 +1,51 @@
 package com.example.sma;
 
 
+import java.util.ArrayList;
 
 public class Meeting {
 
 
-    public Meeting(int id,int creatorId, String title, String location, int date, int time, int duration) {
+    public Meeting(int id,int creatorId, String title) {
         this.id = id;
         this.title = title;
-        this.location = location;
-        this.date = date;
-        this.time = time;
-        this.duration = duration;
-        this.creatorId = userId;
+        this.creatorId = creatorId;
     }
+
 
     private int id;
     private String title;
-    private String location;
-    private int date;
-    private int time;
-    private int duration;
     private int creatorId;
+    ArrayList<Topic> agenda = new ArrayList<>();
+    ArrayList<User> participantList = new ArrayList<>();
 
 
 
 
 
 
-    public Agenda agenda = new Agenda();
+    public void addParticipant(int userId){
+        participantList.add(Main.userList.get(userId));
+    }
+
+    public void deleteParticipant(int userId){
+        participantList.remove(Main.userList.get(userId));
+    }
+
+
+    public void addTopic(int id, String name, String description){
+        Topic topic = new Topic(id,name, description);
+        agenda.add(topic);
+    };
+
+    public void deleteTopic(int id){
+        agenda.remove(id);}
+
+
+
+
+
+
 
 
     public int getCreatorId() {
@@ -54,51 +71,5 @@ public class Meeting {
     public void setTitle(String title) {
         this.title = title;
     }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public int getDate() {
-        return date;
-    }
-
-    public void setDate(int date) {
-        this.date = date;
-    }
-
-    public int getTime() {
-        return time;
-    }
-
-    public void setTime(int time) {
-        this.time = time;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

@@ -1,27 +1,37 @@
 package com.example.sma;
 
+import java.util.ArrayList;
+
 public class Main {
+
+    // Repræsenterer på nuværende tidspunkt databasen for brugere.
+    static ArrayList<User> userList = new ArrayList<>();
+
 
 
     public static void main(String[] args) {
-        Meeting meeting = new Meeting(1, 1,"test", "DTU", 1, 12, 30);
-        meeting.agenda.addTopic(0, "Tester", "Her Går det ned");
-        meeting.agenda.addTopic(1, "MødeMAasd", "Her Går det godt");
-        meeting.agenda.addTopic(2, "Madrads", "Her Går det fremad");
+        Controller controller = new Controller();
+        controller.createAdmin(0,"Gustav","123");
 
 
-        User Gustav = new Admin(1,"Stavo", "123");
-        User Mads = new Guest(2,"MadsG", "321");
-        User Sercan = new Member(3, "Sercan", "452");
+
+        userList.get(0).createMeeting(0, 0,"Møde");
+        userList.get(0).addTopic(0,1,"Topic test", "Her ser vi på tingene.");
 
 
-        for (int i = 0; i < meeting.agenda.topicList.size(); i++) {
-            System.out.println(meeting.agenda.topicList.get(i).getId());
-            System.out.println(meeting.agenda.topicList.get(i).getName());
-            System.out.println(meeting.agenda.topicList.get(i).getDescription() + "\n");
-        }
+
+
+
+        userList.get(0).myMeetings();
+        System.out.println(userList.get(0).toString());
+        System.out.println(userList.get(0).toString());
 
 
 
     }
+
+
+
+
+
 }
