@@ -4,19 +4,23 @@ public class Controller {
 
 
 
-    public void createAdmin(int id, String name, String pass){
+    public User createAdmin(int id, String name, String pass){
         User user = new Admin(id,name,pass);
-        Main.userList.add(user);
+        return user;
     }
-    public void createMember(int id, String name, String pass){
+    public User createMember(int id, String name, String pass){
         User user = new Member(id,name,pass);
-        Main.userList.add(user);
+          return user;
     }
-    public void createGuest(int id, String name, String pass){
+    public User createGuest(int id, String name, String pass){
         User user = new Guest(id,name,pass);
-        Main.userList.add(user);
+        return user;
     }
 
+    public Meeting createMeeting(){
+        Meeting meeting = new Meeting(0,0, "Testmøde");
+        return meeting;
+    }
 
 
 

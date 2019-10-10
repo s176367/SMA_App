@@ -36,12 +36,14 @@ public abstract class User {
    }
 
 
-    public void myMeetings(){
-        for (int i = 0; i <meetingList.size() ; i++) {
-            System.out.println(meetingList.get(i).getTitle()+ "\n");
+    public String myMeetings(){
 
+        String returnMe = "";
+        for (int i = 0; i <meetingList.size() ; i++) {
+            returnMe += meetingList.get(i).getTitle() + "\n";
         }
 
+        return returnMe;
 
     }
 
