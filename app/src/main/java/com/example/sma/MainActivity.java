@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -19,31 +19,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         meeting =findViewById(R.id.meetings);
         create = findViewById(R.id.create);
-        delete = findViewById(R.id.delete);
-
-
+        delete = findViewById(R.id.Invitations);
 
         meeting.setOnClickListener(this);
         create.setOnClickListener(this);
         delete.setOnClickListener(this);
+
+
+
+
 
 
 
@@ -58,9 +48,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
-        if (view == create){
-
-        }
 
         if (view == delete){
 

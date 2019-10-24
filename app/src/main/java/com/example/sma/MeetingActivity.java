@@ -8,8 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 public class MeetingActivity extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -33,7 +31,7 @@ public class MeetingActivity extends AppCompatActivity implements View.OnClickLi
         back.setOnClickListener(this);
 
 
-        meetings.setText(userList.get(0).myMeetings());
+
 
 
 

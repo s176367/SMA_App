@@ -1,5 +1,9 @@
 package com.example.sma;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class Main {
@@ -9,9 +13,23 @@ public class Main {
 
 
 
+
+
     public static void main(String[] args) {
+
+
+
         Controller controller = new Controller();
-        controller.createAdmin(0,"Gustav","123");
+        User user;
+
+        user = controller.createAdmin(0,"Gustav","123");
+
+
+
+
+        userList.add(user);
+        System.out.println(FirebaseApp.getInstance("Gus").getName());
+
 
 
 

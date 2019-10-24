@@ -2,75 +2,37 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorLightBlue"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/BlueHero"
+    android:orientation="vertical"
     tools:context=".MainActivity">
-
-    <ImageView
-        android:id="@+id/bgPic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="0.2"
-        android:scaleType="fitXY"
-        android:src="@drawable/turquisebackground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
-
-    <TextView
-        android:id="@+id/titel"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="103dp"
-        android:gravity="center"
-        android:text="@string/Titel"
-        android:textColor="@color/colorBlack"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/meetings"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/meetings"
-        android:layout_width="197dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="43dp"
+        android:layout_width="120dp"
+        android:layout_height="124dp"
+
+        android:background="@drawable/roundbutton"
         android:text="My Meetings"
-        app:layout_constraintBottom_toTopOf="@+id/create"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titel" />
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="527dp" />
 
     <Button
         android:id="@+id/create"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="53dp"
-        android:text="Create Meeting"
-        app:layout_constraintBottom_toTopOf="@+id/delete"
-        app:layout_constraintEnd_toEndOf="@+id/meetings"
-        app:layout_constraintStart_toStartOf="@+id/meetings"
-        app:layout_constraintTop_toBottomOf="@+id/meetings" />
+        android:text="Create Meeting" />
 
     <Button
-        android:id="@+id/delete"
+        android:id="@+id/Invitations"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginRight="1dp"
         android:layout_marginBottom="106dp"
-        android:text="Delete Meeting"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/create"
-        app:layout_constraintStart_toStartOf="@+id/create"
-        app:layout_constraintTop_toBottomOf="@+id/create" />
+        android:text="Invitations" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
