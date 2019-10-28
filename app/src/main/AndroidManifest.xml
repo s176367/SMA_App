@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Aktivitet2"></activity>
-        <activity android:name=".Aktivitet1">
+        <activity android:name=".Frontpage"></activity>
+        <activity android:name=".CreateMeeting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
