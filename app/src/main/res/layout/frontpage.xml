@@ -8,21 +8,6 @@
     tools:context=".Frontpage">
 
     <TextView
-        android:id="@+id/account"
-        android:layout_width="122dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:text="Account"
-        android:textColor="#DFDADA"
-        android:textSize="20sp"
-        app:fontFamily="@font/alike"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profilebutton" />
-
-    <TextView
         android:id="@+id/mymeetings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,7 +21,7 @@
         app:layout_constraintTop_toBottomOf="@+id/meetings" />
 
     <TextView
-        android:id="@+id/favorite"
+        android:id="@+id/favoritestext"
         android:layout_width="88dp"
         android:layout_height="28dp"
         android:layout_marginTop="5dp"
@@ -51,7 +36,7 @@
         app:layout_constraintTop_toBottomOf="@+id/favorites" />
 
     <TextView
-        android:id="@+id/createmeeting"
+        android:id="@+id/createtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -65,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/create" />
 
     <TextView
-        android:id="@+id/myinvitations"
+        android:id="@+id/invitationstext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -79,35 +64,14 @@
         app:layout_constraintTop_toBottomOf="@+id/invitations" />
 
     <Button
-        android:id="@+id/profilebutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/settings"
-        android:layout_width="30dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/settings"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/meetings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="170dp"
         android:background="@drawable/m"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/account" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/create"
@@ -140,5 +104,16 @@
         android:background="@drawable/doc"
         app:layout_constraintStart_toEndOf="@+id/create"
         app:layout_constraintTop_toBottomOf="@+id/mymeetings" />
+
+    <Button
+        android:id="@+id/account"
+        android:layout_width="51dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
