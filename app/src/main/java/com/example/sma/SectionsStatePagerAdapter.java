@@ -7,19 +7,16 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class fragmentContainer extends FragmentStatePagerAdapter {
-
-
-
+public class SectionsStatePagerAdapter extends FragmentStatePagerAdapter {
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
 
 
-    public fragmentContainer(FragmentManager fm) {
+    public SectionsStatePagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
-    private void addFragment(Fragment fragment, String title){
+    public void addFragment(Fragment fragment, String title){
         mFragmentList.add(fragment);
         mFragmentTitleList.add(title);
     }

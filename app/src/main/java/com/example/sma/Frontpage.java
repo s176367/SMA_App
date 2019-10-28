@@ -3,12 +3,12 @@ package com.example.sma;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
-public class Frontpage extends AppCompatActivity {
-
-
+public class Frontpage extends AppCompatActivity implements View.OnClickListener {
 
 
     Button account;
@@ -16,8 +16,6 @@ public class Frontpage extends AppCompatActivity {
     Button meetings;
     Button invitations;
     Button create;
-
-
 
 
     @Override
@@ -31,11 +29,14 @@ public class Frontpage extends AppCompatActivity {
         invitations = findViewById(R.id.invitations);
         create = findViewById(R.id.create);
 
-
-
-
+        meetings.setOnClickListener(this);
 
     }
-}
 
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(getApplicationContext(), FragmentContainer.class);
+        startActivity(intent);
+    }
+}
 
