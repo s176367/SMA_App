@@ -91,6 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/pic_location"
+                android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/pic_location"
                 android:text="DTU Ballerup, R2"
                 android:textSize="20sp" />

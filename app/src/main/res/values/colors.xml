@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#003F62</color>
     <color name="colorAccent">#D81B60</color>
     <color name="standardBrand">#5E9FAA</color>
+    <color name="bg">#efefef</color>
 </resources>

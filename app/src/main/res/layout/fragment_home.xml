@@ -9,7 +9,7 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/bg">
 
     <ImageView
         android:id="@+id/topBar"
@@ -23,7 +23,8 @@
         android:layout_height="70dp"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="5dp"
-        android:gravity="center"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="27dp"
         android:text="Meetings"
         android:textSize="20sp"
         android:textColor="@color/cardview_light_background"
