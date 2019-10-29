@@ -4,45 +4,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+
+    >
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+        android:layout_height="120dp"
+        android:layout_marginTop="15dp"
+        android:outlineProvider="bounds"
+    >
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:padding="8dp">
 
             <TextView
                 android:id="@+id/meetingTitle"
                 android:layout_width="322dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="6dp"
                 android:text="Very Important Meeting"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="#000000"
-                android:textSize="22dp" />
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/img_persons"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@id/clockImage"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="30dp"
-                app:srcCompat="@drawable/profile" />
+                android:layout_marginRight="90dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/people"
+
+                />
 
             <TextView
                 android:id="@+id/meetingCount"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="30dp"
-                android:text="20sp" />
+                android:layout_alignBottom="@id/img_persons"
+                android:layout_alignLeft="@id/img_persons"
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="4dp"
+                android:text="30sp"
+                android:textStyle="bold" />
 
 
             <ImageView
@@ -51,8 +62,8 @@
                 android:layout_height="25dp"
                 android:layout_below="@id/meetingTitle"
 
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp"
 
                 android:background="@drawable/time" />
 
@@ -61,8 +72,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/clockImage"
-                android:layout_toRightOf="@id/clockImage"
                 android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/clockImage"
                 android:text="19:00-21:30"
                 android:textSize="20sp" />
 
@@ -70,11 +81,10 @@
                 android:id="@+id/pic_location"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:background="@drawable/location"
                 android:layout_below="@id/clockImage"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                />
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/location" />
 
             <TextView
                 android:id="@+id/meetingLocation"
@@ -82,28 +92,19 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/pic_location"
                 android:layout_toRightOf="@id/pic_location"
-                android:textSize="20sp"
                 android:text="DTU Ballerup, R2"
-                />
+                android:textSize="20sp" />
 
 
             <Button
                 android:id="@+id/editButton"
                 android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
+                android:layout_height="35dp"
                 android:layout_alignTop="@id/pic_location"
-                android:background="@drawable/edit"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"
-                />
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="90dp"
 
-
-
-
-
-
-
+                android:background="@drawable/edit" />
 
 
         </RelativeLayout>

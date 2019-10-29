@@ -18,10 +18,7 @@ public class MeetingFragment extends Fragment {
 
 
 
-    RecyclerView recyclerView;
-    MeetingAdapter adapter;
 
-    List<MeetingCard> meetingList;
 
 
     @Nullable
@@ -29,30 +26,7 @@ public class MeetingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
-        View view =  inflater.inflate(R.layout.fragment_meetings, container, false);
-
-
-
-        meetingList = new ArrayList<>();
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
-        meetingList.add(
-                new MeetingCard(0,"Møde", "19:00-20:00", "Ballerup DTU R2", 10)
-        );
-
-        meetingList.add(
-                new MeetingCard(1,"Vigtigt møde", "19:00-21:00", "Ballerup DTU R4", 4)
-        );
-
-        adapter = new MeetingAdapter(getContext(), meetingList);
-        recyclerView.setAdapter(adapter);
-
-        return view;
+      return getView();
 
 
     }
