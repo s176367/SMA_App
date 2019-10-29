@@ -19,9 +19,15 @@
         <activity android:name=".CreateMeeting">
         </activity>
 
-        <activity android:name=".Home">
+        <activity android:name=".Fragment_Home">
 
         </activity>
+
+
+
+
+
+
 
         <meta-data
             android:name="preloaded_fonts"
