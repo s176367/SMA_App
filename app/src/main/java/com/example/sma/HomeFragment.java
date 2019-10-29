@@ -46,14 +46,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
        // fake meetings for prototype
         meetingList.add(new MeetingCard(0,"Møde", "19:00-20:00", "Ballerup DTU R2", 10)
         );
-        meetingList.add(new MeetingCard(1,"Vigtigt møde", "19:00-21:00", "Ballerup DTU R4", 4)
-        );
-        meetingList.add(new MeetingCard(2,"Vigtigt møde", "19:00-21:00", "Ballerup DTU R4", 4)
-        );
-        meetingList.add(
-                new MeetingCard(1,"Vigtigt møde", "19:00-21:00", "Ballerup DTU R4", 4));
-        meetingList.add(
-                new MeetingCard(1,"Vigtigt møde", "19:00-21:00", "Ballerup DTU R4", 4));
+        meetingList.add(new MeetingCard(1,"Vigtigt møde", "19:00-21:00", "Ballerup DTU R4", 4));
+        meetingList.add(new MeetingCard(2,"Vigtigt møde", "19:00-21:00", "Ballerup DTU R4", 4));
+        meetingList.add(new MeetingCard(1,"Vigtigt møde", "19:00-21:00", "Ballerup DTU R4", 4));
+        meetingList.add(new MeetingCard(1,"Vigtigt møde", "19:00-21:00", "Ballerup DTU R4", 4));
+
+
         adapter = new MeetingAdapter(getContext(), meetingList);
         recyclerView.setAdapter(adapter);
         return view;
