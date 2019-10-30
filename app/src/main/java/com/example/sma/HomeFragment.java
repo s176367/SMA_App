@@ -61,6 +61,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
 
         if (view == but_create){
+            Intent intent = new Intent(getActivity(), CreateMeetingActivity.class);
+            startActivity(intent);
 
         }
     }

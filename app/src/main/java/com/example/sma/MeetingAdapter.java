@@ -27,7 +27,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
     @Override
     public MeetingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.meeting_layout, null);
+        View view = inflater.inflate(R.layout.meeting_template, null);
         MeetingViewHolder holder = new MeetingViewHolder(view);
         return holder;
     }
