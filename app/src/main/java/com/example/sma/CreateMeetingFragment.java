@@ -3,12 +3,16 @@ package com.example.sma;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EdgeEffect;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,7 +35,9 @@ public class CreateMeetingFragment  extends Fragment {
     EditText title;
     EditText dateView;
     EditText timeView;
-
+    EditText duration;
+    EditText location;
+    Button create;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,6 +47,20 @@ public class CreateMeetingFragment  extends Fragment {
         title = view.findViewById(R.id.title);
         dateView= view.findViewById(R.id.date);
         timeView = view.findViewById(R.id.time);
+        duration = view.findViewById(R.id.duration);
+        location = view.findViewById(R.id.location);
+        create = view.findViewById(R.id.createButton);
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FakeMeetingDatabase db = new FakeMeetingDatabase();
+                        db.addMeeting(title.getText().toString(), timeView.getText().toString(),location.getText().toString(),111);
+                Intent intent = new Intent(getActivity(),MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override

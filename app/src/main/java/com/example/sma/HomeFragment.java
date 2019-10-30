@@ -1,5 +1,6 @@
 package com.example.sma;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,14 +23,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     MeetingAdapter adapter;
     Button but_create;
 
+
     List<MeetingCard> meetingList;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
+
 
         meetingList = new ArrayList<>();
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView2);
@@ -43,15 +45,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-       // fake meetings for prototype
-        meetingList.add(new MeetingCard(0,"Møde", "19:00-20:00", "Ballerup DTU R2", 10)
-        );
-        meetingList.add(new MeetingCard(1,"Vigtigt møde", "19:00-21:00", "Ballerup DTU R4", 4));
-        meetingList.add(new MeetingCard(2,"Vigtigt møde", "19:00-21:00", "Ballerup DTU R4", 4));
-        meetingList.add(new MeetingCard(1,"Vigtigt møde", "19:00-21:00", "Ballerup DTU R4", 4));
-        meetingList.add(new MeetingCard(1,"Vigtigt møde", "19:00-21:00", "Ballerup DTU R4", 4));
+
+        FakeMeetingDatabase db = new FakeMeetingDatabase();
 
 
+
+
+
+       updateMeetingList();
         adapter = new MeetingAdapter(getContext(), meetingList);
         recyclerView.setAdapter(adapter);
         return view;
@@ -59,11 +60,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-
         if (view == but_create){
             Intent intent = new Intent(getActivity(), CreateMeetingActivity.class);
             startActivity(intent);
-
         }
+    }
+
+
+
+    public void updateMeetingList(){
+        FakeMeetingDatabase db = new FakeMeetingDatabase();
+        meetingList = db.retriveMeetingList();
+
+
+
+
+
     }
 }

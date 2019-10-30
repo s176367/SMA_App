@@ -1,20 +1,22 @@
 package com.example.sma;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class MeetingCard {
 
 
-    private int id;
+    private int id = 0;
     private String title;
     private String time;
     private String location;
     private int antalPersoner;
 
 
-    public MeetingCard(int id,String title, String time, String location, int antalPersoner) {
-        this.id = id;
+    public MeetingCard(String title, String time, String location, int peopleCount) {
+        id++;
         this.time = time;
         this.location = location;
-        this.antalPersoner = antalPersoner;
+        this.antalPersoner = peopleCount;
         this.title = title;
     }
 
