@@ -31,6 +31,19 @@ public class CreateMeetingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_createmeeting);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CreateMeetingFragment()).commit();
     }
+
+
+
+
+
+
+
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
 
 

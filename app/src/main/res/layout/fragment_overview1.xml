@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+
+    <Button
+        android:id="@+id/but_delete"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/delete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        />
+
+    <Button
+        android:id="@+id/but_back"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/back" />
+
+
+
+    <ImageView
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:srcCompat="@color/standardBrand" />
+
+
+    <TextView
+        android:id="@+id/titledetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Details"
+        android:textSize="30dp"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topBar"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp">
+
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Title"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            />
+
+        <TextView
+            android:layout_below="@id/title"
+            android:id="@+id/title_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Insert title here"
+            android:textSize="20dp"
+            />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Date"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:layout_below="@id/title_text"
+            />
+
+        <TextView
+            android:layout_below="@id/date"
+            android:id="@+id/date_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Insert date here"
+            android:textSize="20dp"
+            />
+
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_below="@id/date_text"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Time"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            />
+
+        <TextView
+            android:layout_below="@id/time"
+            android:id="@+id/time_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Insert time here"
+            android:textSize="20dp"
+            />
+        <TextView
+            android:id="@+id/duration"
+            android:layout_below="@id/time_text"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Duration"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            />
+
+        <TextView
+            android:layout_below="@id/duration"
+            android:id="@+id/duration_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Insert duration here"
+            android:textSize="20dp"
+            />
+
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_below="@id/duration_text"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Location"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            />
+
+        <TextView
+            android:layout_below="@id/location"
+            android:id="@+id/location_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Insert location here"
+            android:textSize="20dp"
+            />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+</RelativeLayout>

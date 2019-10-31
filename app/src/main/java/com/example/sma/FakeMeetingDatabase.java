@@ -1,6 +1,5 @@
 package com.example.sma;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.preference.PreferenceManager;
@@ -20,6 +19,8 @@ public class FakeMeetingDatabase {
     SharedPreferences.Editor editor;
 FakeMeetingDatabase (){
 
+
+
     prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.getContext());
     editor = prefs.edit();
 }
@@ -29,12 +30,12 @@ FakeMeetingDatabase (){
 
     static List<MeetingCard> meetingList = new ArrayList<MeetingCard>();
 
-    public void addMeeting(String title, String time, String location, int peopleCount) {
+    public void addMeeting(String title, String time, String location, int peopleCount, String date) {
 
         json = prefs.getString("Meetings","");
         meetingList = retriveMeetingList();
 
-            MeetingCard mCard = new MeetingCard(title, time, location, peopleCount);
+            MeetingCard mCard = new MeetingCard(title, time, location, peopleCount, date);
             meetingList.add(mCard);
             json = gson.toJson(meetingList);
             editor.putString("Meetings", json);

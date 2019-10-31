@@ -10,14 +10,24 @@ public class MeetingCard {
     private String time;
     private String location;
     private int antalPersoner;
+    private String date;
 
 
-    public MeetingCard(String title, String time, String location, int peopleCount) {
+    public MeetingCard(String title, String time, String location, int peopleCount, String date) {
         id++;
         this.time = time;
         this.location = location;
         this.antalPersoner = peopleCount;
         this.title = title;
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getTitle() {

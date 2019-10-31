@@ -1,11 +1,13 @@
 package com.example.sma;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,13 +35,29 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MeetingViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MeetingViewHolder holder, int position) {
 
-        MeetingCard meeting = meetingList.get(position);
+        final MeetingCard meeting = meetingList.get(position);
         holder.textViewTitle.setText(meeting.getTitle());
         holder.textViewTime.setText(meeting.getTime());
         holder.textViewLocation.setText(meeting.getLocation());
         holder.textViewPeopleCount.setText(String.valueOf(meeting.getAntalPersoner()));
+        holder.textViewDate.setText(String.valueOf(meeting.getDate()));
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mCtx, OverviewActivity.class);
+                intent.putExtra("title", holder.textViewTitle.getText().toString());
+                mCtx.startActivity(intent);
+
+
+
+            }
+        });
+
+
     }
 
     @Override
@@ -50,7 +68,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
     class MeetingViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
-        TextView textViewTitle, textViewTime, textViewLocation, textViewPeopleCount;
+        TextView textViewTitle, textViewTime, textViewLocation, textViewPeopleCount,textViewDate;
 
 
         public MeetingViewHolder(@NonNull View itemView) {
@@ -60,6 +78,9 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
             textViewTime = itemView.findViewById(R.id.meetingTime);
             textViewLocation = itemView.findViewById(R.id.meetingLocation);
             textViewPeopleCount = itemView.findViewById(R.id.meetingCount);
+            textViewDate = itemView.findViewById(R.id.date);
         }
     }
+
+
 }

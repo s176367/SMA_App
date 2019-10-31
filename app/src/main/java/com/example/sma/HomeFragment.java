@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,18 +38,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView2);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
-
-
         but_create = view.findViewById(R.id.but_createMeeting);
         but_create.setOnClickListener(this);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
-
         FakeMeetingDatabase db = new FakeMeetingDatabase();
-
-
 
 
 

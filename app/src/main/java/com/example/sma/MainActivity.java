@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragmemt = new HomeFragment();
                             break;
 
-                        case R.id.nav_meetings:
+                        case R.id.nav_contacts:
                             selectedFragmemt = new MeetingFragment();
                             break;
 
