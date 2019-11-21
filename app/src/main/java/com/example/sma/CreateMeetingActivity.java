@@ -30,6 +30,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createmeeting);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CreateMeetingFragment()).commit();
+
     }
 
 

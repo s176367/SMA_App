@@ -25,12 +25,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class CreateMeetingFragment  extends Fragment {
+public class CreateMeetingFragment  extends Fragment  {
 
 
     final Calendar calender = Calendar.getInstance();
@@ -42,7 +44,7 @@ public class CreateMeetingFragment  extends Fragment {
     Button create;
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_createmeeting, container, false);
 
 
@@ -61,9 +63,13 @@ public class CreateMeetingFragment  extends Fragment {
 
                 if (allFilled()) {
                     FakeMeetingDatabase db = new FakeMeetingDatabase();
-                    db.addMeeting(title.getText().toString(), timeView.getText().toString(), location.getText().toString(), 111,dateView.getText().toString());
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
+
+                    db.addMeeting(title.getText().toString(), timeView.getText().toString(), location.getText().toString(), 11,dateView.getText().toString());
+                    Fragment fragment = new CreateAgendaFragment();
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    FragmentTransaction transaction = fm.beginTransaction();
+                    transaction.replace(container.getId(), fragment);
+                    transaction.commit();
                 }
 
                 else {
