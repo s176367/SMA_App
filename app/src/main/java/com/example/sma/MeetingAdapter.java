@@ -7,10 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.sma.Model.MeetingObject;
+import com.example.sma.Overview.ActivityOverview;
 
 import java.util.List;
 
@@ -18,9 +20,9 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
 
 
     private Context mCtx;
-    private List<MeetingCard> meetingList;
+    private List<MeetingObject> meetingList;
 
-    public MeetingAdapter(Context mCtx, List<MeetingCard> meetingList) {
+    public MeetingAdapter(Context mCtx, List<MeetingObject> meetingList) {
         this.mCtx = mCtx;
         this.meetingList = meetingList;
     }
@@ -37,7 +39,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
     @Override
     public void onBindViewHolder(@NonNull final MeetingViewHolder holder, int position) {
 
-        final MeetingCard meeting = meetingList.get(position);
+        final MeetingObject meeting = meetingList.get(position);
         holder.textViewTitle.setText(meeting.getTitle());
         holder.textViewTime.setText(meeting.getTime());
         holder.textViewLocation.setText(meeting.getLocation());
@@ -48,7 +50,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mCtx, OverviewActivity.class);
+                Intent intent = new Intent(mCtx, ActivityOverview.class);
                 intent.putExtra("title", holder.textViewTitle.getText().toString());
                 mCtx.startActivity(intent);
 

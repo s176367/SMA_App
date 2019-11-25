@@ -1,11 +1,11 @@
-package com.example.sma;
+package com.example.sma.Model;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.ArrayList;
 
-public class MeetingCard {
+public class MeetingObject {
 
 
-    private int id = 0;
+    private int id;
     private String title;
     private String time;
     private String location;
@@ -13,30 +13,16 @@ public class MeetingCard {
     private String date;
 
 
-    public MeetingCard(String title, String time, String location, int peopleCount, String date) {
-        id++;
-        this.time = time;
-        this.location = location;
-        this.antalPersoner = peopleCount;
-        this.title = title;
-        this.date = date;
+    public ArrayList<Topic> topics = new ArrayList<>();
+
+    public ArrayList<Topic> getTopics() {
+        return topics;
     }
 
-    public String getDate() {
-        return date;
+    public void setTopics(ArrayList<Topic> topics) {
+        this.topics = topics;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public int getId() {
         return id;
@@ -46,6 +32,13 @@ public class MeetingCard {
         this.id = id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getTime() {
         return time;
@@ -70,4 +63,20 @@ public class MeetingCard {
     public void setAntalPersoner(int antalPersoner) {
         this.antalPersoner = antalPersoner;
     }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+
+
+
+
+
+
+
 }

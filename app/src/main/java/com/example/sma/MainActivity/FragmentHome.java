@@ -1,13 +1,11 @@
-package com.example.sma;
+package com.example.sma.MainActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,17 +13,23 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sma.CreateMeeting.ActivityCreateMeeting;
+import com.example.sma.FakeMeetingDatabase;
+import com.example.sma.MeetingAdapter;
+import com.example.sma.Model.MeetingObject;
+import com.example.sma.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements View.OnClickListener {
+public class FragmentHome extends Fragment implements View.OnClickListener {
 
     RecyclerView recyclerView;
     MeetingAdapter adapter;
     Button but_create;
 
 
-    List<MeetingCard> meetingList;
+    List<MeetingObject> meetingList;
 
     @Nullable
     @Override
@@ -54,7 +58,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view == but_create){
-            Intent intent = new Intent(getActivity(), CreateMeetingActivity.class);
+            Intent intent = new Intent(getActivity(), ActivityCreateMeeting.class);
             startActivity(intent);
         }
     }

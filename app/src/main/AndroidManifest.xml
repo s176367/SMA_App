@@ -12,7 +12,7 @@
         android:hardwareAccelerated="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity.ActivityMain">
             <intent-filter>
 
                 <action android:name="android.intent.action.MAIN" />
@@ -21,11 +21,11 @@
 
         </activity>
 
-        <activity android:name=".CreateMeetingActivity">
+        <activity android:name=".CreateMeeting.ActivityCreateMeeting">
 
         </activity>
 
-        <activity android:name=".OverviewActivity">
+        <activity android:name=".Overview.ActivityOverview">
 
         </activity>
 

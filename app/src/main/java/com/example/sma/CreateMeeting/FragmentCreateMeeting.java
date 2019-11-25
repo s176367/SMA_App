@@ -1,38 +1,31 @@
-package com.example.sma;
+package com.example.sma.CreateMeeting;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EdgeEffect;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.sma.FakeMeetingDatabase;
+import com.example.sma.R;
+import com.example.sma.TimePickerFragment;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class CreateMeetingFragment  extends Fragment  {
+public class FragmentCreateMeeting extends Fragment  {
 
 
     final Calendar calender = Calendar.getInstance();
@@ -53,7 +46,7 @@ public class CreateMeetingFragment  extends Fragment  {
         timeView = view.findViewById(R.id.time);
         duration = view.findViewById(R.id.duration);
         location = view.findViewById(R.id.location);
-        create = view.findViewById(R.id.createButton);
+        create = view.findViewById(R.id.addTopic);
 
 
         create.setOnClickListener(new View.OnClickListener() {
@@ -64,8 +57,11 @@ public class CreateMeetingFragment  extends Fragment  {
                 if (allFilled()) {
                     FakeMeetingDatabase db = new FakeMeetingDatabase();
 
-                    db.addMeeting(title.getText().toString(), timeView.getText().toString(), location.getText().toString(), 11,dateView.getText().toString());
-                    Fragment fragment = new CreateAgendaFragment();
+                //    db.addMeeting(title.getText().toString(), timeView.getText().toString(), location.getText().toString(), 11,dateView.getText().toString());
+
+
+
+                    Fragment fragment = new FragmentCreateAgenda();
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     FragmentTransaction transaction = fm.beginTransaction();
                     transaction.replace(container.getId(), fragment);

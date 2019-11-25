@@ -12,7 +12,7 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 
-public class DurationPickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
+public class TimePicker1 extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
 
     @NonNull
@@ -26,7 +26,7 @@ public class DurationPickerFragment extends DialogFragment implements TimePicker
     }
 
     @Override
-    public void onTimeSet(TimePicker timePicker, int hour, int min) {
+    public void onTimeSet(android.widget.TimePicker timePicker, int hour, int min) {
         EditText timeView = (EditText) getActivity().findViewById(R.id.time);
         timeView.setText(""+ timePicker.getCurrentHour()+ ":"+timePicker.getCurrentMinute());
 

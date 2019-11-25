@@ -63,7 +63,7 @@
         />
 
     <Button
-        android:id="@+id/createButton"
+        android:id="@+id/addTopic"
         android:layout_below="@id/location"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"

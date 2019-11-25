@@ -1,4 +1,4 @@
-package com.example.sma;
+package com.example.sma.MainActivity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class invitesFragment extends Fragment {
+import com.example.sma.R;
+
+public class FragmentInvites extends Fragment {
 
 
     @Nullable
