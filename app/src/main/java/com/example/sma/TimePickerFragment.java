@@ -20,6 +20,9 @@ import java.util.Calendar;
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
 
+    String modifyHour;
+    String modifyMin;
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -31,8 +34,23 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int min) {
+
         EditText timeView = (EditText) getActivity().findViewById(R.id.time);
-        timeView.setText(""+ timePicker.getCurrentHour()+ ":"+timePicker.getCurrentMinute());
+        int settedHour = timePicker.getCurrentHour();
+        int settedMin = timePicker.getCurrentMinute();
+        if (settedMin <10){
+            modifyMin = "0" + settedMin;}
+        else {
+            modifyMin = String.valueOf(settedMin);
+        }
+        if (settedHour < 10){
+            modifyHour ="0" + settedHour;
+        }
+        else {
+            modifyHour = String.valueOf(settedHour);
+        }
+
+        timeView.setText(modifyHour+ ":"+modifyMin);
 
     }
 }

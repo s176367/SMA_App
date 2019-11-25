@@ -48,18 +48,13 @@ public class FragmentCreateMeeting extends Fragment  {
         location = view.findViewById(R.id.location);
         create = view.findViewById(R.id.addTopic);
 
-
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
-                if (allFilled()) {
+                if (!allFilled()) {
                     FakeMeetingDatabase db = new FakeMeetingDatabase();
-
                 //    db.addMeeting(title.getText().toString(), timeView.getText().toString(), location.getText().toString(), 11,dateView.getText().toString());
-
-
 
                     Fragment fragment = new FragmentCreateAgenda();
                     FragmentManager fm = getActivity().getSupportFragmentManager();
@@ -67,14 +62,12 @@ public class FragmentCreateMeeting extends Fragment  {
                     transaction.replace(container.getId(), fragment);
                     transaction.commit();
                 }
-
                 else {
                     Toast toast = Toast.makeText(view.getContext(), "Fill in the remaining fields", Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
         });
-
 
 
 
