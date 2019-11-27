@@ -49,7 +49,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         else {
             modifyHour = String.valueOf(settedHour);
         }
-
+        
         timeView.setText(modifyHour+ ":"+modifyMin);
 
     }
