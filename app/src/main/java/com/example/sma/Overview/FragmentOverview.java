@@ -1,4 +1,4 @@
-package com.example.sma;
+package com.example.sma.Overview;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,12 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import org.w3c.dom.Text;
+import com.example.sma.FakeMeetingDatabase;
+import com.example.sma.MainActivity.ActivityMain;
+import com.example.sma.Model.MeetingObject;
+import com.example.sma.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class Overview_fragment extends Fragment implements View.OnClickListener {
+public class FragmentOverview extends Fragment implements View.OnClickListener {
 
 
     TextView title;
@@ -28,7 +30,7 @@ public class Overview_fragment extends Fragment implements View.OnClickListener 
     Button back;
     Button delete;
     String recivedInfo;
-    ArrayList<MeetingCard> list;
+    ArrayList<MeetingObject> list;
     FakeMeetingDatabase db;
 
 
@@ -77,7 +79,7 @@ public class Overview_fragment extends Fragment implements View.OnClickListener 
                     db.deleteMeeting(list.get(i).getTitle());
                 }
             }
-            Intent intent = new Intent(getContext(), MainActivity.class);
+            Intent intent = new Intent(getContext(), ActivityMain.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
 

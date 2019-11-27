@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 
 import androidx.preference.PreferenceManager;
 
+import com.example.sma.MainActivity.ActivityMain;
+import com.example.sma.Model.MeetingObject;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -17,26 +19,26 @@ public class FakeMeetingDatabase {
 
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
-FakeMeetingDatabase (){
-
-
-
-    prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.getContext());
+public FakeMeetingDatabase(){
+    prefs = PreferenceManager.getDefaultSharedPreferences(ActivityMain.getContext());
     editor = prefs.edit();
 }
 
     Gson gson = new Gson();
     String json;
 
-    static List<MeetingCard> meetingList = new ArrayList<MeetingCard>();
+  //  static List<MeetingCard> meetingList2 = new ArrayList<MeetingCard>();
+    static List<MeetingObject> meetingList = new ArrayList<>();
 
-    public void addMeeting(String title, String time, String location, int peopleCount, String date) {
+    public void addMeeting(MeetingObject meetingObject) {
 
         json = prefs.getString("Meetings","");
         meetingList = retriveMeetingList();
 
-            MeetingCard mCard = new MeetingCard(title, time, location, peopleCount, date);
-            meetingList.add(mCard);
+           // MeetingCard mCard = new MeetingCard(title, time, location, peopleCount, date);
+         //   meetingList.add(mCard);
+
+
             json = gson.toJson(meetingList);
             editor.putString("Meetings", json);
             editor.commit();
@@ -60,17 +62,17 @@ FakeMeetingDatabase (){
 
     }
 
-    public ArrayList<MeetingCard> retriveMeetingList() {
+    public ArrayList<MeetingObject> retriveMeetingList() {
 
         json = prefs.getString("Meetings","");
-        ArrayList<MeetingCard> returnList = null;
+        ArrayList<MeetingObject> returnList = null;
         if (!json.isEmpty()) {
-            Type type = new TypeToken<List<MeetingCard>>() {
+            Type type = new TypeToken<List<MeetingObject>>() {
             }.getType();
             returnList = gson.fromJson(json, type);
         }
 
-        else returnList = new ArrayList<MeetingCard>();
+        else returnList = new ArrayList<MeetingObject>();
         return returnList;
     }
 }

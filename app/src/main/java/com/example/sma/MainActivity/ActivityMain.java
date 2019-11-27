@@ -1,4 +1,4 @@
-package com.example.sma;
+package com.example.sma.MainActivity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,9 +8,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.sma.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class ActivityMain extends AppCompatActivity {
 
 
     protected static Context mContext;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
 
     }
 
@@ -36,15 +37,15 @@ public class MainActivity extends AppCompatActivity {
 
                     switch (menuItem.getItemId()){
                         case R.id.nav_home:
-                            selectedFragmemt = new HomeFragment();
+                            selectedFragmemt = new FragmentHome();
                             break;
 
                         case R.id.nav_contacts:
-                            selectedFragmemt = new MeetingFragment();
+                            selectedFragmemt = new FragmentContacts();
                             break;
 
                         case R.id.nav_invites:
-                            selectedFragmemt = new invitesFragment();
+                            selectedFragmemt = new FragmentInvites();
                             break;
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

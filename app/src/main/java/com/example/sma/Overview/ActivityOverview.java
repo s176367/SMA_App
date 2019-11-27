@@ -1,17 +1,13 @@
-package com.example.sma;
+package com.example.sma.Overview;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.sma.R;
 
-public class OverviewActivity extends AppCompatActivity {
+public class ActivityOverview extends AppCompatActivity {
 
 
 
@@ -32,7 +28,7 @@ public class OverviewActivity extends AppCompatActivity {
 
         Bundle bundle = new Bundle();
         bundle.putString("title", title );
-        Overview_fragment overFrag = new Overview_fragment();
+        FragmentOverview overFrag = new FragmentOverview();
         overFrag.setArguments(bundle);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, overFrag).commit();

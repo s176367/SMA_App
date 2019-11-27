@@ -1,4 +1,4 @@
-package com.example.sma;
+package com.example.sma.MainActivity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MeetingFragment extends Fragment {
+public class FragmentContacts extends Fragment {
 
 
 
