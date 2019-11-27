@@ -1,11 +1,15 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
+
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
         applicationId "com.example.sma"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -19,7 +23,6 @@ android {
     }
 
 
-
 }
 
 
@@ -30,10 +33,16 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "androidx.preference:preference:1.1.0"
     testImplementation 'junit:junit:4.12'
+    implementation 'com.google.firebase:firebase-auth:16.0.5'
+    implementation 'com.google.firebase:firebase-firestore:17.1.2'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.android.support:design:29.0.0'
     implementation 'com.google.code.gson:gson:2.7'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+    implementation 'com.android.support:multidex:1.0.3'
+
 
 }

@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +52,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+
     @Override
     public void onClick(View view) {
         if (view == but_create){
@@ -64,10 +66,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void updateMeetingList(){
         FakeMeetingDatabase db = new FakeMeetingDatabase();
         meetingList = db.retriveMeetingList();
-
-
-
-
 
     }
 }
