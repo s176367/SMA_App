@@ -12,32 +12,29 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
 public class FakeMeetingDatabase {
 
 
 
-    SharedPreferences prefs;
-    SharedPreferences.Editor editor;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 public FakeMeetingDatabase(){
     prefs = PreferenceManager.getDefaultSharedPreferences(ActivityMain.getContext());
     editor = prefs.edit();
 }
 
-    Gson gson = new Gson();
-    String json;
+    private Gson gson = new Gson();
+    private String json;
 
-  //  static List<MeetingCard> meetingList2 = new ArrayList<MeetingCard>();
-    static List<MeetingObject> meetingList = new ArrayList<>();
+    public static List<MeetingObject> meetingList = new ArrayList<>();
 
     public void addMeeting(MeetingObject meetingObject) {
 
         json = prefs.getString("Meetings","");
         meetingList = retriveMeetingList();
 
-           // MeetingCard mCard = new MeetingCard(title, time, location, peopleCount, date);
-         //   meetingList.add(mCard);
 
+            meetingList.add(meetingObject);
 
             json = gson.toJson(meetingList);
             editor.putString("Meetings", json);
@@ -65,7 +62,7 @@ public FakeMeetingDatabase(){
     public ArrayList<MeetingObject> retriveMeetingList() {
 
         json = prefs.getString("Meetings","");
-        ArrayList<MeetingObject> returnList = null;
+        ArrayList<MeetingObject> returnList;
         if (!json.isEmpty()) {
             Type type = new TypeToken<List<MeetingObject>>() {
             }.getType();

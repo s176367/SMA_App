@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:scrollbars="vertical"
 
-        android:id="@+id/description"
+        android:id="@+id/topic_description"
         android:layout_below="@+id/topicTitle"
         android:layout_marginTop="70dp"
         android:background="#FFFFFF"

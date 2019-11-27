@@ -61,6 +61,7 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
                 time.setText(list.get(i).getTime());
                 date.setText(list.get(i).getDate());
                 location.setText(list.get(i).getLocation());
+                duration.setText(list.get(i).getDuration());
             }
         }
         return view;

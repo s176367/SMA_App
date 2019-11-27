@@ -18,8 +18,20 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+
+        <activity android:name=".Login">
+
 
         </activity>
+        <activity android:name=".Registration">
+
+        </activity>
+        <activity android:name=".Profile">
+        </activity>
+
+
 
         <activity android:name=".CreateMeeting.ActivityCreateMeeting">
 
@@ -28,6 +40,7 @@
         <activity android:name=".Overview.ActivityOverview">
 
         </activity>
+
 
 
 

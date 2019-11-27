@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.NumberPicker;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,6 +20,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.sma.DurationNPFragment;
 import com.example.sma.FakeMeetingDatabase;
+import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 import com.example.sma.TimePickerFragment;
 
@@ -39,18 +38,33 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
     EditText duration;
     EditText location;
     Button create;
-
+    MeetingObject tempMeeting;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_createmeeting, container, false);
+        View view =  inflater.inflate(R.layout.fragment_createmeeting, container, false);
+        tempMeeting = ((ActivityCreateMeeting)getActivity()).getMeeting();
 
-        title = view.findViewById(R.id.title);
-        dateView = view.findViewById(R.id.date);
+
+
+        title = view.findViewById(R.id.insert_title);
+        dateView= view.findViewById(R.id.date);
         timeView = view.findViewById(R.id.time);
         duration = view.findViewById(R.id.duration);
         location = view.findViewById(R.id.location);
         create = view.findViewById(R.id.addTopic);
+
+                if (tempMeeting.getTitle() != null){
+                    title.setText(tempMeeting.getTitle());
+                    dateView.setText(tempMeeting.getDate());
+                    timeView.setText(tempMeeting.getTime());
+                    duration.setText(tempMeeting.getDuration());
+                    location.setText(tempMeeting.getLocation());
+                    }
+
+
+
+
 
         duration.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,17 +76,17 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (allFilled()) {
+                    tempMeeting.setTitle(title.getText().toString());
+                    tempMeeting.setDate(dateView.getText().toString());
+                    tempMeeting.setTime(timeView.getText().toString());
+                    tempMeeting.setLocation(location.getText().toString());
+                    tempMeeting.setDuration(duration.getText().toString());
+                    ((ActivityCreateMeeting)getActivity()).setMeeting(tempMeeting);
 
-                if (!allFilled()) {
-                    FakeMeetingDatabase db = new FakeMeetingDatabase();
-                    //    db.addMeeting(title.getText().toString(), timeView.getText().toString(), location.getText().toString(), 11,dateView.getText().toString());
-
-                    Fragment fragment = new FragmentCreateAgenda();
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    FragmentTransaction transaction = fm.beginTransaction();
-                    transaction.replace(container.getId(), fragment);
-                    transaction.commit();
-                } else {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(container.getId(), new FragmentCreateAgenda()).commit();
+                }
+                else {
                     Toast toast = Toast.makeText(view.getContext(), "Fill in the remaining fields", Toast.LENGTH_SHORT);
                     toast.show();
                 }
@@ -80,35 +94,33 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
         });
 
 
+
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
-                calender.set(calender.YEAR, year);
+                calender.set(calender.YEAR,year);
                 calender.set(calender.MONTH, month);
-                calender.set(calender.DAY_OF_MONTH, day);
+                calender.set(calender.DAY_OF_MONTH,day);
                 updateLabel();
-            }
-        };
+            }};
 
         dateView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(view.getContext(), date, calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(view.getContext(),date,calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
-        timeView.setOnClickListener(new View.OnClickListener() {
+     timeView.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View view) {
-                DialogFragment timeFragment = new TimePickerFragment();
-                timeFragment.show(getFragmentManager(), "timepicker");
+         @Override
+         public void onClick(View view) {
+             DialogFragment timeFragment = new TimePickerFragment();
+             timeFragment.show(getFragmentManager(), "timepicker");
 
-            }
-        });
-
-
-        return view;
+         }
+     });
+                return view;
     }
 
 
@@ -120,23 +132,25 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
     }
 
 
-    public boolean allFilled() {
+
+
+    public boolean allFilled (){
 
         Boolean returnMe = true;
 
-        if (title.getText().toString().isEmpty()) {
+        if (title.getText().toString().isEmpty()){
             returnMe = false;
         }
-        if (dateView.getText().toString().isEmpty()) {
+        if (dateView.getText().toString().isEmpty()){
             returnMe = false;
         }
-        if (timeView.getText().toString().isEmpty()) {
+        if (timeView.getText().toString().isEmpty()){
             returnMe = false;
         }
-        if (duration.getText().toString().isEmpty()) {
+        if (duration.getText().toString().isEmpty()){
             returnMe = false;
         }
-        if (location.getText().toString().isEmpty()) {
+        if (location.getText().toString().isEmpty()){
             returnMe = false;
         }
 
@@ -155,7 +169,6 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
         DurationNPFragment newFragment = new DurationNPFragment();
         newFragment.setValueChangeListener(this);
         newFragment.show(getFragmentManager(), "time picker");
-        System.out.println("hej Stavo");
     }
 
     public String eValPicker(int npVal) {

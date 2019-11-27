@@ -11,7 +11,15 @@ public class MeetingObject {
     private String location;
     private int antalPersoner;
     private String date;
+    private String duration;
 
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
 
     public ArrayList<Topic> topics = new ArrayList<>();
 
@@ -71,6 +79,7 @@ public class MeetingObject {
     public void setDate(String date) {
         this.date = date;
     }
+
 
 
 

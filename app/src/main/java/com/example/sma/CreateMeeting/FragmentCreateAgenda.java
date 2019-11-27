@@ -1,5 +1,6 @@
 package com.example.sma.CreateMeeting;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,30 +15,56 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sma.FakeMeetingDatabase;
+import com.example.sma.MainActivity.ActivityMain;
+import com.example.sma.Model.MeetingObject;
+import com.example.sma.Model.Topic;
 import com.example.sma.R;
 
-public class FragmentCreateAgenda extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
 
-    Button addTopic;
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
+public class FragmentCreateAgenda extends Fragment implements TopicAdapter.ItemClickListener{
+
+    Button but_addTopic;
+    Button but_finishAgenda;
+    FakeMeetingDatabase db = new FakeMeetingDatabase();
+
+    private TopicAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-
+    private MeetingObject tempMeeting;
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_createagenda, container, false);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_agenda);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        tempMeeting = ((ActivityCreateMeeting)getActivity()).getMeeting();
 
-        recyclerView = view.findViewById(R.id.recycler_agenda);
+            adapter = new TopicAdapter(view.getContext(), tempMeeting.topics);
+            adapter.setClickListener(this);
+            recyclerView.setAdapter(adapter);
 
-        layoutManager = new LinearLayoutManager(view.getContext());
-        mAdapter = new Topic
 
 
-        addTopic = view.findViewById(R.id.addTopic);
-        addTopic.setOnClickListener(new View.OnClickListener() {
+
+        but_finishAgenda = view.findViewById(R.id.finish_agenda);
+        but_finishAgenda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (tempMeeting.topics != null) {
+                    FakeMeetingDatabase db = new FakeMeetingDatabase();
+                    db.addMeeting(tempMeeting);
+                    Intent intent = new Intent(getContext(), ActivityMain.class);
+                    startActivity(intent);
+                    getActivity().finish();
+               }
+            }
+        });
+
+        but_addTopic = view.findViewById(R.id.addTopic);
+        but_addTopic.setOnClickListener(new View.OnClickListener() {
            @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(container.getId(), new FragmentAddTopic()).commit();
@@ -47,8 +74,9 @@ public class FragmentCreateAgenda extends Fragment {
     }
 
 
+    @Override
+    public void onItemClick(View view, int position) {
 
-
-
+    }
 
 }

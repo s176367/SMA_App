@@ -38,6 +38,10 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
 
         meetingList = new ArrayList<>();
+        MeetingObject mo = new MeetingObject();
+        mo.setTitle("Hej");
+
+
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_agenda);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
@@ -46,9 +50,8 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         FakeMeetingDatabase db = new FakeMeetingDatabase();
 
+        meetingList = db.retriveMeetingList();
 
-
-       updateMeetingList();
         adapter = new MeetingAdapter(getContext(), meetingList);
         recyclerView.setAdapter(adapter);
         return view;
@@ -59,18 +62,9 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         if (view == but_create){
             Intent intent = new Intent(getActivity(), ActivityCreateMeeting.class);
             startActivity(intent);
+            getActivity().finish();
         }
     }
 
 
-
-    public void updateMeetingList(){
-        FakeMeetingDatabase db = new FakeMeetingDatabase();
-        meetingList = db.retriveMeetingList();
-
-
-
-
-
-    }
 }

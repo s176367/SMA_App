@@ -32,7 +32,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
     @Override
     public MeetingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.meeting_template, null);
+        View view = inflater.inflate(R.layout.template_meeting, null);
         MeetingViewHolder holder = new MeetingViewHolder(view);
         return holder;
     }
@@ -54,9 +54,6 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
                 Intent intent = new Intent(mCtx, ActivityOverview.class);
                 intent.putExtra("title", holder.textViewTitle.getText().toString());
                 mCtx.startActivity(intent);
-
-
-
             }
         });
 
