@@ -155,7 +155,7 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
         DurationNPFragment newFragment = new DurationNPFragment();
         newFragment.setValueChangeListener(this);
         newFragment.show(getFragmentManager(), "time picker");
-
+        System.out.println("hej Stavo");
     }
 
     public String eValPicker(int npVal) {
@@ -181,4 +181,5 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
         }
         return null;
     }
+
 }
