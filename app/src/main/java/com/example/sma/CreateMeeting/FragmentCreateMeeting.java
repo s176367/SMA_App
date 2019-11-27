@@ -41,7 +41,7 @@ public class FragmentCreateMeeting extends Fragment  {
         View view =  inflater.inflate(R.layout.fragment_createmeeting, container, false);
 
 
-        title = view.findViewById(R.id.title);
+        title = view.findViewById(R.id.insert_title);
         dateView= view.findViewById(R.id.date);
         timeView = view.findViewById(R.id.time);
         duration = view.findViewById(R.id.duration);

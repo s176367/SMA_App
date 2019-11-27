@@ -45,14 +45,14 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView2"
+                android:id="@+id/recycler_agenda"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_below="@id/recyclerView2" />
+                android:layout_below="@id/recycler_agenda" />
 
 
         </RelativeLayout>

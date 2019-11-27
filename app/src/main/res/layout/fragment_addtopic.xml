@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/addTopic2"
+        android:id="@+id/but_addtopic"
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_alignParentBottom="true"

@@ -1,4 +1,4 @@
-package com.example.sma;
+package com.example.sma.MainActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Overview.ActivityOverview;
+import com.example.sma.R;
 
 import java.util.List;
 

@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sma.CreateMeeting.ActivityCreateMeeting;
 import com.example.sma.FakeMeetingDatabase;
-import com.example.sma.MeetingAdapter;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 
@@ -39,7 +38,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
 
         meetingList = new ArrayList<>();
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView2);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_agenda);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
         but_create = view.findViewById(R.id.but_createMeeting);
