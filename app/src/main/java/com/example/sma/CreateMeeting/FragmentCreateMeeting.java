@@ -24,8 +24,10 @@ import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 import com.example.sma.TimePickerFragment;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnValueChangeListener {
@@ -107,7 +109,9 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
         dateView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(view.getContext(),date,calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH)).show();
+             DatePickerDialog dp =  new DatePickerDialog(view.getContext(),date,calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH));//.show();
+            dp.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
+            dp.show();
             }
         });
 
@@ -117,6 +121,8 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
          public void onClick(View view) {
              DialogFragment timeFragment = new TimePickerFragment();
              timeFragment.show(getFragmentManager(), "timepicker");
+
+
 
          }
      });
