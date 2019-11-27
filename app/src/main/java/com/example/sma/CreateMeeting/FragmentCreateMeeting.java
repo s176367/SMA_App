@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.NumberPicker;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.sma.DurationNPFragment;
 import com.example.sma.FakeMeetingDatabase;
 import com.example.sma.R;
 import com.example.sma.TimePickerFragment;
@@ -25,7 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class FragmentCreateMeeting extends Fragment  {
+public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnValueChangeListener {
 
 
     final Calendar calender = Calendar.getInstance();
@@ -35,34 +39,40 @@ public class FragmentCreateMeeting extends Fragment  {
     EditText duration;
     EditText location;
     Button create;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_createmeeting, container, false);
+        View view = inflater.inflate(R.layout.fragment_createmeeting, container, false);
 
-
-        title = view.findViewById(R.id.insert_title);
-        dateView= view.findViewById(R.id.date);
+        title = view.findViewById(R.id.title);
+        dateView = view.findViewById(R.id.date);
         timeView = view.findViewById(R.id.time);
         duration = view.findViewById(R.id.duration);
         location = view.findViewById(R.id.location);
         create = view.findViewById(R.id.addTopic);
 
+        duration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showNumberPicker(v);
+
+            }
+        });
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if (!allFilled()) {
                     FakeMeetingDatabase db = new FakeMeetingDatabase();
-                //    db.addMeeting(title.getText().toString(), timeView.getText().toString(), location.getText().toString(), 11,dateView.getText().toString());
+                    //    db.addMeeting(title.getText().toString(), timeView.getText().toString(), location.getText().toString(), 11,dateView.getText().toString());
 
                     Fragment fragment = new FragmentCreateAgenda();
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     FragmentTransaction transaction = fm.beginTransaction();
                     transaction.replace(container.getId(), fragment);
                     transaction.commit();
-                }
-                else {
+                } else {
                     Toast toast = Toast.makeText(view.getContext(), "Fill in the remaining fields", Toast.LENGTH_SHORT);
                     toast.show();
                 }
@@ -70,33 +80,35 @@ public class FragmentCreateMeeting extends Fragment  {
         });
 
 
-
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
-                calender.set(calender.YEAR,year);
+                calender.set(calender.YEAR, year);
                 calender.set(calender.MONTH, month);
-                calender.set(calender.DAY_OF_MONTH,day);
+                calender.set(calender.DAY_OF_MONTH, day);
                 updateLabel();
-            }};
+            }
+        };
 
         dateView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(view.getContext(),date,calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(view.getContext(), date, calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
-     timeView.setOnClickListener(new View.OnClickListener() {
+        timeView.setOnClickListener(new View.OnClickListener() {
 
-         @Override
-         public void onClick(View view) {
-             DialogFragment timeFragment = new TimePickerFragment();
-             timeFragment.show(getFragmentManager(), "timepicker");
+            @Override
+            public void onClick(View view) {
+                DialogFragment timeFragment = new TimePickerFragment();
+                timeFragment.show(getFragmentManager(), "timepicker");
 
-         }
-     });
-                return view;
+            }
+        });
+
+
+        return view;
     }
 
 
@@ -108,28 +120,66 @@ public class FragmentCreateMeeting extends Fragment  {
     }
 
 
-
-
-    public boolean allFilled (){
+    public boolean allFilled() {
 
         Boolean returnMe = true;
 
-        if (title.getText().toString().isEmpty()){
+        if (title.getText().toString().isEmpty()) {
             returnMe = false;
         }
-        if (dateView.getText().toString().isEmpty()){
+        if (dateView.getText().toString().isEmpty()) {
             returnMe = false;
         }
-        if (timeView.getText().toString().isEmpty()){
+        if (timeView.getText().toString().isEmpty()) {
             returnMe = false;
         }
-        if (duration.getText().toString().isEmpty()){
+        if (duration.getText().toString().isEmpty()) {
             returnMe = false;
         }
-        if (location.getText().toString().isEmpty()){
+        if (location.getText().toString().isEmpty()) {
             returnMe = false;
         }
 
         return returnMe;
     }
+
+    DurationNPFragment np = new DurationNPFragment();
+
+    @Override
+    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+        duration.setText(eValPicker(newVal));
+
+    }
+
+    public void showNumberPicker(View view) {
+        DurationNPFragment newFragment = new DurationNPFragment();
+        newFragment.setValueChangeListener(this);
+        newFragment.show(getFragmentManager(), "time picker");
+        System.out.println("hej Stavo");
+    }
+
+    public String eValPicker(int npVal) {
+        switch (npVal) {
+            case 1:
+                return "15 min";
+
+            case 2:
+                return "30 min";
+            case 3:
+                return "45 min";
+            case 4:
+                return "1 hour";
+            case 5:
+                return "1 hour, 15 min";
+            case 6:
+                return "1 hour, 30 min";
+            case 7:
+                return "1 hour, 45 min";
+            case 8:
+                return "2 hours";
+            default:
+        }
+        return null;
+    }
+
 }
