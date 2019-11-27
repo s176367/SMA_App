@@ -4,43 +4,36 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.sma.R;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 
 public class ActivityOverview extends AppCompatActivity {
 
-
-
-
+    String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meetingoverview);
         Intent intent = getIntent();
-        String title = intent.getStringExtra("title");
+        title = intent.getStringExtra("title");
 
 
-
-
-
-
-
-        Bundle bundle = new Bundle();
-        bundle.putString("title", title );
-        FragmentOverview overFrag = new FragmentOverview();
-        overFrag.setArguments(bundle);
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, overFrag).commit();
+        ViewPager viewPager = findViewById(R.id.pager);
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
+        tabLayout.setupWithViewPager(viewPager,true);
 
 
     }
 
-
-
-
-
-
+    public String getTitleString() {
+        return title;
+    }
 }
 
 

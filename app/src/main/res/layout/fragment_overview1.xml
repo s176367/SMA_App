@@ -7,37 +7,21 @@
     android:orientation="vertical">
 
 
-
-
-    <Button
-        android:id="@+id/but_delete"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/delete"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        />
-
-    <Button
-        android:id="@+id/but_back"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/back" />
-
-
-
     <ImageView
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         app:srcCompat="@color/standardBrand" />
 
+    <Button
+        android:id="@+id/but_delete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/delete" />
 
     <TextView
         android:id="@+id/titledetails"
