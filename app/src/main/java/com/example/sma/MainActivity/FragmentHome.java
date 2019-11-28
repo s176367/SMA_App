@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sma.CreateMeeting.ActivityCreateMeeting;
+import com.example.sma.CreateMeeting.TopicAdapter;
 import com.example.sma.FakeMeetingDatabase;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
@@ -38,9 +40,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
 
         meetingList = new ArrayList<>();
-        MeetingObject mo = new MeetingObject();
-        mo.setTitle("Hej");
-
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_agenda);
         recyclerView.setHasFixedSize(true);
@@ -49,20 +48,22 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         but_create.setOnClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         FakeMeetingDatabase db = new FakeMeetingDatabase();
-
         meetingList = db.retriveMeetingList();
-
         adapter = new MeetingAdapter(getContext(), meetingList);
         recyclerView.setAdapter(adapter);
+
+
+
         return view;
     }
+
+
 
     @Override
     public void onClick(View view) {
         if (view == but_create){
             Intent intent = new Intent(getActivity(), ActivityCreateMeeting.class);
             startActivity(intent);
-            getActivity().finish();
         }
     }
 

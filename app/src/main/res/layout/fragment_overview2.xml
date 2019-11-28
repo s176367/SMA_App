@@ -7,19 +7,20 @@
         android:id="@+id/topBar5"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:srcCompat="@color/standardBrand" />
+        app:srcCompat="@color/colorAccent" />
 
     <TextView
-        android:id="@+id/titledetails2"
+        android:id="@+id/titleMeetings5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="27dp"
+        android:gravity="center_horizontal"
         android:text="Agenda"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="30dp"
-        android:visibility="visible" />
+        android:textColor="@color/cardview_light_background"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <ScrollView
         android:layout_width="match_parent"

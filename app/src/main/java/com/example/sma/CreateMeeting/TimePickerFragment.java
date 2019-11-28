@@ -1,4 +1,4 @@
-package com.example.sma;
+package com.example.sma.CreateMeeting;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -11,6 +11,8 @@ import android.widget.TimePicker;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.example.sma.R;
 
 import java.sql.Time;
 import java.sql.Timestamp;

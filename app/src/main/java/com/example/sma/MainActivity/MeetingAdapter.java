@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sma.CreateMeeting.TopicAdapter;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Overview.ActivityOverview;
 import com.example.sma.R;
@@ -22,6 +23,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
 
     private Context mCtx;
     private List<MeetingObject> meetingList;
+    private TopicAdapter.ItemClickListener mClickListener;
 
     public MeetingAdapter(Context mCtx, List<MeetingObject> meetingList) {
         this.mCtx = mCtx;
@@ -38,7 +40,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MeetingViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MeetingViewHolder holder, final int position) {
 
         final MeetingObject meeting = meetingList.get(position);
         holder.textViewTitle.setText(meeting.getTitle());
@@ -52,7 +54,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mCtx, ActivityOverview.class);
-                intent.putExtra("title", holder.textViewTitle.getText().toString());
+                intent.putExtra("position", position);
                 mCtx.startActivity(intent);
             }
         });
@@ -80,6 +82,19 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
             textViewPeopleCount = itemView.findViewById(R.id.meetingCount);
             textViewDate = itemView.findViewById(R.id.date);
         }
+    }
+
+
+
+
+    // allows clicks events to be caught
+    void setClickListener(TopicAdapter.ItemClickListener itemClickListener) {
+        this.mClickListener = itemClickListener;
+    }
+
+    // parent activity will implement this method to respond to click events
+    public interface ItemClickListener {
+        void onItemClick(View view, int position);
     }
 
 

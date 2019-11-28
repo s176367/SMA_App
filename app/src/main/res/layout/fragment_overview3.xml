@@ -4,40 +4,41 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/topBar2"
+        android:id="@+id/topBar5"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:srcCompat="@color/colorPrimaryDark" />
+        app:srcCompat="@color/colorAccent" />
 
     <TextView
-        android:id="@+id/titleMeetings2"
+        android:id="@+id/titleMeetings5"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="27dp"
         android:gravity="center_horizontal"
-        android:text="Agenda"
+        android:text="Participants"
         android:textColor="@color/cardview_light_background"
         android:textSize="20sp"
         android:textStyle="bold" />
 
 
-    <Button
-        android:id="@+id/finish_agenda"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/finish" />
 
-
-
-    <ScrollView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/topBar2"
+        android:text="Not implemented yet"
+        android:layout_below="@id/topBar5"
+        android:textSize="20dp"
+        android:layout_marginTop="100dp"
+        android:gravity="center"/>
+
+
+
+   <!-- <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topBar5"
         android:fadingEdgeLength="1dp"
         android:requiresFadingEdge="vertical">
 
@@ -47,28 +48,21 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_agenda"
+                android:id="@+id/recycler_overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_below="@id/recycler_agenda" />
+                android:layout_below="@id/recycler_overview" />
 
-            <Button
-                android:id="@+id/addTopic"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_below="@id/recycler_agenda"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/plus"
-                android:layout_alignParentRight="true"/>
+
 
         </RelativeLayout>
 
 
-    </ScrollView>
+    </ScrollView>-->
+
 
 </RelativeLayout>

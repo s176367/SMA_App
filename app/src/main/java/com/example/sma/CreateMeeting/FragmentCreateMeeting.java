@@ -15,19 +15,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.example.sma.DurationNPFragment;
-import com.example.sma.FakeMeetingDatabase;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
-import com.example.sma.TimePickerFragment;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnValueChangeListener {
@@ -86,7 +79,8 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
                     tempMeeting.setDuration(duration.getText().toString());
                     ((ActivityCreateMeeting)getActivity()).setMeeting(tempMeeting);
 
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(container.getId(), new FragmentCreateAgenda()).commit();
+
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(container.getId(), new FragmentCreateAgenda()).addToBackStack(null).commit();
                 }
                 else {
                     Toast toast = Toast.makeText(view.getContext(), "Fill in the remaining fields", Toast.LENGTH_SHORT);
@@ -128,7 +122,6 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
      });
                 return view;
     }
-
 
     private void updateLabel() {
         String myFormat = "MM/dd/yy"; //In which you need put here

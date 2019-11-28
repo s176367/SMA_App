@@ -27,10 +27,10 @@ public class FragmentAgendaOverview extends Fragment {
 
     FakeMeetingDatabase db = new FakeMeetingDatabase();
 
-    private TopicAdapter adapter;
+    private EditTopicAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private MeetingObject tempMeeting;
-    private String titleString;
+    private int position;
     private List<MeetingObject> meetingList;
 
     @Override
@@ -39,19 +39,16 @@ public class FragmentAgendaOverview extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_overview);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        titleString = ((ActivityOverview)getActivity()).getTitleString();
+        position = ((ActivityOverview)getActivity()).getPosition();
 
         FakeMeetingDatabase db = new FakeMeetingDatabase();
         meetingList = db.retriveMeetingList();
 
+        tempMeeting = meetingList.get(position);
 
-        for (int i = 0; i <meetingList.size() ; i++) {
-            if (meetingList.get(i).getTitle().equalsIgnoreCase(titleString)){
-                tempMeeting = meetingList.get(i);
-            }
 
-        }
-        adapter = new TopicAdapter(view.getContext(), tempMeeting.topics);
+
+        adapter = new EditTopicAdapter(view.getContext(), tempMeeting.topics);
         recyclerView.setAdapter(adapter);
 
 

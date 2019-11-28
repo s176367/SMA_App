@@ -1,4 +1,4 @@
-package com.example.sma;
+package com.example.sma.CreateMeeting;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,7 +25,7 @@ import com.example.sma.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentCreateAgenda extends Fragment implements TopicAdapter.ItemClickListener{
+public class FragmentCreateAgenda extends Fragment{
 
     Button but_addTopic;
     Button but_finishAgenda;
@@ -33,18 +34,18 @@ public class FragmentCreateAgenda extends Fragment implements TopicAdapter.ItemC
     private TopicAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private MeetingObject tempMeeting;
-
+    private RecyclerView recyclerView;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_createagenda, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_agenda);
+        recyclerView = view.findViewById(R.id.recycler_agenda);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         tempMeeting = ((ActivityCreateMeeting)getActivity()).getMeeting();
 
-            adapter = new TopicAdapter(view.getContext(), tempMeeting.topics);
-            adapter.setClickListener(this);
-            recyclerView.setAdapter(adapter);
+        adapter = new TopicAdapter(view.getContext(), tempMeeting.topics);
+        recyclerView.setAdapter(adapter);
 
 
 
@@ -74,9 +75,5 @@ public class FragmentCreateAgenda extends Fragment implements TopicAdapter.ItemC
     }
 
 
-    @Override
-    public void onItemClick(View view, int position) {
-
-    }
 
 }

@@ -1,28 +1,25 @@
-package com.example.sma.CreateMeeting;
+package com.example.sma.Overview;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sma.MainActivity.MeetingAdapter;
+import com.example.sma.CreateMeeting.ActivityCreateMeeting;
+import com.example.sma.CreateMeeting.FragmentAddTopic;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.Topic;
-import com.example.sma.Overview.ActivityOverview;
 import com.example.sma.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHolder> {
+public class EditTopicAdapter extends RecyclerView.Adapter<EditTopicAdapter.TopicViewHolder> {
 
 
     private Context context;
@@ -31,7 +28,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    public TopicAdapter(Context context, List<Topic> data) {
+    public EditTopicAdapter(Context context, List<Topic> data) {
         this.context = context;
         topicList = data;
     }
@@ -58,18 +55,14 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               MeetingObject tempMeeting =  ((ActivityCreateMeeting)context).getMeeting();
+               MeetingObject tempMeeting =  ((ActivityOverview)context).getMeeting();
                ArrayList<Topic> topicList =tempMeeting.getTopics();
 
 
                         topicList.remove(position);
-                        FragmentAddTopic tempTopic = new FragmentAddTopic();
+                        FragmentEditTopic tempTopic = new FragmentEditTopic();
                         tempTopic.openTopic(title,desc);
-
-                        ((FragmentActivity)view.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                tempTopic).commit();
-
-
+                        ((FragmentActivity)view.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,tempTopic).commit();
             }
         });
     }

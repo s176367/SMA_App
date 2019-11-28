@@ -30,7 +30,7 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
     TextView location;
     Button back;
     Button delete;
-    String recivedInfo;
+    int position;
     ArrayList<MeetingObject> list;
     FakeMeetingDatabase db;
 
@@ -48,20 +48,19 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
         duration = view.findViewById(R.id.duration_text);
         location = view.findViewById(R.id.location_text);
         db = new FakeMeetingDatabase();
-        recivedInfo = ((ActivityOverview)getActivity()).getTitleString();
+        position = ((ActivityOverview)getActivity()).getPosition();
 
         list = db.retriveMeetingList();
 
 
-        for (int i = 0; i <list.size() ; i++) {
-            if (list.get(i).getTitle().equals(recivedInfo)){
-                title.setText(list.get(i).getTitle());
-                time.setText(list.get(i).getTime());
-                date.setText(list.get(i).getDate());
-                location.setText(list.get(i).getLocation());
-                duration.setText(list.get(i).getDuration());
-            }
-        }
+
+                title.setText(list.get(position).getTitle());
+                time.setText(list.get(position).getTime());
+                date.setText(list.get(position).getDate());
+                location.setText(list.get(position).getLocation());
+                duration.setText(list.get(position).getDuration());
+
+
 
         return view;
     }
@@ -70,17 +69,14 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view == delete) {
-            list = db.retriveMeetingList();
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getTitle().equals(recivedInfo)) {
-                    db.deleteMeeting(list.get(i).getTitle());
-                }
+                    db.deleteMeeting(position);
+
             }
             Intent intent = new Intent(getContext(), ActivityMain.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
 
-        }
     }
 }
+
 

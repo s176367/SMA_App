@@ -44,15 +44,10 @@ public FakeMeetingDatabase(){
 
 
 
-    public void deleteMeeting(String title) {
+    public void deleteMeeting(int position) {
         meetingList = retriveMeetingList();
 
-        for (int i = 0; i < meetingList.size(); i++) {
-            if (meetingList.get(i).getTitle().equals(title)) {
-                meetingList.remove(i);
-                i--;
-            }
-        }
+            meetingList.remove(position);
             json = gson.toJson(meetingList);
             editor.putString("Meetings", json);
             editor.commit();

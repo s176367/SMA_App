@@ -1,4 +1,4 @@
-package com.example.sma.CreateMeeting;
+package com.example.sma.Overview;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,14 +11,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
+import com.example.sma.CreateMeeting.ActivityCreateMeeting;
+import com.example.sma.CreateMeeting.FragmentCreateAgenda;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.Topic;
 import com.example.sma.R;
 
-public class FragmentAddTopic extends Fragment {
+public class FragmentEditTopic extends Fragment {
 
 
     Button addTopic;
