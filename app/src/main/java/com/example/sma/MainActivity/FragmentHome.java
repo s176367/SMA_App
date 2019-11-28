@@ -18,6 +18,7 @@ import com.example.sma.CreateMeeting.ActivityCreateMeeting;
 import com.example.sma.CreateMeeting.TopicAdapter;
 import com.example.sma.FakeMeetingDatabase;
 import com.example.sma.Model.MeetingObject;
+import com.example.sma.Profile;
 import com.example.sma.R;
 
 import java.util.ArrayList;
@@ -27,7 +28,8 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
     RecyclerView recyclerView;
     MeetingAdapter adapter;
-    Button but_create;
+    Button but_create, but_profile;
+
 
 
     List<MeetingObject> meetingList;
@@ -46,6 +48,8 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         recyclerView.setNestedScrollingEnabled(false);
         but_create = view.findViewById(R.id.but_createMeeting);
         but_create.setOnClickListener(this);
+        but_profile = view.findViewById(R.id.but_profile);
+        but_profile.setOnClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         FakeMeetingDatabase db = new FakeMeetingDatabase();
         meetingList = db.retriveMeetingList();
@@ -64,6 +68,11 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         if (view == but_create){
             Intent intent = new Intent(getActivity(), ActivityCreateMeeting.class);
             startActivity(intent);
+        }
+        if (view==but_profile){
+            Intent profile = new Intent(getActivity(), Profile.class);
+            startActivity(profile);
+            getActivity().finish();
         }
     }
 
