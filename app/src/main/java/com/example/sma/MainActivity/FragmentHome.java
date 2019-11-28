@@ -72,7 +72,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         if (view==but_profile){
             Intent profile = new Intent(getActivity(), Profile.class);
             startActivity(profile);
-            getActivity().finish();
         }
     }
 
