@@ -29,7 +29,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         final Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int min = c.get(Calendar.MINUTE);
-        return new TimePickerDialog(getActivity(), this, hour, min,true);
+        return new TimePickerDialog(getActivity(), this, 12, 0,true);
     }
 
     @Override
@@ -50,6 +50,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
             modifyHour = String.valueOf(settedHour);
         }
         
+
         timeView.setText(modifyHour+ ":"+modifyMin);
 
     }
