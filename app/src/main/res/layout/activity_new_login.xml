@@ -4,59 +4,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/Baggroundcolorxx"
-    tools:context=".NewLogin">
+    android:background="@color/colorPrimaryDark"
+    tools:context=".FirebaseAndLogin.NewLogin">
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="255dp"
-        android:layout_height="200dp"
+        android:layout_width="220dp"
+        android:layout_height="177dp"
+        android:layout_marginStart="87dp"
         android:layout_marginTop="44dp"
+        android:layout_marginEnd="86dp"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/NewLoginEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
 
     <EditText
-        android:id="@+id/editmail"
-        android:layout_width="match_parent"
+        android:id="@+id/NewLoginEmail"
+        android:layout_width="393dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Email"
-        android:textSize="24sp"
-        android:textColor="@color/colorWhite"
-        android:drawablePadding="10dp"
+        android:layout_marginBottom="10dp"
         android:drawableLeft="@drawable/baseline_email_white_24"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@android:color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/NewLoginPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/Textpassword"
-        android:layout_width="match_parent"
+        android:id="@+id/NewLoginPassword"
+        android:layout_width="393dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="25dp"
+        android:drawableLeft="@drawable/baseline_lock_white_24"
         android:drawablePadding="10dp"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPersonName"
-        android:text="Password"
-        android:textSize="24sp"
-        android:drawableLeft="@drawable/baseline_lock_white_24"
         android:textColor="@color/colorWhite"
+        android:textColorHint="@android:color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/NewReg_TextClick"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editmail" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/buttonRegister"
-        android:layout_width="197dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="48dp"
-        android:background="@drawable/Login"
+        android:id="@+id/NewLogin_btn"
+        android:layout_width="192dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="98dp"
+        android:layout_marginEnd="98dp"
+        android:layout_marginBottom="236dp"
+        android:text="Login"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Textpassword" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/NewReg_TextClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="199dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="35dp"
+        android:text="New Here ?  Create Account"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/NewLogin_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

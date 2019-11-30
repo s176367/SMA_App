@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,10 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sma.CreateMeeting.ActivityCreateMeeting;
-import com.example.sma.CreateMeeting.TopicAdapter;
 import com.example.sma.FakeMeetingDatabase;
 import com.example.sma.Model.MeetingObject;
-import com.example.sma.Profile;
+import com.example.sma.FirebaseAndLogin.NewProfile;
 import com.example.sma.R;
 
 import java.util.ArrayList;
@@ -70,7 +68,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
             startActivity(intent);
         }
         if (view==but_profile){
-            Intent profile = new Intent(getActivity(), Profile.class);
+            Intent profile = new Intent(getActivity(), NewProfile.class);
             startActivity(profile);
         }
     }

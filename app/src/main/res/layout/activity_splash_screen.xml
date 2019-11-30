@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/Baggroundcolorxx"
-    tools:context=".SplashScreen">
+    android:background="@color/colorPrimaryDark"
+    tools:context=".FirebaseAndLogin.SplashScreen">
 
     <ImageView
         android:id="@+id/imageViewLogo"
@@ -21,15 +21,16 @@
 
     <TextView
         android:id="@+id/textViewHead"
-        android:layout_width="290dp"
+        android:layout_width="363dp"
         android:layout_height="59dp"
-        android:layout_marginTop="28dp"
-        android:text="Welcome to \n smart meeting assistant"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/adamina"
+        android:text="Smart Meeting Assistant"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
-        android:textSize="25dp"
+        android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.537"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewLogo" />
 
@@ -38,7 +39,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="smart meeting app helps\n you to organize your company\n meetings and private"
+        android:fontFamily="@font/adamina"
+        android:text="Smart Meeting Assistant helps\n you to organize your company\n meetings and private meetings"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
         android:textSize="16dp"
@@ -47,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewHead" />
 
     <Button
-        android:id="@+id/buttonCreatean"
+        android:id="@+id/buttonCreate"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
@@ -66,6 +68,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonCreatean" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonCreate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

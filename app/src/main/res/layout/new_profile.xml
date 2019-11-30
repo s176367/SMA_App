@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".FirebaseAndLogin.Profile">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profilPicture"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/profile">
+
+    </de.hdodenhof.circleimageview.CircleImageView>
+    <TextView
+        android:id="@+id/NewProfileName"
+        android:layout_width="267dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profilPicture"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/adamina"
+        android:gravity="center"
+        android:text="Your name"
+        android:textColor="@android:color/white"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/NewProfileEmail"
+        android:layout_width="267dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/NewProfileName"
+        android:layout_centerHorizontal="true"
+        android:textSize="16dp"
+        android:fontFamily="@font/adamina"
+        android:gravity="center"
+        android:text="Your email "
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/work"
+        android:layout_width="267dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/NewProfileEmail"
+        android:layout_centerHorizontal="true"
+        android:textSize="16dp"
+        android:fontFamily="@font/adamina"
+        android:gravity="center"
+        android:text="Work position"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/NewProfilePhone"
+        android:layout_width="267dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/work"
+        android:layout_centerHorizontal="true"
+        android:textSize="16dp"
+        android:fontFamily="@font/adamina"
+        android:gravity="center"
+        android:text="Phone number"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/text_Description"
+        android:layout_width="273dp"
+        android:layout_height="101dp"
+        android:layout_below="@+id/NewProfilePhone"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/white"
+        android:textSize="16dp"
+        android:text="Profile description"
+        android:textColor="@android:color/black" />
+
+    <Button
+        android:id="@+id/but_addCo"
+        android:layout_width="145dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="30dp"
+        android:layout_alignLeft="@id/text_Description"
+        android:layout_marginLeft="-30dp"
+        android:layout_below="@id/text_Description"
+
+        android:background="@drawable/add_coworker"
+        android:textColor="@android:color/black" />
+
+    <Button
+        android:id="@+id/message"
+        android:layout_width="145dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/text_Description"
+        android:layout_alignRight="@+id/text_Description"
+        android:layout_marginRight="-30dp"
+        android:background="@drawable/message" />
+
+
+    <Button
+        android:id="@+id/but_edit"
+        android:layout_width="263dp"
+        android:layout_height="46dp"
+        android:background="@drawable/editprofile"
+        android:layout_below="@+id/message"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textColor="@android:color/black" />
+
+    <Button
+        android:id="@+id/Logout_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="600dp"
+        android:layout_marginLeft="170dp"
+        android:onClick="logout"
+        android:text="Logout" />
+
+</RelativeLayout>
+
