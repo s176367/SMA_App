@@ -4,6 +4,14 @@
     <color name="colorPrimaryDark">#003F62</color>
     <color name="colorAccent">#D81B60</color>
     <color name="standardBrand">#5E9FAA</color>
-    <color name="bg">#efefef</color>
+    <color name="bg">#004165</color>
+    <color name="colorStandard">#5E9FAA</color>
+    <color name="colorGrey">#A9B2B1</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorRed">#772432</color>
+    <color name="colorBlue">#2786BB</color>
+    <color name="colorYellow">#F2DF74</color>
+    <color name="colorDarkGrey">#404040</color>
+    <color name="colorWhite">#FAFAFA</color>
 
 </resources>
