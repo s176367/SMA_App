@@ -78,7 +78,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
 
             textViewTitle = itemView.findViewById(R.id.meetingTitle);
             textViewTime = itemView.findViewById(R.id.meetingTime);
-            textViewLocation = itemView.findViewById(R.id.meetingLocation);
+            textViewLocation = itemView.findViewById(R.id.location);
             textViewPeopleCount = itemView.findViewById(R.id.meetingCount);
             textViewDate = itemView.findViewById(R.id.date);
         }

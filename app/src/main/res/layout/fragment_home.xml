@@ -6,14 +6,14 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg"
+    android:background="@color/colorWhite"
     >
 
     <ImageView
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:srcCompat="@color/standardBrand" />
+        app:srcCompat="@color/colorPrimaryDark" />
 
     <TextView
         android:id="@+id/titleMeetings"

@@ -19,6 +19,7 @@ public class ActivityMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        overridePendingTransition(0,0);
         mContext = this;
         setContentView(R.layout.activity_main);
 
@@ -27,7 +28,17 @@ public class ActivityMain extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
 
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0,0);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -57,6 +68,7 @@ public class ActivityMain extends AppCompatActivity {
     public static Context getContext(){
         return mContext;
     }
+
 
 }
 

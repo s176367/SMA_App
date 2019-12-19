@@ -9,5 +9,9 @@
     </style>
 
 
+    <style name="noAnimTheme" parent="android:Theme">
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
 
 </resources>

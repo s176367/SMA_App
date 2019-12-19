@@ -33,6 +33,7 @@ public class ActivityOverview extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meetingoverview);
         Intent intent = getIntent();
@@ -56,6 +57,8 @@ public class ActivityOverview extends AppCompatActivity {
         return position;
         
     }
+
+
 }
 
 
