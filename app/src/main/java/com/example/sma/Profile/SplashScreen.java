@@ -1,4 +1,4 @@
-package com.example.sma.FirebaseAndLogin;
+package com.example.sma.Profile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,7 +47,7 @@ public class SplashScreen extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-        Intent intent = new Intent(this, NewLogin.class);
+        Intent intent = new Intent(this, ActivityLogin.class);
         startActivity(intent);
 
     }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".FirebaseAndLogin.NewLogin">
+    tools:context=".Profile.ActivityLogin">
 
     <ImageView
         android:id="@+id/imageView3"
@@ -15,14 +15,14 @@
         android:layout_marginTop="44dp"
         android:layout_marginEnd="86dp"
         android:layout_marginBottom="80dp"
-        app:layout_constraintBottom_toTopOf="@+id/NewLoginEmail"
+        app:layout_constraintBottom_toTopOf="@+id/emailField"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
 
     <EditText
-        android:id="@+id/NewLoginEmail"
+        android:id="@+id/emailField"
         android:layout_width="393dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -34,12 +34,12 @@
         android:textColor="@color/colorWhite"
         android:textColorHint="@android:color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/NewLoginPassword"
+        app:layout_constraintBottom_toTopOf="@+id/passwordField"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/NewLoginPassword"
+        android:id="@+id/passwordField"
         android:layout_width="393dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
@@ -51,12 +51,12 @@
         android:textColor="@color/colorWhite"
         android:textColorHint="@android:color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/NewReg_TextClick"
+        app:layout_constraintBottom_toTopOf="@+id/register_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/NewLogin_btn"
+        android:id="@+id/login_btn"
         android:layout_width="192dp"
         android:layout_height="66dp"
         android:layout_marginStart="98dp"
@@ -68,7 +68,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/NewReg_TextClick"
+        android:id="@+id/register_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="199dp"
@@ -76,7 +76,7 @@
         android:layout_marginBottom="35dp"
         android:text="New Here ?  Create Account"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/NewLogin_btn"
+        app:layout_constraintBottom_toTopOf="@+id/login_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

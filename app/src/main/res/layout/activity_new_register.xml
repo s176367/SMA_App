@@ -37,12 +37,12 @@
         android:textColor="@color/colorWhite"
         android:textColorHint="@android:color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/NewLoginEmail"
+        app:layout_constraintBottom_toTopOf="@+id/emailField"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/NewLoginEmail"
+        android:id="@+id/emailField"
         android:layout_width="347dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -112,13 +112,13 @@
         android:textColor="@color/colorWhite"
         android:textColorHint="@android:color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/NewLoginPassword"
+        app:layout_constraintBottom_toTopOf="@+id/passwordField"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 
     <EditText
-        android:id="@+id/NewLoginPassword"
+        android:id="@+id/passwordField"
         android:layout_width="347dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -131,12 +131,12 @@
         android:textColor="@color/colorWhite"
         android:textColorHint="@android:color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/NewReg_TextClick"
+        app:layout_constraintBottom_toTopOf="@+id/register_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/NewLogin_btn"
+        android:id="@+id/login_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
@@ -161,14 +161,14 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/NewReg_TextClick"
+        android:id="@+id/register_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="187dp"
         android:layout_marginBottom="36dp"
         android:text="Login here, if your are registered!"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/NewLogin_btn"
+        app:layout_constraintBottom_toTopOf="@+id/login_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

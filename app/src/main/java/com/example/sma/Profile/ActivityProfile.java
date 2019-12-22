@@ -1,6 +1,5 @@
-package com.example.sma.FirebaseAndLogin;
+package com.example.sma.Profile;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -54,7 +53,7 @@ public class ActivityProfile extends AppCompatActivity {
 
     public void logout(View v) {
         FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(getApplicationContext(), NewLogin.class));
+        startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
         finish();
     }
 

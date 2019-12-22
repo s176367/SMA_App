@@ -1,4 +1,4 @@
-package com.example.sma.FirebaseAndLogin;
+package com.example.sma.Profile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,13 +45,13 @@ public class NewRegister extends AppCompatActivity {
 
         Company = findViewById(R.id.editTextCompany);
         Fullname = findViewById(R.id.editTextName);
-        Email = findViewById(R.id.NewLoginEmail);
+        Email = findViewById(R.id.emailField);
         Phone = findViewById(R.id.editTextMobil);
         Zipcode = findViewById(R.id.editTextZipcode);
-        Password = findViewById(R.id.NewLoginPassword);
+        Password = findViewById(R.id.passwordField);
         progressBar = findViewById(R.id.NewReg_progressbar);
-        LoginText = findViewById(R.id.NewReg_TextClick);
-        buttonRegister = findViewById(R.id.NewLogin_btn);
+        LoginText = findViewById(R.id.register_text);
+        buttonRegister = findViewById(R.id.login_btn);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -129,7 +129,7 @@ public class NewRegister extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(NewRegister.this, NewLogin.class);
+                Intent intent = new Intent(NewRegister.this, ActivityLogin.class);
                 startActivity(intent);
 
             }

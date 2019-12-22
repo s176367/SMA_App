@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sma.CreateMeeting.ActivityCreateMeeting;
 import com.example.sma.FakeMeetingDatabase;
 import com.example.sma.Model.MeetingObject;
-import com.example.sma.FirebaseAndLogin.ActivityProfile;
+import com.example.sma.Profile.ActivityProfile;
 import com.example.sma.R;
 
 import java.util.ArrayList;
