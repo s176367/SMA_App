@@ -58,7 +58,7 @@ public class NewRegister extends AppCompatActivity {
 
 
         if(firebaseAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), NewProfile.class));
+            startActivity(new Intent(getApplicationContext(), ActivityProfile.class));
             finish();
         }
 
@@ -112,7 +112,7 @@ public class NewRegister extends AppCompatActivity {
                                 }
                             });
 
-                            Intent intent = new Intent(NewRegister.this, NewProfile.class);
+                            Intent intent = new Intent(NewRegister.this, ActivityProfile.class);
                             startActivity(intent);
 
 

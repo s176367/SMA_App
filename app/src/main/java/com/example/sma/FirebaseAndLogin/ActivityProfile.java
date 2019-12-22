@@ -1,5 +1,6 @@
 package com.example.sma.FirebaseAndLogin;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -17,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import javax.annotation.Nullable;
 
-public class NewProfile extends AppCompatActivity {
+public class ActivityProfile extends AppCompatActivity {
 
     TextView Fullname, Email, Phone;
     FirebaseAuth firebaseAuth;
@@ -27,7 +29,7 @@ public class NewProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_profile);
+        setContentView(R.layout.profile_activity);
 
 
         Fullname = findViewById(R.id.NewProfileName);
@@ -54,5 +56,12 @@ public class NewProfile extends AppCompatActivity {
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(getApplicationContext(), NewLogin.class));
         finish();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, ActivityMain.class);
+        startActivity(intent);
     }
 }

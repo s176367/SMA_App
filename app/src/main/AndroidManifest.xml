@@ -18,7 +18,7 @@
 
         </activity>
         <activity android:name=".FirebaseAndLogin.NewLogin" />
-        <activity android:name=".FirebaseAndLogin.NewProfile"></activity>
+        <activity android:name=".FirebaseAndLogin.ActivityProfile"></activity>
         <activity android:name=".FirebaseAndLogin.NewRegister"/>
         <activity android:name=".MainActivity.ActivityMain">
             <intent-filter>

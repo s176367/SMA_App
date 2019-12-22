@@ -28,17 +28,7 @@ public class ActivityMain extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
 
     }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        overridePendingTransition(0,0);
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
-    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {

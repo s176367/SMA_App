@@ -30,7 +30,7 @@ public class NewLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_login);
+        setContentView(R.layout.activity_login);
 
         Email = findViewById(R.id.NewLoginEmail);
         Password = findViewById(R.id.NewLoginPassword);
@@ -66,7 +66,7 @@ public class NewLogin extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(NewLogin.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(NewLogin.this, NewProfile.class);
+                            Intent intent = new Intent(NewLogin.this, ActivityProfile.class);
                             startActivity(intent);
 
                         } else {

@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sma.CreateMeeting.ActivityCreateMeeting;
 import com.example.sma.FakeMeetingDatabase;
 import com.example.sma.Model.MeetingObject;
-import com.example.sma.FirebaseAndLogin.NewProfile;
+import com.example.sma.FirebaseAndLogin.ActivityProfile;
 import com.example.sma.R;
 
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
             startActivity(intent);
         }
         if (view==but_profile){
-            Intent profile = new Intent(getActivity(), NewProfile.class);
+            Intent profile = new Intent(getActivity(), ActivityProfile.class);
             startActivity(profile);
         }
     }
