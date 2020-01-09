@@ -1,12 +1,10 @@
 package com.example.sma.CreateMeeting;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 
@@ -28,7 +26,7 @@ public class ActivityCreateMeeting extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_createmeeting);
+        setContentView(R.layout.createmeeting_activity);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentCreateMeeting()).commit();
 
     }

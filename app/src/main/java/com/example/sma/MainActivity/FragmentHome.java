@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sma.CreateMeeting.ActivityCreateMeeting;
-import com.example.sma.FakeMeetingDatabase;
+import com.example.sma.Profile.FakeMeetingDatabase;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Profile.ActivityProfile;
 import com.example.sma.R;
@@ -36,11 +36,8 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view =  inflater.inflate(R.layout.fragment_home, container, false);
-
-
+        View view =  inflater.inflate(R.layout.main_fragment_1, container, false);
         meetingList = new ArrayList<>();
-
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_agenda);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
@@ -48,12 +45,16 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         but_create.setOnClickListener(this);
         but_profile = view.findViewById(R.id.but_profile);
         but_profile.setOnClickListener(this);
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         FakeMeetingDatabase db = new FakeMeetingDatabase();
+
+
+
         meetingList = db.retriveMeetingList();
         adapter = new MeetingAdapter(getContext(), meetingList);
         recyclerView.setAdapter(adapter);
-
 
 
         return view;

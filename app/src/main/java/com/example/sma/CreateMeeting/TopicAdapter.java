@@ -1,22 +1,17 @@
 package com.example.sma.CreateMeeting;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sma.MainActivity.MeetingAdapter;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.Topic;
-import com.example.sma.Overview.ActivityOverview;
 import com.example.sma.R;
 
 import java.util.ArrayList;
@@ -41,7 +36,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
     @Override
     public TopicViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.template_agenda, null);
+        View view = inflater.inflate(R.layout.model_agenda, null);
         TopicViewHolder holder = new TopicViewHolder(view);
         return holder;
     }

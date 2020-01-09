@@ -17,7 +17,7 @@ public class FragmentParticipants extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.fragment_overview3,container,false);
+       View view = inflater.inflate(R.layout.overview_fragment_3,container,false);
        return view;
     }
 }

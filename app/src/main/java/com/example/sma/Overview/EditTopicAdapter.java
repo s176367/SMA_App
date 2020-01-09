@@ -7,16 +7,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sma.CreateMeeting.ActivityCreateMeeting;
-import com.example.sma.CreateMeeting.FragmentAddTopic;
-import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.Topic;
 import com.example.sma.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EditTopicAdapter extends RecyclerView.Adapter<EditTopicAdapter.TopicViewHolder> {
@@ -38,7 +33,7 @@ public class EditTopicAdapter extends RecyclerView.Adapter<EditTopicAdapter.Topi
     @Override
     public TopicViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.template_agenda, null);
+        View view = inflater.inflate(R.layout.model_agenda, null);
         TopicViewHolder holder = new TopicViewHolder(view);
         return holder;
     }
@@ -52,19 +47,21 @@ public class EditTopicAdapter extends RecyclerView.Adapter<EditTopicAdapter.Topi
         holder.topicTitle.setText(title);
         holder.topicDesc.setText(desc);
 
+        // Crasher på nuværende tidspunkt..
+/*
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                MeetingObject tempMeeting =  ((ActivityOverview)context).getMeeting();
                ArrayList<Topic> topicList =tempMeeting.getTopics();
-
-
                         topicList.remove(position);
                         FragmentEditTopic tempTopic = new FragmentEditTopic();
                         tempTopic.openTopic(title,desc);
                         ((FragmentActivity)view.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,tempTopic).commit();
             }
         });
+
+ */
     }
 
     // total number of rows

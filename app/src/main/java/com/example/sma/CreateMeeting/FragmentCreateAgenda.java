@@ -6,24 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sma.FakeMeetingDatabase;
+import com.example.sma.Profile.FakeMeetingDatabase;
 import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.MeetingObject;
-import com.example.sma.Model.Topic;
 import com.example.sma.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class FragmentCreateAgenda extends Fragment{
 
@@ -38,12 +31,11 @@ public class FragmentCreateAgenda extends Fragment{
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_createagenda, container, false);
+        View view = inflater.inflate(R.layout.createmeeting_fragment_2, container, false);
         recyclerView = view.findViewById(R.id.recycler_agenda);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         tempMeeting = ((ActivityCreateMeeting)getActivity()).getMeeting();
-
         adapter = new TopicAdapter(view.getContext(), tempMeeting.topics);
         recyclerView.setAdapter(adapter);
 

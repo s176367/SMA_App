@@ -37,7 +37,7 @@ public class FragmentEditTopic extends Fragment {
 
         tempMeeting = ((ActivityCreateMeeting)getActivity()).getMeeting();
 
-        View view = inflater.inflate(R.layout.fragment_addtopic, container,false);
+        View view = inflater.inflate(R.layout.createmeeting_fragment_3, container,false);
 
         topicTitle = view.findViewById(R.id.topicTitle);
 

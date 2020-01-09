@@ -25,6 +25,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
     private List<MeetingObject> meetingList;
     private TopicAdapter.ItemClickListener mClickListener;
 
+
     public MeetingAdapter(Context mCtx, List<MeetingObject> meetingList) {
         this.mCtx = mCtx;
         this.meetingList = meetingList;
@@ -34,7 +35,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
     @Override
     public MeetingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.template_meeting, null);
+        View view = inflater.inflate(R.layout.model_meeting, null);
         MeetingViewHolder holder = new MeetingViewHolder(view);
         return holder;
     }
@@ -67,9 +68,9 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
         return meetingList.size();
     }
 
+
     class MeetingViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView imageView;
         TextView textViewTitle, textViewTime, textViewLocation, textViewPeopleCount,textViewDate;
 
 

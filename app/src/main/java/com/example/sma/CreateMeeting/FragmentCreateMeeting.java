@@ -37,7 +37,7 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_createmeeting, container, false);
+        View view =  inflater.inflate(R.layout.createmeeting_fragment_1, container, false);
         tempMeeting = ((ActivityCreateMeeting)getActivity()).getMeeting();
 
 

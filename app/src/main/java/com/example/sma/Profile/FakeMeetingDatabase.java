@@ -1,4 +1,4 @@
-package com.example.sma;
+package com.example.sma.Profile;
 
 import android.content.SharedPreferences;
 

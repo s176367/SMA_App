@@ -16,7 +16,7 @@ public class SplashScreen extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen);
+        setContentView(R.layout.splashscreen_activity);
 
 
         buttonLogin = findViewById(R.id.buttonlogin);

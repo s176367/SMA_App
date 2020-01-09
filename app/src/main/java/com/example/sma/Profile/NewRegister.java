@@ -41,7 +41,7 @@ public class NewRegister extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_register);
+        setContentView(R.layout.profile_register_activity);
 
         Company = findViewById(R.id.editTextCompany);
         Fullname = findViewById(R.id.editTextName);

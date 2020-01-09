@@ -11,8 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.Topic;
@@ -37,7 +35,7 @@ public class FragmentAddTopic extends Fragment {
 
         tempMeeting = ((ActivityCreateMeeting)getActivity()).getMeeting();
 
-        View view = inflater.inflate(R.layout.fragment_addtopic, container,false);
+        View view = inflater.inflate(R.layout.createmeeting_fragment_3, container,false);
 
         topicTitle = view.findViewById(R.id.topicTitle);
 

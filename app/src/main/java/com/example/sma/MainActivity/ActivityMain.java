@@ -1,6 +1,7 @@
 package com.example.sma.MainActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -8,20 +9,34 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.sma.Profile.ActivityLogin;
 import com.example.sma.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class ActivityMain extends AppCompatActivity {
 
 
     protected static Context mContext;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            Intent i = new Intent(ActivityMain.this, ActivityLogin.class);
+            startActivity(i);
+        }
+
+
+
         super.onCreate(savedInstanceState);
         overridePendingTransition(0,0);
         mContext = this;
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_activity);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);

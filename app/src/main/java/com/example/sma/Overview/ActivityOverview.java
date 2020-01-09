@@ -4,13 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.sma.FakeMeetingDatabase;
+import com.example.sma.Profile.FakeMeetingDatabase;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 public class ActivityOverview extends AppCompatActivity {
@@ -35,7 +33,7 @@ public class ActivityOverview extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_meetingoverview);
+        setContentView(R.layout.overview_activity);
         Intent intent = getIntent();
         position = intent.getIntExtra("position",0);
 
