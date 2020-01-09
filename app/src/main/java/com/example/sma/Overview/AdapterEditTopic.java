@@ -14,21 +14,17 @@ import com.example.sma.R;
 
 import java.util.List;
 
-public class EditTopicAdapter extends RecyclerView.Adapter<EditTopicAdapter.TopicViewHolder> {
+public class AdapterEditTopic extends RecyclerView.Adapter<AdapterEditTopic.TopicViewHolder> {
 
 
     private Context context;
     private List<Topic> topicList;
-    private LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
 
-    // data is passed into the constructor
-    public EditTopicAdapter(Context context, List<Topic> data) {
+    public AdapterEditTopic(Context context, List<Topic> data) {
         this.context = context;
         topicList = data;
     }
 
-    // inflates the row layout from xml when needed
     @NonNull
     @Override
     public TopicViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -47,40 +43,17 @@ public class EditTopicAdapter extends RecyclerView.Adapter<EditTopicAdapter.Topi
         holder.topicTitle.setText(title);
         holder.topicDesc.setText(desc);
 
-        // Crasher på nuværende tidspunkt..
-/*
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               MeetingObject tempMeeting =  ((ActivityOverview)context).getMeeting();
-               ArrayList<Topic> topicList =tempMeeting.getTopics();
-                        topicList.remove(position);
-                        FragmentEditTopic tempTopic = new FragmentEditTopic();
-                        tempTopic.openTopic(title,desc);
-                        ((FragmentActivity)view.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,tempTopic).commit();
-            }
-        });
-
- */
     }
 
-    // total number of rows
     @Override
     public int getItemCount() {
         return topicList.size();
     }
 
-    // allows clicks events to be caught
-    void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
-    }
-
-    // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position);
 
     }
-
 
 
 
@@ -91,7 +64,6 @@ public class EditTopicAdapter extends RecyclerView.Adapter<EditTopicAdapter.Topi
             super(itemView);
             topicTitle = itemView.findViewById(R.id.topicTitle);
             topicDesc = itemView.findViewById(R.id.topic_description);
-
         }
     }
 }

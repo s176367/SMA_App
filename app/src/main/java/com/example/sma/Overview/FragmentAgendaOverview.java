@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sma.Profile.FakeMeetingDatabase;
+import com.example.sma.Profile.LocalDatabase;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 
@@ -19,9 +19,9 @@ import java.util.List;
 
 public class FragmentAgendaOverview extends Fragment {
 
-    FakeMeetingDatabase db = new FakeMeetingDatabase();
+    LocalDatabase db = new LocalDatabase();
 
-    private EditTopicAdapter adapter;
+    private AdapterEditTopic adapter;
     private RecyclerView.LayoutManager layoutManager;
     private MeetingObject tempMeeting;
     private int position;
@@ -35,11 +35,11 @@ public class FragmentAgendaOverview extends Fragment {
 
         position = ((ActivityOverview)getActivity()).getPosition();
 
-        FakeMeetingDatabase db = new FakeMeetingDatabase();
+        LocalDatabase db = new LocalDatabase();
         meetingList = db.retriveMeetingList();
         tempMeeting = meetingList.get(position);
 
-        adapter = new EditTopicAdapter(view.getContext(), tempMeeting.topics);
+        adapter = new AdapterEditTopic(view.getContext(), tempMeeting.topics);
         recyclerView.setAdapter(adapter);
         return view;
     }

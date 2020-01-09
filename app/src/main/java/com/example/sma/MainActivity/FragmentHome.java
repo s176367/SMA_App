@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sma.CreateMeeting.ActivityCreateMeeting;
-import com.example.sma.Profile.FakeMeetingDatabase;
+import com.example.sma.Profile.LocalDatabase;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Profile.ActivityProfile;
 import com.example.sma.R;
@@ -48,7 +48,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        FakeMeetingDatabase db = new FakeMeetingDatabase();
+        LocalDatabase db = new LocalDatabase();
 
 
 

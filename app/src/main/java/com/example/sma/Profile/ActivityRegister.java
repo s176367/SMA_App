@@ -27,7 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NewRegister extends AppCompatActivity {
+public class ActivityRegister extends AppCompatActivity {
 
     public static final String TAG = "TAG";
     EditText Company, Fullname, Email, Phone, Zipcode, Password;
@@ -77,7 +77,7 @@ public class NewRegister extends AppCompatActivity {
                 if (!TextUtils.isEmpty(company) && !TextUtils.isEmpty(fullname) && !TextUtils.isEmpty(email)
                         && !TextUtils.isEmpty(phone) && !TextUtils.isEmpty(zipcode) && !TextUtils.isEmpty(password)){
 
-                    Toast.makeText(NewRegister.this, "Fill all the fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivityRegister.this, "Fill all the fields", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -90,7 +90,7 @@ public class NewRegister extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(NewRegister.this, "User Created.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityRegister.this, "User Created.", Toast.LENGTH_SHORT).show();
                             userId = firebaseAuth.getCurrentUser().getUid();
                             DocumentReference documentReference = firebaseFirestore.collection("users").document(userId);
                             Map<String,Object> user = new HashMap<>();
@@ -112,12 +112,12 @@ public class NewRegister extends AppCompatActivity {
                                 }
                             });
 
-                            Intent intent = new Intent(NewRegister.this, ActivityProfile.class);
+                            Intent intent = new Intent(ActivityRegister.this, ActivityProfile.class);
                             startActivity(intent);
 
 
                         }else {
-                            Toast.makeText(NewRegister.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityRegister.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }
@@ -129,7 +129,7 @@ public class NewRegister extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(NewRegister.this, ActivityLogin.class);
+                Intent intent = new Intent(ActivityRegister.this, ActivityLogin.class);
                 startActivity(intent);
 
             }

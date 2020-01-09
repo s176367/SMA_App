@@ -30,7 +30,6 @@ public class ActivityProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_activity);
 
-
         Fullname = findViewById(R.id.NewProfileName);
         Email = findViewById(R.id.NewProfileEmail);
         Phone = findViewById(R.id.NewProfilePhone);
@@ -38,7 +37,6 @@ public class ActivityProfile extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
         userId = firebaseAuth.getCurrentUser().getUid();
-
 
         DocumentReference documentReference = firestore.collection("users").document(userId);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
@@ -56,7 +54,6 @@ public class ActivityProfile extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
         finish();
     }
-
 
     @Override
     public void onBackPressed() {

@@ -6,14 +6,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-public class ViewPagerAdapter extends FragmentPagerAdapter {
+public class AdapterViewPager extends FragmentPagerAdapter {
 
     private Fragment[] childFragments;
 
 
 
 
-    public ViewPagerAdapter(@NonNull FragmentManager fm) {
+    public AdapterViewPager(@NonNull FragmentManager fm) {
         super(fm);
         childFragments = new Fragment[]{
                 new FragmentOverview(), new FragmentAgendaOverview(), new FragmentParticipants()

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.sma.Profile.FakeMeetingDatabase;
+import com.example.sma.Profile.LocalDatabase;
 import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
@@ -21,7 +21,6 @@ import java.util.ArrayList;
 
 public class FragmentOverview extends Fragment implements View.OnClickListener {
 
-    String titleString;
     TextView title;
     TextView date;
     TextView time;
@@ -31,7 +30,7 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
     Button delete;
     int position;
     ArrayList<MeetingObject> list;
-    FakeMeetingDatabase db;
+    LocalDatabase db;
 
 
     @Nullable
@@ -46,7 +45,7 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
         date = view.findViewById(R.id.date_text);
         duration = view.findViewById(R.id.duration_text);
         location = view.findViewById(R.id.location_text);
-        db = new FakeMeetingDatabase();
+        db = new LocalDatabase();
         position = ((ActivityOverview)getActivity()).getPosition();
 
         list = db.retriveMeetingList();
@@ -69,7 +68,6 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if (view == delete) {
                     db.deleteMeeting(position);
-
             }
             Intent intent = new Intent(getContext(), ActivityMain.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sma.Profile.FakeMeetingDatabase;
+import com.example.sma.Profile.LocalDatabase;
 import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
@@ -22,7 +22,7 @@ public class FragmentCreateAgenda extends Fragment{
 
     Button but_addTopic;
     Button but_finishAgenda;
-    FakeMeetingDatabase db = new FakeMeetingDatabase();
+    LocalDatabase db = new LocalDatabase();
 
     private TopicAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -47,7 +47,7 @@ public class FragmentCreateAgenda extends Fragment{
             @Override
             public void onClick(View view) {
                 if (tempMeeting.topics != null) {
-                    FakeMeetingDatabase db = new FakeMeetingDatabase();
+                    LocalDatabase db = new LocalDatabase();
                     db.addMeeting(tempMeeting);
                     Intent intent = new Intent(getContext(), ActivityMain.class);
                     startActivity(intent);

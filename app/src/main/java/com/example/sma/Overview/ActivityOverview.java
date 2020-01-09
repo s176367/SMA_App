@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.sma.Profile.FakeMeetingDatabase;
+import com.example.sma.Profile.LocalDatabase;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 import com.google.android.material.tabs.TabLayout;
@@ -16,7 +16,7 @@ public class ActivityOverview extends AppCompatActivity {
     int position;
 
 
-    private FakeMeetingDatabase db = new FakeMeetingDatabase();
+    private LocalDatabase db = new LocalDatabase();
 
     private MeetingObject meeting = db.retriveMeetingList().get(0);
 
@@ -44,7 +44,7 @@ public class ActivityOverview extends AppCompatActivity {
 
         ViewPager viewPager = findViewById(R.id.pager);
         TabLayout tabLayout = findViewById(R.id.tab_layout);
-        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
+        viewPager.setAdapter(new AdapterViewPager(getSupportFragmentManager()));
         tabLayout.setupWithViewPager(viewPager,true);
 
     

@@ -39,7 +39,7 @@ public class SplashScreen extends AppCompatActivity implements View.OnClickListe
 
     private void openActivity() {
 
-        Intent intent = new Intent(this, NewRegister.class);
+        Intent intent = new Intent(this, ActivityRegister.class);
         startActivity(intent);
 
     }

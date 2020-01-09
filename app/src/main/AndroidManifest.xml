@@ -19,7 +19,7 @@
         </activity>
         <activity android:name=".Profile.ActivityLogin" />
         <activity android:name=".Profile.ActivityProfile"/>
-        <activity android:name=".Profile.NewRegister"/>
+        <activity android:name=".Profile.ActivityRegister"/>
         <activity android:name=".MainActivity.ActivityMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
