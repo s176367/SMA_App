@@ -7,7 +7,7 @@
         android:id="@+id/topBar5"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:srcCompat="@color/colorAccent" />
+        app:srcCompat="@color/colorPrimaryDark" />
 
     <TextView
         android:id="@+id/titleMeetings5"
