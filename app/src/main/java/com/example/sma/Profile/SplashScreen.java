@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.sma.ActivityRegister;
 import com.example.sma.R;
 
 public class SplashScreen extends AppCompatActivity implements View.OnClickListener {

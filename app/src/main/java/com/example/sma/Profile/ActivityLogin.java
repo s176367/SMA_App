@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.sma.ActivityRegister;
 import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.R;
 import com.google.android.gms.tasks.OnCompleteListener;

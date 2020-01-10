@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
 
 
@@ -13,5 +14,11 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
+
+    <style name="TextInputLayout.HintText">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="TextInputLayout">TextInputLayout</style>
 
 </resources>

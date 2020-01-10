@@ -1,4 +1,4 @@
-package com.example.sma.Profile;
+package com.example.sma;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.sma.R;
+import com.example.sma.Profile.ActivityLogin;
+import com.example.sma.Profile.ActivityProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
