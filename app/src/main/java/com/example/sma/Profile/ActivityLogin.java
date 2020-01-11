@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.sma.ActivityRegister;
 import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -83,7 +82,7 @@ public class ActivityLogin extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityLogin.this, ActivityRegister.class);
+                Intent intent = new Intent(ActivityLogin.this, NewRegisterV2.class);
                 startActivity(intent);
 
             }

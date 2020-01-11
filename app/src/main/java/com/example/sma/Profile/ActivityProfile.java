@@ -20,9 +20,9 @@ import javax.annotation.Nullable;
 
 public class ActivityProfile extends AppCompatActivity {
 
-    TextView Fullname, Email, Phone;
-    FirebaseAuth firebaseAuth;
-    FirebaseFirestore firestore;
+    TextView fullname, email, phone, company, zipcode;
+    FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
     String userId;
 
     @Override
@@ -30,23 +30,33 @@ public class ActivityProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_activity);
 
-        Fullname = findViewById(R.id.NewProfileName);
-        Email = findViewById(R.id.NewProfileEmail);
-        Phone = findViewById(R.id.NewProfilePhone);
+        fullname = findViewById(R.id.NewProfileName);
+        email = findViewById(R.id.NewProfileEmail);
+        phone = findViewById(R.id.NewProfilePhone);
+        company = findViewById(R.id.NewProfileCompany);
+        zipcode = findViewById(R.id.NewProfileZipcode);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        firestore = FirebaseFirestore.getInstance();
-        userId = firebaseAuth.getCurrentUser().getUid();
 
-        DocumentReference documentReference = firestore.collection("users").document(userId);
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+
+        userId = fAuth.getCurrentUser().getUid();
+
+
+        DocumentReference documentReference = fStore.collection("users").document(userId);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                Fullname.setText(documentSnapshot.getString("fname"));
-                Email.setText(documentSnapshot.getString("email"));
-                Phone.setText(documentSnapshot.getString("phone"));
+
+                phone.setText(documentSnapshot.getString("phone"));
+                fullname.setText(documentSnapshot.getString("fname"));
+                email.setText(documentSnapshot.getString("email"));
+                company.setText(documentSnapshot.getString("company"));
+                zipcode.setText(documentSnapshot.getString("zipcode"));
+
             }
         });
+
     }
 
     public void logout(View v) {
@@ -59,5 +69,7 @@ public class ActivityProfile extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(this, ActivityMain.class);
         startActivity(intent);
-    }
+
+        }
 }
+

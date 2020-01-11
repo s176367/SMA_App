@@ -2,6 +2,7 @@ package com.example.sma.Profile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -9,13 +10,23 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sma.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class NewRegisterV2 extends AppCompatActivity {
 
@@ -26,9 +37,9 @@ public class NewRegisterV2 extends AppCompatActivity {
     TextView loginText;
     Button btn_register;
     ProgressBar progressBar;
-    String userId;
-    FirebaseAuth firebaseAuth;
-    FirebaseFirestore firebaseFirestore;
+    String userID;
+    FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,104 +67,80 @@ public class NewRegisterV2 extends AppCompatActivity {
         inputETPassword = findViewById(R.id.input_ET_password);
 
 
-        btn_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                submmit_form();
-
-            }
-        });
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
 
 
-
-
-
-        /*
-        Company = findViewById(R.id.editTextCompany);
-        Fullname = findViewById(R.id.editTextName);
-        Email = findViewById(R.id.NewLoginEmail);
-        Phone = findViewById(R.id.editTextMobil);
-        Zipcode = findViewById(R.id.editTextZipcode);
-        Password = findViewById(R.id.NewLoginPassword);
-        progressBar = findViewById(R.id.NewReg_progressbar);
-        LoginText = findViewById(R.id.NewReg_TextClick);
-        buttonRegister = findViewById(R.id.NewLogin_btn);
-
-
-         */
-
-        /*
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseFirestore = FirebaseFirestore.getInstance();
-
-
-        if(firebaseAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), NewProfile.class));
+        if (fAuth.getCurrentUser() != null) {
+            startActivity(new Intent(getApplicationContext(), ActivityProfile.class));
             finish();
         }
 
 
+
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                submmit_form();
+                submit_form();
 
-                final String company = inputETCompany.getText().toString().trim();
-                final String fullname = inputETName.getText().toString().trim();
                 final String email = inputETEmail.getText().toString().trim();
-                final String phone = inputETPhone.getText().toString().trim();
-                final String zipcode = inputETZipcode.getText().toString().trim();
                 String password = inputETPassword.getText().toString().trim();
+                final String fullname = inputETName.getText().toString();
+                final String company = inputETCompany.getText().toString();
+                final String zipcode = inputETZipcode.getText().toString();
+                final String phone = inputETPhone.getText().toString();
 
                 progressBar.setVisibility(View.VISIBLE);
 
-
-                //User registration in Firebase
-                //createUserWithEmailAndPassword is a method in Android-library
-                firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                //registration
+                fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(NewRegister.this, "User Created.", Toast.LENGTH_SHORT).show();
-                            userId = firebaseAuth.getCurrentUser().getUid();
-                            DocumentReference documentReference = firebaseFirestore.collection("users").document(userId);
-                            Map<String,Object> user = new HashMap<>();
+
+                        if (task.isSuccessful()) {
+
+                            Toast.makeText(NewRegisterV2.this, "User created.", Toast.LENGTH_SHORT).show();
+                            userID = fAuth.getCurrentUser().getUid();
+                            DocumentReference documentReference = fStore.collection("users").document(userID);
+                            Map<String, Object> user = new HashMap<>();
                             user.put("fname", fullname);
-                            user.put("company", company);
                             user.put("email", email);
                             user.put("phone", phone);
+                            user.put("company", company);
                             user.put("zipcode", zipcode);
-
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Log.d(TAG, "user profile is created for "+ userId);
+
+                                    Log.d(TAG, "onSuccess: user profile is created for " + userID);
+
+
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
+
                                     Log.d(TAG, "onFailure: " + e.toString());
+
                                 }
                             });
 
-                            Intent intent = new Intent(NewRegister.this, NewProfile.class);
-                            startActivity(intent);
+                            startActivity(new Intent(getApplicationContext(), ActivityProfile.class));
 
+                        } else {
 
-                        }else {
-                            Toast.makeText(NewRegister.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NewRegisterV2.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
+
                         }
+
                     }
                 });
+
+
             }
         });
-
-         */
-
 
         loginText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -284,9 +271,7 @@ public class NewRegisterV2 extends AppCompatActivity {
     }
 
 
-    private void submmit_form() {
-
-        //| !validateName() | !validateEmail() | validatePhone() | !validateZipcode() | !validatePassword()
+    private void submit_form() {
 
         if (!validateCompany() && !validateZipcode() && !validatePassword() && !validatePhone() && !validateEmail() && !validateName()){
 
