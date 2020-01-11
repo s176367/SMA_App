@@ -10,12 +10,13 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="177dp"
-        android:layout_height="155dp"
+        android:layout_width="137dp"
+        android:layout_height="112dp"
         android:layout_marginStart="116dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="102dp"
         android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
         app:srcCompat="@drawable/logo_m" />
 
 
@@ -25,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="29dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="-5dp"
+        android:layout_marginTop="-15dp"
         android:textColorHint="@color/specialWhite"
         app:hintTextAppearance="@style/TextInputLayout.HintText"
         android:backgroundTint="@android:color/white"
@@ -41,6 +42,8 @@
             android:inputType="text"
             android:textColor="@android:color/white"
             android:backgroundTint="@android:color/white"
+            android:drawableLeft="@drawable/baseline_work_white_24"
+            android:drawablePadding="5dp"
             >
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -73,6 +76,9 @@
             android:inputType="text"
             android:textColor="@android:color/white"
             android:backgroundTint="@android:color/white"
+            android:drawableLeft="@drawable/ic_person_black_24dp"
+            android:drawablePadding="5dp"
+
             >
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -103,6 +109,8 @@
             android:inputType="textEmailAddress"
             android:textColor="@android:color/white"
             android:backgroundTint="@android:color/white"
+            android:drawableLeft="@drawable/baseline_email_white_24"
+            android:drawablePadding="5dp"
             >
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -132,6 +140,8 @@
             android:inputType="phone"
             android:textColor="@android:color/white"
             android:backgroundTint="@android:color/white"
+            android:drawableLeft="@drawable/baseline_call_white_24"
+            android:drawablePadding="5dp"
             >
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -161,6 +171,8 @@
             android:inputType="number"
             android:textColor="@android:color/white"
             android:backgroundTint="@android:color/white"
+            android:drawableLeft="@drawable/baseline_home_white_24"
+            android:drawablePadding="5dp"
             >
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -194,7 +206,9 @@
             android:textColorHighlight="#FFFFFF"
             android:textColorHint="#FFFFFF"
             android:textColorLink="#FFFFFF"
-            android:textCursorDrawable="@color/common_google_signin_btn_text_dark_default">
+            android:textCursorDrawable="@color/common_google_signin_btn_text_dark_default"
+            android:drawableLeft="@drawable/ic_lock_black_24dp"
+            android:drawablePadding="5dp">
 
         </com.google.android.material.textfield.TextInputEditText>
 
@@ -217,7 +231,7 @@
         android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="-10dp"
+        android:layout_marginTop="-30dp"
         android:background="@drawable/rounded_buttons"
         android:text="Register"
         android:textColor="@android:color/white"/>

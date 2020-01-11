@@ -2,6 +2,7 @@ package com.example.sma.Profile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -93,6 +94,59 @@ public class NewRegisterV2 extends AppCompatActivity {
 
                 progressBar.setVisibility(View.VISIBLE);
 
+
+                if (TextUtils.isEmpty(company)) {
+
+                    inputCompany.setError("Enter company");
+                    requestFocus(inputETCompany);
+                    return;
+
+                }
+
+
+                if (TextUtils.isEmpty(fullname)) {
+
+                    inputName.setError("Enter name");
+                    requestFocus(inputETName);
+                    return;
+
+                }
+
+                if (TextUtils.isEmpty(email)) {
+
+                    inputEmail.setError("Enter email");
+                    requestFocus(inputETEmail);
+                    return;
+
+                }
+
+
+                if (TextUtils.isEmpty(phone)) {
+
+                    inputPhone.setError("Enter phone");
+                    requestFocus(inputETPhone);
+                    return;
+
+                }
+
+                if (TextUtils.isEmpty(zipcode)) {
+
+                    inputZipcode.setError("Enter zipcode");
+                    requestFocus(inputETZipcode);
+                    return;
+
+                }
+
+                if (TextUtils.isEmpty(password)) {
+
+                    inputPassword.setError("Enter password");
+                    requestFocus(inputETPassword);
+                    return;
+
+                }
+
+
+
                 //registration
                 fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -137,8 +191,6 @@ public class NewRegisterV2 extends AppCompatActivity {
 
                     }
                 });
-
-
             }
         });
 
@@ -162,6 +214,7 @@ public class NewRegisterV2 extends AppCompatActivity {
 
         }
     }
+
 
     private boolean validateCompany() {
 
@@ -215,15 +268,6 @@ public class NewRegisterV2 extends AppCompatActivity {
             requestFocus(inputETPhone);
             return false;
 
-        } else {
-
-            if (inputETPhone.getText().toString().trim().length() < 8) {
-
-                inputPhone.setError("Invalid number");
-                requestFocus(inputETPhone);
-                return false;
-
-            }
         }
 
         return true;
@@ -239,15 +283,6 @@ public class NewRegisterV2 extends AppCompatActivity {
             requestFocus(inputETZipcode);
             return false;
 
-        } else {
-
-            if (inputETPhone.getText().toString().trim().length() > 4) {
-
-                inputPhone.setError("Invalid zipcode");
-                requestFocus(inputETZipcode);
-                return false;
-
-            }
         }
 
         return true;
@@ -283,7 +318,7 @@ public class NewRegisterV2 extends AppCompatActivity {
         String userPassword = inputETPassword.getText().toString().trim() + "";
 
 
-        Toast.makeText(getApplicationContext(), userEmail + "\n" + userPassword, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Email: " + userEmail + "\n" + "Password: " + userPassword, Toast.LENGTH_LONG).show();
 
     }
 }
