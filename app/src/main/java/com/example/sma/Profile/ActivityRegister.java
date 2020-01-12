@@ -23,13 +23,14 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class NewRegister extends AppCompatActivity {
+public class ActivityRegister extends AppCompatActivity {
 
 
     public static final String TAG = "TAG";
@@ -45,7 +46,7 @@ public class NewRegister extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_register);
+        setContentView(R.layout.profile_register_activity);
 
 
         inputCompany = findViewById(R.id.input_company);
@@ -68,13 +69,13 @@ public class NewRegister extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
+        CollectionReference collectionReference = fStore.collection("users");
 
 
         if (fAuth.getCurrentUser() != null) {
             startActivity(new Intent(getApplicationContext(), ActivityProfile.class));
             finish();
         }
-
 
 
         btn_register.setOnClickListener(new View.OnClickListener() {
@@ -136,7 +137,6 @@ public class NewRegister extends AppCompatActivity {
                 }
 
 
-
                 //registration
                 fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -144,7 +144,7 @@ public class NewRegister extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
 
-                            Toast.makeText(NewRegister.this, "User created.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityRegister.this, "User created.", Toast.LENGTH_SHORT).show();
                             userID = fAuth.getCurrentUser().getUid();
                             DocumentReference documentReference = fStore.collection("users").document(userID);
                             Map<String, Object> user = new HashMap<>();
@@ -158,7 +158,6 @@ public class NewRegister extends AppCompatActivity {
 
                                     Log.d(TAG, "onSuccess: user profile is created for " + userID);
 
-
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -169,11 +168,32 @@ public class NewRegister extends AppCompatActivity {
                                 }
                             });
 
+
+                            //Email-verification
+                            /*
+                            if (task.isSuccessful()) {
+
+                                fAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                        if (task.isSuccessful()) {
+
+                                            Toast.makeText(ActivityRegister.this, "Please check your email for verification", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                });
+
+
+                            }
+
+                             */
+
                             startActivity(new Intent(getApplicationContext(), ActivityProfile.class));
 
                         } else {
 
-                            Toast.makeText(NewRegister.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityRegister.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
 
                         }
@@ -187,7 +207,7 @@ public class NewRegister extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(NewRegister.this, ActivityLogin.class);
+                Intent intent = new Intent(ActivityRegister.this, ActivityLogin.class);
                 startActivity(intent);
 
             }

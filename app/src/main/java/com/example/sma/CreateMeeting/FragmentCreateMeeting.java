@@ -28,7 +28,7 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
 
 
     final Calendar calender = Calendar.getInstance();
-    EditText title;
+    public EditText title;
     EditText dateView;
     EditText timeView;
     EditText duration;
