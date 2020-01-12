@@ -42,7 +42,7 @@ public class FragmentCreateAgenda extends Fragment{
         recyclerView.setAdapter(adapter);
 
 
-        meetingDAO.uploadMeeting(tempMeeting);
+
 
 
 
@@ -53,6 +53,7 @@ public class FragmentCreateAgenda extends Fragment{
                 if (tempMeeting.topics != null) {
                     LocalDatabase db = new LocalDatabase();
                     db.addMeeting(tempMeeting);
+                    meetingDAO.uploadMeeting(tempMeeting);
                     Intent intent = new Intent(getContext(), ActivityMain.class);
                     startActivity(intent);
                     getActivity().finish();

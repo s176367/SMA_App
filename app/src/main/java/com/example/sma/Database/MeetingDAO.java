@@ -16,13 +16,7 @@ import java.util.Map;
 
 public class MeetingDAO extends MeetingObject {
 
-
-
-
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    
-   
-
 
 
     public void uploadMeeting(MeetingObject meeting){
@@ -35,7 +29,6 @@ public class MeetingDAO extends MeetingObject {
         mapMeeting.put("location", meeting.getLocation());
         mapMeeting.put("duration", meeting.getDuration());
         mapMeeting.put("date", meeting.getDate());
-        
         //mapMeeting.put("topic", meeting.getTopics());
 
         db.collection("meetings").add(mapMeeting).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

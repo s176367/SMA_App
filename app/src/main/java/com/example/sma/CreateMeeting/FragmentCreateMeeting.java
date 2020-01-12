@@ -85,7 +85,6 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
                     tempMeeting.setDuration(duration.getText().toString());
                     ((ActivityCreateMeeting)getActivity()).setMeeting(tempMeeting);
 
-                    meetingDAO.uploadMeeting(tempMeeting);
 
 
                     getActivity().getSupportFragmentManager().beginTransaction().replace(container.getId(), new FragmentCreateAgenda()).addToBackStack(null).commit();
