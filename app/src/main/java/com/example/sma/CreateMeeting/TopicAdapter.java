@@ -25,6 +25,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
+
+
     // data is passed into the constructor
     public TopicAdapter(Context context, List<Topic> data) {
         this.context = context;
@@ -63,6 +65,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
 
                         ((FragmentActivity)view.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 tempTopic).commit();
+
+
 
 
             }

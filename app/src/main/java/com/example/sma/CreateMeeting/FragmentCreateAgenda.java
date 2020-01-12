@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sma.Database.MeetingDAO;
 import com.example.sma.Profile.LocalDatabase;
 import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.MeetingObject;
@@ -28,6 +29,7 @@ public class FragmentCreateAgenda extends Fragment{
     private RecyclerView.LayoutManager layoutManager;
     private MeetingObject tempMeeting;
     private RecyclerView recyclerView;
+    MeetingDAO meetingDAO = new MeetingDAO();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class FragmentCreateAgenda extends Fragment{
         adapter = new TopicAdapter(view.getContext(), tempMeeting.topics);
         recyclerView.setAdapter(adapter);
 
+
+        meetingDAO.uploadMeeting(tempMeeting);
 
 
 
