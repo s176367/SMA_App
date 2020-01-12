@@ -31,29 +31,21 @@ public class ActivityLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_login_activity);
-
         emailField = findViewById(R.id.emailField);
         passwordField = findViewById(R.id.passwordField);
-        progressB = findViewById(R.id.NewReg_progressbar);
         login_btn = findViewById(R.id.login_btn);
         register = findViewById(R.id.register_text);
         firebaseAuth = FirebaseAuth.getInstance();
-
 
        login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
-
                 String emailString = emailField.getText().toString().trim();
                 String passwordString = passwordField.getText().toString().trim();
 
-
                 if (emailString.isEmpty() || passwordString.isEmpty()){
                     Toast.makeText(ActivityLogin.this, "Fill all the fields.", Toast.LENGTH_SHORT).show();
-
-
                 }
 
                 else if (passwordString.length() < 6) {
@@ -82,7 +74,7 @@ public class ActivityLogin extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityLogin.this, NewRegisterV2.class);
+                Intent intent = new Intent(ActivityLogin.this, NewRegister.class);
                 startActivity(intent);
 
             }

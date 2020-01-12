@@ -11,7 +11,7 @@
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:srcCompat="@color/colorAccent" />
+        app:srcCompat="@color/colorPrimaryDark" />
 
     <Button
         android:id="@+id/but_delete"

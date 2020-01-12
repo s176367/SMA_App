@@ -53,7 +53,7 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
         timeView = view.findViewById(R.id.time);
         duration = view.findViewById(R.id.duration);
         location = view.findViewById(R.id.location);
-        create = view.findViewById(R.id.addTopic);
+        create = view.findViewById(R.id.but_create1 );
 
                 if (tempMeeting.getTitle() != null){
                     title.setText(tempMeeting.getTitle());

@@ -16,7 +16,7 @@
 
 
     <style name="TextInputLayout.HintText">
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
         <item name="android:textSize">14sp</item>
     </style>
     <style name="TextInputLayout">TextInputLayout</style>

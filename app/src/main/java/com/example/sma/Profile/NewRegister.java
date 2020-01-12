@@ -29,12 +29,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NewRegisterV2 extends AppCompatActivity {
+public class NewRegister extends AppCompatActivity {
 
 
     public static final String TAG = "TAG";
     private TextInputLayout inputCompany, inputName, inputEmail, inputPhone, inputZipcode, inputPassword;
-    private TextInputEditText inputETCompany, inputETName, inputETEmail, inputETPhone, inputETZipcode, inputETPassword;
+    private TextInputEditText inputETCompany, inputETName, inputETEmail, inputETPhone, inputETPassword;
     TextView loginText;
     Button btn_register;
     ProgressBar progressBar;
@@ -45,14 +45,13 @@ public class NewRegisterV2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_register_v2);
+        setContentView(R.layout.activity_new_register);
 
 
         inputCompany = findViewById(R.id.input_company);
         inputName = findViewById(R.id.input_name);
         inputEmail = findViewById(R.id.input_email);
         inputPhone = findViewById(R.id.input_phone);
-        inputZipcode = findViewById(R.id.input_zipcode);
         inputPassword = findViewById(R.id.input_password);
 
         loginText = findViewById(R.id.login_text);
@@ -64,7 +63,6 @@ public class NewRegisterV2 extends AppCompatActivity {
         inputETName = findViewById(R.id.input_ET_name);
         inputETEmail = findViewById(R.id.input_ET_email);
         inputETPhone = findViewById(R.id.input_ET_phone);
-        inputETZipcode = findViewById(R.id.input_ET_zipcode);
         inputETPassword = findViewById(R.id.input_ET_password);
 
 
@@ -89,7 +87,6 @@ public class NewRegisterV2 extends AppCompatActivity {
                 String password = inputETPassword.getText().toString().trim();
                 final String fullname = inputETName.getText().toString();
                 final String company = inputETCompany.getText().toString();
-                final String zipcode = inputETZipcode.getText().toString();
                 final String phone = inputETPhone.getText().toString();
 
                 progressBar.setVisibility(View.VISIBLE);
@@ -129,13 +126,6 @@ public class NewRegisterV2 extends AppCompatActivity {
 
                 }
 
-                if (TextUtils.isEmpty(zipcode)) {
-
-                    inputZipcode.setError("Enter zipcode");
-                    requestFocus(inputETZipcode);
-                    return;
-
-                }
 
                 if (TextUtils.isEmpty(password)) {
 
@@ -154,7 +144,7 @@ public class NewRegisterV2 extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
 
-                            Toast.makeText(NewRegisterV2.this, "User created.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NewRegister.this, "User created.", Toast.LENGTH_SHORT).show();
                             userID = fAuth.getCurrentUser().getUid();
                             DocumentReference documentReference = fStore.collection("users").document(userID);
                             Map<String, Object> user = new HashMap<>();
@@ -162,7 +152,6 @@ public class NewRegisterV2 extends AppCompatActivity {
                             user.put("email", email);
                             user.put("phone", phone);
                             user.put("company", company);
-                            user.put("zipcode", zipcode);
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
@@ -184,7 +173,7 @@ public class NewRegisterV2 extends AppCompatActivity {
 
                         } else {
 
-                            Toast.makeText(NewRegisterV2.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NewRegister.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
 
                         }
@@ -198,7 +187,7 @@ public class NewRegisterV2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(NewRegisterV2.this, ActivityLogin.class);
+                Intent intent = new Intent(NewRegister.this, ActivityLogin.class);
                 startActivity(intent);
 
             }
@@ -267,28 +256,11 @@ public class NewRegisterV2 extends AppCompatActivity {
             inputPhone.setError("Enter phone");
             requestFocus(inputETPhone);
             return false;
-
         }
 
         return true;
 
     }
-
-
-    private boolean validateZipcode() {
-
-        if (inputETZipcode.getText().toString().trim().isEmpty()) {
-
-            inputZipcode.setError("Enter zipcode");
-            requestFocus(inputETZipcode);
-            return false;
-
-        }
-
-        return true;
-
-    }
-
 
     private boolean validatePassword() {
 
@@ -308,8 +280,7 @@ public class NewRegisterV2 extends AppCompatActivity {
 
     private void submit_form() {
 
-        if (!validateCompany() && !validateZipcode() && !validatePassword() && !validatePhone() && !validateEmail() && !validateName()){
-
+        if (!validateCompany() && !validatePassword() && !validatePhone() && !validateEmail() && !validateName()){
             return;
 
         }

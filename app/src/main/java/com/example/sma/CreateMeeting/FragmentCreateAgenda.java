@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,7 +23,8 @@ import com.example.sma.R;
 
 public class FragmentCreateAgenda extends Fragment{
 
-    Button but_addTopic;
+    CardView newAgendaCard;
+    ScrollView scroll;
     Button but_finishAgenda;
     LocalDatabase db = new LocalDatabase();
 
@@ -35,6 +38,15 @@ public class FragmentCreateAgenda extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.createmeeting_fragment_2, container, false);
         recyclerView = view.findViewById(R.id.recycler_agenda);
+        newAgendaCard = view.findViewById(R.id.newAgendaCard);
+            scroll = view.findViewById(R.id.scrollview);
+
+        scroll.post(new Runnable() {
+            @Override
+            public void run() {
+                scroll.fullScroll(View.FOCUS_DOWN);
+            }
+        });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         tempMeeting = ((ActivityCreateMeeting)getActivity()).getMeeting();
@@ -61,8 +73,7 @@ public class FragmentCreateAgenda extends Fragment{
             }
         });
 
-        but_addTopic = view.findViewById(R.id.addTopic);
-        but_addTopic.setOnClickListener(new View.OnClickListener() {
+        newAgendaCard.setOnClickListener(new View.OnClickListener() {
            @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(container.getId(), new FragmentAddTopic()).commit();

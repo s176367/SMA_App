@@ -42,15 +42,14 @@ public class ActivityRegister extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profile_register_activity);
+        setContentView(R.layout.activity_new_register);
 
-        Company = findViewById(R.id.editTextCompany);
-        Fullname = findViewById(R.id.editTextName);
+        Company = findViewById(R.id.input_ET_company);
+        Fullname = findViewById(R.id.input_ET_name);
         Email = findViewById(R.id.emailField);
-        Phone = findViewById(R.id.editTextMobil);
-        Zipcode = findViewById(R.id.editTextZipcode);
+        Phone = findViewById(R.id.input_ET_phone);
         Password = findViewById(R.id.passwordField);
-        progressBar = findViewById(R.id.NewReg_progressbar);
+        progressBar = findViewById(R.id.progressbar);
         LoginText = findViewById(R.id.register_text);
         buttonRegister = findViewById(R.id.login_btn);
 
