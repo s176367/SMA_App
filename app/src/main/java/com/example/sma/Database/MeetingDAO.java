@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.Topic;
+import com.example.sma.Profile.ActivityProfile;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -16,22 +18,18 @@ import java.util.Map;
 
 public class MeetingDAO extends MeetingObject {
 
+
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    ActivityProfile profile = new ActivityProfile();
 
     public void uploadMeeting(MeetingObject meeting){
 
-        Map<String, Object> mapMeeting = new HashMap<>();
 
-
-        mapMeeting.put("title", meeting.getTitle());
-        mapMeeting.put("time", meeting.getTime());
-        mapMeeting.put("location", meeting.getLocation());
-        mapMeeting.put("duration", meeting.getDuration());
-        mapMeeting.put("date", meeting.getDate());
-        //mapMeeting.put("topic", meeting.getTopics());
-
-        db.collection("meetings").add(mapMeeting).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        db.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings")
+                .add(meeting)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 System.out.println("Data blev tilføjet!");
@@ -42,10 +40,6 @@ public class MeetingDAO extends MeetingObject {
                 System.out.println("Der blev ikke tilføjet data");
             }
         });
-
-
-
-
     }
 
 
