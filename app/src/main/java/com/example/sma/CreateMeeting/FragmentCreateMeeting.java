@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import com.example.sma.Database.MeetingDAO;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 
@@ -34,12 +35,17 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
     EditText location;
     Button create;
     MeetingObject tempMeeting;
+
+    MeetingDAO meetingDAO;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.createmeeting_fragment_1, container, false);
         tempMeeting = ((ActivityCreateMeeting)getActivity()).getMeeting();
 
+
+        meetingDAO = new MeetingDAO();
 
 
         title = view.findViewById(R.id.insert_title);
@@ -78,6 +84,8 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
                     tempMeeting.setLocation(location.getText().toString());
                     tempMeeting.setDuration(duration.getText().toString());
                     ((ActivityCreateMeeting)getActivity()).setMeeting(tempMeeting);
+
+                    meetingDAO.uploadMeeting(tempMeeting);
 
 
                     getActivity().getSupportFragmentManager().beginTransaction().replace(container.getId(), new FragmentCreateAgenda()).addToBackStack(null).commit();
@@ -193,5 +201,6 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
         }
         return null;
     }
+
 
 }
