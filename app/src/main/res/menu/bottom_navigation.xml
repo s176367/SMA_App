@@ -15,7 +15,7 @@
 
 
     <item android:id="@+id/nav_invites"
-        android:icon="@drawable/invitationsicons"
+        android:icon="@drawable/invites"
         android:title="Invites"
 
         />

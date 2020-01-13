@@ -24,25 +24,24 @@ public class ActivityCreateMeeting extends AppCompatActivity {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.createmeeting_activity);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentCreateMeeting()).commit();
-
     }
 
+
+
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
 
+        int count = getSupportFragmentManager().getBackStackEntryCount();
 
-        if(getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStack();
-        }
-        else {
+        if (count == 0) {
             super.onBackPressed();
+            //additional code
+        } else {
+            getSupportFragmentManager().popBackStack();
         }
-
 
     }
 }

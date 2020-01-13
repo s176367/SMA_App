@@ -1,5 +1,6 @@
 package com.example.sma.CreateMeeting;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,17 +17,31 @@ import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.Topic;
 import com.example.sma.R;
 
+import java.util.List;
+
 public class FragmentAddTopic extends Fragment {
 
 
-    Button addTopic;
-    MeetingObject tempMeeting;
+    private Button addTopic;
+    private MeetingObject tempMeeting;
     private Topic topic;
-    EditText topicTitle;
-    EditText topicDesc;
-    String title = "";
-    String desc = "";
+    private EditText topicTitle;
+    private EditText topicDesc;
+    private String title = "";
+    private String desc = "";
+    private int position;
+    private ViewGroup container;
+    private Boolean updateTopic = false;
 
+    public FragmentAddTopic(){};
+
+
+    public FragmentAddTopic (String title, String desc,int position){
+        this.title = title;
+        this.desc = desc;
+        this.position = position;
+        updateTopic = true;
+    }
 
 
     @Nullable
@@ -41,9 +56,14 @@ public class FragmentAddTopic extends Fragment {
 
         topicDesc = view.findViewById(R.id.topic_description);
 
+        if (updateTopic){
+            topicTitle.setText(title);
+            topicDesc.setText(desc);
+        }
 
+        this.container = container;
 
-        addTopic = view.findViewById(R.id.but_addtopic);
+        addTopic = view.findViewById(R.id.but_addTopic);
 
         addTopic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,17 +75,19 @@ public class FragmentAddTopic extends Fragment {
                     topic = new Topic();
                     topic.setTopicName(topicTitle.getText().toString());
                     topic.setTopicDescription(topicDesc.getText().toString());
-                    tempMeeting.topics.add(topic);
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(container.getId(), new FragmentCreateAgenda()).commit();
+                    if (updateTopic){
+                        tempMeeting.topics.remove(position);
+                        tempMeeting.topics.add(position,topic);
+                    }
+                    else tempMeeting.topics.add(topic);
+
+
+                    updateTopic = false;
+                    getActivity().getSupportFragmentManager().popBackStack();
                 }
             }
         });
-
-
-        if (!title.isEmpty() && !desc.isEmpty()){
-            topicTitle.setText(title);
-            topicDesc.setText(desc);
-        }
+                                                                                                                            
         return view;
 
     }
@@ -73,8 +95,14 @@ public class FragmentAddTopic extends Fragment {
 
 
 
-    public void openTopic (String title, String desc){
-        this.title = title;
-        this.desc = desc;
-    }
+
+
+
+
+
+
+
+
+
+
 }

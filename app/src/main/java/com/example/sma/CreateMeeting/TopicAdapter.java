@@ -55,20 +55,9 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               MeetingObject tempMeeting =  ((ActivityCreateMeeting)context).getMeeting();
-               ArrayList<Topic> topicList =tempMeeting.getTopics();
-
-
-                        topicList.remove(position);
-                        FragmentAddTopic tempTopic = new FragmentAddTopic();
-                        tempTopic.openTopic(title,desc);
-
+               FragmentAddTopic tempTopic = new FragmentAddTopic(title,desc,position);
                         ((FragmentActivity)view.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                tempTopic).commit();
-
-
-
-
+                                tempTopic).addToBackStack(null).commit();
             }
         });
     }

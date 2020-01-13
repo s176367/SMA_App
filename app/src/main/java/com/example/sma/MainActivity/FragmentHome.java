@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sma.CreateMeeting.ActivityCreateMeeting;
-import com.example.sma.Profile.LocalDatabase;
+import com.example.sma.Database.LocalDatabase;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Profile.ActivityProfile;
 import com.example.sma.R;
@@ -25,7 +25,7 @@ import java.util.List;
 public class FragmentHome extends Fragment implements View.OnClickListener {
 
     RecyclerView recyclerView;
-    MeetingAdapter adapter;
+    MeetingCardAdapter adapter;
     Button but_create, but_profile;
 
 
@@ -37,25 +37,29 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.main_fragment_1, container, false);
-        meetingList = new ArrayList<>();
+
+
+
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_agenda);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
         but_create = view.findViewById(R.id.but_createMeeting);
         but_create.setOnClickListener(this);
+
         but_profile = view.findViewById(R.id.but_profile);
         but_profile.setOnClickListener(this);
 
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
         LocalDatabase db = new LocalDatabase();
-
-
-
+        meetingList = new ArrayList<>();
         meetingList = db.retriveMeetingList();
-        adapter = new MeetingAdapter(getContext(), meetingList);
+        adapter = new MeetingCardAdapter(getContext(), meetingList);
         recyclerView.setAdapter(adapter);
-
 
         return view;
     }

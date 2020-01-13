@@ -64,9 +64,6 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
                     }
 
 
-
-
-
         duration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

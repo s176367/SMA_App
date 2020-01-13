@@ -1,4 +1,4 @@
-package com.example.sma.Profile;
+package com.example.sma.Database;
 
 import android.content.SharedPreferences;
 
@@ -37,12 +37,27 @@ public class LocalDatabase {
         editor.commit();
     }
 
+    public void addMeeting(int pos, MeetingObject meetingObject) {
+        json = prefs.getString("Meetings","");
+        meetingList = retriveMeetingList();
+        meetingList.add(pos, meetingObject);
+        json = gson.toJson(meetingList);
+        editor.putString("Meetings", json);
+        editor.commit();
+    }
+
     public void deleteMeeting(int position) {
         meetingList = retriveMeetingList();
         meetingList.remove(position);
         json = gson.toJson(meetingList);
         editor.putString("Meetings", json);
         editor.commit();
+    }
+
+    public void updateMeeting(int position, MeetingObject newMeeting){
+        deleteMeeting(position);
+        addMeeting(position, newMeeting);
+
     }
 
     public ArrayList<MeetingObject> retriveMeetingList() {

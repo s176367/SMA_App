@@ -31,13 +31,10 @@ public class ActivityMain extends AppCompatActivity {
             startActivity(i);
         }
 
-
-
         super.onCreate(savedInstanceState);
         overridePendingTransition(0,0);
         mContext = this;
         setContentView(R.layout.main_activity);
-
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
