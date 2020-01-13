@@ -16,7 +16,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+// Denne klasse anvendes til at lave metoder der skal ændre databasen
 public class MeetingDAO extends MeetingObject {
+
 
 
 

@@ -21,7 +21,10 @@ import java.util.List;
 
 public class FragmentAddTopic extends Fragment {
 
+    /*
+    Denne klasses anvendes til at tilføe forskellige emner til vores agenda.
 
+     */
     private Button addTopic;
     private MeetingObject tempMeeting;
     private Topic topic;
@@ -36,6 +39,7 @@ public class FragmentAddTopic extends Fragment {
     public FragmentAddTopic(){};
 
 
+    // Konstruktør der anvendes hvis bruger vil opdatere emne
     public FragmentAddTopic (String title, String desc,int position){
         this.title = title;
         this.desc = desc;
@@ -49,45 +53,46 @@ public class FragmentAddTopic extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         tempMeeting = ((ActivityCreateMeeting)getActivity()).getMeeting();
-
         View view = inflater.inflate(R.layout.createmeeting_fragment_3, container,false);
-
         topicTitle = view.findViewById(R.id.topicTitle);
-
         topicDesc = view.findViewById(R.id.topic_description);
-
-        if (updateTopic){
-            topicTitle.setText(title);
-            topicDesc.setText(desc);
-        }
-
         this.container = container;
 
         addTopic = view.findViewById(R.id.but_addTopic);
+
 
         addTopic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (topicTitle.getText().toString().isEmpty() || topicDesc.getText().toString().isEmpty()){
+                    //Checker hvis bruger har udfyldt alle felter
                     Toast.makeText(getContext(), "Please insert all informations", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     topic = new Topic();
                     topic.setTopicName(topicTitle.getText().toString());
                     topic.setTopicDescription(topicDesc.getText().toString());
+
+                    //Hvis emnet skal opdateres, slettes det møde man vil opdatere, og så indsættes det igen på samme plads med ny info
                     if (updateTopic){
                         tempMeeting.topics.remove(position);
                         tempMeeting.topics.add(position,topic);
+                        updateTopic = false;
                     }
                     else tempMeeting.topics.add(topic);
 
 
-                    updateTopic = false;
+
                     getActivity().getSupportFragmentManager().popBackStack();
                 }
             }
         });
-                                                                                                                            
+
+        // Hvis et topic skal opdateres vises den gamle titel og beskrivelse til at starte med.
+        if (updateTopic){
+            topicTitle.setText(title);
+            topicDesc.setText(desc);
+        }
         return view;
 
     }

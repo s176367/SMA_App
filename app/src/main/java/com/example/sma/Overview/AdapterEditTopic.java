@@ -18,8 +18,11 @@ import com.example.sma.R;
 
 import java.util.List;
 
+
+
 public class AdapterEditTopic extends RecyclerView.Adapter<AdapterEditTopic.TopicViewHolder> {
 
+    // Denne klasse anvendes til at vise de emner brugeren har i et møde.
     private int meetingPos;
     private Context context;
     private List<Topic> topicList;
@@ -49,6 +52,7 @@ public class AdapterEditTopic extends RecyclerView.Adapter<AdapterEditTopic.Topi
         holder.topicDesc.setText(desc);
 
 
+        //OnClickListener der starter editTopic aktiviteten med de relevante informationer, der sendes med vha. intents.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

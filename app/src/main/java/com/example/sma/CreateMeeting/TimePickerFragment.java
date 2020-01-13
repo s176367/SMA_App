@@ -19,6 +19,10 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.util.Calendar;
 
+/*
+Fragment der bruges til at bruger kan vælge hvornår mødet skal starte
+ */
+
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
 
@@ -31,12 +35,12 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         final Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int min = c.get(Calendar.MINUTE);
+        //Indsætter urets "default" tid
         return new TimePickerDialog(getActivity(), this, 12, 0,true);
     }
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int min) {
-
         EditText timeView = (EditText) getActivity().findViewById(R.id.time);
         int settedHour = timePicker.getCurrentHour();
         int settedMin = timePicker.getCurrentMinute();
@@ -51,7 +55,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         else {
             modifyHour = String.valueOf(settedHour);
         }
-        
+
 
         timeView.setText(modifyHour+ ":"+modifyMin);
 

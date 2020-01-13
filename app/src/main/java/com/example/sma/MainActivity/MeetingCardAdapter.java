@@ -19,6 +19,8 @@ import java.util.List;
 
 public class MeetingCardAdapter extends RecyclerView.Adapter<MeetingCardAdapter.MeetingViewHolder> {
 
+    // Adapter der viser brugers møder udfra en møde liste.
+
 
     private Context mCtx;
     private List<MeetingObject> meetingList;
@@ -49,7 +51,7 @@ public class MeetingCardAdapter extends RecyclerView.Adapter<MeetingCardAdapter.
         holder.textViewPeopleCount.setText(String.valueOf(meeting.getAntalPersoner()));
         holder.textViewDate.setText(String.valueOf(meeting.getDate()));
 
-
+        // Onclick listener der sender bruger videre til overblikket over det valgte møde.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,8 +61,6 @@ public class MeetingCardAdapter extends RecyclerView.Adapter<MeetingCardAdapter.
                 mCtx.startActivity(intent);
             }
         });
-
-
     }
 
     @Override
@@ -70,13 +70,11 @@ public class MeetingCardAdapter extends RecyclerView.Adapter<MeetingCardAdapter.
 
 
     class MeetingViewHolder extends RecyclerView.ViewHolder {
-
         TextView textViewTitle, textViewTime, textViewLocation, textViewPeopleCount,textViewDate;
 
 
         public MeetingViewHolder(@NonNull View itemView) {
             super(itemView);
-
             textViewTitle = itemView.findViewById(R.id.meetingTitle);
             textViewTime = itemView.findViewById(R.id.meetingTime);
             textViewLocation = itemView.findViewById(R.id.location);
@@ -88,12 +86,10 @@ public class MeetingCardAdapter extends RecyclerView.Adapter<MeetingCardAdapter.
 
 
 
-    // allows clicks events to be caught
     void setClickListener(TopicAdapter.ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
-    // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }

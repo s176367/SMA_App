@@ -13,6 +13,8 @@ import com.example.sma.R;
 
 public class FragmentParticipants extends Fragment {
 
+    // Ikke implementeret endnu. Skal vise deltagere i mødet.
+
 
     @Nullable
     @Override

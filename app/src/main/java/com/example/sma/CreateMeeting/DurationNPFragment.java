@@ -19,6 +19,12 @@ import androidx.fragment.app.DialogFragment;
 import java.util.ArrayList;
 
 
+
+/*
+Denne klasse anvendes til at lave vores durationhjul, som angiver hvor lang tid et møde varer
+Vi modificere derfor en numberpicker til at have de værdier vi gerne vil bruge (15 min intervaller)
+*/
+
 public class DurationNPFragment extends DialogFragment {
     private NumberPicker.OnValueChangeListener valueChangeListener;
 
@@ -32,6 +38,7 @@ public class DurationNPFragment extends DialogFragment {
 
         np.setMinValue(1);
         np.setMaxValue(8);
+        // sætter værdierne der vises på hjulet til vores string array
         np.setDisplayedValues(minutInt);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -59,6 +66,7 @@ public class DurationNPFragment extends DialogFragment {
     public void setValueChangeListener(NumberPicker.OnValueChangeListener valueChangeListener){
         this.valueChangeListener = valueChangeListener;
     }
+    }
 
 
-}
+

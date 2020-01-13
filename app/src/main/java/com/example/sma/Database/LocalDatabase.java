@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 public class LocalDatabase {
 
+/*
+Lokal database der virker vha. shared preferences til at gemme lokalt på brugers mobil.
+ */
+
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
     public LocalDatabase(){

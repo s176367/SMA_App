@@ -2,6 +2,8 @@ package com.example.sma.Model;
 
 public class Contact {
 
+    // Model til de atributter en bruger skal kende til sine kontakter.
+
     private String name;
     private String email;
     private String phone;

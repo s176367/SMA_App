@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 
 
 public class ResetPasswordFragment extends Fragment {
+    // Klasse til at få nyt password.
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

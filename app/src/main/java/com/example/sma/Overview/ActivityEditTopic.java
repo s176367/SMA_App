@@ -18,6 +18,8 @@ import java.util.List;
 
 public class ActivityEditTopic extends Activity {
 
+    // Denne klasse anvendes til at ændre et emne i en brugers agenda
+
 
     Button updateTopic;
     MeetingObject tempMeeting;
@@ -48,6 +50,7 @@ public class ActivityEditTopic extends Activity {
         meetingPos = bundle.getInt("MeetingPos");
         cardPos = bundle.getInt("CardPos");
 
+        // Sætter de gamle værdier
         topicTitle.setText(title);
         topicDesc.setText(desc);
 
@@ -65,17 +68,12 @@ public class ActivityEditTopic extends Activity {
                     topic = new Topic();
                     topic.setTopicName(topicTitle.getText().toString());
                     topic.setTopicDescription(topicDesc.getText().toString());
+                    //Udskifter det gamle emne
                     tempMeeting.topics.remove(cardPos);
                     tempMeeting.topics.add(cardPos,topic);
                     db.updateMeeting(meetingPos,tempMeeting);
+                    // Kalder finish og ryger tilbage i overview
                     finish();
-
-                    /*
-                    Intent intent = new Intent(getApplicationContext(), ActivityOverview.class);
-                    intent.putExtra("update", true);
-                    startActivity(intent);
-
-                     */
                 }
             }
         });

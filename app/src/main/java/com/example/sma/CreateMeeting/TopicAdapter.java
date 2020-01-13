@@ -27,13 +27,13 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
 
 
 
-    // data is passed into the constructor
+
     public TopicAdapter(Context context, List<Topic> data) {
         this.context = context;
         topicList = data;
     }
 
-    // inflates the row layout from xml when needed
+
     @NonNull
     @Override
     public TopicViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -43,7 +43,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
         return holder;
     }
 
-    // binds the data to the TextView in each row
+    // indsætter de rigtige titler og beskrivelser og laver onclick listner
 
     public void onBindViewHolder(TopicViewHolder holder, final int position) {
 

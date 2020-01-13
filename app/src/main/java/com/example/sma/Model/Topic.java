@@ -2,6 +2,8 @@ package com.example.sma.Model;
 
 public class Topic {
 
+    // Model til et emnes attributter.
+
 
  private String topicName;
  private String topicDescription;

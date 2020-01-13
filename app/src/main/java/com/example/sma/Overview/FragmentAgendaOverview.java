@@ -19,6 +19,8 @@ import java.util.List;
 
 public class FragmentAgendaOverview extends Fragment {
 
+    //Denne klasse viser vha. EditTopic adpateren de forskellige emner der er i mødet.
+
     LocalDatabase db = new LocalDatabase();
 
     private AdapterEditTopic adapter;
@@ -46,6 +48,7 @@ public class FragmentAgendaOverview extends Fragment {
     }
 
 
+    // bruger onResume til at opdatere det der vises efter et emne er blevet ændret i editTopic.
     @Override
     public void onResume() {
         super.onResume();

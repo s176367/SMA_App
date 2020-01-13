@@ -8,9 +8,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 public class AdapterViewPager extends FragmentPagerAdapter {
 
+    // Viewpager der gør så brugeren kan bladre mellem forskellige fragmenter i overview
+
     private Fragment[] childFragments;
-
-
 
 
     public AdapterViewPager(@NonNull FragmentManager fm) {

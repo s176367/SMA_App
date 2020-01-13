@@ -11,7 +11,9 @@ import com.example.sma.R;
 
 public class SplashScreen extends AppCompatActivity implements View.OnClickListener {
 
-    Button buttonCreate, buttonLogin;
+    //En splashscreen klasse der muligvis skal implementers hvis det tager lang tid at indlæse information når appen åbnes.
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,20 +21,8 @@ public class SplashScreen extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.splashscreen_activity);
 
 
-        buttonLogin = findViewById(R.id.buttonlogin);
-        buttonCreate = findViewById(R.id.buttonCreate);
 
-
-        buttonLogin.setOnClickListener(this);
-
-        buttonCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                openActivity();
-
-            }
-        });
+        openActivity();
 
 
     }

@@ -21,6 +21,9 @@ import java.util.ArrayList;
 
 public class FragmentOverview extends Fragment implements View.OnClickListener {
 
+    // Klasse til at vise de basale informationer som mødet indeholder.
+
+
     TextView title;
     TextView date;
     TextView time;

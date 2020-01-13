@@ -24,12 +24,13 @@ import java.util.List;
 
 public class FragmentHome extends Fragment implements View.OnClickListener {
 
+    // Dette er "hovedaktiviteten" hvor man kan se alle sine møder og starte oprettelsesprocessen af nye møder.
+    // Klassen anvender MeetingCardAdapter til at vise de allerede oprettede møder.
+
+
     RecyclerView recyclerView;
     MeetingCardAdapter adapter;
     Button but_create, but_profile;
-
-
-
     List<MeetingObject> meetingList;
 
     @Nullable
@@ -37,14 +38,10 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.main_fragment_1, container, false);
-
-
-
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_agenda);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
 
         but_create = view.findViewById(R.id.but_createMeeting);
         but_create.setOnClickListener(this);
@@ -52,12 +49,10 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         but_profile = view.findViewById(R.id.but_profile);
         but_profile.setOnClickListener(this);
 
-
-
-
         LocalDatabase db = new LocalDatabase();
         meetingList = new ArrayList<>();
         meetingList = db.retriveMeetingList();
+        // Opsættelse af adapter
         adapter = new MeetingCardAdapter(getContext(), meetingList);
         recyclerView.setAdapter(adapter);
 
@@ -65,7 +60,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     }
 
 
-
+    // Opsættelse af de forskellige knapper
     @Override
     public void onClick(View view) {
         if (view == but_create){

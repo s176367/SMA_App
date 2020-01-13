@@ -3,7 +3,7 @@ package com.example.sma.Model;
 import java.util.ArrayList;
 
 public class MeetingObject {
-
+// Model til de atributter en bruger skal kende til sine møder.
 
     private int id;
     private String title;
@@ -13,6 +13,14 @@ public class MeetingObject {
     private String date;
     private String duration;
 
+
+
+    public ArrayList<Topic> topics = new ArrayList<>();
+
+    public ArrayList<Topic> getTopics() {
+        return topics;
+    }
+
     public String getDuration() {
         return duration;
     }
@@ -21,16 +29,9 @@ public class MeetingObject {
         this.duration = duration;
     }
 
-    public ArrayList<Topic> topics = new ArrayList<>();
-
-    public ArrayList<Topic> getTopics() {
-        return topics;
-    }
-
     public void setTopics(ArrayList<Topic> topics) {
         this.topics = topics;
     }
-
 
     public int getId() {
         return id;

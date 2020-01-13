@@ -32,6 +32,8 @@ import java.util.Map;
 
 public class ActivityRegister extends AppCompatActivity {
 
+    // Denne klass anvendes til at registrere nye brugere i firestore.
+
 
     public static final String TAG = "TAG";
     private TextInputLayout inputCompany, inputName, inputEmail, inputPhone, inputZipcode, inputPassword;
