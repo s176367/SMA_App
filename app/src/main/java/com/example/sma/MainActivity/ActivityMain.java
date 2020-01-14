@@ -17,34 +17,31 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class ActivityMain extends AppCompatActivity {
 
+    // Denne klasse anvendes til at vise de tre hovedfragmenter i appen, vha. bundnavigation
+
 
     protected static Context mContext;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
 
+        // Da appen starter herfra, chekkes der her hvis brugeren er logget ind. Hvis bruger ikke er logget ind starter login aktivitet.
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
             Intent i = new Intent(ActivityMain.this, ActivityLogin.class);
             startActivity(i);
         }
 
-
-
         super.onCreate(savedInstanceState);
         overridePendingTransition(0,0);
         mContext = this;
         setContentView(R.layout.main_activity);
-
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
 
     }
 
-
+    // Opsætning af bund navigationsbaren
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override

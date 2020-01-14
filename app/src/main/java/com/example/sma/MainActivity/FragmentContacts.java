@@ -19,7 +19,7 @@ import java.util.List;
 
 public class FragmentContacts extends Fragment {
 
-
+    // Dette fragment bruges til at vise kontakterne vha. contactsadapteren der indsættes i et recyclerview
 
 
     RecyclerView recyclerView;

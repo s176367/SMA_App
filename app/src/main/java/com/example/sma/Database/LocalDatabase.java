@@ -1,4 +1,4 @@
-package com.example.sma.Profile;
+package com.example.sma.Database;
 
 import android.content.SharedPreferences;
 
@@ -14,6 +14,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 public class LocalDatabase {
+
+/*
+Lokal database der virker vha. shared preferences til at gemme lokalt på brugers mobil.
+ */
 
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
@@ -37,12 +41,27 @@ public class LocalDatabase {
         editor.commit();
     }
 
+    public void addMeeting(int pos, MeetingObject meetingObject) {
+        json = prefs.getString("Meetings","");
+        meetingList = retriveMeetingList();
+        meetingList.add(pos, meetingObject);
+        json = gson.toJson(meetingList);
+        editor.putString("Meetings", json);
+        editor.commit();
+    }
+
     public void deleteMeeting(int position) {
         meetingList = retriveMeetingList();
         meetingList.remove(position);
         json = gson.toJson(meetingList);
         editor.putString("Meetings", json);
         editor.commit();
+    }
+
+    public void updateMeeting(int position, MeetingObject newMeeting){
+        deleteMeeting(position);
+        addMeeting(position, newMeeting);
+
     }
 
     public ArrayList<MeetingObject> retriveMeetingList() {

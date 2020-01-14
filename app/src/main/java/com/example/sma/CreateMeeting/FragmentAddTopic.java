@@ -1,5 +1,6 @@
 package com.example.sma.CreateMeeting;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,17 +17,35 @@ import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.Topic;
 import com.example.sma.R;
 
+import java.util.List;
+
 public class FragmentAddTopic extends Fragment {
 
+    /*
+    Denne klasses anvendes til at tilføe forskellige emner til vores agenda.
 
-    Button addTopic;
-    MeetingObject tempMeeting;
+     */
+    private Button addTopic;
+    private MeetingObject tempMeeting;
     private Topic topic;
-    EditText topicTitle;
-    EditText topicDesc;
-    String title = "";
-    String desc = "";
+    private EditText topicTitle;
+    private EditText topicDesc;
+    private String title = "";
+    private String desc = "";
+    private int position;
+    private ViewGroup container;
+    private Boolean updateTopic = false;
 
+    public FragmentAddTopic(){};
+
+
+    // Konstruktør der anvendes hvis bruger vil opdatere emne
+    public FragmentAddTopic (String title, String desc,int position){
+        this.title = title;
+        this.desc = desc;
+        this.position = position;
+        updateTopic = true;
+    }
 
 
     @Nullable
@@ -34,35 +53,43 @@ public class FragmentAddTopic extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         tempMeeting = ((ActivityCreateMeeting)getActivity()).getMeeting();
-
         View view = inflater.inflate(R.layout.createmeeting_fragment_3, container,false);
-
         topicTitle = view.findViewById(R.id.topicTitle);
-
         topicDesc = view.findViewById(R.id.topic_description);
+        this.container = container;
 
+        addTopic = view.findViewById(R.id.but_addTopic);
 
-
-        addTopic = view.findViewById(R.id.but_addtopic);
 
         addTopic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (topicTitle.getText().toString().isEmpty() || topicDesc.getText().toString().isEmpty()){
+                    //Checker hvis bruger har udfyldt alle felter
                     Toast.makeText(getContext(), "Please insert all informations", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     topic = new Topic();
                     topic.setTopicName(topicTitle.getText().toString());
                     topic.setTopicDescription(topicDesc.getText().toString());
-                    tempMeeting.topics.add(topic);
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(container.getId(), new FragmentCreateAgenda()).commit();
+
+                    //Hvis emnet skal opdateres, slettes det møde man vil opdatere, og så indsættes det igen på samme plads med ny info
+                    if (updateTopic){
+                        tempMeeting.topics.remove(position);
+                        tempMeeting.topics.add(position,topic);
+                        updateTopic = false;
+                    }
+                    else tempMeeting.topics.add(topic);
+
+
+
+                    getActivity().getSupportFragmentManager().popBackStack();
                 }
             }
         });
 
-
-        if (!title.isEmpty() && !desc.isEmpty()){
+        // Hvis et topic skal opdateres vises den gamle titel og beskrivelse til at starte med.
+        if (updateTopic){
             topicTitle.setText(title);
             topicDesc.setText(desc);
         }
@@ -73,8 +100,14 @@ public class FragmentAddTopic extends Fragment {
 
 
 
-    public void openTopic (String title, String desc){
-        this.title = title;
-        this.desc = desc;
-    }
+
+
+
+
+
+
+
+
+
+
 }

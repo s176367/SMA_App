@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.example.sma.R;
 
 public class FragmentInvites extends Fragment {
+    // Denne klasse er ikke implementeret endnu, men skal vise brugers mødeinvitationer
 
 
     @Nullable

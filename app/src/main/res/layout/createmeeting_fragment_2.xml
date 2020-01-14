@@ -26,24 +26,13 @@
 
     <Button
         android:id="@+id/finish_agenda"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-         />
-    <Button
-        android:id="@+id/addTopic"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="30dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/plus"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_alignParentRight="true"
-        android:layout_alignBottom="@id/scrollview"
-
-        />
-
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/next" />
 
 
     <ScrollView
@@ -64,15 +53,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <Space
+            <include
+                layout="@layout/model_new_agenda"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_below="@id/recycler_agenda" />
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recycler_agenda"
+                android:layout_marginTop="1dp" />
+
 
         </RelativeLayout>
 
 
 
+
+
     </ScrollView>
+
 
 </RelativeLayout>

@@ -21,6 +21,8 @@ import java.util.List;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ContactViewHolder> {
 
+    // Denne adapter bruges til at lave views af brugerens kontakter.
+
 
     private Context mCtx;
     private List<Contact> contactList;

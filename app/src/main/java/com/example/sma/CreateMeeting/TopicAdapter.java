@@ -25,13 +25,15 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
-    // data is passed into the constructor
+
+
+
     public TopicAdapter(Context context, List<Topic> data) {
         this.context = context;
         topicList = data;
     }
 
-    // inflates the row layout from xml when needed
+
     @NonNull
     @Override
     public TopicViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,7 +43,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
         return holder;
     }
 
-    // binds the data to the TextView in each row
+    // indsætter de rigtige titler og beskrivelser og laver onclick listner
 
     public void onBindViewHolder(TopicViewHolder holder, final int position) {
 
@@ -53,18 +55,9 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               MeetingObject tempMeeting =  ((ActivityCreateMeeting)context).getMeeting();
-               ArrayList<Topic> topicList =tempMeeting.getTopics();
-
-
-                        topicList.remove(position);
-                        FragmentAddTopic tempTopic = new FragmentAddTopic();
-                        tempTopic.openTopic(title,desc);
-
+               FragmentAddTopic tempTopic = new FragmentAddTopic(title,desc,position);
                         ((FragmentActivity)view.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                tempTopic).commit();
-
-
+                                tempTopic).addToBackStack(null).commit();
             }
         });
     }

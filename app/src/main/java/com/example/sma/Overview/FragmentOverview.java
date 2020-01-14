@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.sma.Profile.LocalDatabase;
+import com.example.sma.Database.LocalDatabase;
 import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
@@ -20,6 +20,9 @@ import com.example.sma.R;
 import java.util.ArrayList;
 
 public class FragmentOverview extends Fragment implements View.OnClickListener {
+
+    // Klasse til at vise de basale informationer som mødet indeholder.
+
 
     TextView title;
     TextView date;
@@ -50,8 +53,6 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
 
         list = db.retriveMeetingList();
 
-
-
                 title.setText(list.get(position).getTitle());
                 time.setText(list.get(position).getTime());
                 date.setText(list.get(position).getDate());
@@ -62,6 +63,7 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
 
         return view;
     }
+
 
 
     @Override

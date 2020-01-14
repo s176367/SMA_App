@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sma.CreateMeeting.ActivityCreateMeeting;
-import com.example.sma.Profile.LocalDatabase;
+import com.example.sma.Database.LocalDatabase;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Profile.ActivityProfile;
 import com.example.sma.R;
@@ -24,12 +24,13 @@ import java.util.List;
 
 public class FragmentHome extends Fragment implements View.OnClickListener {
 
+    // Dette er "hovedaktiviteten" hvor man kan se alle sine møder og starte oprettelsesprocessen af nye møder.
+    // Klassen anvender MeetingCardAdapter til at vise de allerede oprettede møder.
+
+
     RecyclerView recyclerView;
-    MeetingAdapter adapter;
+    MeetingCardAdapter adapter;
     Button but_create, but_profile;
-
-
-
     List<MeetingObject> meetingList;
 
     @Nullable
@@ -37,31 +38,29 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.main_fragment_1, container, false);
-        meetingList = new ArrayList<>();
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_agenda);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         but_create = view.findViewById(R.id.but_createMeeting);
         but_create.setOnClickListener(this);
+
         but_profile = view.findViewById(R.id.but_profile);
         but_profile.setOnClickListener(this);
 
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         LocalDatabase db = new LocalDatabase();
-
-
-
+        meetingList = new ArrayList<>();
         meetingList = db.retriveMeetingList();
-        adapter = new MeetingAdapter(getContext(), meetingList);
+        // Opsættelse af adapter
+        adapter = new MeetingCardAdapter(getContext(), meetingList);
         recyclerView.setAdapter(adapter);
-
 
         return view;
     }
 
 
-
+    // Opsættelse af de forskellige knapper
     @Override
     public void onClick(View view) {
         if (view == but_create){

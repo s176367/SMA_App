@@ -1,27 +1,36 @@
 package com.example.sma.Overview;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sma.CreateMeeting.FragmentAddTopic;
 import com.example.sma.Model.Topic;
 import com.example.sma.R;
 
 import java.util.List;
 
+
+
 public class AdapterEditTopic extends RecyclerView.Adapter<AdapterEditTopic.TopicViewHolder> {
 
-
+    // Denne klasse anvendes til at vise de emner brugeren har i et møde.
+    private int meetingPos;
     private Context context;
     private List<Topic> topicList;
 
-    public AdapterEditTopic(Context context, List<Topic> data) {
+    public AdapterEditTopic(Context context, List<Topic> data, int meetingPos) {
+        setHasStableIds(true);
         this.context = context;
+        this.meetingPos = meetingPos;
         topicList = data;
     }
 
@@ -34,15 +43,27 @@ public class AdapterEditTopic extends RecyclerView.Adapter<AdapterEditTopic.Topi
         return holder;
     }
 
-    // binds the data to the TextView in each row
+
 
     public void onBindViewHolder(TopicViewHolder holder, final int position) {
-
         final String title = topicList.get(position).getTopicName();
         final String desc = topicList.get(position).getTopicDescription();
         holder.topicTitle.setText(title);
         holder.topicDesc.setText(desc);
 
+
+        //OnClickListener der starter editTopic aktiviteten med de relevante informationer, der sendes med vha. intents.
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ActivityEditTopic.class);
+                intent.putExtra("title", title);
+                intent.putExtra("desc",desc);
+                intent.putExtra("MeetingPos", meetingPos);
+                intent.putExtra("CardPos", position);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -54,7 +75,6 @@ public class AdapterEditTopic extends RecyclerView.Adapter<AdapterEditTopic.Topi
         void onItemClick(View view, int position);
 
     }
-
 
 
     class TopicViewHolder extends RecyclerView.ViewHolder {

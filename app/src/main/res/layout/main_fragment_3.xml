@@ -27,17 +27,6 @@
         android:textSize="20sp"
         android:textColor="@color/cardview_light_background"
         android:textStyle="bold" />
-    <Button
-        android:id="@+id/but_profile"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/profile" />
-
 
 
     <ScrollView

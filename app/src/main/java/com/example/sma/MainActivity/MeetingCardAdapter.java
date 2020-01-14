@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,7 +17,9 @@ import com.example.sma.R;
 
 import java.util.List;
 
-public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingViewHolder> {
+public class MeetingCardAdapter extends RecyclerView.Adapter<MeetingCardAdapter.MeetingViewHolder> {
+
+    // Adapter der viser brugers møder udfra en møde liste.
 
 
     private Context mCtx;
@@ -26,7 +27,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
     private TopicAdapter.ItemClickListener mClickListener;
 
 
-    public MeetingAdapter(Context mCtx, List<MeetingObject> meetingList) {
+    public MeetingCardAdapter(Context mCtx, List<MeetingObject> meetingList) {
         this.mCtx = mCtx;
         this.meetingList = meetingList;
     }
@@ -43,24 +44,23 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
     @Override
     public void onBindViewHolder(@NonNull final MeetingViewHolder holder, final int position) {
 
-        final MeetingObject meeting = meetingList.get(position);
+        MeetingObject meeting = meetingList.get(position);
         holder.textViewTitle.setText(meeting.getTitle());
         holder.textViewTime.setText(meeting.getTime());
         holder.textViewLocation.setText(meeting.getLocation());
         holder.textViewPeopleCount.setText(String.valueOf(meeting.getAntalPersoner()));
         holder.textViewDate.setText(String.valueOf(meeting.getDate()));
 
-
+        // Onclick listener der sender bruger videre til overblikket over det valgte møde.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mCtx, ActivityOverview.class);
                 intent.putExtra("position", position);
+                System.out.println("card pos" + position);
                 mCtx.startActivity(intent);
             }
         });
-
-
     }
 
     @Override
@@ -70,13 +70,11 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
 
 
     class MeetingViewHolder extends RecyclerView.ViewHolder {
-
         TextView textViewTitle, textViewTime, textViewLocation, textViewPeopleCount,textViewDate;
 
 
         public MeetingViewHolder(@NonNull View itemView) {
             super(itemView);
-
             textViewTitle = itemView.findViewById(R.id.meetingTitle);
             textViewTime = itemView.findViewById(R.id.meetingTime);
             textViewLocation = itemView.findViewById(R.id.location);
@@ -88,15 +86,12 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
 
 
 
-    // allows clicks events to be caught
     void setClickListener(TopicAdapter.ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
-    // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }
-
 
 }
