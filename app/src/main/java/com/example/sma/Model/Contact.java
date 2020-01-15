@@ -10,6 +10,7 @@ public class Contact {
     private String company;
 
 
+
     public Contact(String name, String email, String company, String phone) {
         this.name = name;
         this.email = email;
@@ -49,4 +50,6 @@ public class Contact {
     public void setCompany(String company) {
         this.company = company;
     }
+
+
 }

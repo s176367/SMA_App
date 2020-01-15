@@ -14,6 +14,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.sma.Database.FirebaseControl;
+import com.example.sma.Database.LocalDatabase;
+import com.example.sma.Database.SenderCallback;
+import com.example.sma.MainActivity.ActivityMain;
+import com.example.sma.Model.User;
 import com.example.sma.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -148,25 +153,23 @@ public class ActivityRegister extends AppCompatActivity {
 
                             Toast.makeText(ActivityRegister.this, "User created.", Toast.LENGTH_SHORT).show();
                             userID = fAuth.getCurrentUser().getUid();
-                            DocumentReference documentReference = fStore.collection("users").document(userID);
-                            Map<String, Object> user = new HashMap<>();
-                            user.put("fname", fullname);
-                            user.put("email", email);
-                            user.put("phone", phone);
-                            user.put("company", company);
-                            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            DocumentReference dr = fStore.collection("users").document(userID);
+                            final User user = new User(fullname,company,email,phone);
+                            user.setName(fullname);
+                            user.setEmail(email);
+                            user.setCompany(company);
+                            user.setPhoneNr(phone);
+
+                            FirebaseControl.fc.createUser(user, new SenderCallback() {
                                 @Override
-                                public void onSuccess(Void aVoid) {
-
-                                    Log.d(TAG, "onSuccess: user profile is created for " + userID);
-
+                                public void succes() {
+                                    System.out.println("bruger tilføjet.");
+                                    LocalDatabase.LD.setUser(user);
                                 }
-                            }).addOnFailureListener(new OnFailureListener() {
+
                                 @Override
-                                public void onFailure(@NonNull Exception e) {
-
-                                    Log.d(TAG, "onFailure: " + e.toString());
-
+                                public void failure(Exception exception) {
+                                    System.out.println("Fejl");
                                 }
                             });
 
@@ -174,7 +177,6 @@ public class ActivityRegister extends AppCompatActivity {
                             //Email-verification
                             /*
                             if (task.isSuccessful()) {
-
                                 fAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -185,13 +187,10 @@ public class ActivityRegister extends AppCompatActivity {
                                         }
                                     }
                                 });
-
-
                             }
-
                              */
 
-                            startActivity(new Intent(getApplicationContext(), ActivityProfile.class));
+                            startActivity(new Intent(getApplicationContext(), ActivityMain.class));
 
                         } else {
 

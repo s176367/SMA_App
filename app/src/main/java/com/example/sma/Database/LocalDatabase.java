@@ -7,6 +7,7 @@ import androidx.preference.PreferenceManager;
 import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.Contact;
 import com.example.sma.Model.MeetingObject;
+import com.example.sma.Model.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -19,6 +20,9 @@ public class LocalDatabase {
 Lokal database der virker vha. shared preferences til at gemme lokalt på brugers mobil.
  */
 
+    public static LocalDatabase LD = new LocalDatabase();
+
+
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
     public LocalDatabase(){
@@ -30,6 +34,7 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
 
     private List<MeetingObject> meetingList = new ArrayList<>();
     private List<Contact> contactList = new ArrayList<>();
+    private static User user = new User();
 
 
     public void addMeeting(MeetingObject meetingObject) {
@@ -56,6 +61,24 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
         json = gson.toJson(meetingList);
         editor.putString("Meetings", json);
         editor.commit();
+    }
+
+
+    public User getUser() {
+        json = prefs.getString("User","");
+        if (!json.isEmpty()){
+            user = gson.fromJson(json, User.class);
+            return user;
+        }
+        else return new User();
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        json = gson.toJson(user);
+        editor.putString("User", json);
+        editor.commit();
+        this.user = user;
     }
 
     public void updateMeeting(int position, MeetingObject newMeeting){
