@@ -71,7 +71,10 @@ public class ActivityMain extends AppCompatActivity {
         return mContext;
     }
 
+    @Override
+    public void onBackPressed() {
 
+    }
 }
 
 
