@@ -36,7 +36,7 @@ public class ActivityRegister extends AppCompatActivity {
 
 
     public static final String TAG = "TAG";
-    private TextInputLayout inputCompany, inputName, inputEmail, inputPhone, inputZipcode, inputPassword;
+    private TextInputLayout inputCompany, inputName, inputEmail, inputPhone, inputPassword;
     private TextInputEditText inputETCompany, inputETName, inputETEmail, inputETPhone, inputETPassword;
     TextView loginText;
     Button btn_register;
