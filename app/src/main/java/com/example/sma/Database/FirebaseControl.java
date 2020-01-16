@@ -48,15 +48,12 @@ public class FirebaseControl implements IFirebaseControl {
                     DocumentSnapshot ds = task.getResult();
                     if (ds != null) {
                         receiverCallback.success(task);
-
                     }
 
                     if (ds == null) {
                         receiverCallback.noData();
                     }
-                }
-
-                else {
+                } else {
                     receiverCallback.failure(task.getException());
                 }
             }
