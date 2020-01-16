@@ -79,9 +79,6 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
 
     }
 
-
-
-
     class TopicViewHolder extends RecyclerView.ViewHolder {
         TextView topicTitle, topicDesc;
 

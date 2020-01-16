@@ -7,9 +7,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.sma.Database.LocalDatabase;
 import com.example.sma.MainActivity.ActivityMain;
+import com.example.sma.Model.User;
 import com.example.sma.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -25,6 +29,8 @@ public class ActivityProfile extends AppCompatActivity {
     FirebaseFirestore firestore;
     String userId;
 
+    // private FirebaseUser currentUSer = FirebaseAuth.getInstance().getCurrentUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,22 +41,21 @@ public class ActivityProfile extends AppCompatActivity {
         Phone = findViewById(R.id.profilePhone);
         Company = findViewById(R.id.profileCompany);
 
+        User user;
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        firestore = FirebaseFirestore.getInstance();
-        userId = firebaseAuth.getCurrentUser().getUid();
 
-        DocumentReference documentReference = firestore.collection("users").document(userId);
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                Fullname.setText(documentSnapshot.getString("fname"));
-                Email.setText(documentSnapshot.getString("email"));
-                Phone.setText(documentSnapshot.getString("phone"));
-                Company.setText(documentSnapshot.getString("company"));
-            }
-        });
+        user = LocalDatabase.LD.getUser();
+        try {
+            Fullname.setText(user.getName());
+            Email.setText(user.getEmail());
+            Phone.setText(user.getPhoneNr());
+            Company.setText(user.getCompany());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
+
 
     public void logout(View v) {
         FirebaseAuth.getInstance().signOut();
