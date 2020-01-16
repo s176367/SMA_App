@@ -4,7 +4,6 @@ public interface SenderCallback {
 
 
     void onSuccess();
-
     void onFailure(Exception exception);
 
 }

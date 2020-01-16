@@ -100,9 +100,10 @@ public class ActivityLogin extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()){
-                                    FirebaseControl.fc.getUser(firebaseAuth.getCurrentUser().getUid(), new ReceiverCallback() {
+                                    FirebaseControl.FC.getUser(firebaseAuth.getCurrentUser().getUid(), new ReceiverCallback() {
                                         @Override
                                         public void onSuccess(Task<DocumentSnapshot> task) {
+
                                             User user = task.getResult().toObject(User.class);
                                             LocalDatabase.LD.setUser(user);
                                             Intent intent = new Intent(ActivityLogin.this, ActivityMain.class);
@@ -112,6 +113,7 @@ public class ActivityLogin extends AppCompatActivity {
                                         }
                                         @Override
                                         public void onFailure(Exception exception) {
+
                                             System.out.println(exception);
                                         }
 
