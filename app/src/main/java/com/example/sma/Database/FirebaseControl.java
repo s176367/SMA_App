@@ -1,7 +1,5 @@
 package com.example.sma.Database;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.example.sma.Model.MeetingObject;
@@ -14,7 +12,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,6 +37,7 @@ public class FirebaseControl implements IFirebaseControl {
                 senderCallback.onFailure(e);
             }
         });
+        FC.collection("meetings").document().getId();
     }
 
     @Override
