@@ -12,7 +12,8 @@ public interface IFirebaseControl {
 
 
     void createMeeting (MeetingObject meetingObject, SenderCallback senderCallback);
-    void getMeeting (String meetingID,  ReceiverCallback receiverCallback);
+    void getAllMeetings (ReceiverCallback receiverCallback);
+    void getMeeting(String MeetingId, ReceiverCallback receiverCallback);
     void insertMeetingID (String meetingID, SenderCallback senderCallback);
 
 

@@ -12,13 +12,7 @@ import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.User;
 import com.example.sma.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-
-import javax.annotation.Nullable;
 
 public class ActivityProfile extends AppCompatActivity {
 
@@ -44,7 +38,7 @@ public class ActivityProfile extends AppCompatActivity {
         try {
             Fullname.setText(user.getName());
             Email.setText(user.getEmail());
-            Phone.setText(user.getPhoneNr());
+            Phone.setText(user.getPhone());
             Company.setText(user.getCompany());
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,8 +48,11 @@ public class ActivityProfile extends AppCompatActivity {
 
     public void logout(View v) {
         FirebaseAuth.getInstance().signOut();
+        LocalDatabase.LD.deleteMeetingList();
         startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
+
         finish();
+
     }
 
     @Override

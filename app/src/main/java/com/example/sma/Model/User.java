@@ -5,17 +5,17 @@ public class User {
     private String name;
     private String company;
     private String email;
-    private String phoneNr;
+    private String phone;
     private String userID;
 
     public User(){};
 
 
-    public User(String name, String company, String email, String phoneNr) {
+    public User(String name, String company, String email, String phone) {
         this.name = name;
         this.company = company;
         this.email = email;
-        this.phoneNr = phoneNr;
+        this.phone = phone;
     }
 
     public String getName() {
@@ -42,12 +42,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPhoneNr() {
-        return phoneNr;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNr(String phoneNr) {
-        this.phoneNr = phoneNr;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getUserID() {

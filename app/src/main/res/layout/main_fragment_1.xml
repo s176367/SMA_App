@@ -49,6 +49,13 @@
         android:background="@drawable/plus"
         android:hapticFeedbackEnabled="false" />
 
+
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@id/topBar"
+    android:id="@+id/swipeScroll">
+
     <ScrollView
             android:requiresFadingEdge="vertical"
             android:fadingEdgeLength="1dp"
@@ -81,6 +88,6 @@
 
 
         </ScrollView>
-
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

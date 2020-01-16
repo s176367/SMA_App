@@ -118,18 +118,6 @@ public class FragmentCreateAgenda extends Fragment{
         FirebaseControl.fc.createMeeting(tempMeeting, new SenderCallback() {
             @Override
             public void onSuccess() {
-                FirebaseControl.fc.insertMeetingID(tempMeeting.getId(), new SenderCallback() {
-                    @Override
-                    public void onSuccess() {
-
-                    }
-
-                    @Override
-                    public void onFailure(Exception exception) {
-
-                    }
-                });
-
 
             }
 

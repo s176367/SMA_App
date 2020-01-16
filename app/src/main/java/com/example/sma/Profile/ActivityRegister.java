@@ -243,28 +243,18 @@ public class ActivityRegister extends AppCompatActivity {
             inputName.setError("Enter name");
             requestFocus(inputETName);
             return false;
-
         }
-
         return true;
-
     }
 
     private boolean validateEmail(){
-
         if (inputETEmail.getText().toString().trim().isEmpty()) {
-
             inputEmail.setError("Enter email");
             requestFocus(inputETEmail);
             return false;
-
-
         }
-
         return true;
-
     }
-
 
     private boolean validatePhone() {
 
@@ -274,39 +264,25 @@ public class ActivityRegister extends AppCompatActivity {
             requestFocus(inputETPhone);
             return false;
         }
-
         return true;
-
     }
 
     private boolean validatePassword() {
-
-
         if (inputETPassword.getText().toString().trim().isEmpty()) {
 
             inputPassword.setError("Enter password");
             requestFocus(inputETPassword);
             return false;
-
         }
-
         return true;
-
     }
 
-
     private void submit_form() {
-
         if (!validateCompany() && !validatePassword() && !validatePhone() && !validateEmail() && !validateName()){
             return;
-
         }
-
         String userEmail = inputETEmail.getText().toString().trim() + "";
         String userPassword = inputETPassword.getText().toString().trim() + "";
-
-
         Toast.makeText(getApplicationContext(), "Email: " + userEmail + "\n" + "Password: " + userPassword, Toast.LENGTH_LONG).show();
-
     }
 }

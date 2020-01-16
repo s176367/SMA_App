@@ -2,6 +2,8 @@ package com.example.sma.Database;
 
 import android.content.SharedPreferences;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 
 import com.example.sma.MainActivity.ActivityMain;
@@ -13,7 +15,11 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+
 public class LocalDatabase {
 
 /*
@@ -25,10 +31,12 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
 
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
-    public LocalDatabase(){
+
+    public LocalDatabase() {
         prefs = PreferenceManager.getDefaultSharedPreferences(ActivityMain.getContext());
         editor = prefs.edit();
     }
+
     private Gson gson = new Gson();
     private String json;
 
@@ -38,16 +46,16 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
 
 
     public void addMeeting(MeetingObject meetingObject) {
-        json = prefs.getString("Meetings","");
+        json = prefs.getString("Meetings", "");
         meetingList = retriveMeetingList();
         meetingList.add(meetingObject);
         json = gson.toJson(meetingList);
         editor.putString("Meetings", json);
         editor.commit();
     }
-
+    // Bruges for at opdatere topic
     public void addMeeting(int pos, MeetingObject meetingObject) {
-        json = prefs.getString("Meetings","");
+        json = prefs.getString("Meetings", "");
         meetingList = retriveMeetingList();
         meetingList.add(pos, meetingObject);
         json = gson.toJson(meetingList);
@@ -65,12 +73,11 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
 
 
     public User getUser() {
-        json = prefs.getString("User","");
-        if (!json.isEmpty()){
+        json = prefs.getString("User", "");
+        if (!json.isEmpty()) {
             user = gson.fromJson(json, User.class);
             return user;
-        }
-        else return new User();
+        } else return new User();
     }
 
     public void setUser(User user) {
@@ -81,22 +88,27 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
         this.user = user;
     }
 
-    public void updateMeeting(int position, MeetingObject newMeeting){
+    public void updateMeeting(int position, MeetingObject newMeeting) {
         deleteMeeting(position);
         addMeeting(position, newMeeting);
 
     }
 
     public ArrayList<MeetingObject> retriveMeetingList() {
-        json = prefs.getString("Meetings","");
+        json = prefs.getString("Meetings", "");
         ArrayList<MeetingObject> returnList;
         if (!json.isEmpty()) {
             Type type = new TypeToken<List<MeetingObject>>() {
             }.getType();
             returnList = gson.fromJson(json, type);
-        }
-        else returnList = new ArrayList<MeetingObject>();
+        } else returnList = new ArrayList<MeetingObject>();
 
         return returnList;
+    }
+
+    public void deleteMeetingList() {
+        editor.remove("Meetings").commit();
+
+
     }
 }

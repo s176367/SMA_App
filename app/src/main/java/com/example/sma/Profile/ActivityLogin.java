@@ -100,7 +100,7 @@ public class ActivityLogin extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()){
-                                    FirebaseControl.FC.getUser(firebaseAuth.getCurrentUser().getUid(), new ReceiverCallback() {
+                                    FirebaseControl.fc.getUser(firebaseAuth.getCurrentUser().getUid(), new ReceiverCallback() {
                                         @Override
                                         public void onSuccess(Task<DocumentSnapshot> task) {
 
