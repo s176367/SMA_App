@@ -29,7 +29,7 @@ public class ActivityProfile extends AppCompatActivity {
     FirebaseFirestore firestore;
     String userId;
 
-    private FirebaseUser currentUSer = FirebaseAuth.getInstance().getCurrentUser();
+    // private FirebaseUser currentUSer = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
