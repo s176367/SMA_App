@@ -15,7 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class FirebaseControl implements IFirebaseControl {
 
-     FirebaseFirestore db = FirebaseFirestore.getInstance();
+     FirebaseFirestore FC = FirebaseFirestore.getInstance();
 
       public static FirebaseControl fc = new FirebaseControl();
 
@@ -24,7 +24,7 @@ public class FirebaseControl implements IFirebaseControl {
     @Override
     public void createUser(User user, final SenderCallback senderCallback) {
         user.setUserID(FirebaseAuth.getInstance().getUid());
-        db.collection("users").document(user.getUserID()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+        FC.collection("users").document(user.getUserID()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 senderCallback.succes();
@@ -35,11 +35,12 @@ public class FirebaseControl implements IFirebaseControl {
                 senderCallback.failure(e);
             }
         });
+        FC.collection("meetings").document().getId();
     }
 
     @Override
     public void getUser(String userID, final ReceiverCallback receiverCallback) {
-        DocumentReference dr = db.collection("users").document(userID);
+        DocumentReference dr = FC.collection("users").document(userID);
         dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {

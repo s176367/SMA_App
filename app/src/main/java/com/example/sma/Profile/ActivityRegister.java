@@ -154,12 +154,8 @@ public class ActivityRegister extends AppCompatActivity {
 
                             Toast.makeText(ActivityRegister.this, "User created.", Toast.LENGTH_SHORT).show();
                             userID = fAuth.getCurrentUser().getUid();
-                            DocumentReference dr = fStore.collection("users").document(userID);
                             final User user = new User(fullname,company,email,phone);
-                            user.setName(fullname);
-                            user.setEmail(email);
-                            user.setCompany(company);
-                            user.setPhoneNr(phone);
+                            user.setUserID(userID);
 
                             FirebaseControl.fc.createUser(user, new SenderCallback() {
                                 @Override
