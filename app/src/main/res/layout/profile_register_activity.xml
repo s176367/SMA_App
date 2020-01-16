@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="29dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="-15dp"
+        android:layout_marginTop="-12dp"
         android:textColorHint="@color/specialWhite"
         app:hintTextAppearance="@style/TextInputLayout.HintText"
         android:backgroundTint="@android:color/white"
@@ -48,8 +48,6 @@
         </com.google.android.material.textfield.TextInputEditText>
 
     </com.google.android.material.textfield.TextInputLayout>
-
-
 
 
 
@@ -147,36 +145,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/input_zipcode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="29dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="5dp"
-        android:textColorHint="@color/specialWhite"
-        app:hintTextAppearance="@style/TextInputLayout.HintText"
-        android:backgroundTint="@android:color/white">
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_ET_zipcode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Zipcode"
-            android:inputType="number"
-            android:textColor="@android:color/white"
-            android:backgroundTint="@android:color/white"
-            android:drawableLeft="@drawable/baseline_home_white_24"
-            android:drawablePadding="5dp"
-            >
-
-        </com.google.android.material.textfield.TextInputEditText>
-
-    </com.google.android.material.textfield.TextInputLayout>
 
 
 

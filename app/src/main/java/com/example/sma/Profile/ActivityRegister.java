@@ -159,7 +159,6 @@ public class ActivityRegister extends AppCompatActivity {
                             user.setEmail(email);
                             user.setCompany(company);
                             user.setPhoneNr(phone);
-                            user.setUserID(dr.getId());
 
                             FirebaseControl.fc.createUser(user, new SenderCallback() {
                                 @Override
