@@ -16,11 +16,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sma.Database.FirebaseControl;
 import com.example.sma.Database.MeetingDAO;
 import com.example.sma.Database.LocalDatabase;
+import com.example.sma.Database.SenderCallback;
 import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class FragmentCreateAgenda extends Fragment{
     /*
@@ -36,6 +41,8 @@ public class FragmentCreateAgenda extends Fragment{
     private RecyclerView.LayoutManager layoutManager;
     private MeetingObject tempMeeting;
     private RecyclerView recyclerView;
+    SenderCallback senderCallback;
+
     MeetingDAO meetingDAO = new MeetingDAO();
 
     @Override
@@ -67,9 +74,11 @@ public class FragmentCreateAgenda extends Fragment{
             @Override
             public void onClick(View view) {
                 if (!tempMeeting.topics.isEmpty()) {
-                    LocalDatabase db = new LocalDatabase();
-                    db.addMeeting(tempMeeting);
-                    meetingDAO.uploadMeeting(tempMeeting);
+                    finishAgenda();
+
+
+
+
                     Intent intent = new Intent(getContext(), ActivityMain.class);
                     startActivity(intent);
                     getActivity().finish();
@@ -100,4 +109,41 @@ public class FragmentCreateAgenda extends Fragment{
     }
 
 
+    public void finishAgenda () {
+        final FirebaseFirestore dbFB = FirebaseFirestore.getInstance();
+        FirebaseAuth fbAuth = FirebaseAuth.getInstance();
+        DocumentReference dr = dbFB.collection("users").document(fbAuth.getUid());
+        LocalDatabase db = new LocalDatabase();
+        db.addMeeting(tempMeeting);
+        FirebaseControl.fc.createMeeting(tempMeeting, new SenderCallback() {
+            @Override
+            public void onSuccess() {
+                FirebaseControl.fc.insertMeetingID(tempMeeting.getId(), new SenderCallback() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onFailure(Exception exception) {
+
+                    }
+                });
+
+
+            }
+
+            @Override
+            public void onFailure(Exception exception) {
+
+            }
+
+
+        });
+        Intent intent = new Intent(getContext(), ActivityMain.class);
+        startActivity(intent);
+        getActivity().finish();
+    }
+
 }
+

@@ -12,8 +12,6 @@ import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.User;
 import com.example.sma.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -28,8 +26,6 @@ public class ActivityProfile extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firestore;
     String userId;
-
-    // private FirebaseUser currentUSer = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +51,6 @@ public class ActivityProfile extends AppCompatActivity {
         }
 
     }
-
 
     public void logout(View v) {
         FirebaseAuth.getInstance().signOut();

@@ -1,5 +1,7 @@
 package com.example.sma.Database;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.sma.Model.MeetingObject;
@@ -13,9 +15,12 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FirebaseControl implements IFirebaseControl {
 
-     FirebaseFirestore db = FirebaseFirestore.getInstance();
+     FirebaseFirestore FC = FirebaseFirestore.getInstance();
 
       public static FirebaseControl fc = new FirebaseControl();
 
@@ -24,22 +29,22 @@ public class FirebaseControl implements IFirebaseControl {
     @Override
     public void createUser(User user, final SenderCallback senderCallback) {
         user.setUserID(FirebaseAuth.getInstance().getUid());
-        db.collection("users").document(user.getUserID()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+        FC.collection("users").document(user.getUserID()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                senderCallback.succes();
+                senderCallback.onSuccess();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                senderCallback.failure(e);
+                senderCallback.onFailure(e);
             }
         });
     }
 
     @Override
     public void getUser(String userID, final ReceiverCallback receiverCallback) {
-        DocumentReference dr = db.collection("users").document(userID);
+        DocumentReference dr = FC.collection("users").document(userID);
         dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -47,7 +52,7 @@ public class FirebaseControl implements IFirebaseControl {
                 if (task.isSuccessful()) {
                     DocumentSnapshot ds = task.getResult();
                     if (ds != null) {
-                        receiverCallback.success(task);
+                        receiverCallback.onSuccess(task);
 
                     }
 
@@ -55,9 +60,8 @@ public class FirebaseControl implements IFirebaseControl {
                         receiverCallback.noData();
                     }
                 }
-
                 else {
-                    receiverCallback.failure(task.getException());
+                    receiverCallback.onFailure(task.getException());
                 }
             }
         });
@@ -65,12 +69,38 @@ public class FirebaseControl implements IFirebaseControl {
     }
 
     @Override
-    public void createMeeting(MeetingObject meetingObject, SenderCallback senderCallback) {
+    public void createMeeting(final MeetingObject meetingObject, final SenderCallback senderCallback) {
+        DocumentReference dr = FC.collection("meetings").document();
 
+        FC.collection("meetings").add(meetingObject).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                senderCallback.onSuccess();
+                System.out.println(documentReference.getId());
+               insertMeetingID(documentReference.getId(), new SenderCallback() {
+                   @Override
+                   public void onSuccess() {
+                   }
+
+                   @Override
+                   public void onFailure(Exception exception) {
+
+                   }
+               });
+            }
+        });
     }
 
     @Override
     public void getMeeting(String meetingID, ReceiverCallback receiverCallback) {
 
+    }
+
+    @Override
+    public void insertMeetingID(String meetingID, SenderCallback senderCallback) {
+        String userId = LocalDatabase.LD.getUser().getUserID();
+        Map<String, Object> meetingIDmap = new HashMap<>();
+        meetingIDmap.put("meetingID", meetingID);
+        FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings").add(meetingIDmap);
     }
 }

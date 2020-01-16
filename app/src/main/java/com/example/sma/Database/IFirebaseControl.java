@@ -13,7 +13,7 @@ public interface IFirebaseControl {
 
     void createMeeting (MeetingObject meetingObject, SenderCallback senderCallback);
     void getMeeting (String meetingID,  ReceiverCallback receiverCallback);
-
+    void insertMeetingID (String meetingID, SenderCallback senderCallback);
 
 
 

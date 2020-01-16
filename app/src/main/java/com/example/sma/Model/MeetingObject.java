@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class MeetingObject {
 // Model til de atributter en bruger skal kende til sine møder.
 
-    private int id;
+    private String id;
     private String title;
     private String time;
     private String location;
@@ -33,11 +33,11 @@ public class MeetingObject {
         this.topics = topics;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

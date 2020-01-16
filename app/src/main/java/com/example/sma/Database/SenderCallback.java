@@ -3,8 +3,8 @@ package com.example.sma.Database;
 public interface SenderCallback {
 
 
-    void succes();
+    void onSuccess();
 
-    void failure(Exception exception);
+    void onFailure(Exception exception);
 
 }
