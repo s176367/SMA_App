@@ -24,18 +24,16 @@ public class MeetingDAO extends MeetingObject {
 
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    ActivityProfile profile = new ActivityProfile();
+    FirebaseAuth fa = FirebaseAuth.getInstance();
 
     public void uploadMeeting(MeetingObject meeting){
 
-
-        db.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings")
-                .add(meeting)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        db.collection("meetings").add(meeting)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>(){
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 System.out.println("Data blev tilføjet!");
+                System.out.println(documentReference.getId());
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

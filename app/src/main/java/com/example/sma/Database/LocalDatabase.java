@@ -5,11 +5,12 @@ import android.content.SharedPreferences;
 import androidx.preference.PreferenceManager;
 
 import com.example.sma.MainActivity.ActivityMain;
-import com.example.sma.Model.Contact;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -35,9 +36,22 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
     private Gson gson = new Gson();
     private String json;
 
-    private List<MeetingObject> meetingList = new ArrayList<>();
-    private List<Contact> contactList = new ArrayList<>();
+    private static List<MeetingObject> meetingList = new ArrayList<>();
+    private static List<User> contactList;
     private static User user = new User();
+
+
+
+
+    public void addContact(User contact) {
+
+        json = prefs.getString("Contacts", "");
+        contactList = retriveContactList();
+        contactList.add(contact);
+        json = gson.toJson(contactList);
+        editor.putString("Contacts", json);
+        editor.commit();
+    }
 
 
     public void addMeeting(MeetingObject meetingObject) {
@@ -80,7 +94,6 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
         json = gson.toJson(user);
         editor.putString("User", json);
         editor.commit();
-        this.user = user;
     }
 
     public void updateMeeting(int position, MeetingObject newMeeting) {
@@ -89,6 +102,8 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
 
     }
 
+
+
     public ArrayList<MeetingObject> retriveMeetingList() {
         json = prefs.getString("Meetings", "");
         ArrayList<MeetingObject> returnList;
@@ -96,14 +111,32 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
             Type type = new TypeToken<List<MeetingObject>>() {
             }.getType();
             returnList = gson.fromJson(json, type);
-        } else returnList = new ArrayList<MeetingObject>();
-
+        } else {returnList = new ArrayList<MeetingObject>();}
         return returnList;
     }
 
+    public List<User> retriveContactList() {
+
+        json = prefs.getString("Contacts", "");
+        ArrayList<User> returnList;
+
+        if (!json.isEmpty()) {
+            Type type = new TypeToken<List<User>>() {
+            }.getType();
+            returnList = gson.fromJson(json, type);
+        }
+        else {returnList = new ArrayList<User>();}
+        return returnList;
+    }
+
+
     public void deleteMeetingList() {
         editor.remove("Meetings").commit();
-
-
     }
+
+    public void deleteContactList() {
+        editor.remove("Contacts").commit();
+    }
+
+
 }

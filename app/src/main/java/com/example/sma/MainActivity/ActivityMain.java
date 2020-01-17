@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,10 +34,11 @@ public class ActivityMain extends AppCompatActivity {
         if (user == null) {
             Intent i = new Intent(ActivityMain.this, ActivityLogin.class);
             startActivity(i);
+            finish();
         }
 
         super.onCreate(savedInstanceState);
-        overridePendingTransition(0,0);
+
         mContext = this;
         setContentView(R.layout.main_activity);
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);

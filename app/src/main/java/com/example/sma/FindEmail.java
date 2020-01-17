@@ -46,16 +46,12 @@ public class FindEmail extends AppCompatActivity {
 
                                     Toast.makeText(FindEmail.this, "Email is valid", Toast.LENGTH_SHORT).show();
                                     Log.d(TAG, "Email is valid.");
-
                                 }
                             }
                         }
-
                     }
                 });
-
             }
-
         });
     }
 }

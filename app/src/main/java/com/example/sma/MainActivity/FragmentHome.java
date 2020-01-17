@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -66,8 +68,9 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         });
 
 
-        meetingList = new ArrayList<>();
-        refresh();
+        meetingList = LocalDatabase.LD.retriveMeetingList();
+        adapter = new MeetingCardAdapter(getContext(), meetingList);
+        recyclerView.setAdapter(adapter);
 
         return view;
     }
@@ -90,25 +93,36 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     public void refresh (){
         swipe.setRefreshing(true);
         LocalDatabase.LD.deleteMeetingList();
-        FirebaseControl.fc.getAllMeetings(new ReceiverCallback() {
+        FirebaseControl.fc.getAllMeetings(new ReceiverCallback()
+        {
             @Override
             public void onSuccess(Task<DocumentSnapshot> task) {
-                swipe.setRefreshing(false);
                 meetingList = LocalDatabase.LD.retriveMeetingList();
+
                 // Opsættelse af adapter
                 adapter = new MeetingCardAdapter(getContext(), meetingList);
                 recyclerView.setAdapter(adapter);
+                swipe.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Exception exception) {
-
             }
             @Override
             public void noData() {
-
             }
         });
+
+        Handler handler = new Handler();
+        Runnable run = new Runnable() {
+            @Override
+            public void run() {
+                if (LocalDatabase.LD.retriveMeetingList().isEmpty()){
+                    swipe.setRefreshing(false);
+                }
+            }
+        };
+        handler.postDelayed(run, 5000);
     }
 
 

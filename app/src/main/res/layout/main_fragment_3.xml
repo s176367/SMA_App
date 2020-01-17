@@ -28,6 +28,26 @@
         android:textColor="@color/cardview_light_background"
         android:textStyle="bold" />
 
+    <ImageButton
+        android:id="@+id/add_contact"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/person_add"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="@color/colorWhite"
+        android:layout_alignTop="@id/titleContacts"
+
+        />
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/refresh_but"
+        android:background="@drawable/refreshbut"
+        android:backgroundTint="@color/colorWhite"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@id/titleContacts"
+        android:layout_marginLeft="20dp"/>
 
     <ScrollView
         android:requiresFadingEdge="vertical"
@@ -57,6 +77,7 @@
 
 
         </RelativeLayout>
+
 
 
 

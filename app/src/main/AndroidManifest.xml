@@ -14,20 +14,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FindEmail">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".FindEmail"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+
         <activity android:name=".Profile.ActivityForgotPassword" />
         <activity android:name=".Profile.ActivityLogin" />
         <activity android:name=".Profile.ActivityProfile" />
         <activity android:name=".Profile.ActivityRegister" />
         <activity android:name=".Overview.ActivityEditTopic" />
-        <activity android:name=".MainActivity.ActivityMain"/>
-        
+        <activity android:name=".MainActivity.ActivityMain">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".CreateMeeting.ActivityCreateMeeting" />
         <activity android:name=".Overview.ActivityOverview" />
 
