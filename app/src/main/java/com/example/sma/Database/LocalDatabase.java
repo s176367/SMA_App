@@ -2,8 +2,6 @@ package com.example.sma.Database;
 
 import android.content.SharedPreferences;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 
 import com.example.sma.MainActivity.ActivityMain;
@@ -15,10 +13,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class LocalDatabase {
 
