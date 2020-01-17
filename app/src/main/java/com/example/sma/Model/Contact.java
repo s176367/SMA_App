@@ -1,7 +1,8 @@
+/*
 package com.example.sma.Model;
 
-public class Contact {
-
+public class Contact  {
+/*
     // Model til de atributter en bruger skal kende til sine kontakter.
 
     private String name;
@@ -11,11 +12,16 @@ public class Contact {
 
 
 
+    //Null argument contructor used when revieving contact from firebase
+    public Contact(){
+    }
+
     public Contact(String name, String email, String company, String phone) {
         this.name = name;
         this.email = email;
         this.company = company;
         this.phone = phone;
+
     }
 
 
@@ -53,3 +59,4 @@ public class Contact {
 
 
 }
+ */

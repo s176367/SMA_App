@@ -1,7 +1,14 @@
 package com.example.sma.Database;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 
+import com.example.sma.FindEmail;
+// import com.example.sma.Model.Contact;
+import com.example.sma.Model.ContactIDObject;
+import com.example.sma.Model.ContactInvite;
 import com.example.sma.Model.MeetingIDObject;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.User;
@@ -45,30 +52,7 @@ public class FirebaseControl implements IFirebaseControl {
         FC.collection("meetings").document().getId();
     }
 
-    @Override
-    public void getUser(String userID, final ReceiverCallback receiverCallback) {
-        DocumentReference dr = FC.collection("users").document(userID);
-        dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-                if (task.isSuccessful()) {
-                    DocumentSnapshot ds = task.getResult();
-                    if (ds != null) {
-                        receiverCallback.onSuccess(task);
-                    }
-
-                    if (ds == null) {
-                        receiverCallback.noData();
-                    }
-                }
-                else {
-                    receiverCallback.onFailure(task.getException());
-                }
-            }
-        }
-        );
-    }
 
     @Override
     public void createMeeting(final MeetingObject meetingObject, final SenderCallback senderCallback) {
@@ -138,12 +122,7 @@ public class FirebaseControl implements IFirebaseControl {
                    DocumentSnapshot ds = task.getResult();
                    MeetingObject meetingObject = ds.toObject(MeetingObject.class);
                    LocalDatabase.LD.addMeeting(meetingObject);
-                   if (ds != null) {
-                       receiverCallback.onSuccess(task);
-                   }
-                   if (ds == null) {
-                       receiverCallback.noData();
-                   } else receiverCallback.onFailure(task.getException());
+                   receiverCallback.onSuccess(task);
                }
            }
        });
@@ -156,5 +135,86 @@ public class FirebaseControl implements IFirebaseControl {
         meetingIDmap.put("meetingID", meetingID); */
         MeetingIDObject meetingIDObject = new MeetingIDObject(meetingID);
         FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings").add(meetingIDObject);
+    }
+
+    @Override
+    public void contactRequest(final String userID, SenderCallback senderCallback) {
+
+        // Det ID man vil finde
+        final String user =  userID;
+
+        FC.collection("users").whereEqualTo("email", userID)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot document : task.getResult()) {
+                        if (document.getString("email").equals(userID)) {
+                            String contactID = document.getString("userID");
+                            ContactInvite CI = new ContactInvite(FirebaseAuth.getInstance().getUid());
+                            FC.collection("users").document(contactID).collection("contactInvites").add(CI);
+
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
+    public void retriveAllContacts(final ReceiverCallback receiverCallback) {
+
+        FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("contacts")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for(QueryDocumentSnapshot document : task.getResult()) {
+                        ContactIDObject CIDObject = document.toObject(ContactIDObject.class);
+
+
+                        getUser(CIDObject.getUserID(), new ReceiverCallback() {
+                            @Override
+                            public void onSuccess(Task<DocumentSnapshot> task) {
+                                receiverCallback.onSuccess(task);
+                            }
+                            @Override
+                            public void onFailure(Exception exception) {
+                                receiverCallback.onFailure(exception);
+                            }
+                            @Override
+                            public void noData() {
+                                receiverCallback.noData();
+                            }
+                        });
+
+
+                    }
+                }
+                else{
+                    System.out.println("error");
+                }
+            }
+        });
+
+    }
+
+
+
+    @Override
+    public void getUser(final String userId, final ReceiverCallback receiverCallback) {
+        DocumentReference dr = FC.collection("users").document(userId);
+        dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot ds = task.getResult();
+                    User user = ds.toObject(User.class);
+                    LocalDatabase.LD.addContact(user);
+                    receiverCallback.onSuccess(task);
+                    }
+                }
+
+        });
     }
 }

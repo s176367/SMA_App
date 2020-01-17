@@ -24,11 +24,14 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
+        android:layout_width="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="30dp"
         android:layout_alignParentBottom="true"
-        app:tabBackground="@drawable/dot_tab_selector"
+        android:layout_marginBottom="30dp"
         app:tabIndicatorHeight="0dp"
+        app:tabBackground="@drawable/dot_tab_selector"
+
         />
 
 
