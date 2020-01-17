@@ -27,6 +27,7 @@
         <activity android:name=".Profile.ActivityRegister" />
         <activity android:name=".Overview.ActivityEditTopic" />
         <activity android:name=".MainActivity.ActivityMain"/>
+        
         <activity android:name=".CreateMeeting.ActivityCreateMeeting" />
         <activity android:name=".Overview.ActivityOverview" />
 

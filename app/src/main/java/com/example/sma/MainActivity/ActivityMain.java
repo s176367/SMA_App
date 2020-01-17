@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.sma.Profile.ActivityLogin;
+import com.example.sma.Profile.ActivityRegister;
 import com.example.sma.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +22,8 @@ public class ActivityMain extends AppCompatActivity {
 
 
     protected static Context mContext;
+
+    private FirebaseUser currentUser;
     @Override
     protected void onCreate(Bundle savedInstanceState){
 
@@ -40,6 +43,22 @@ public class ActivityMain extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (currentUser == null) {
+            sendUserToLoginActivity();
+        }
+    }
+
+    private void sendUserToLoginActivity() {
+        Intent inten = new Intent(ActivityMain.this, ActivityLogin.class);
+        startActivity(inten);
+    }
+
+
 
     // Opsætning af bund navigationsbaren
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =

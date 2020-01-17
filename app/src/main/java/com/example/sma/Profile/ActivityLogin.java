@@ -23,6 +23,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 public class ActivityLogin extends AppCompatActivity {
@@ -33,6 +34,8 @@ public class ActivityLogin extends AppCompatActivity {
     TextView register, forgotPassword;
     ProgressBar progressB;
     FirebaseAuth firebaseAuth;
+
+    private FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +95,23 @@ public class ActivityLogin extends AppCompatActivity {
             }
 
 
-            private void signIn(String email, String pass){
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (currentUser == null) {
+            sendUserToActivityMain();
+        }
+    }
+
+    private void sendUserToActivityMain() {
+
+        Intent intentMain = new Intent(ActivityLogin.this, ActivityMain.class);
+        startActivity(intentMain);
+    }
+
+
+    private void signIn(String email, String pass){
                 final FirebaseAuth fAuth = FirebaseAuth.getInstance();
 
                 fAuth.signInWithEmailAndPassword(email, pass)
