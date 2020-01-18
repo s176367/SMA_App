@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sma.Database.FirebaseControl;
-import com.example.sma.Database.MeetingDAO;
 import com.example.sma.Database.LocalDatabase;
 import com.example.sma.Database.SenderCallback;
 import com.example.sma.MainActivity.ActivityMain;
@@ -43,7 +42,6 @@ public class FragmentCreateAgenda extends Fragment{
     private RecyclerView recyclerView;
     SenderCallback senderCallback;
 
-    MeetingDAO meetingDAO = new MeetingDAO();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {

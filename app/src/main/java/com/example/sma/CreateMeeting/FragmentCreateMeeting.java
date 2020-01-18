@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
-import com.example.sma.Database.MeetingDAO;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 
