@@ -8,6 +8,7 @@ import com.example.sma.Model.ContactInvite;
 import com.example.sma.Model.MeetingIDObject;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.User;
+import com.example.sma.Overview.FragmentOverview;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,11 +21,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+
 public class FirebaseControl implements IFirebaseControl {
 
      FirebaseFirestore FC = FirebaseFirestore.getInstance();
 
       public static FirebaseControl fc = new FirebaseControl();
+
+      ArrayList<Object> meetinglist;
 
 
 
@@ -127,18 +132,8 @@ public class FirebaseControl implements IFirebaseControl {
 
     @Override
     public void deleteMeeting(final String meetingId, final SenderCallback senderCallback) {
-        DocumentReference dr = FC.collection("users").document(FirebaseAuth.getInstance().getUid())
-                .collection("meetings").document(meetingId);
         System.out.println(meetingId);
-        FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings").document(meetingId).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-             if (task.isSuccessful()){
-                 //LocalDatabase.LD.deleteMeeting();
-                 senderCallback.onSuccess();
-             }
-            }
-        });
+        FC.collection("meetings").document().delete();
     }
 
     @Override

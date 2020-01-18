@@ -54,7 +54,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_below="@id/topBar"
-    android:id="@+id/swipeScroll">
+    android:id="@+id/swipeContacts">
 
     <ScrollView
             android:requiresFadingEdge="vertical"

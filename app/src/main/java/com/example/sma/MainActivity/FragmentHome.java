@@ -6,8 +6,6 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -24,11 +22,9 @@ import com.example.sma.Database.ReceiverCallback;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Profile.ActivityProfile;
 import com.example.sma.R;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentHome extends Fragment implements View.OnClickListener {
@@ -59,7 +55,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         but_profile = view.findViewById(R.id.but_profile);
         but_profile.setOnClickListener(this);
 
-        swipe = view.findViewById(R.id.swipeScroll);
+        swipe = view.findViewById(R.id.swipeContacts);
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

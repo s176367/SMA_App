@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.sma.Database.FirebaseControl;
 import com.example.sma.Database.LocalDatabase;
@@ -42,6 +43,7 @@ public class FragmentContacts extends Fragment {
     ImageButton butAddContact;
     List<User> contactsList;
     ImageButton refresh;
+    SwipeRefreshLayout swipeContacts;
 
 
 
@@ -73,6 +75,14 @@ public class FragmentContacts extends Fragment {
       recyclerView.setNestedScrollingEnabled(true);
       recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+      swipeContacts = view.findViewById(R.id.swipeContacts);
+      swipeContacts.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+          @Override
+          public void onRefresh() {
+              refreshContacts();
+          }
+      });
+
 
       contactsList = LocalDatabase.LD.retriveContactList();
       adapter = new ContactsAdapter(getContext(),contactsList);
@@ -83,6 +93,8 @@ public class FragmentContacts extends Fragment {
 
 
     }
+
+
 
 
     public void contactRequest(){
@@ -120,6 +132,7 @@ public class FragmentContacts extends Fragment {
 
             }
         });
+        swipeContacts.setRefreshing(false);
     }
 
 
