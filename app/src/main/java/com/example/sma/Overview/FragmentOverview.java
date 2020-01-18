@@ -31,7 +31,6 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
     TextView time;
     TextView duration;
     TextView location;
-    Button back;
     Button delete;
     int position;
     ArrayList<MeetingObject> list;
@@ -61,8 +60,6 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
                 location.setText(list.get(position).getLocation());
                 duration.setText(list.get(position).getDuration());
 
-
-
         return view;
     }
 
@@ -83,11 +80,13 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
 
                 }
             });
-            db.deleteMeeting(position);
+      //      db.deleteMeeting(position);
             }
             Intent intent = new Intent(getContext(), ActivityMain.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("refresh", "refresh");
+         //   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+            getActivity().finish();
 
     }
 }

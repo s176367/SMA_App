@@ -56,7 +56,9 @@ public class FirebaseControl implements IFirebaseControl {
             public void onSuccess(final DocumentReference documentReference) {
                 senderCallback.onSuccess();
                 FC.collection("meetings").document(documentReference.getId()).update("id", documentReference.getId());
+
                 insertMeetingID(documentReference.getId(), new SenderCallback() {
+
                     @Override
                     public void onSuccess() {
                     }
@@ -65,6 +67,8 @@ public class FirebaseControl implements IFirebaseControl {
 
                     }
                 });
+
+
             }
         });
     }
@@ -72,11 +76,12 @@ public class FirebaseControl implements IFirebaseControl {
 
 
     @Override
-    public void getAllMeetings(final ReceiverCallback receiverCallback) {
+    public void retrieveAllMeetings(final ReceiverCallback receiverCallback) {
         FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull final Task<QuerySnapshot> task) {
+                    LocalDatabase.LD.deleteMeetingList();
                 if (task.isSuccessful()){
                     for(QueryDocumentSnapshot document : task.getResult()){
                         MeetingIDObject mtObject = document.toObject(MeetingIDObject.class);
@@ -94,15 +99,10 @@ public class FirebaseControl implements IFirebaseControl {
                                 receiverCallback.noData();
                             }
                         });
-
                     }
-
-                }else{
-                    System.out.println("error");
                 }
             }
         });
-
     }
 
     @Override
@@ -142,7 +142,7 @@ public class FirebaseControl implements IFirebaseControl {
             });
         }
     @Override
-    public void insertMeetingID(String meetingID, SenderCallback senderCallback) {
+    public void insertMeetingID(final String meetingID, SenderCallback senderCallback) {
         String userId = LocalDatabase.LD.getUser().getUserID();
         /**Map<String, Object> meetingIDmap = new HashMap<>();
          meetingIDmap.put("meetingID", meetingID); */
@@ -153,6 +153,22 @@ public class FirebaseControl implements IFirebaseControl {
                     public void onSuccess(DocumentReference documentReference) {
                         FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings")
                                 .document(documentReference.getId()).update("docID", documentReference.getId());
+                        getMeeting(meetingID, new ReceiverCallback() {
+                            @Override
+                            public void onSuccess(Task<DocumentSnapshot> task) {
+
+                            }
+
+                            @Override
+                            public void onFailure(Exception exception) {
+
+                            }
+
+                            @Override
+                            public void noData() {
+
+                            }
+                        });
                     }
 
                 });

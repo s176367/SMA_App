@@ -63,7 +63,7 @@ public class FragmentContacts extends Fragment {
       butAddContact.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-              //  contactRequest();
+                contactRequest();
             //½    getActivity().getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new FragmentAddContact()).commit();
 
           }
@@ -86,7 +86,7 @@ public class FragmentContacts extends Fragment {
 
 
     public void contactRequest(){
-        FirebaseControl.fc.contactRequest("test123@test123.dk", new SenderCallback() {
+        FirebaseControl.fc.contactRequest("test1234@test1234.dk", new SenderCallback() {
             @Override
             public void onSuccess() {
 

@@ -6,8 +6,6 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -24,7 +22,6 @@ import com.example.sma.Database.ReceiverCallback;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Profile.ActivityProfile;
 import com.example.sma.R;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -47,7 +44,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view =  inflater.inflate(R.layout.main_fragment_1, container, false);
+        View view = inflater.inflate(R.layout.main_fragment_1, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_agenda);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
@@ -64,13 +61,23 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
             @Override
             public void onRefresh() {
                 refresh();
-            };
+            }
+
+            ;
         });
 
 
-        meetingList = LocalDatabase.LD.retriveMeetingList();
-        adapter = new MeetingCardAdapter(getContext(), meetingList);
-        recyclerView.setAdapter(adapter);
+
+
+
+
+    //    meetingList = LocalDatabase.LD.retriveMeetingList();
+     //   adapter = new MeetingCardAdapter(getContext(), meetingList);
+     //   recyclerView.setAdapter(adapter);
+
+
+        refresh();
+
 
         return view;
     }
@@ -79,51 +86,80 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     // Opsættelse af de forskellige knapper
     @Override
     public void onClick(View view) {
-        if (view == but_create){
+        if (view == but_create) {
             Intent intent = new Intent(getActivity(), ActivityCreateMeeting.class);
             startActivity(intent);
         }
-        if (view==but_profile){
+        if (view == but_profile) {
             Intent profile = new Intent(getActivity(), ActivityProfile.class);
             startActivity(profile);
         }
     }
 
 
-    public void refresh (){
+    public void refresh() {
         swipe.setRefreshing(true);
-        LocalDatabase.LD.deleteMeetingList();
-        FirebaseControl.fc.getAllMeetings(new ReceiverCallback()
-        {
+
+
+        FirebaseControl.fc.retrieveAllMeetings(new ReceiverCallback() {
             @Override
             public void onSuccess(Task<DocumentSnapshot> task) {
                 meetingList = LocalDatabase.LD.retriveMeetingList();
 
                 // Opsættelse af adapter
-                adapter = new MeetingCardAdapter(getContext(), meetingList);
+
+
+                if (meetingList == null){
+                    adapter = new MeetingCardAdapter(getContext(), null);
+                }
+                else {
+                    adapter = new MeetingCardAdapter(getContext(), meetingList);
+
+                }
+                    adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
+
+
+
                 swipe.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Exception exception) {
             }
+
             @Override
             public void noData() {
             }
         });
 
+
+        // "Lappe løsning" til at refresh ikke kører forevigt. Skal ændres hvis der er tid.
         Handler handler = new Handler();
         Runnable run = new Runnable() {
             @Override
             public void run() {
-                if (LocalDatabase.LD.retriveMeetingList().isEmpty()){
+                if (LocalDatabase.LD.retriveMeetingList().isEmpty()) {
                     swipe.setRefreshing(false);
                 }
             }
         };
-        handler.postDelayed(run, 5000);
+        handler.postDelayed(run, 2000);
     }
 
 
+    // https://stackoverflow.com/questions/7876043/android-new-intent-starts-particular-method
+
+    public void checkRefresh() {
+        Bundle extras = getActivity().getIntent().getExtras();
+        if (extras == null) {
+            // Do nothing
+        } else {
+            String method = extras.getString("refresh");
+            if (method.equals("refresh")) {
+                refresh();
+            }
+        }
+    }
 }
+

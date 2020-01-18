@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.sma.Database.LocalDatabase;
+import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 import com.google.android.material.tabs.TabLayout;
@@ -57,6 +58,11 @@ public class ActivityOverview extends AppCompatActivity {
         
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, ActivityMain.class);
+        startActivity(intent);
+    }
 }
 
 
