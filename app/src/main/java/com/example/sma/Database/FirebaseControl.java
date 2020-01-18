@@ -1,11 +1,7 @@
 package com.example.sma.Database;
 
-import android.util.Log;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 
-import com.example.sma.FindEmail;
 // import com.example.sma.Model.Contact;
 import com.example.sma.Model.ContactIDObject;
 import com.example.sma.Model.ContactInvite;
@@ -17,15 +13,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.protobuf.Api;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class FirebaseControl implements IFirebaseControl {
 
@@ -56,21 +49,25 @@ public class FirebaseControl implements IFirebaseControl {
 
     @Override
     public void createMeeting(final MeetingObject meetingObject, final SenderCallback senderCallback) {
-        DocumentReference dr = FC.collection("meetings").document();
+        CollectionReference dr = FC.collection("meetings");
 
-        FC.collection("meetings").add(meetingObject).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        FC.collection("meetings").add(meetingObject).addOnSuccessListener(new OnSuccessListener<DocumentReference>()
+        {
             @Override
-            public void onSuccess(DocumentReference documentReference) {
+            public void onSuccess(final DocumentReference documentReference) {
                 senderCallback.onSuccess();
                 System.out.println(documentReference.getId());
+                FC.collection("meetings").document(documentReference.getId()).update("id", documentReference.getId());
                insertMeetingID(documentReference.getId(), new SenderCallback() {
                    @Override
                    public void onSuccess() {
+
                    }
                    @Override
                    public void onFailure(Exception exception) {
 
                    }
+
                });
             }
         });
@@ -126,6 +123,22 @@ public class FirebaseControl implements IFirebaseControl {
                }
            }
        });
+    }
+
+    @Override
+    public void deleteMeeting(final String meetingId, final SenderCallback senderCallback) {
+        DocumentReference dr = FC.collection("users").document(FirebaseAuth.getInstance().getUid())
+                .collection("meetings").document(meetingId);
+        System.out.println(meetingId);
+        FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings").document(meetingId).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+             if (task.isSuccessful()){
+                 //LocalDatabase.LD.deleteMeeting();
+                 senderCallback.onSuccess();
+             }
+            }
+        });
     }
 
     @Override
