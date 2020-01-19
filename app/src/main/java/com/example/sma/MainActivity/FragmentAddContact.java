@@ -16,9 +16,6 @@ import com.example.sma.R;
 
 public class FragmentAddContact extends Fragment {
 
-
-
-
         @Nullable
         @Override
         public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {

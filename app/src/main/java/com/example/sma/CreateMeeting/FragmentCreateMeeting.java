@@ -172,6 +172,39 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
                 return "1 hour, 45 min";
             case 8:
                 return "2 hours";
+
+            case 9:
+                return "2 hours, 15 min";
+
+            case 10:
+                return "2 hours, 30 min";
+
+            case 11:
+                return "2 hours, 45 min";
+
+            case 12:
+                return "3 hours";
+
+            case 13:
+                return "4 hours";
+
+            case 14:
+                return "5 hours";
+
+            case 15:
+                return "6 hours";
+
+            case 16:
+                return "7 hours";
+
+            case 17:
+                return "8 hours";
+
+            case 18:
+                return "9 hours";
+
+            case 19:
+                return "10 hours";
             default:
         }
 
