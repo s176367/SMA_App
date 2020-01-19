@@ -1,5 +1,6 @@
 package com.example.sma.MainActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -59,6 +60,8 @@ public class MeetingCardAdapter extends RecyclerView.Adapter<MeetingCardAdapter.
                 intent.putExtra("position", position);
                 System.out.println("card pos" + position);
                 mCtx.startActivity(intent);
+             //   ((Activity)mCtx).finish();
+
             }
         });
     }

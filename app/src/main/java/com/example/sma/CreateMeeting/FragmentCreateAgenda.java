@@ -2,6 +2,7 @@ package com.example.sma.CreateMeeting;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,6 @@ import com.example.sma.Database.FirebaseControl;
 import com.example.sma.Database.LocalDatabase;
 import com.example.sma.Database.SenderCallback;
 import com.example.sma.MainActivity.ActivityMain;
-import com.example.sma.MainActivity.FragmentHome;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -75,9 +75,6 @@ public class FragmentCreateAgenda extends Fragment{
                 if (!tempMeeting.topics.isEmpty()) {
                     finishAgenda();
 
-                    Intent intent = new Intent(getContext(), ActivityMain.class);
-                    startActivity(intent);
-                    getActivity().finish();
                }
                 else {
                     Toast.makeText(getContext(), "Insert a topic", Toast.LENGTH_SHORT).show();
@@ -106,28 +103,28 @@ public class FragmentCreateAgenda extends Fragment{
 
 
     public void finishAgenda () {
-        final FirebaseFirestore dbFB = FirebaseFirestore.getInstance();
-        FirebaseAuth fbAuth = FirebaseAuth.getInstance();
-        DocumentReference dr = dbFB.collection("users").document(fbAuth.getUid());
-        LocalDatabase db = new LocalDatabase();
-        db.addMeeting(tempMeeting);
+
         FirebaseControl.fc.createMeeting(tempMeeting, new SenderCallback() {
             @Override
             public void onSuccess() {
 
-            }
+                Intent intent = new Intent(getContext(), ActivityMain.class);
+                intent.putExtra("refresh", "refresh");
+                startActivity(intent);
 
+                getActivity().finish();
+
+            }
             @Override
             public void onFailure(Exception exception) {
 
+
             }
-
-
         });
-        Intent intent = new Intent(getContext(), ActivityMain.class);
-        startActivity(intent);
 
-        getActivity().finish();
+
+
+
     }
 
 }

@@ -44,10 +44,15 @@ public class FindEmail extends AppCompatActivity {
                             for (DocumentSnapshot document : task.getResult()) {
                                 if (document.getString("email").equals(content)) {
 
-                                    Toast.makeText(FindEmail.this, "Email is valid", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(FindEmail.this, "Email is valid", Toast.LENGTH_LONG).show();
                                     Log.d(TAG, "Email is valid.");
                                 }
                             }
+                        } else if (!task.isSuccessful()){
+
+                            Toast.makeText(FindEmail.this, "Email is not valid", Toast.LENGTH_LONG).show();
+                            Log.d(TAG, "Email is not valid");
+
                         }
                     }
                 });

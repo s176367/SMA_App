@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sma">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -14,16 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FindEmail"/>
-
-
+        <activity android:name=".FindEmail" />
         <activity android:name=".Profile.ActivityForgotPassword" />
         <activity android:name=".CreateMeeting.ActivityEditMeeting"/>
         <activity android:name=".Profile.ActivityLogin" />
         <activity android:name=".Profile.ActivityProfile" />
         <activity android:name=".Profile.ActivityRegister" />
         <activity android:name=".Overview.ActivityEditTopic" />
-        <activity android:name=".MainActivity.ActivityMain">
+        <activity android:name=".MainActivity.ActivityMain" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -31,7 +29,6 @@
         </activity>
         <activity android:name=".CreateMeeting.ActivityCreateMeeting" />
         <activity android:name=".Overview.ActivityOverview" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

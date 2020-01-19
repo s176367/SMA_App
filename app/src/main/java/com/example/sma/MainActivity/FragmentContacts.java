@@ -54,7 +54,7 @@ public class FragmentContacts extends Fragment {
 
       View view = inflater.inflate(R.layout.main_fragment_3, container, false);
 
-      refresh  =view.findViewById(R.id.refresh_but);
+      refresh = view.findViewById(R.id.refresh_but);
       refresh.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
@@ -65,7 +65,7 @@ public class FragmentContacts extends Fragment {
       butAddContact.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-              //  contactRequest();
+                contactRequest();
             //½    getActivity().getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new FragmentAddContact()).commit();
 
           }
@@ -84,9 +84,9 @@ public class FragmentContacts extends Fragment {
       });
 
 
-      contactsList = LocalDatabase.LD.retriveContactList();
-      adapter = new ContactsAdapter(getContext(),contactsList);
-      recyclerView.setAdapter(adapter);
+      refreshContacts();
+
+
 
 
       return view;
@@ -98,7 +98,7 @@ public class FragmentContacts extends Fragment {
 
 
     public void contactRequest(){
-        FirebaseControl.fc.contactRequest("test123@test123.dk", new SenderCallback() {
+        FirebaseControl.fc.contactRequest("sercan@test.dk", new SenderCallback() {
             @Override
             public void onSuccess() {
 

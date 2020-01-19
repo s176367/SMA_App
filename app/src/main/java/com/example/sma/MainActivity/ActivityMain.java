@@ -42,6 +42,7 @@ public class ActivityMain extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
 
+
     }
 
     // Opsætning af bund navigationsbaren
@@ -78,6 +79,8 @@ public class ActivityMain extends AppCompatActivity {
     public void onBackPressed() {
 
     }
+
+
 }
 
 
