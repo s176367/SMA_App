@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -141,28 +142,29 @@ public class FirebaseControl implements IFirebaseControl {
     public void acceptContactRequest(final String senderID, final String receiverID, final ReceiverCallback receiverCallback) {
 
         ContactIDObject sender = new ContactIDObject(senderID);
-        ContactIDObject receiver = new ContactIDObject(receiverID);
+        final ContactIDObject receiver = new ContactIDObject(receiverID);
 
         FC.collection("users").document(senderID).collection("contacts").add(receiver);
         FC.collection("users").document(receiverID).collection("contacts").add(sender);
         FC.collection("users").document(FirebaseAuth.getInstance().getUid())
                 .collection("contactInvites").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    for (QueryDocumentSnapshot ds : task.getResult()){
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot ds : task.getResult()) {
+
                         ContactInvite contactInvite = ds.toObject(ContactInvite.class);
-                        if (contactInvite.getUserID().equals(receiverID)){
+                        if (contactInvite.getUserID().equals(receiverID)) {
                             FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("contactInvites")
                                     .document(contactInvite.getDocID()).delete();
-                            System.out.println(receiverID );
 
-                        } }
+                        }
+                    }
                 }
             }
-        })
-        ;
 
+        });
     }
 
 
@@ -267,13 +269,13 @@ public class FirebaseControl implements IFirebaseControl {
                 if (task.isSuccessful()) {
                     for (DocumentSnapshot document : task.getResult()) {
                         if (document.getString("email").equals(email)) {
-                            String contactID = document.getString("userID");
+                            final String contactID = document.getString("userID");
                             ContactInvite CI = new ContactInvite(FirebaseAuth.getInstance().getUid());
                             FC.collection("users").document(contactID).collection("contactInvites")
                                     .add(CI).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
-                                    FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("contactInvites")
+                                    FC.collection("users").document(contactID).collection("contactInvites")
                                             .document(documentReference.getId()).update("docID", documentReference.getId());
 
                                 }

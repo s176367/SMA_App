@@ -55,13 +55,15 @@ public class ContactRequestAdapter extends RecyclerView.Adapter<ContactRequestAd
         holder.yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String senderID = FirebaseAuth.getInstance().getUid();
                 String receiverID = LocalDatabase.LD.retriveInviteList().get(position).getUserID();
+
                 FirebaseControl.fc.acceptContactRequest(senderID, receiverID, new ReceiverCallback() {
                     @Override
                     public void onSuccess(Task<DocumentSnapshot> task) {
-                        System.out.println("Successssss");
+                      //  inviteList.remove(position);
+                      //  notifyItemRemoved(position);
+
                     }
 
                     @Override

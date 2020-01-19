@@ -167,8 +167,6 @@ public class FragmentContacts extends Fragment {
 
             }
         });
-
-
         FirebaseControl.fc.retriveAllInvites(new ReceiverCallback() {
             @Override
             public void onSuccess(Task<DocumentSnapshot> task) {
