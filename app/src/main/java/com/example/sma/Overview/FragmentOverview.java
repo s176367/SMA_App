@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.sma.CreateMeeting.ActivityEditMeeting;
 import com.example.sma.CreateMeeting.FragmentEditMeeting;
+import com.example.sma.CreateMeeting.Spinner;
 import com.example.sma.Database.FirebaseControl;
 import com.example.sma.Database.LocalDatabase;
 import com.example.sma.Database.SenderCallback;
@@ -57,6 +58,7 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
         db = new LocalDatabase();
         position = ((ActivityOverview)getActivity()).getPosition();
 
+
         list = db.retriveMeetingList();
 
                 title.setText(list.get(position).getTitle());
@@ -75,7 +77,7 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view == delete) {
-            /**FirebaseControl.fc.deleteMeeting(list.get(position).getId(), new SenderCallback() {
+            FirebaseControl.fc.deleteMeeting(list.get(position).getId(), new SenderCallback() {
                 @Override
                 public void onSuccess() {
 
@@ -87,13 +89,13 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
                 }
             });
             db.deleteMeeting(position);
-            }**/
-            Intent intent = new Intent(getContext(), ActivityEditMeeting.class);
+            }
+            Intent intent = new Intent(getContext(), ActivityMain.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
 
         }
-}
-}
+    }
+
 
 

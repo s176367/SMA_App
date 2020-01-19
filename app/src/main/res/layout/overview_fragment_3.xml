@@ -9,6 +9,20 @@
         android:layout_height="70dp"
         app:srcCompat="@color/colorPrimaryDark" />
 
+    <androidx.appcompat.widget.AppCompatSpinner
+
+        android:id="@+id/spinnerBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/ic_launcher_3dots_foreground"
+        >
+
+    </androidx.appcompat.widget.AppCompatSpinner>
+
     <TextView
         android:id="@+id/titleMeetings5"
         android:layout_width="match_parent"

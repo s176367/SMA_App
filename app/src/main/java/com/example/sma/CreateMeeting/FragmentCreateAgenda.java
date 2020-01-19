@@ -17,10 +17,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sma.Database.FirebaseControl;
-import com.example.sma.Database.MeetingDAO;
 import com.example.sma.Database.LocalDatabase;
 import com.example.sma.Database.SenderCallback;
 import com.example.sma.MainActivity.ActivityMain;
+import com.example.sma.MainActivity.FragmentHome;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,7 +43,6 @@ public class FragmentCreateAgenda extends Fragment{
     private RecyclerView recyclerView;
     SenderCallback senderCallback;
 
-    MeetingDAO meetingDAO = new MeetingDAO();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -75,9 +74,6 @@ public class FragmentCreateAgenda extends Fragment{
             public void onClick(View view) {
                 if (!tempMeeting.topics.isEmpty()) {
                     finishAgenda();
-
-
-
 
                     Intent intent = new Intent(getContext(), ActivityMain.class);
                     startActivity(intent);
@@ -130,6 +126,7 @@ public class FragmentCreateAgenda extends Fragment{
         });
         Intent intent = new Intent(getContext(), ActivityMain.class);
         startActivity(intent);
+
         getActivity().finish();
     }
 

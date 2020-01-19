@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
-import com.example.sma.Database.MeetingDAO;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 
@@ -51,8 +50,6 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
         duration = view.findViewById(R.id.duration);
         location = view.findViewById(R.id.location);
         create = view.findViewById(R.id.but_create1 );
-
-
 
         duration.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +102,7 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
             public void onClick(View view) {
                 DialogFragment timeFragment = new TimePickerFragment();
                 timeFragment.show(getFragmentManager(), "timepicker");
+
             }
         });
 

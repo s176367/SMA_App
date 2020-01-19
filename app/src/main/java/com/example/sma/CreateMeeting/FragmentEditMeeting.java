@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
-import com.example.sma.Database.FirebaseControl;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 
@@ -39,6 +38,7 @@ public class FragmentEditMeeting extends Fragment implements NumberPicker.OnValu
     EditText location;
     Button create;
     MeetingObject tempMeeting;
+    Spinner spinner;
 
     @Nullable
     @Override
@@ -61,6 +61,7 @@ public class FragmentEditMeeting extends Fragment implements NumberPicker.OnValu
         location = view.findViewById(R.id.location);
         location.setText(tempMeeting.getLocation());
         create = view.findViewById(R.id.but_create1 );
+        
 
 
 
