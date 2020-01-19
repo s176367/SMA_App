@@ -97,4 +97,5 @@ public class MeetingCardAdapter extends RecyclerView.Adapter<MeetingCardAdapter.
         void onItemClick(View view, int position);
     }
 
+
 }

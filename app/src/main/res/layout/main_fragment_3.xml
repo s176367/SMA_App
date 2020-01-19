@@ -32,13 +32,14 @@
         android:id="@+id/add_contact"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/person_add"
+        android:layout_alignTop="@id/titleContacts"
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
+        android:background="@drawable/person_add"
         android:backgroundTint="@color/colorWhite"
-        android:layout_alignTop="@id/titleContacts"
 
         />
+
     <ImageButton
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -64,16 +65,22 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_contacts"
+                android:id="@+id/recycler_invites"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content" />´
 
-            <!--                <Space-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="100dp"-->
-            <!--                    android:layout_below="@id/recycler_agenda"-->
-            <!--                    android:layout_marginTop="1dp" />-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_pending"
+                android:layout_below="@id/recycler_invites"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_contacts"
+                android:layout_below="@id/recycler_pending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
 
 
         </RelativeLayout>

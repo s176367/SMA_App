@@ -80,11 +80,9 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
 
                 }
             });
-      //      db.deleteMeeting(position);
+            db.deleteMeeting(position);
             }
             Intent intent = new Intent(getContext(), ActivityMain.class);
-            intent.putExtra("refresh", "refresh");
-         //   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             getActivity().finish();
 

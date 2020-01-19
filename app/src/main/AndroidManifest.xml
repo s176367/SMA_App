@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FindEmail" />
+        <activity android:name=".MainActivity.ActivityAddNewContact" />
         <activity android:name=".Profile.ActivityForgotPassword" />
         <activity android:name=".Profile.ActivityLogin" />
         <activity android:name=".Profile.ActivityProfile" />
