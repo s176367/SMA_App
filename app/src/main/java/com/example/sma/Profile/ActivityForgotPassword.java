@@ -28,7 +28,7 @@ public class ActivityForgotPassword extends AppCompatActivity {
         setContentView(R.layout.profile_forgotpassword_activity);
 
 
-        editTextEmail = findViewById(R.id.resetPassword_editText);
+        editTextEmail = findViewById(R.id.forgotPassword_email);
 
         resetPassword_submitbtn = findViewById(R.id.resetPassword_submitbtn);
         resetPassword_submitbtn.setOnClickListener(new View.OnClickListener() {

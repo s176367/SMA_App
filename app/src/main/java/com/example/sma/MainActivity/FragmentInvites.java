@@ -18,6 +18,6 @@ public class FragmentInvites extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.main_fragment_2, container, false);
+        return inflater.inflate(R.layout.model_invite, container, false);
     }
 }

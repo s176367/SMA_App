@@ -12,6 +12,7 @@ public interface IFirebaseControl {
 
     void getUser (String userID,  ReceiverCallback receiverCallback);
     void getMeeting(String MeetingId, ReceiverCallback receiverCallback);
+    void getInvite (String inviteUserID, ReceiverCallback receiverCallback);
 
 
 
@@ -24,7 +25,7 @@ public interface IFirebaseControl {
 
     void retriveAllContacts(ReceiverCallback receiverCallback);
     void retrieveAllMeetings(ReceiverCallback receiverCallback);
-
+    void retriveAllInvites(ReceiverCallback receiverCallback);
 
 
 

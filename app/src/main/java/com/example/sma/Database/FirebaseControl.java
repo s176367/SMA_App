@@ -81,7 +81,7 @@ public class FirebaseControl implements IFirebaseControl {
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull final Task<QuerySnapshot> task) {
-                    LocalDatabase.LD.deleteMeetingList();
+                LocalDatabase.LD.deleteMeetingList();
                 if (task.isSuccessful()){
                     for(QueryDocumentSnapshot document : task.getResult()){
                         MeetingIDObject mtObject = document.toObject(MeetingIDObject.class);
@@ -106,73 +106,123 @@ public class FirebaseControl implements IFirebaseControl {
     }
 
     @Override
-    public void getMeeting(final String MeetingId, final ReceiverCallback receiverCallback) {
-        DocumentReference dr = FC.collection("meetings").document(MeetingId);
-        dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+    public void retriveAllInvites(final ReceiverCallback receiverCallback) {
+        FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("contactInvites")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()){
+                        ContactIDObject user = document.toObject(ContactIDObject.class);
+                        getInvite(user.getUserID(), new ReceiverCallback() {
+                            @Override
+                            public void onSuccess(Task<DocumentSnapshot> task) {
+                                receiverCallback.onSuccess(task);
+                            }
+
+                            @Override
+                            public void onFailure(Exception exception) {
+                                receiverCallback.onFailure(exception);
+                            }
+
+                            @Override
+                            public void noData() {
+                                receiverCallback.noData();
+                            }
+                        });
+
+                    }
+                }
+            }
+        });
+    }
+
+
+    @Override
+    public void getInvite(String inviteUserID, final ReceiverCallback receiverCallback) {
+        DocumentReference dr =FC.collection("users").document(inviteUserID);
+                dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
-                    DocumentSnapshot ds = task.getResult();
-                    MeetingObject meetingObject = ds.toObject(MeetingObject.class);
-                    LocalDatabase.LD.addMeeting(meetingObject);
+                    DocumentSnapshot document = task.getResult();
+                    User userInvite = document.toObject(User.class);
+                    LocalDatabase.LD.addInvite(userInvite);
                     receiverCallback.onSuccess(task);
                 }
             }
         });
     }
 
-    @Override
-    public void deleteMeeting(final String meetingId, final SenderCallback senderCallback) {
-        FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings")
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot document : task.getResult()){
-                        MeetingIDObject mtObject = document.toObject(MeetingIDObject.class);
-                        if (mtObject.getMeetingID().equals(meetingId)){
-                            FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings")
-                                    .document(mtObject.getDocID()).delete();
-                            break;
-                        }
+
+        @Override
+        public void getMeeting(final String MeetingId, final ReceiverCallback receiverCallback) {
+            DocumentReference dr = FC.collection("meetings").document(MeetingId);
+            dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot ds = task.getResult();
+                        MeetingObject meetingObject = ds.toObject(MeetingObject.class);
+                        LocalDatabase.LD.addMeeting(meetingObject);
+                        receiverCallback.onSuccess(task);
                     }
+                }
+            });
+        }
+
+        @Override
+        public void deleteMeeting(final String meetingId, final SenderCallback senderCallback) {
+            FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings")
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if(task.isSuccessful()){
+                        for(QueryDocumentSnapshot document : task.getResult()){
+                            MeetingIDObject mtObject = document.toObject(MeetingIDObject.class);
+                            if (mtObject.getMeetingID().equals(meetingId)){
+                                FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings")
+                                        .document(mtObject.getDocID()).delete();
+                                break;
+                            }
+                        }
 
                     }
                 }
             });
         }
-    @Override
-    public void insertMeetingID(final String meetingID, SenderCallback senderCallback) {
-        String userId = LocalDatabase.LD.getUser().getUserID();
-        /**Map<String, Object> meetingIDmap = new HashMap<>();
-         meetingIDmap.put("meetingID", meetingID); */
-        MeetingIDObject meetingIDObject = new MeetingIDObject(meetingID);
-        FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings").add(meetingIDObject)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings")
-                                .document(documentReference.getId()).update("docID", documentReference.getId());
-                        getMeeting(meetingID, new ReceiverCallback() {
-                            @Override
-                            public void onSuccess(Task<DocumentSnapshot> task) {
+        @Override
+        public void insertMeetingID(final String meetingID, SenderCallback senderCallback) {
+            String userId = LocalDatabase.LD.getUser().getUserID();
+            /**Map<String, Object> meetingIDmap = new HashMap<>();
+             meetingIDmap.put("meetingID", meetingID); */
+            MeetingIDObject meetingIDObject = new MeetingIDObject(meetingID);
+            FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings").add(meetingIDObject)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings")
+                                    .document(documentReference.getId()).update("docID", documentReference.getId());
+                            getMeeting(meetingID, new ReceiverCallback() {
+                                @Override
+                                public void onSuccess(Task<DocumentSnapshot> task) {
 
-                            }
+                                }
 
-                            @Override
-                            public void onFailure(Exception exception) {
+                                @Override
+                                public void onFailure(Exception exception) {
 
-                            }
+                                }
 
-                            @Override
-                            public void noData() {
+                                @Override
+                                public void noData() {
 
-                            }
-                        });
-                    }
+                                }
+                            });
+                        }
 
-                });
-    }
+                    });
+        }
 
 
 

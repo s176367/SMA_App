@@ -67,9 +67,9 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
 
 
-    //    meetingList = LocalDatabase.LD.retriveMeetingList();
-     //   adapter = new MeetingCardAdapter(getContext(), meetingList);
-     //   recyclerView.setAdapter(adapter);
+        meetingList = LocalDatabase.LD.retriveMeetingList();
+        adapter = new MeetingCardAdapter(getContext(), meetingList);
+        recyclerView.setAdapter(adapter);
 
         checkRefresh();
         return view;
@@ -92,7 +92,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
     public void refresh() {
         swipe.setRefreshing(true);
-
         FirebaseControl.fc.retrieveAllMeetings(new ReceiverCallback() {
             @Override
             public void onSuccess(Task<DocumentSnapshot> task) {
@@ -103,16 +102,23 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                     // Opsættelse af adapter
                     adapter = new MeetingCardAdapter(getContext(), meetingList);
                     recyclerView.setAdapter(adapter);
+                    if (meetingList.size() == 0){
+                        recyclerView.setAdapter(null);
+                    }
                     swipe.setRefreshing(false);
+
+
                 }
             }
 
             @Override
             public void onFailure(Exception exception) {
+                System.out.println("failure");
             }
 
             @Override
             public void noData() {
+                System.out.println("no data");
             }
         });
 
@@ -138,10 +144,15 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         if (extras == null) {
             // Do nothing
         } else {
-            String method = extras.getString("refresh");
-            if (method.equals("refresh")) {
-                refresh();
-            }
+
+            Handler handler = new Handler();
+            Runnable run = new Runnable() {
+                @Override
+                public void run() {
+                    refresh();
+                }
+            };
+            handler.postDelayed(run,300);
         }
     }
 }

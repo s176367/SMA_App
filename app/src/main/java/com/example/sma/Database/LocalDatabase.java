@@ -38,6 +38,7 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
 
     private static List<MeetingObject> meetingList = new ArrayList<>();
     private static List<User> contactList;
+    private static List<User> inviteList;
     private static User user = new User();
 
 
@@ -129,6 +130,46 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
         return returnList;
     }
 
+
+
+    public List<User> retriveInviteList() {
+        json = prefs.getString("Invites", "");
+        ArrayList<User> returnList;
+        if (!json.isEmpty()) {
+            Type type = new TypeToken<List<User>>() {
+            }.getType();
+            returnList = gson.fromJson(json, type);
+        }
+        else {returnList = new ArrayList<User>();}
+        return returnList;
+    }
+
+    public void addInvite(User inviteUser) {
+        json = prefs.getString("Invites", "");
+        inviteList = retriveInviteList();
+        inviteList.add(inviteUser);
+        json = gson.toJson(inviteList);
+        editor.putString("Invites", json);
+        editor.commit();
+    }
+
+    public void deleteInvite(int position) {
+        inviteList = retriveInviteList();
+        inviteList.remove(position);
+        json = gson.toJson(inviteList);
+        editor.putString("Invites", json);
+        editor.commit();
+    }
+
+
+
+
+
+
+
+    public void deleteInviteList() {
+        editor.remove("Invites").commit();
+    }
 
     public void deleteMeetingList() {
         editor.remove("Meetings").commit();
