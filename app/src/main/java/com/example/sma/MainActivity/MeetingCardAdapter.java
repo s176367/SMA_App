@@ -60,7 +60,7 @@ public class MeetingCardAdapter extends RecyclerView.Adapter<MeetingCardAdapter.
                 intent.putExtra("position", position);
                 System.out.println("card pos" + position);
                 mCtx.startActivity(intent);
-                ((Activity)mCtx).finish();
+             //   ((Activity)mCtx).finish();
 
             }
         });

@@ -68,17 +68,11 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
 
 
-
-
-
     //    meetingList = LocalDatabase.LD.retriveMeetingList();
      //   adapter = new MeetingCardAdapter(getContext(), meetingList);
      //   recyclerView.setAdapter(adapter);
 
-
-        refresh();
-
-
+        checkRefresh();
         return view;
     }
 
@@ -100,28 +94,18 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     public void refresh() {
         swipe.setRefreshing(true);
 
-
         FirebaseControl.fc.retrieveAllMeetings(new ReceiverCallback() {
             @Override
             public void onSuccess(Task<DocumentSnapshot> task) {
-                meetingList = LocalDatabase.LD.retriveMeetingList();
 
-                // Opsættelse af adapter
+                if(task.isSuccessful()) {
+                    meetingList = LocalDatabase.LD.retriveMeetingList();
 
-
-                if (meetingList == null){
-                    adapter = new MeetingCardAdapter(getContext(), null);
-                }
-                else {
+                    // Opsættelse af adapter
                     adapter = new MeetingCardAdapter(getContext(), meetingList);
-
+                    recyclerView.setAdapter(adapter);
+                    swipe.setRefreshing(false);
                 }
-                    adapter.notifyDataSetChanged();
-                recyclerView.setAdapter(adapter);
-
-
-
-                swipe.setRefreshing(false);
             }
 
             @Override

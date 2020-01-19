@@ -60,8 +60,7 @@ public class ActivityOverview extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, ActivityMain.class);
-        startActivity(intent);
+       super.onBackPressed();
     }
 }
 

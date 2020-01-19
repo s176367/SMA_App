@@ -52,7 +52,7 @@ public class FragmentContacts extends Fragment {
 
       View view = inflater.inflate(R.layout.main_fragment_3, container, false);
 
-      refresh  =view.findViewById(R.id.refresh_but);
+      refresh = view.findViewById(R.id.refresh_but);
       refresh.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
@@ -74,9 +74,9 @@ public class FragmentContacts extends Fragment {
       recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-      contactsList = LocalDatabase.LD.retriveContactList();
-      adapter = new ContactsAdapter(getContext(),contactsList);
-      recyclerView.setAdapter(adapter);
+      refreshContacts();
+
+
 
 
       return view;
@@ -86,7 +86,7 @@ public class FragmentContacts extends Fragment {
 
 
     public void contactRequest(){
-        FirebaseControl.fc.contactRequest("test1234@test1234.dk", new SenderCallback() {
+        FirebaseControl.fc.contactRequest("sercan@test.dk", new SenderCallback() {
             @Override
             public void onSuccess() {
 
