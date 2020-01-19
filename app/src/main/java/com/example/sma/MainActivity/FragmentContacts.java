@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,6 +40,8 @@ public class FragmentContacts extends Fragment {
     List<User> contactsList;
     List<User> inviteList;
     ImageButton refresh;
+    TextView pendingContacts;
+    TextView contactsTitle;
 
 
 
@@ -49,6 +52,10 @@ public class FragmentContacts extends Fragment {
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.main_fragment_3, container, false);
+
+
+        pendingContacts = view.findViewById(R.id.pendingTitle);
+        contactsTitle = view.findViewById(R.id.contactsTitle);
 
         refresh = view.findViewById(R.id.refresh_but);
         refresh.setOnClickListener(new View.OnClickListener() {
@@ -98,16 +105,32 @@ public class FragmentContacts extends Fragment {
 
         contactsList = LocalDatabase.LD.retriveContactList();
         adapter = new ContactsAdapter(getContext(), contactsList);
-        recyclerViewMeetings.setAdapter(adapter);
+
 
         //LocalDatabase.LD.deleteInviteList();
-        refreshContacts();
+     //   refreshContacts();
         inviteList = LocalDatabase.LD.retriveInviteList();
         requestAdapter = new ContactRequestAdapter(getContext(), inviteList);
+
+
+        checkRefresh();
+
+
+        // Skjuler tekst hvis der ikke er nogle contact requests.
+        if(inviteList.isEmpty()){
+            pendingContacts.setText("");
+            contactsTitle.setText("");
+
+        }
+        else{
+            pendingContacts.setText("Pending requests");
+            contactsTitle.setText("Contacts");
+        }
+
+
+        recyclerViewMeetings.setAdapter(adapter);
         recyclerViewRequests.setAdapter(requestAdapter);
 
-
-//      checkRefresh();
 
 
 
@@ -150,6 +173,19 @@ public class FragmentContacts extends Fragment {
             @Override
             public void onSuccess(Task<DocumentSnapshot> task) {
                 inviteList = LocalDatabase.LD.retriveInviteList();
+
+                if(inviteList.isEmpty()){
+                    pendingContacts.setText("");
+                    contactsTitle.setText("");
+
+                }
+                else{
+                    pendingContacts.setText("Pending contact requests");
+                    contactsTitle.setText("Contacts");
+
+                }
+
+
                 requestAdapter = new ContactRequestAdapter(getContext(), inviteList);
                 recyclerViewRequests.setAdapter(requestAdapter);
             }
