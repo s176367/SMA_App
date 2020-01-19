@@ -22,11 +22,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_input"
-        android:layout_width="340dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="29dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="50dp"
+        android:layout_gravity="center"
         android:textColorHint="@color/specialWhite"
         app:hintTextAppearance="@style/TextInputLayout.HintText"
         android:backgroundTint="@android:color/white">
@@ -34,7 +34,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email_ET"
-            android:layout_width="340dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="Email"
             android:inputType="textEmailAddress"
@@ -51,11 +51,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_input"
-        android:layout_width="340dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="29dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="5dp"
+        android:layout_gravity="center"
         android:textColorHint="@color/specialWhite"
         app:hintTextAppearance="@style/TextInputLayout.HintText"
         android:backgroundTint="@android:color/white">
@@ -63,7 +63,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_ET"
-            android:layout_width="340dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/white"
             android:hint="Password"
@@ -85,36 +85,36 @@
 
     <TextView
         android:id="@+id/register_text"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/password_input"
         android:layout_alignLeft="@id/password_input"
-        android:layout_marginTop="-2dp"
+        android:layout_marginTop="-3dp"
         android:text="Create an Account"
         android:textColor="@android:color/white"
-        android:textSize="15dp"
-        android:layout_marginLeft="33dp"
+        android:textSize="13dp"
+        android:layout_marginLeft="43.5dp"
         android:textStyle="bold" />
 
 
     <TextView
         android:id="@+id/forgotPassword"
-        android:layout_width="wrap_content"
+        android:layout_width="98dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/password_input"
         android:layout_alignRight="@id/password_input"
-        android:layout_marginTop="-19dp"
-        android:text="I forgot my password"
-        android:layout_marginLeft="222dp"
+        android:layout_marginTop="-20dp"
+        android:text="Forgot password"
+        android:layout_marginLeft="236dp"
         android:textColor="@android:color/white"
-        android:textSize="15dp"
+        android:textSize="13dp"
         android:textStyle="bold" />
 
 
     <Button
         android:id="@+id/login_btn"
-        android:layout_width="192dp"
-        android:layout_height="66dp"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
         android:layout_below="@id/password_input"
         android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
