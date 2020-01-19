@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sma.Database.LocalDatabase;
 import com.example.sma.MainActivity.ActivityMain;
+import com.example.sma.MainActivity.FragmentHome;
 import com.example.sma.Model.User;
+import com.example.sma.Overview.FragmentOverview;
 import com.example.sma.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -57,6 +59,7 @@ public class ActivityProfile extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
         Intent intent = new Intent(this, ActivityMain.class);
         startActivity(intent);
     }

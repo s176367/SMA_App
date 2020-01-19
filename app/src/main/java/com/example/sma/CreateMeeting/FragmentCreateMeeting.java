@@ -85,6 +85,7 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
                 calender.set(calender.YEAR,year);
                 calender.set(calender.MONTH, month);
                 calender.set(calender.DAY_OF_MONTH,day);
+
                 updateLabel();
             }};
 
@@ -94,6 +95,7 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
                 DatePickerDialog dp =  new DatePickerDialog(view.getContext(),date,calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH));//.show();
                 dp.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
                 dp.show();
+                System.out.println(calender);
             }
         });
 
@@ -110,8 +112,9 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
     }
 
     private void updateLabel() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        String myFormat = "yyyy/MM/dd"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.UK);
+        System.out.println(sdf.toString());
 
         dateView.setText(sdf.format(calender.getTime()));
     }

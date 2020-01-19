@@ -88,6 +88,7 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
             db.deleteMeeting(position);
             }
             Intent intent = new Intent(getContext(), ActivityMain.class);
+            //intent.putExtra("refresh", "refresh");
             startActivity(intent);
             getActivity().finish();
 

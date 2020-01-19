@@ -43,6 +43,8 @@ public class ActivityMain extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
 
 
+
+
     }
 
     // Opsætning af bund navigationsbaren

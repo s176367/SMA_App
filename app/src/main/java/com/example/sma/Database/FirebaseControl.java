@@ -168,7 +168,8 @@ public class FirebaseControl implements IFirebaseControl {
                         receiverCallback.onSuccess(task);
                     }
                 }
-            });
+
+                });
         }
 
         @Override
