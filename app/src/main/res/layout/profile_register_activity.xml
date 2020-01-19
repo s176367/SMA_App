@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="29dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="-12dp"
+        android:layout_marginTop="10dp"
         android:textColorHint="@color/specialWhite"
         app:hintTextAppearance="@style/TextInputLayout.HintText"
         android:backgroundTint="@android:color/white"
@@ -188,7 +188,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:fontFamily="sans-serif"
-        android:layout_marginLeft="170dp"
+        android:layout_marginLeft="140dp"
         android:text="Login here, if your are registered!"
         android:textColor="#FFFFFFFF"/>
 
@@ -198,7 +198,7 @@
         android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="-30dp"
+        android:layout_marginTop="-10dp"
         android:background="@android:color/transparent"
         android:text="Register"
         android:textSize="20dp"
@@ -211,7 +211,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="182dp"
         android:layout_marginEnd="182dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="16dp"
         android:visibility="invisible" />
 
