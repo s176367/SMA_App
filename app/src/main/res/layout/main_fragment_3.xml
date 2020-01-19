@@ -70,21 +70,43 @@
             android:layout_width="match_parent"
             >
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pendingTitle"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/colorWhite"
+                android:text="Pending invites"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                android:background="@color/colorPrimaryDark"
+                />
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_invites"
                 android:layout_width="match_parent"
+                android:layout_below="@id/pendingTitle"
                 android:layout_height="wrap_content" />´
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_pending"
-                android:layout_below="@id/recycler_invites"
+
+
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:id="@+id/contactsTitle"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/colorWhite"
+                android:text="Contacts"
+                android:layout_below="@id/recycler_invites"
+                android:gravity="center_horizontal"
+                android:background="@color/colorPrimaryDark"
+                />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_contacts"
-                android:layout_below="@id/recycler_pending"
+                android:layout_below="@id/contactsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

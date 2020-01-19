@@ -10,8 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sma.Database.FirebaseControl;
+import com.example.sma.Database.LocalDatabase;
+import com.example.sma.Database.ReceiverCallback;
 import com.example.sma.Model.User;
 import com.example.sma.R;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.List;
 
@@ -46,13 +52,44 @@ public class ContactRequestAdapter extends RecyclerView.Adapter<ContactRequestAd
         holder.textViewMail.setText(contact.getEmail());
         holder.textViewPhone.setText(contact.getPhone());
         holder.textViewCompany.setText(contact.getCompany());
+        holder.yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                String senderID = FirebaseAuth.getInstance().getUid();
+                String receiverID = LocalDatabase.LD.retriveInviteList().get(position).getUserID();
+                FirebaseControl.fc.acceptContactRequest(senderID, receiverID, new ReceiverCallback() {
+                    @Override
+                    public void onSuccess(Task<DocumentSnapshot> task) {
+                        System.out.println("Successssss");
+                    }
+
+                    @Override
+                    public void onFailure(Exception exception) {
+
+                    }
+
+                    @Override
+                    public void noData() {
+
+                    }
+                });
+
+            }
+        });
+        holder.no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return inviteList.size();
     }
+
 
 
     class ContactViewHolder extends RecyclerView.ViewHolder {
