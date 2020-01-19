@@ -12,14 +12,10 @@ import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.User;
 import com.example.sma.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ActivityProfile extends AppCompatActivity {
 
     TextView Fullname, Email, Phone, Company;
-    FirebaseAuth firebaseAuth;
-    FirebaseFirestore firestore;
-    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +38,7 @@ public class ActivityProfile extends AppCompatActivity {
             Company.setText(user.getCompany());
         } catch (Exception e) {
             e.printStackTrace();
+
         }
 
     }
