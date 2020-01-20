@@ -103,6 +103,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                     // Opsættelse af adapter
                     adapter = new MeetingCardAdapter(getContext(), meetingList);
                     recyclerView.setAdapter(adapter);
+                    swipe.setRefreshing(false);
                 }
             }
 

@@ -102,7 +102,6 @@ public class FirebaseControl implements IFirebaseControl {
 
                     @Override
                     public void onSuccess() {
-                        senderCallback.onSuccess();
                         Log.d(TAG, "Meeting successfully created in database");
                     }
 
@@ -115,21 +114,16 @@ public class FirebaseControl implements IFirebaseControl {
                 });
 
                 for (int i = 0; i <meetingObject.getParticipants().size() ; i++) {
-                    getInvite(meetingObject.getParticipants().get(i), new ReceiverCallback() {
+                    inviteParticipant(meetingObject.getParticipants().get(i), documentReference.getId(), new SenderCallback() {
                         @Override
-                        public void onSuccess(Task<DocumentSnapshot> task) {
-                            Log.d(TAG,"Participant invited");
+                        public void onSuccess() {
+                            Log.d(TAG, "Participant invited");
+                            senderCallback.onSuccess();
                         }
 
                         @Override
                         public void onFailure(Exception exception) {
-                            Log.d(TAG, "Participant failed to be invited");
-
-                        }
-
-                        @Override
-                        public void noData() {
-
+                        Log.d(TAG, "Participant invite failed");
                         }
                     });
                 }
@@ -265,7 +259,23 @@ public class FirebaseControl implements IFirebaseControl {
                 });
     }
 
+
+
     //Invite
+
+    @Override
+    public void inviteParticipant(final String userID, String meetingID, final SenderCallback senderCallback) {
+        final MeetingIDObject meetingIDObject = new MeetingIDObject(meetingID);
+        FC.collection("users").document(userID).collection("meetingInvites").add(meetingIDObject)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        FC.collection("users").document(userID).collection("meetingInvites")
+                                .document(documentReference.getId()).update("docID", documentReference.getId());
+                        senderCallback.onSuccess();
+                    }
+                });
+    }
 
     @Override
     public void getInvite(String inviteUserID, final ReceiverCallback receiverCallback) {
