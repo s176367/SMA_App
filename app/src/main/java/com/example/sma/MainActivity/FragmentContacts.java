@@ -128,8 +128,7 @@ public class FragmentContacts extends Fragment {
 
 
     public void refreshContacts() {
-        LocalDatabase.LD.deleteContactList();
-        LocalDatabase.LD.deleteInviteList();
+
         FirebaseControl.fc.retriveAllContacts(new CollectionReceiverCallback() {
             @Override
             public void onSuccess(Task<QuerySnapshot> task) {

@@ -3,6 +3,7 @@ package com.example.sma.MainActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,45 +98,26 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         FirebaseControl.fc.retrieveAllMeetings(new CollectionReceiverCallback() {
             @Override
             public void onSuccess(Task<QuerySnapshot> task) {
-
                 if(task.isSuccessful()) {
                     meetingList = LocalDatabase.LD.retriveMeetingList();
-
                     // Opsættelse af adapter
                     adapter = new MeetingCardAdapter(getContext(), meetingList);
                     recyclerView.setAdapter(adapter);
-                    if (meetingList.size() == 0){
-                        recyclerView.setAdapter(null);
-                    }
-                    swipe.setRefreshing(false);
-
-
                 }
             }
 
             @Override
             public void onFailure(Exception exception) {
-                System.out.println("failure");
+                swipe.setRefreshing(false);
+                recyclerView.setAdapter(null);
             }
 
             @Override
             public void noData() {
-                System.out.println("no data");
+                swipe.setRefreshing(false);
+                recyclerView.setAdapter(null);
             }
         });
-
-
-        // "Lappe løsning" til at refresh ikke kører forevigt. Skal ændres hvis der er tid.
-        Handler handler = new Handler();
-        Runnable run = new Runnable() {
-            @Override
-            public void run() {
-                if (LocalDatabase.LD.retriveMeetingList().isEmpty()) {
-                    swipe.setRefreshing(false);
-                }
-            }
-        };
-        handler.postDelayed(run, 2000);
     }
 
 

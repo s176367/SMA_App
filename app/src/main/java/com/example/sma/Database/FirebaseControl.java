@@ -170,16 +170,16 @@ public class FirebaseControl implements IFirebaseControl {
         FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+            public void onComplete(@NonNull final Task<QuerySnapshot> task) {
                 LocalDatabase.LD.deleteMeetingList();
                 if (task.isSuccessful()){
-                    receiverCallback.onSuccess(task);
                     for(DocumentSnapshot document : task.getResult()){
                         MeetingIDObject mtObject = document.toObject(MeetingIDObject.class);
                         getMeeting(mtObject.getMeetingID(), new ReceiverCallback() {
                             @Override
-                            public void onSuccess(Task<DocumentSnapshot> task) {
+                            public void onSuccess(Task<DocumentSnapshot> task1) {
                                 Log.d(TAG,"getMeeting success");
+                                receiverCallback.onSuccess(task);
 
                             }
                             @Override
@@ -192,6 +192,11 @@ public class FirebaseControl implements IFirebaseControl {
                             }
                         });
                     }
+
+
+                }
+                if (task.getResult().isEmpty()){
+                    receiverCallback.noData();
                 }
             }
         });
@@ -448,7 +453,7 @@ public class FirebaseControl implements IFirebaseControl {
             @Override
             public void onComplete(@NonNull final Task<QuerySnapshot> task) {
                 if (task.isSuccessful())
-
+                    LocalDatabase.LD.deleteContactList();
                     for( QueryDocumentSnapshot doc : task.getResult()) {
                         ContactIDObject CIDObject = doc.toObject(ContactIDObject.class);
                         getUser(CIDObject.getUserID(), new ReceiverCallback() {
