@@ -36,6 +36,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int min = c.get(Calendar.MINUTE);
         //Indsætter urets "default" tid
+
         return new TimePickerDialog(getActivity(), this, 12, 0,true);
     }
 

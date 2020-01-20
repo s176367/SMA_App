@@ -12,12 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.sma.CreateMeeting.ActivityEditMeeting;
+import com.example.sma.CreateMeeting.FragmentEditMeeting;
+import com.example.sma.CreateMeeting.Spinner;
 import com.example.sma.Database.FirebaseControl;
 import com.example.sma.Database.LocalDatabase;
 import com.example.sma.Database.SenderCallback;
 import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -52,6 +57,7 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
         db = new LocalDatabase();
         position = ((ActivityOverview)getActivity()).getPosition();
 
+
         list = db.retriveMeetingList();
 
                 title.setText(list.get(position).getTitle());
@@ -68,7 +74,6 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view == delete) {
-
             FirebaseControl.fc.deleteMeeting(list.get(position).getId(), new SenderCallback() {
                 @Override
                 public void onSuccess() {
@@ -83,10 +88,12 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
             db.deleteMeeting(position);
             }
             Intent intent = new Intent(getContext(), ActivityMain.class);
+            //intent.putExtra("refresh", "refresh");
             startActivity(intent);
             getActivity().finish();
 
+        }
     }
-}
+
 
 

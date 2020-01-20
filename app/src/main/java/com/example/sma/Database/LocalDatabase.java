@@ -1,9 +1,12 @@
 package com.example.sma.Database;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 
+import androidx.annotation.RequiresApi;
 import androidx.preference.PreferenceManager;
 
+import com.example.sma.CreateMeeting.FragmentCreateMeeting;
 import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.User;
@@ -14,7 +17,12 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+
+import static java.util.Collections.sort;
 
 public class LocalDatabase {
 
@@ -40,6 +48,8 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
     private static List<User> contactList;
     private static List<User> inviteList;
     private static User user = new User();
+    Comparator compareByDate, compareByTime;
+    ArrayList<MeetingObject> dateSortedList = new ArrayList<>();
 
 
 
@@ -105,6 +115,7 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public ArrayList<MeetingObject> retriveMeetingList() {
         json = prefs.getString("Meetings", "");
         ArrayList<MeetingObject> returnList;
@@ -113,6 +124,26 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
             }.getType();
             returnList = gson.fromJson(json, type);
         } else {returnList = new ArrayList<MeetingObject>();}
+        compareByTime = new Comparator<MeetingObject>() {
+            @Override
+            public int compare(MeetingObject o1, MeetingObject o2) {
+               //Sorting code from SO https://stackoverflow.com/questions/4805606/how-to-sort-by-two-fields-in-java
+
+                String x1 = o1.getDate();
+                String x2 = o2.getDate();
+
+                int sComp = x1.compareTo(x2);
+
+                if(sComp !=0){
+                    return sComp;
+                }
+                return o1.getTime().compareTo(o2.getTime());
+            }
+        };
+
+        returnList.sort(compareByTime);
+
+
         return returnList;
     }
 

@@ -25,7 +25,6 @@ import com.example.sma.R;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentHome extends Fragment implements View.OnClickListener {
@@ -56,7 +55,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         but_profile = view.findViewById(R.id.but_profile);
         but_profile.setOnClickListener(this);
 
-        swipe = view.findViewById(R.id.swipeScroll);
+        swipe = view.findViewById(R.id.swipeContacts);
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

@@ -23,6 +23,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity.ActivityAddNewContact" />
         <activity android:name=".Profile.ActivityForgotPassword" />
+        <activity android:name=".CreateMeeting.ActivityEditMeeting"/>
         <activity android:name=".Profile.ActivityLogin" />
         <activity android:name=".Profile.ActivityProfile" />
         <activity android:name=".Profile.ActivityRegister" />

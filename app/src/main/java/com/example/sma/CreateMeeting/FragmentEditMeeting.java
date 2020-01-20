@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnValueChangeListener {
+public class FragmentEditMeeting extends Fragment implements NumberPicker.OnValueChangeListener {
 
     /*
     Dette fragment står for at tilføje de basale informationer til mødet
@@ -38,18 +38,32 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
     EditText location;
     Button create;
     MeetingObject tempMeeting;
+    Spinner spinner;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.createmeeting_fragment_1, container, false);
-        tempMeeting = ((ActivityCreateMeeting)getActivity()).getMeeting();
+        View view =  inflater.inflate(R.layout.editmeeting_fragment_1, container, false);
+        tempMeeting = ((ActivityEditMeeting)getActivity()).getMeeting();
+
         title = view.findViewById(R.id.insert_title);
+        title.setText(tempMeeting.getTitle());
+
         dateView= view.findViewById(R.id.date);
+        dateView.setText(tempMeeting.getDate());
+
         timeView = view.findViewById(R.id.time);
+        timeView.setText(tempMeeting.getTime());
+
         duration = view.findViewById(R.id.duration);
+        duration.setText(tempMeeting.getDuration());
+
         location = view.findViewById(R.id.location);
+        location.setText(tempMeeting.getLocation());
         create = view.findViewById(R.id.but_create1 );
+        
+
+
 
         duration.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +99,6 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
                 calender.set(calender.YEAR,year);
                 calender.set(calender.MONTH, month);
                 calender.set(calender.DAY_OF_MONTH,day);
-
                 updateLabel();
             }};
 
@@ -95,7 +108,6 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
                 DatePickerDialog dp =  new DatePickerDialog(view.getContext(),date,calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH));//.show();
                 dp.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
                 dp.show();
-                System.out.println(calender);
             }
         });
 
@@ -104,7 +116,6 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
             public void onClick(View view) {
                 DialogFragment timeFragment = new TimePickerFragment();
                 timeFragment.show(getFragmentManager(), "timepicker");
-
             }
         });
 
@@ -112,9 +123,8 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
     }
 
     private void updateLabel() {
-        String myFormat = "yyyy/MM/dd"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.UK);
-        System.out.println(sdf.toString());
+        String myFormat = "MM/dd/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         dateView.setText(sdf.format(calender.getTime()));
     }
@@ -174,39 +184,6 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
                 return "1 hour, 45 min";
             case 8:
                 return "2 hours";
-
-            case 9:
-                return "2 hours, 15 min";
-
-            case 10:
-                return "2 hours, 30 min";
-
-            case 11:
-                return "2 hours, 45 min";
-
-            case 12:
-                return "3 hours";
-
-            case 13:
-                return "4 hours";
-
-            case 14:
-                return "5 hours";
-
-            case 15:
-                return "6 hours";
-
-            case 16:
-                return "7 hours";
-
-            case 17:
-                return "8 hours";
-
-            case 18:
-                return "9 hours";
-
-            case 19:
-                return "10 hours";
             default:
         }
 
