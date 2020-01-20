@@ -302,7 +302,8 @@ public class FirebaseControl implements IFirebaseControl {
 
     @Override
     public void getMeetingInvite(String meetingID, final ReceiverCallback receiverCallback) {
-        FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetingInvites").document(meetingID)
+
+        FC.collection("meetings").document(meetingID)
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -311,7 +312,6 @@ public class FirebaseControl implements IFirebaseControl {
                     MeetingObject meetingInvite = document.toObject(MeetingObject.class);
                     LocalDatabase.LD.addMeetingInvite(meetingInvite);
                     receiverCallback.onSuccess(task);
-
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -322,6 +322,7 @@ public class FirebaseControl implements IFirebaseControl {
         });
     }
 
+
     @Override
     public void retrieveAllMeetingInvites(final CollectionReceiverCallback receiverCallback) {
         FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetingInvites")
@@ -331,8 +332,8 @@ public class FirebaseControl implements IFirebaseControl {
                 LocalDatabase.LD.deleteMeetingInviteList();
                 if(task.isSuccessful()){
                     for (QueryDocumentSnapshot document : task.getResult()){
-                        MeetingObject meetingObject = document.toObject(MeetingObject.class);
-                        getMeetingInvite(meetingObject.getId(), new ReceiverCallback() {
+                        MeetingIDObject meetingIDObject = document.toObject(MeetingIDObject.class);
+                        getMeetingInvite(meetingIDObject.getMeetingID(), new ReceiverCallback() {
                             @Override
                             public void onSuccess(Task<DocumentSnapshot> task1) {
                                 receiverCallback.onSuccess(task);
@@ -358,6 +359,90 @@ public class FirebaseControl implements IFirebaseControl {
                 }
             }
         });
+    }
+
+    @Override
+    public void acceptMeetingRequest(String meetingID, SenderCallback senderCallback) {
+        final MeetingIDObject meeting = new MeetingIDObject(meetingID);
+
+
+        insertMeetingID(meetingID, new SenderCallback() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure(Exception exception) {
+
+            }
+        });
+
+        getMeeting(meetingID, new ReceiverCallback() {
+            @Override
+            public void onSuccess(Task<DocumentSnapshot> task) {
+                Log.d(TAG, "Meetings invitation accepted");
+
+            }
+
+            @Override
+            public void onFailure(Exception exception) {
+                Log.d(TAG, "Meeting accept failed");
+
+            }
+
+            @Override
+            public void noData() {
+                Log.d(TAG, "Meeting did not exist");
+
+            }
+        });
+
+
+
+
+
+
+        deleteMeetingRequest(meetingID, new SenderCallback() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure(Exception exception) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void deleteMeetingRequest(final String meetingID, final SenderCallback senderCallback) {
+        FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetingInvites").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot doc : task.getResult()) {
+                                MeetingIDObject meetingIDObject = doc.toObject(MeetingIDObject.class);
+                                if (meetingIDObject.getMeetingID().equals(meetingID)) {
+                                    FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetingInvites")
+                                            .document(meetingIDObject.getDocID()).delete();
+                                    senderCallback.onSuccess();
+                                    Log.d(TAG, "Meeting invite request deleted");
+                                }
+                            }
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                senderCallback.onFailure(e);
+                Log.d(TAG, "Contact request failed to delete");
+            }
+        });
+
     }
 
     @Override
