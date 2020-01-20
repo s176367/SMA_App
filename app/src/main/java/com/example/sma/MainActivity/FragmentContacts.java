@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,10 @@ public class FragmentContacts extends Fragment {
     ImageButton refresh;
     TextView pendingContacts;
     TextView contactsTitle;
+    RelativeLayout cardContainer;
+    FragmentContacts fragment;
+    public static Boolean refreshFragment = true;
+
 
 
 
@@ -54,8 +59,10 @@ public class FragmentContacts extends Fragment {
         View view = inflater.inflate(R.layout.main_fragment_3, container, false);
 
 
+        fragment = this;
         pendingContacts = view.findViewById(R.id.pendingTitle);
         contactsTitle = view.findViewById(R.id.contactsTitle);
+        cardContainer = view.findViewById(R.id.cardContainer);
 
         refresh = view.findViewById(R.id.refresh_but);
         refresh.setOnClickListener(new View.OnClickListener() {
@@ -106,31 +113,18 @@ public class FragmentContacts extends Fragment {
         contactsList = LocalDatabase.LD.retriveContactList();
         adapter = new ContactsAdapter(getContext(), contactsList);
 
+        requestAdapter = new ContactRequestAdapter(getContext(), inviteList, fragment);
+        requestAdapter = new ContactRequestAdapter(getContext(), inviteList, fragment);
+
 
         //LocalDatabase.LD.deleteInviteList();
      //   refreshContacts();
         inviteList = LocalDatabase.LD.retriveInviteList();
-        requestAdapter = new ContactRequestAdapter(getContext(), inviteList);
 
+        cardContainer.removeView(pendingContacts);
+        cardContainer.removeView(contactsTitle);
 
         checkRefresh();
-
-
-        // Skjuler tekst hvis der ikke er nogle contact requests.
-        if(inviteList.isEmpty()){
-            pendingContacts.setText("");
-            contactsTitle.setText("");
-
-        }
-        else{
-            pendingContacts.setText("Pending requests");
-            contactsTitle.setText("Contacts");
-        }
-
-
-        recyclerViewMeetings.setAdapter(adapter);
-        recyclerViewRequests.setAdapter(requestAdapter);
-
 
 
 
@@ -143,15 +137,17 @@ public class FragmentContacts extends Fragment {
 
 
 
-    public void refreshContacts(){
-        LocalDatabase.LD.deleteInviteList();
+    public void refreshContacts() {
+
         LocalDatabase.LD.deleteContactList();
+        LocalDatabase.LD.deleteInviteList();
+
 
         FirebaseControl.fc.retriveAllContacts(new ReceiverCallback() {
             @Override
             public void onSuccess(Task<DocumentSnapshot> task) {
                 contactsList = LocalDatabase.LD.retriveContactList();
-                adapter = new ContactsAdapter(getContext(),contactsList);
+                adapter = new ContactsAdapter(getContext(), contactsList);
                 recyclerViewMeetings.setAdapter(adapter);
 
             }
@@ -167,71 +163,62 @@ public class FragmentContacts extends Fragment {
 
             }
         });
+
         FirebaseControl.fc.retriveAllInvites(new ReceiverCallback() {
             @Override
             public void onSuccess(Task<DocumentSnapshot> task) {
                 inviteList = LocalDatabase.LD.retriveInviteList();
-
-                if(inviteList.isEmpty()){
-                    pendingContacts.setText("");
-                    contactsTitle.setText("");
-
-                }
-                else{
-                    pendingContacts.setText("Pending contact requests");
-                    contactsTitle.setText("Contacts");
-
-                }
-
-
-                requestAdapter = new ContactRequestAdapter(getContext(), inviteList);
+                requestAdapter = new ContactRequestAdapter(getContext(), inviteList, fragment);
                 recyclerViewRequests.setAdapter(requestAdapter);
+                cardContainer.removeView(pendingContacts);
+                cardContainer.removeView(contactsTitle);
+                cardContainer.addView(pendingContacts);
+                cardContainer.addView(contactsTitle);
             }
 
             @Override
             public void onFailure(Exception exception) {
-
             }
 
             @Override
             public void noData() {
-
             }
         });
+
+        if (inviteList.isEmpty()) {
+            // Skjuler tekst hvis der ikke er nogle contact requests.
+
+            recyclerViewRequests.setAdapter(null);
+            cardContainer.removeView(pendingContacts);
+            cardContainer.removeView(contactsTitle);
+
+        }
     }
-
-
 
 
     // https://stackoverflow.com/questions/7876043/android-new-intent-starts-particular-method
 
     public void checkRefresh() {
-        Bundle extras = getActivity().getIntent().getExtras();
-        if (extras == null) {
-            // Do nothing
-        } else {
-            String method = extras.getString("refresh");
-            if (method.equals("refresh")) {
-
-
+      if(refreshFragment){
                 Handler handler = new Handler() ;
                 Runnable run = new Runnable() {
                     @Override
                     public void run() {
                         refreshContacts();
-
                     }
                 };
-
-                handler.postDelayed(run,500);
-
+                handler.postDelayed(run,0);
+               // refreshFragment = false;
             }
+      else{
+          contactsList = LocalDatabase.LD.retriveContactList();
+          adapter = new ContactsAdapter(getContext(), contactsList);
+          requestAdapter = new ContactRequestAdapter(getContext(), inviteList, fragment);
+          requestAdapter = new ContactRequestAdapter(getContext(), inviteList, fragment);
+          recyclerViewMeetings.setAdapter(adapter);
+          recyclerViewRequests.setAdapter(requestAdapter);
+
+      }
         }
     }
 
-
-
-
-
-
-}

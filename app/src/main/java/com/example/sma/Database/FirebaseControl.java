@@ -139,34 +139,82 @@ public class FirebaseControl implements IFirebaseControl {
     }
 
     @Override
-    public void acceptContactRequest(final String senderID, final String receiverID, final ReceiverCallback receiverCallback) {
+    public void acceptContactRequest(final String senderID, final String receiverID, final SenderCallback senderCallback) {
 
-        ContactIDObject sender = new ContactIDObject(senderID);
+        final ContactIDObject sender = new ContactIDObject(senderID);
         final ContactIDObject receiver = new ContactIDObject(receiverID);
 
-        FC.collection("users").document(senderID).collection("contacts").add(receiver);
-        FC.collection("users").document(receiverID).collection("contacts").add(sender);
-        FC.collection("users").document(FirebaseAuth.getInstance().getUid())
-                .collection("contactInvites").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        FC.collection("users").document(senderID).collection("contacts").add(receiver)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
 
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot ds : task.getResult()) {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
 
-                        ContactInvite contactInvite = ds.toObject(ContactInvite.class);
-                        if (contactInvite.getUserID().equals(receiverID)) {
-                            FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("contactInvites")
-                                    .document(contactInvite.getDocID()).delete();
 
-                        }
+
+                        receiver.setDocID(documentReference.getId());
+                        FC.collection("users").document(senderID).collection("contacts").document
+                        (documentReference.getId()).update("docID", receiver.getDocID());
+                        senderCallback.onSuccess();
                     }
-                }
+                });
+
+
+
+
+        FC.collection("users").document(receiverID).collection("contacts").add(sender)
+        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                sender.setDocID(documentReference.getId());
+                FC.collection("users").document(receiverID).collection("contacts").document
+                        (documentReference.getId()).update("docID", sender.getDocID());
+
+
+            }
+        });
+
+
+        deleteContactRequest(receiverID, new SenderCallback() {
+            @Override
+            public void onSuccess() {
+
             }
 
+            @Override
+            public void onFailure(Exception exception) {
+
+            }
         });
     }
 
+
+    @Override
+    public void deleteContactRequest(final String receiverID, final SenderCallback senderCallback) {
+        FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("contactInvites").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            for (QueryDocumentSnapshot doc : task.getResult()) {
+                                ContactInvite contactInvite = doc.toObject(ContactInvite.class);
+                                    if (contactInvite.getUserID().equals(receiverID)) {
+                                        FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("contactInvites")
+                                                .document(contactInvite.getDocID()).delete();
+                                        senderCallback.onSuccess();
+                                    }
+
+                            }
+
+                        }
+
+
+                    }
+
+
+                });
+    }
 
     @Override
     public void getInvite(String inviteUserID, final ReceiverCallback receiverCallback) {

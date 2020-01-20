@@ -59,50 +59,46 @@
         >
 
         <RelativeLayout
-            android:layout_height="wrap_content"
+            android:id="@+id/cardContainer"
             android:layout_width="match_parent"
-            >
+            android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/pendingTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/pendingTitle"
                 android:layout_centerHorizontal="true"
-                android:textColor="@color/colorWhite"
-                android:text="Pending invites"
-                android:textStyle="bold"
-                android:gravity="center_horizontal"
                 android:background="@color/colorPrimaryDark"
-                />
+                android:gravity="center_horizontal"
+                android:text="Pending invites"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold" />
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_invites"
                 android:layout_width="match_parent"
-                android:layout_below="@id/pendingTitle"
-                android:layout_height="wrap_content" />´
-
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pendingTitle" />´
 
 
             <TextView
+                android:id="@+id/contactsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/contactsTitle"
-                android:textStyle="bold"
-                android:layout_centerHorizontal="true"
-                android:textColor="@color/colorWhite"
-                android:text="Contacts"
                 android:layout_below="@id/recycler_invites"
-                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
                 android:background="@color/colorPrimaryDark"
-                />
+                android:gravity="center_horizontal"
+                android:text="Contacts"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_contacts"
-                android:layout_below="@id/contactsTitle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
+                android:layout_height="wrap_content"
+                android:layout_below="@id/contactsTitle" />
 
 
         </RelativeLayout>

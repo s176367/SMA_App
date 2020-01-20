@@ -1,5 +1,6 @@
 package com.example.sma.MainActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,7 @@ public class ActivityAddNewContact extends AppCompatActivity {
     private Button btn_emailCheck;
     private EditText inputEmailCheck;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,11 @@ public class ActivityAddNewContact extends AppCompatActivity {
 
                 if (!emailInput.isEmpty()){
                 contactRequest(inputEmailCheck.getText().toString());
+
+                // Der skal laves en metode til at chekke om emailen eksisterer.
+                    FragmentContacts.refreshFragment = true;
+                   finish();
+
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Email field cannot be empty", Toast.LENGTH_SHORT).show();

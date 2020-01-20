@@ -27,7 +27,8 @@ public interface IFirebaseControl {
     void retrieveAllMeetings(ReceiverCallback receiverCallback);
     void retriveAllInvites(ReceiverCallback receiverCallback);
 
-    void acceptContactRequest(String senderID, String ReceiverID, ReceiverCallback receiverCallback);
+    void acceptContactRequest(String senderID, String ReceiverID, SenderCallback senderCallback);
+    void deleteContactRequest (String ReceiverID, SenderCallback senderCallback);
 
 
 

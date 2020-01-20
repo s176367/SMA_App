@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sma.Database.FirebaseControl;
 import com.example.sma.Database.LocalDatabase;
 import com.example.sma.Database.ReceiverCallback;
+import com.example.sma.Database.SenderCallback;
 import com.example.sma.Model.User;
 import com.example.sma.R;
 import com.google.android.gms.tasks.Task;
@@ -27,12 +28,14 @@ public class ContactRequestAdapter extends RecyclerView.Adapter<ContactRequestAd
 
     private Context mCtx;
     private List<User> inviteList;
+    private boolean refresh;
+    private  FragmentContacts fragment;
 
-
-
-    public ContactRequestAdapter(Context mCtx, List<User> inviteList) {
+    public ContactRequestAdapter(Context mCtx, List<User> inviteList, FragmentContacts fragment ) {
         this.mCtx = mCtx;
         this.inviteList = inviteList;
+        this.fragment = fragment;
+
     }
 
     @NonNull
@@ -46,43 +49,47 @@ public class ContactRequestAdapter extends RecyclerView.Adapter<ContactRequestAd
 
     @Override
     public void onBindViewHolder(@NonNull final ContactViewHolder holder, final int position) {
-
         User contact = inviteList.get(position);
         holder.textViewName.setText(contact.getName());
         holder.textViewMail.setText(contact.getEmail());
         holder.textViewPhone.setText(contact.getPhone());
         holder.textViewCompany.setText(contact.getCompany());
+
         holder.yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String senderID = FirebaseAuth.getInstance().getUid();
                 String receiverID = LocalDatabase.LD.retriveInviteList().get(position).getUserID();
-
-                FirebaseControl.fc.acceptContactRequest(senderID, receiverID, new ReceiverCallback() {
+                FirebaseControl.fc.acceptContactRequest(senderID, receiverID, new SenderCallback() {
                     @Override
-                    public void onSuccess(Task<DocumentSnapshot> task) {
-                      //  inviteList.remove(position);
-                      //  notifyItemRemoved(position);
-
+                    public void onSuccess() {
+                        removeAt(position);
+                        fragment.refreshContacts();
                     }
-
                     @Override
                     public void onFailure(Exception exception) {
-
-                    }
-
-                    @Override
-                    public void noData() {
-
                     }
                 });
-
             }
         });
         holder.no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseControl.fc.deleteContactRequest(LocalDatabase.LD.retriveInviteList().get(position).getUserID(), new SenderCallback() {
 
+                    @Override
+                    public void onSuccess() {
+                        removeAt(position);
+                        fragment.refreshContacts();
+
+
+                        }
+
+                    @Override
+                    public void onFailure(Exception exception) {
+
+                    }
+                });
             }
         });
     }
@@ -111,6 +118,22 @@ public class ContactRequestAdapter extends RecyclerView.Adapter<ContactRequestAd
         }
     }
 
+    // https://stackoverflow.com/questions/26076965/android-recyclerview-addition-removal-of-items
+
+    // Metode til at slette
+    public void removeAt(int position) {
+        inviteList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, inviteList.size());
+
+    }
 
 
+    public boolean isRefresh() {
+        return refresh;
+    }
+
+    public void setRefresh(boolean refresh) {
+        this.refresh = refresh;
+    }
 }
