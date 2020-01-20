@@ -3,6 +3,7 @@ package com.example.sma.MainActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.sma.Database.CollectionReceiverCallback;
 import com.example.sma.Database.FirebaseControl;
 import com.example.sma.Database.LocalDatabase;
 import com.example.sma.Database.ReceiverCallback;
@@ -24,6 +27,8 @@ import com.example.sma.Model.User;
 import com.example.sma.R;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +37,7 @@ public class FragmentContacts extends Fragment {
 
     // Dette fragment bruges til at vise kontakterne vha. contactsadapteren der indsættes i et recyclerview
 
-
+    String TAG = this.getClass().getName();
     RecyclerView recyclerViewMeetings;
     RecyclerView recyclerViewRequests;
     ContactsAdapter adapter;
@@ -40,7 +45,7 @@ public class FragmentContacts extends Fragment {
     ImageButton butAddContact;
     List<User> contactsList;
     List<User> inviteList;
-    ImageButton refresh;
+    SwipeRefreshLayout refreshSwipe;
     TextView pendingContacts;
     TextView contactsTitle;
     RelativeLayout cardContainer;
@@ -63,30 +68,15 @@ public class FragmentContacts extends Fragment {
         pendingContacts = view.findViewById(R.id.pendingTitle);
         contactsTitle = view.findViewById(R.id.contactsTitle);
         cardContainer = view.findViewById(R.id.cardContainer);
-
-        refresh = view.findViewById(R.id.refresh_but);
-        refresh.setOnClickListener(new View.OnClickListener() {
+        refreshSwipe = view.findViewById(R.id.swipeContacts);
+        refreshSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onClick(View view) {
+            public void onRefresh() {
                 refreshContacts();
-
-                Handler handler = new Handler();
-                Runnable runInvis = new Runnable() {
-                    @Override
-                    public void run() {
-                        refresh.setVisibility(View.INVISIBLE);
-                    }
-                };
-                Runnable runVis = new Runnable() {
-                    @Override
-                    public void run() {
-                        refresh.setVisibility(View.VISIBLE);
-                    }
-                };
-                handler.post(runInvis);
-                handler.postDelayed(runVis, 1000);
             }
         });
+
+
         butAddContact = view.findViewById(R.id.add_contact);
         butAddContact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,35 +128,34 @@ public class FragmentContacts extends Fragment {
 
 
     public void refreshContacts() {
-
         LocalDatabase.LD.deleteContactList();
         LocalDatabase.LD.deleteInviteList();
-
-
-        FirebaseControl.fc.retriveAllContacts(new ReceiverCallback() {
+        FirebaseControl.fc.retriveAllContacts(new CollectionReceiverCallback() {
             @Override
-            public void onSuccess(Task<DocumentSnapshot> task) {
-                contactsList = LocalDatabase.LD.retriveContactList();
+            public void onSuccess(Task<QuerySnapshot> task) {
+               contactsList = LocalDatabase.LD.retriveContactList();
                 adapter = new ContactsAdapter(getContext(), contactsList);
                 recyclerViewMeetings.setAdapter(adapter);
-
-            }
+                refreshSwipe.setRefreshing(false);
+                Log.d(TAG, "Refreshed all contacts");
+                }
 
             @Override
             public void onFailure(Exception exception) {
-                System.out.println("failure");
+                refreshSwipe.setRefreshing(false);
+                Log.d(TAG, "Failed to retrieve contacts" + exception);
             }
 
             @Override
             public void noData() {
-                System.out.println("no data");
-
+                refreshSwipe.setRefreshing(false);
+                Log.d(TAG, "There is no contacts");
             }
         });
 
-        FirebaseControl.fc.retriveAllInvites(new ReceiverCallback() {
+        FirebaseControl.fc.retriveAllInvites(new CollectionReceiverCallback() {
             @Override
-            public void onSuccess(Task<DocumentSnapshot> task) {
+            public void onSuccess(Task<QuerySnapshot> task) {
                 inviteList = LocalDatabase.LD.retriveInviteList();
                 requestAdapter = new ContactRequestAdapter(getContext(), inviteList, fragment);
                 recyclerViewRequests.setAdapter(requestAdapter);
@@ -174,14 +163,17 @@ public class FragmentContacts extends Fragment {
                 cardContainer.removeView(contactsTitle);
                 cardContainer.addView(pendingContacts);
                 cardContainer.addView(contactsTitle);
+                refreshSwipe.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Exception exception) {
+                refreshSwipe.setRefreshing(false);
             }
 
             @Override
             public void noData() {
+                refreshSwipe.setRefreshing(false);
             }
         });
 

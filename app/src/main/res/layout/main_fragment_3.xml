@@ -40,16 +40,6 @@
 
         />
 
-    <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:id="@+id/refresh_but"
-        android:background="@drawable/refreshbut"
-        android:backgroundTint="@color/colorWhite"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@id/titleContacts"
-        android:layout_marginLeft="20dp"/>
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

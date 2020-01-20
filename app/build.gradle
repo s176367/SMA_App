@@ -9,7 +9,7 @@ android {
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         applicationId "com.example.sma"
-        minSdkVersion 19
+        minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
