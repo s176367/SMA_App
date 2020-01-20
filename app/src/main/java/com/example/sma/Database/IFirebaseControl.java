@@ -26,11 +26,12 @@ public interface IFirebaseControl {
     void contactRequest (String UserID, SenderCallback senderCallback);
 
 
-    void retriveAllContacts(ReceiverCallback receiverCallback);
-    void retrieveAllMeetings(ReceiverCallback receiverCallback);
-    void retriveAllInvites(ReceiverCallback receiverCallback);
+    void retriveAllContacts(CollectionReceiverCallback receiverCallback);
+    void retrieveAllMeetings(CollectionReceiverCallback receiverCallback);
+    void retriveAllInvites(CollectionReceiverCallback receiverCallback);
 
-    void acceptContactRequest(String senderID, String ReceiverID, ReceiverCallback receiverCallback);
+    void acceptContactRequest(String senderID, String ReceiverID, SenderCallback senderCallback);
+    void deleteContactRequest (String ReceiverID, SenderCallback senderCallback);
 
 
 

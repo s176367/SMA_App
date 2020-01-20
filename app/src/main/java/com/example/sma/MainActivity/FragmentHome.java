@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.sma.CreateMeeting.ActivityCreateMeeting;
+import com.example.sma.Database.CollectionReceiverCallback;
 import com.example.sma.Database.FirebaseControl;
 import com.example.sma.Database.LocalDatabase;
 import com.example.sma.Database.ReceiverCallback;
@@ -24,6 +25,7 @@ import com.example.sma.Profile.ActivityProfile;
 import com.example.sma.R;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
@@ -92,9 +94,9 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
     public void refresh() {
         swipe.setRefreshing(true);
-        FirebaseControl.fc.retrieveAllMeetings(new ReceiverCallback() {
+        FirebaseControl.fc.retrieveAllMeetings(new CollectionReceiverCallback() {
             @Override
-            public void onSuccess(Task<DocumentSnapshot> task) {
+            public void onSuccess(Task<QuerySnapshot> task) {
 
                 if(task.isSuccessful()) {
                     meetingList = LocalDatabase.LD.retriveMeetingList();
