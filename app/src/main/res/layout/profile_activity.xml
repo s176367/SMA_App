@@ -13,9 +13,9 @@
         android:id="@+id/profilPicture"
         android:layout_width="110dp"
         android:layout_height="110dp"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="60dp"
-        android:layout_centerHorizontal="true"
         android:src="@drawable/profile"></de.hdodenhof.circleimageview.CircleImageView>
 
     <TextView
@@ -23,56 +23,56 @@
         android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/profilPicture"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:gravity="center"
+        android:layout_centerHorizontal="true"
         android:text="Name-lastname"
         android:textColor="@android:color/white"
-        android:textSize="30sp" />
+        android:textSize="24sp" />
 
 
     <TextView
         android:id="@+id/profileEmail"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_below="@id/profileName"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:drawableLeft="@drawable/baseline_email_white_24"
-        android:drawablePadding="10dp"
+        android:drawablePadding="-30dp"
         android:gravity="center"
         android:text="Email@email.com"
         android:textColor="@android:color/white"
-        android:textSize="24sp" />
+        android:textSize="18sp" />
 
 
     <TextView
         android:id="@+id/profileCompany"
         android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
         android:layout_below="@id/profileEmail"
         android:layout_centerHorizontal="true"
         android:drawableLeft="@drawable/baseline_work_white_24"
         android:gravity="center"
-        android:drawablePadding="10dp"
+        android:drawablePadding="-30dp"
         android:text="Company"
         android:textColor="@android:color/white"
-        android:textSize="24sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/profilePhone"
         android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
         android:layout_below="@id/profileCompany"
         android:layout_centerHorizontal="true"
         android:drawableLeft="@drawable/baseline_call_white_24"
         android:gravity="center"
-        android:drawablePadding="10dp"
+        android:drawablePadding="-30dp"
         android:text="12345678"
         android:textColor="@android:color/white"
-        android:textSize="24sp" />
+        android:textSize="18sp" />
 
     <Button
         android:layout_width="150dp"

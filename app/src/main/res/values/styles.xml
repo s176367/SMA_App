@@ -5,9 +5,12 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="colorControlNormal">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorWhite</item>
 
     </style>
+
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText"/>
 
 
     <style name="noAnimTheme" parent="android:Theme">
@@ -16,7 +19,7 @@
 
 
     <style name="TextInputLayout.HintText">
-        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">14sp</item>
     </style>
 

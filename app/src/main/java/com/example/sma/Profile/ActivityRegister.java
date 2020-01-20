@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +37,6 @@ public class ActivityRegister extends AppCompatActivity {
     private TextInputEditText inputETCompany, inputETName, inputETEmail, inputETPhone, inputETPassword;
     TextView loginText;
     Button btn_register;
-    ProgressBar progressBar;
     String userID;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
@@ -57,7 +55,6 @@ public class ActivityRegister extends AppCompatActivity {
 
         loginText = findViewById(R.id.login_text);
         btn_register = findViewById(R.id.btn_register);
-        progressBar = findViewById(R.id.progressbar);
 
 
         inputETCompany = findViewById(R.id.input_ET_company);
@@ -89,8 +86,6 @@ public class ActivityRegister extends AppCompatActivity {
                 final String fullname = inputETName.getText().toString();
                 final String company = inputETCompany.getText().toString();
                 final String phone = inputETPhone.getText().toString();
-
-                progressBar.setVisibility(View.VISIBLE);
 
 
                 if (TextUtils.isEmpty(company)) {
@@ -184,7 +179,6 @@ public class ActivityRegister extends AppCompatActivity {
                         } else {
 
                             Toast.makeText(ActivityRegister.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            progressBar.setVisibility(View.GONE);
 
                         }
 
