@@ -19,7 +19,7 @@
         android:padding="8dp">
 
       <TextView
-          android:id="@+id/meeting_name"
+          android:id="@+id/meeting_invite_name"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="6dp"
@@ -30,37 +30,36 @@
           android:textStyle="bold" />
 
       <TextView
-          android:id="@+id/meeting_planner"
+          android:id="@+id/meeting_invite_date"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_below="@id/meeting_name"
-          android:layout_alignLeft="@id/meeting_name"
-          android:text="Meeting planner (name)"
+          android:layout_below="@id/meeting_invite_name"
+          android:layout_alignLeft="@id/meeting_invite_name"
+          android:text="Date"
           android:textSize="20sp" />
 
 
       <TextView
-          android:id="@+id/meeting_topic"
+          android:id="@+id/meeting_invite_time"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_below="@id/meeting_planner"
-          android:layout_alignLeft="@id/meeting_name"
-          android:text="Meeting topic"
-          android:textSize="22sp"
-          android:textStyle="bold" />
+          android:layout_below="@id/meeting_invite_date"
+          android:layout_alignLeft="@id/meeting_invite_name"
+          android:text="12:20"
+          android:textSize="22sp" />
 
 
       <TextView
-          android:id="@+id/meeting_location"
+          android:id="@+id/meeting_invite_location"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="Location"
           android:textSize="20sp"
-          android:layout_below="@id/meeting_topic"/>
+          android:layout_below="@id/meeting_invite_time"/>
 
 
       <ImageButton
-          android:id="@+id/accept_btn"
+          android:id="@+id/accept_btn_invite"
           android:layout_width="50dp"
           android:layout_height="50dp"
           android:layout_marginLeft="290dp"
@@ -69,7 +68,7 @@
 
 
       <ImageButton
-          android:id="@+id/decline_btn"
+          android:id="@+id/decline_btn_invite"
           android:layout_width="50dp"
           android:layout_height="50dp"
           android:layout_marginLeft="245dp"
