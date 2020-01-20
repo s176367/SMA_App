@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.sma.Database.FirebaseControl;
 import com.example.sma.Database.LocalDatabase;
 import com.example.sma.Database.ReceiverCallback;
@@ -33,6 +34,7 @@ public class ActivityLogin extends AppCompatActivity {
     TextView register, forgotPassword;
     ProgressBar progressB;
     FirebaseAuth firebaseAuth;
+    LottieAnimationView loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,9 @@ public class ActivityLogin extends AppCompatActivity {
         register = findViewById(R.id.register_text);
         forgotPassword = findViewById(R.id.forgotPassword);
         firebaseAuth = FirebaseAuth.getInstance();
+
+        loading = findViewById(R.id.loadingAnimation);
+        loading.setVisibility(View.INVISIBLE);
 
 
         forgotPassword.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +100,8 @@ public class ActivityLogin extends AppCompatActivity {
             private void signIn(String email, String pass){
                 final FirebaseAuth fAuth = FirebaseAuth.getInstance();
 
+                loading.playAnimation();
+                loading.setVisibility(View.VISIBLE);
                 fAuth.signInWithEmailAndPassword(email, pass)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
@@ -110,6 +117,7 @@ public class ActivityLogin extends AppCompatActivity {
                                             startActivity(intent);
                                             finish();
                                             System.out.println("hej");
+                                            loading.setVisibility(View.INVISIBLE);
                                         }
                                         @Override
                                         public void onFailure(Exception exception) {
@@ -123,6 +131,7 @@ public class ActivityLogin extends AppCompatActivity {
                                         }
                                     });
                                 } else {
+                                    loading.setVisibility(View.INVISIBLE);
                                     Toast.makeText(ActivityLogin.this, "something went wrong.", Toast.LENGTH_SHORT).show();
                                 }
                             }
