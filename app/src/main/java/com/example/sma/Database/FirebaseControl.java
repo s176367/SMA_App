@@ -159,6 +159,7 @@ public class FirebaseControl implements IFirebaseControl {
         });
     }
 
+
     @Override
     public void retrieveAllMeetings(final CollectionReceiverCallback receiverCallback) {
         FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings")
@@ -300,6 +301,66 @@ public class FirebaseControl implements IFirebaseControl {
     }
 
     @Override
+    public void getMeetingInvite(String meetingID, final ReceiverCallback receiverCallback) {
+        FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetingInvites").document(meetingID)
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    MeetingObject meetingInvite = document.toObject(MeetingObject.class);
+                    LocalDatabase.LD.addMeetingInvite(meetingInvite);
+                    receiverCallback.onSuccess(task);
+
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                receiverCallback.onFailure(e);
+            }
+        });
+    }
+
+    @Override
+    public void retrieveAllMeetingInvites(final CollectionReceiverCallback receiverCallback) {
+        FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetingInvites")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull final Task<QuerySnapshot> task) {
+                LocalDatabase.LD.deleteMeetingInviteList();
+                if(task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()){
+                        MeetingObject meetingObject = document.toObject(MeetingObject.class);
+                        getMeetingInvite(meetingObject.getId(), new ReceiverCallback() {
+                            @Override
+                            public void onSuccess(Task<DocumentSnapshot> task1) {
+                                receiverCallback.onSuccess(task);
+                                Log.d(TAG, "Invite successfully retrieved");
+                            }
+
+                            @Override
+                            public void onFailure(Exception exception) {
+                                receiverCallback.onFailure(exception);
+                                Log.d(TAG, "Failed to get invite");
+                            }
+
+                            @Override
+                            public void noData() {
+                                receiverCallback.noData();
+                                Log.d(TAG, "No data received");
+
+                            }
+                        });
+                    }
+
+
+                }
+            }
+        });
+    }
+
+    @Override
     public void retriveAllInvites(final CollectionReceiverCallback receiverCallback) {
         FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("contactInvites")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -336,6 +397,8 @@ public class FirebaseControl implements IFirebaseControl {
             }
         });
     }
+
+
 
     //Contact
     @Override

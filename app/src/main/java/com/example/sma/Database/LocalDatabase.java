@@ -8,6 +8,7 @@ import androidx.preference.PreferenceManager;
 
 import com.example.sma.CreateMeeting.FragmentCreateMeeting;
 import com.example.sma.MainActivity.ActivityMain;
+import com.example.sma.Model.MeetingIDObject;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.User;
 import com.google.gson.Gson;
@@ -47,6 +48,7 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
     private static List<MeetingObject> meetingList = new ArrayList<>();
     private static List<User> contactList;
     private static List<User> inviteList;
+    private static List<MeetingObject> meetingInviteList;
     private static User user = new User();
     Comparator compareByDate, compareByTime;
     ArrayList<MeetingObject> dateSortedList = new ArrayList<>();
@@ -113,9 +115,6 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
 
     }
 
-
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public ArrayList<MeetingObject> retriveMeetingList() {
         json = prefs.getString("Meetings", "");
         ArrayList<MeetingObject> returnList;
@@ -160,6 +159,54 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
         else {returnList = new ArrayList<User>();}
         return returnList;
     }
+
+    public List<MeetingObject> retrieveMeetingInviteLst (){
+        json = prefs.getString("MeetingInvites", "");
+        ArrayList<MeetingObject> returnList;
+        if (!json.isEmpty()) {
+            Type type = new TypeToken<List<MeetingObject>>() {
+            }.getType();
+            returnList = gson.fromJson(json, type);
+        } else {returnList = new ArrayList<MeetingObject>();}
+        compareByTime = new Comparator<MeetingObject>() {
+            @Override
+            public int compare(MeetingObject o1, MeetingObject o2) {
+                //Sorting code from SO https://stackoverflow.com/questions/4805606/how-to-sort-by-two-fields-in-java
+
+                String x1 = o1.getDate();
+                String x2 = o2.getDate();
+
+                int sComp = x1.compareTo(x2);
+
+                if(sComp !=0){
+                    return sComp;
+                }
+                return o1.getTime().compareTo(o2.getTime());
+            }
+        };
+
+        returnList.sort(compareByTime);
+
+
+        return returnList;
+    }
+
+    public void addMeetingInvite(MeetingObject meetingObject){
+        json = prefs.getString("MeetingInvites", "");
+        meetingInviteList = retrieveMeetingInviteLst();
+        meetingInviteList.add(meetingObject);
+        json = gson.toJson(meetingInviteList);
+        editor.putString("MeetingInvites", json);
+        editor.commit();
+    }
+    public void deleteMeetingInvite(int position){
+        meetingInviteList = retrieveMeetingInviteLst();
+        meetingInviteList.remove(position);
+        json = gson.toJson(meetingInviteList);
+        editor.putString("MeetingInvites", json);
+        editor.commit();
+    }
+
 
 
 
@@ -208,6 +255,9 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
 
     public void deleteContactList() {
         editor.remove("Contacts").commit();
+    }
+    public void deleteMeetingInviteList(){
+        editor.remove("MeetingInvites").commit();
     }
 
 
