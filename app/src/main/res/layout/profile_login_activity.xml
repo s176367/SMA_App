@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bluem"
+    android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
     tools:context=".Profile.ActivityLogin">
 
@@ -94,7 +94,7 @@
         android:text="Create an Account"
         android:textColor="@android:color/white"
         android:textSize="13dp"
-        android:layout_marginStart="3dp"
+        android:layout_marginStart="5dp"
         android:textStyle="bold" />
 
 
@@ -104,9 +104,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/password_input"
         android:layout_alignRight="@id/password_input"
-       android:layout_alignBottom="@id/register_text"
+        android:layout_alignBottom="@id/register_text"
         android:text="Forgot password"
-        android:layout_marginStart="210dp"
+        android:layout_marginEnd="5dp"
         android:textColor="@android:color/white"
         android:textSize="13dp"
         android:textStyle="bold" />
@@ -128,9 +128,6 @@
         </FrameLayout>
 
 
-
-
-
         <Button
         android:id="@+id/login_btn"
         android:layout_width="180dp"
@@ -144,10 +141,6 @@
         android:textColor="@android:color/white"
         android:textSize="20dp"
         android:textStyle="normal" />
-
-
-
-
 
 
     </RelativeLayout>
