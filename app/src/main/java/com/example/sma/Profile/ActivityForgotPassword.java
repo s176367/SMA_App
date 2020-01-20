@@ -44,6 +44,8 @@ public class ActivityForgotPassword extends AppCompatActivity {
 
     private void resetPassword() {
 
+        // https://stackoverflow.com/questions/42800349/forgot-password-in-firebase-for-android
+
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String emailaddress = editTextEmail.getText().toString();
         auth.sendPasswordResetEmail(emailaddress)

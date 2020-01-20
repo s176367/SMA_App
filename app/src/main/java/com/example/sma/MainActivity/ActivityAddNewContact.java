@@ -1,23 +1,16 @@
 package com.example.sma.MainActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sma.Database.FirebaseControl;
 import com.example.sma.Database.SenderCallback;
 import com.example.sma.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class ActivityAddNewContact extends AppCompatActivity {
 
@@ -52,35 +45,47 @@ public class ActivityAddNewContact extends AppCompatActivity {
                 }
 
 
-                final String content = inputEmailCheck.getText().toString();
-                FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
-                rootRef.collection("users").whereEqualTo("email", content).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (DocumentSnapshot document : task.getResult()) {
-                                if (document.getString("email").equals(content)) {
-
-                                    Toast.makeText(ActivityAddNewContact.this, "Invitation send", Toast.LENGTH_SHORT).show();
-                                    Log.d(TAG, "Successfull", task.getException());
-
-                                } else {
-
-                                    Toast.makeText(ActivityAddNewContact.this, "Invitation isn't send", Toast.LENGTH_SHORT).show();
-                                    Log.d(TAG, "Not successfull");
-
-                                }
-                            }
-
-                        }
-                    }
-
-                });
+                //checkEmail();
 
 
                 }
          });
     }
+
+    //Tjekker email - sender kun hvis brugerens email er i Firestore - giver ingen fejlbesked hvis brugeren ikke er der
+/*
+    private void checkEmail() {
+
+        final String content = inputEmailCheck.getText().toString();
+
+        FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+        rootRef.collection("users").whereEqualTo("email", content).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot document : task.getResult()) {
+                        if (document.getString("email").equals(content)) {
+
+                            Toast.makeText(ActivityAddNewContact.this, "Invitation send", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "Successfull", task.getException());
+
+                        }
+                    }
+                } else {
+
+                    Toast.makeText(ActivityAddNewContact.this, "Invitation is not send", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Not successfull", task.getException());
+
+                }
+
+            }
+
+        });
+
+  }
+
+ */
+
 
 
     public void contactRequest(String email){

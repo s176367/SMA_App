@@ -36,7 +36,7 @@
         android:textColorHint="@color/specialWhite"
         app:hintTextAppearance="@style/TextInputLayout.HintText"
         android:backgroundTint="@android:color/white"
-        >
+        android:theme="@style/TextInputLayout.HintText" >
 
 
         <com.google.android.material.textfield.TextInputEditText
@@ -44,6 +44,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Company"
+            android:theme="@style/TextInputLayout.HintText"
+            android:textAppearance="@style/TextInputLayout.HintText"
+            android:textColorHint="@color/colorWhite"
             android:inputType="text"
             android:textColor="@android:color/white"
             android:backgroundTint="@android:color/white"
@@ -217,7 +220,6 @@
         android:text="Register"
         android:textSize="20dp"
         android:textColor="@android:color/white" />
-
 
 
 </RelativeLayout>
