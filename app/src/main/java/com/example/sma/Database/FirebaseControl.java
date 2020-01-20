@@ -1,5 +1,6 @@
 package com.example.sma.Database;
 
+import android.speech.RecognizerIntent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -112,6 +113,26 @@ public class FirebaseControl implements IFirebaseControl {
 
                     }
                 });
+
+                for (int i = 0; i <meetingObject.getParticipants().size() ; i++) {
+                    getInvite(meetingObject.getParticipants().get(i), new ReceiverCallback() {
+                        @Override
+                        public void onSuccess(Task<DocumentSnapshot> task) {
+                            Log.d(TAG,"Participant invited");
+                        }
+
+                        @Override
+                        public void onFailure(Exception exception) {
+                            Log.d(TAG, "Participant failed to be invited");
+
+                        }
+
+                        @Override
+                        public void noData() {
+
+                        }
+                    });
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

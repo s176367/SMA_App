@@ -29,6 +29,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/title"
         app:hintTextAppearance="@style/TextInputLayout.HintText"
+        android:textColorHint="@color/colorPrimaryDark"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -38,6 +39,7 @@
             android:ems="10"
             android:hint="Title"
             android:inputType="text"
+
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -50,7 +52,9 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/titleLayout"
         android:layout_marginTop="15dp"
-        app:hintTextAppearance="@style/TextInputLayout.HintText">
+        app:hintTextAppearance="@style/TextInputLayout.HintText"
+        android:textColorHint="@color/colorPrimaryDark"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/date"
@@ -60,7 +64,9 @@
             android:hint="Date"
             android:clickable="true"
             android:focusable="false"
-            android:inputType="none"  />
+            android:inputType="none"
+
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -72,7 +78,8 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/dateLayout"
         android:layout_marginTop="15dp"
-        app:hintTextAppearance="@style/TextInputLayout.HintText">
+        app:hintTextAppearance="@style/TextInputLayout.HintText"
+        android:textColorHint="@color/colorPrimaryDark">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/time"
@@ -95,7 +102,8 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/timeLayout"
         android:layout_marginTop="15dp"
-        app:hintTextAppearance="@style/TextInputLayout.HintText">
+        app:hintTextAppearance="@style/TextInputLayout.HintText"
+        android:textColorHint="@color/colorPrimaryDark">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/duration"
@@ -119,7 +127,8 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/durationLayout"
         android:layout_marginTop="15dp"
-        app:hintTextAppearance="@style/TextInputLayout.HintText">
+        app:hintTextAppearance="@style/TextInputLayout.HintText"
+        android:textColorHint="@color/colorPrimaryDark">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/location"

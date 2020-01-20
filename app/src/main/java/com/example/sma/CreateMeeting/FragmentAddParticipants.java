@@ -89,12 +89,12 @@ public class FragmentAddParticipants extends Fragment {
         FirebaseControl.fc.createMeeting(tempMeeting, new SenderCallback() {
             @Override
             public void onSuccess() {
-
                 Intent intent = new Intent(getContext(), ActivityMain.class);
                 intent.putExtra("refresh", "refresh");
                 startActivity(intent);
 
                 getActivity().finish();
+
 
             }
             @Override
@@ -103,6 +103,7 @@ public class FragmentAddParticipants extends Fragment {
 
             }
         });
+
     }
 
 
