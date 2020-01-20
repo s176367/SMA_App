@@ -3,6 +3,8 @@ package com.example.sma.Database;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.User;
 
+import java.util.ArrayList;
+
 public interface IFirebaseControl {
 
 
@@ -19,6 +21,7 @@ public interface IFirebaseControl {
     void deleteMeeting(String MeetindId, SenderCallback senderCallback);
 
     void insertMeetingID (String meetingID, SenderCallback senderCallback);
+    void inviteParticipant (String userID, String meetingId, ArrayList inviteParticipants, SenderCallback senderCallback);
 
     void contactRequest (String UserID, SenderCallback senderCallback);
 

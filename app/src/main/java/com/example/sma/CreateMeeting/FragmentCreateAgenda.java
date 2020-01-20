@@ -2,7 +2,6 @@ package com.example.sma.CreateMeeting;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +22,6 @@ import com.example.sma.Database.SenderCallback;
 import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class FragmentCreateAgenda extends Fragment{
     /*
@@ -57,7 +53,7 @@ public class FragmentCreateAgenda extends Fragment{
 
         // Tilføjer adapter, som håndtere hvis man vil ændre sit emne.
         recyclerView.setAdapter(adapter);
-        but_finishAgenda = view.findViewById(R.id.finish_agenda);
+        but_finishAgenda = view.findViewById(R.id.finish_participants);
 
 
         // Man kan ikke trykke videre, med mindre man har minimum et emne på sit møde
@@ -73,9 +69,11 @@ public class FragmentCreateAgenda extends Fragment{
             @Override
             public void onClick(View view) {
                 if (!tempMeeting.topics.isEmpty()) {
-                    finishAgenda();
 
-               }
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(container.getId(), new FragmentAddParticipants()).addToBackStack(null).commit();
+
+
+                }
                 else {
                     Toast.makeText(getContext(), "Insert a topic", Toast.LENGTH_SHORT).show();
                 }
@@ -102,30 +100,7 @@ public class FragmentCreateAgenda extends Fragment{
     }
 
 
-    public void finishAgenda () {
 
-        FirebaseControl.fc.createMeeting(tempMeeting, new SenderCallback() {
-            @Override
-            public void onSuccess() {
-
-                Intent intent = new Intent(getContext(), ActivityMain.class);
-                intent.putExtra("refresh", "refresh");
-                startActivity(intent);
-
-                getActivity().finish();
-
-            }
-            @Override
-            public void onFailure(Exception exception) {
-
-
-            }
-        });
-
-
-
-
-    }
 
 }
 

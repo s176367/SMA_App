@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:id="@+id/relativeLayout">
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <ImageView
         android:id="@+id/topBar2"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:srcCompat="@color/colorPrimaryDark" />
-
+        app:srcCompat="@color/colorPrimaryDark"
+        />
     <TextView
         android:id="@+id/addParticipants"
         android:layout_width="match_parent"
@@ -18,11 +17,10 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="27dp"
         android:gravity="center_horizontal"
-        android:text="Agenda"
+        android:text="Add Participants"
         android:textColor="@color/cardview_light_background"
         android:textSize="20sp"
         android:textStyle="bold" />
-
 
     <Button
         android:id="@+id/finish_participants"
@@ -44,42 +42,17 @@
         android:id="@+id/scrollview"
         android:requiresFadingEdge="vertical">
 
-        <RelativeLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_participants"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
 
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_agenda"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <include
-                layout="@layout/model_new_agenda"
-                android:id="@+id/newAgenda"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/recycler_agenda"
-                android:layout_marginTop="1dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tiljøttopic"
-                android:layout_alignBottom="@id/newAgenda"
-                android:layout_marginBottom="10dp"
-                android:text="Add new topic"
-                android:textColor="@color/colorBlack"
-                android:layout_centerHorizontal="true"
-                />
-
-        </RelativeLayout>
-
-
+            android:layout_below="@+id/topBar2" />
 
 
 
     </ScrollView>
+
 
 
 </RelativeLayout>

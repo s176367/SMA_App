@@ -12,8 +12,22 @@ public class MeetingObject {
     private int antalPersoner;
     private String date;
     private String duration;
+    private ArrayList<String> participants = new ArrayList<>();
 
+    public ArrayList<String> getParticipants() {
+        return participants;
+    }
 
+    public void addParticipant(String userID) {
+        participants.add(userID);
+    }
+    public void deleteParticipant(String userID){
+        for (int i = 0; i < participants.size() ; i++) {
+            if (participants.get(i).equals(userID)){
+                participants.remove(i);
+            }
+        }
+    }
 
     public ArrayList<Topic> topics = new ArrayList<>();
 

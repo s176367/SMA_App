@@ -21,6 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+
 public class FirebaseControl implements IFirebaseControl {
 
     FirebaseFirestore FC = FirebaseFirestore.getInstance();
@@ -68,6 +70,7 @@ public class FirebaseControl implements IFirebaseControl {
 
                     }
                 });
+
 
 
             }
@@ -254,6 +257,20 @@ public class FirebaseControl implements IFirebaseControl {
                 });
     }
 
+    @Override
+    public void inviteParticipant(final String userID, String meetingId, ArrayList inviteParticipants, SenderCallback senderCallback) {
+        for (int i = 0; i < inviteParticipants.size() ; i++) {
+            MeetingIDObject meetingIDObject = new MeetingIDObject(meetingId);
+            FC.collection("users").document(userID).collection("meetingInvites").add(meetingIDObject)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            FC.collection("users").document(userID).collection("meetingInvites")
+                                    .document(documentReference.getId()).update("docID", documentReference.getId());
+                        }
+                    });
+        }
+    }
 
 
     @Override

@@ -38,7 +38,6 @@ public class FragmentEditMeeting extends Fragment implements NumberPicker.OnValu
     EditText location;
     Button create;
     MeetingObject tempMeeting;
-    Spinner spinner;
 
     @Nullable
     @Override

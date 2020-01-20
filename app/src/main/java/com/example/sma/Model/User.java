@@ -8,7 +8,7 @@ public class User {
     private String phone;
     private String userID;
 
-    public User(){};
+    public User(){}
 
 
     public User(String name, String company, String email, String phone) {
