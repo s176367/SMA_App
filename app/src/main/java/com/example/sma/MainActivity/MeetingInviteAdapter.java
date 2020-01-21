@@ -18,6 +18,10 @@ import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.User;
 import com.example.sma.R;
 import com.example.sma.RefreshContext;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -56,6 +60,7 @@ public class MeetingInviteAdapter extends RecyclerView.Adapter<MeetingInviteAdap
             @Override
             public void onClick(View view) {
                 RefreshContext.setHome(true);
+                RefreshContext.setInvites(true);
                 FirebaseControl.fc.acceptMeetingRequest(inviteList.get(position).getId(), new SenderCallback() {
                     @Override
                     public void onSuccess() {
@@ -67,13 +72,14 @@ public class MeetingInviteAdapter extends RecyclerView.Adapter<MeetingInviteAdap
                     Log.d(TAG, "Meeting has not been accepted, something went wrong: " +exception );
                     }
                 });
-
+                removeAt(position);
             }
         });
 
         holder.deny.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 FirebaseControl.fc.deleteMeetingRequest(inviteList.get(position).getId(), new SenderCallback() {
                     @Override
                     public void onSuccess() {
@@ -83,10 +89,9 @@ public class MeetingInviteAdapter extends RecyclerView.Adapter<MeetingInviteAdap
                     @Override
                     public void onFailure(Exception exception) {
                         Log.d(TAG, "Meeting rejection failed");
-
                     }
                 });
-
+                removeAt(position);
             }
         });
     }
@@ -113,6 +118,15 @@ public class MeetingInviteAdapter extends RecyclerView.Adapter<MeetingInviteAdap
             deny = itemView.findViewById(R.id.decline_btn_invite);
         }
     }
+
+    public void removeAt(int position) {
+        inviteList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, inviteList.size());
+
+    }
+
+
 
 
 
