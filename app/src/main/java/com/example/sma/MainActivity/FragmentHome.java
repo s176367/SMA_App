@@ -24,6 +24,7 @@ import com.example.sma.Database.ReceiverCallback;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Profile.ActivityProfile;
 import com.example.sma.R;
+import com.example.sma.RefreshContext;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -41,6 +42,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     Button but_create, but_profile;
     List<MeetingObject> meetingList;
     SwipeRefreshLayout swipe;
+    RefreshContext context = new RefreshContext();
 
     @Nullable
     @Override
@@ -70,11 +72,11 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
 
 
-        meetingList = LocalDatabase.LD.retriveMeetingList();
-        adapter = new MeetingCardAdapter(getContext(), meetingList);
-        recyclerView.setAdapter(adapter);
 
-        checkRefresh();
+
+
+        checkRefresh(RefreshContext.getHome());
+
         return view;
     }
 
@@ -94,7 +96,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
 
     public void refresh() {
-        swipe.setRefreshing(true);
         FirebaseControl.fc.retrieveAllMeetings(new CollectionReceiverCallback() {
             @Override
             public void onSuccess(Task<QuerySnapshot> task) {
@@ -104,6 +105,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                     adapter = new MeetingCardAdapter(getContext(), meetingList);
                     recyclerView.setAdapter(adapter);
                     swipe.setRefreshing(false);
+                    RefreshContext.setHome(false);
                 }
             }
 
@@ -124,12 +126,14 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
     // https://stackoverflow.com/questions/7876043/android-new-intent-starts-particular-method
 
-    public void checkRefresh() {
-        Bundle extras = getActivity().getIntent().getExtras();
-        if (extras == null) {
-            // Do nothing
+    public void checkRefresh(boolean refresh) {
+        if (!refresh) {
+            meetingList = LocalDatabase.LD.retriveMeetingList();
+            adapter = new MeetingCardAdapter(getContext(), meetingList);
+            recyclerView.setAdapter(adapter);
+            swipe.setRefreshing(false);
         } else {
-
+            swipe.setRefreshing(true);
             Handler handler = new Handler();
             Runnable run = new Runnable() {
                 @Override
@@ -137,7 +141,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                     refresh();
                 }
             };
-            handler.postDelayed(run,300);
+            handler.postDelayed(run,400);
         }
     }
 }

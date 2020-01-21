@@ -24,7 +24,11 @@ public interface IFirebaseControl {
     void insertMeetingID (String meetingID, SenderCallback senderCallback);
     void inviteParticipant (String userID, String meetingId, SenderCallback senderCallback);
 
-    void contactRequest (String UserID, SenderCallback senderCallback);
+    void contactRequest (String UserID, CollectionReceiverCallback receiverCallback);
+    void inviteContact (String UserID, SenderCallback senderCallback);
+
+    void checkContact (String UserID, CollectionReceiverCallback receiverCallback);
+
 
 
     void retriveAllContacts(CollectionReceiverCallback receiverCallback);

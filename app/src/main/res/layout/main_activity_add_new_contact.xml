@@ -14,6 +14,8 @@
         android:layout_height="70dp"
         app:srcCompat="@color/colorPrimaryDark" />
 
+
+
     <TextView
         android:id="@+id/titleAddNewContact"
         android:layout_width="match_parent"
@@ -27,32 +29,68 @@
         android:textColor="@color/cardview_light_background"
         android:textStyle="bold" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/sendContactInviteAnim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_rawRes="@raw/sendinvite"
+        android:layout_above="@id/Container"
+        android:layout_centerHorizontal="true"
+
+        />
+
+
+    <RelativeLayout
+        android:id="@+id/Container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+
+
+    <TextView
+        android:id="@+id/emailNotValid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email is not valid"
+        android:layout_below="@id/emailfield"
+        android:layout_alignLeft="@id/emailfield"
+        android:layout_marginLeft="4dp"
+        android:layout_alignStart="@id/emailfield"
+        android:layout_alignEnd="@id/emailfield"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorRed"
+        android:textStyle="bold"
+        android:visibility="invisible"/>
+
+
     <EditText
         android:id="@+id/emailfield"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textColorHint="@color/colorPrimaryDark"
+        android:layout_height="40dp"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:layout_marginTop="300dp"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:hint="Email"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:textColor="@color/colorPrimaryDark"
+        android:textColorHint="@color/colorPrimaryDark" />
+
 
     <Button
         android:id="@+id/btnCheckEmail"
         android:layout_alignBottom="@id/emailfield"
         android:layout_toRightOf="@id/emailfield"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="7dp"
         android:background="@color/colorPrimaryDark"
         android:layout_height="40dp"
         android:textColor="@color/colorWhite"
+        android:text="Add"/>
 
-        android:text="Add"
+    </RelativeLayout>
 
-        />
+
 
 </RelativeLayout>

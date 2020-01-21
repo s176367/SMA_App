@@ -25,6 +25,7 @@ import com.example.sma.Database.ReceiverCallback;
 //import com.example.sma.Model.Contact;
 import com.example.sma.Model.User;
 import com.example.sma.R;
+import com.example.sma.RefreshContext;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -190,7 +191,8 @@ public class FragmentContacts extends Fragment {
     // https://stackoverflow.com/questions/7876043/android-new-intent-starts-particular-method
 
     public void checkRefresh() {
-      if(refreshFragment){
+      if(RefreshContext.getContacts()){
+          refreshSwipe.setRefreshing(true);
                 Handler handler = new Handler() ;
                 Runnable run = new Runnable() {
                     @Override
@@ -198,8 +200,8 @@ public class FragmentContacts extends Fragment {
                         refreshContacts();
                     }
                 };
-                handler.postDelayed(run,0);
-               // refreshFragment = false;
+                handler.postDelayed(run,400);
+                RefreshContext.setContacts(false);
             }
       else{
           contactsList = LocalDatabase.LD.retriveContactList();

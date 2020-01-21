@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/title"
-        app:hintTextAppearance="@style/TextInputLayout.HintText"
+        app:hintTextAppearance="@style/AppTheme"
         android:textColorHint="@color/colorPrimaryDark"
         >
 
@@ -52,7 +52,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/titleLayout"
         android:layout_marginTop="15dp"
-        app:hintTextAppearance="@style/TextInputLayout.HintText"
+        app:hintTextAppearance="@style/AppTheme"
         android:textColorHint="@color/colorPrimaryDark"
         >
 
@@ -78,7 +78,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/dateLayout"
         android:layout_marginTop="15dp"
-        app:hintTextAppearance="@style/TextInputLayout.HintText"
+        app:hintTextAppearance="@style/AppTheme"
         android:textColorHint="@color/colorPrimaryDark">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -102,7 +102,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/timeLayout"
         android:layout_marginTop="15dp"
-        app:hintTextAppearance="@style/TextInputLayout.HintText"
+        app:hintTextAppearance="@style/AppTheme"
         android:textColorHint="@color/colorPrimaryDark">
 
         <com.google.android.material.textfield.TextInputEditText

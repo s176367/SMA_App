@@ -13,10 +13,16 @@ public class MeetingObject {
     private String date;
     private String duration;
     private ArrayList<String> participants = new ArrayList<>();
+    public ArrayList<String> acceptedParticipants = new ArrayList<>();
 
+    public ArrayList<String> getAcceptedParticipants() {
+        return acceptedParticipants;
+    }
     public ArrayList<String> getParticipants() {
         return participants;
     }
+
+
 
     public void addParticipant(String userID) {
         participants.add(userID);
