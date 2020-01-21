@@ -24,6 +24,7 @@ import com.example.sma.MainActivity.InviteToMeetingAdapter;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.User;
 import com.example.sma.R;
+import com.example.sma.RefreshContext;
 
 import java.util.List;
 
@@ -86,11 +87,13 @@ public class FragmentAddParticipants extends Fragment {
     }
     public void finishAgenda () {
 
+
         FirebaseControl.fc.createMeeting(tempMeeting, new SenderCallback() {
             @Override
             public void onSuccess() {
+
+                RefreshContext.setHome(true);
                 Intent intent = new Intent(getContext(), ActivityMain.class);
-                intent.putExtra("refresh", "refresh");
                 startActivity(intent);
 
                 getActivity().finish();

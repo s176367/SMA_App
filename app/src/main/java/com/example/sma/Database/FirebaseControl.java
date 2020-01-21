@@ -1,6 +1,6 @@
 package com.example.sma.Database;
 
-import android.speech.RecognizerIntent;
+import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -11,21 +11,18 @@ import com.example.sma.Model.ContactInvite;
 import com.example.sma.Model.MeetingIDObject;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.User;
-import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class FirebaseControl implements IFirebaseControl {
 
@@ -44,7 +41,7 @@ public class FirebaseControl implements IFirebaseControl {
             @Override
             public void onSuccess(Void aVoid) {
                 senderCallback.onSuccess();
-                Log.d(TAG," User created in database");
+                Log.d(TAG, " User created in database");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -68,8 +65,7 @@ public class FirebaseControl implements IFirebaseControl {
                         LocalDatabase.LD.addContact(user);
                         receiverCallback.onSuccess(task);
                         Log.d(TAG, "Database successfully retrived user");
-                    }
-                else {
+                    } else {
                         receiverCallback.noData();
                     }
                 }
@@ -85,14 +81,11 @@ public class FirebaseControl implements IFirebaseControl {
     }
 
 
-
-
     //Meeting
     @Override
     public void createMeeting(final MeetingObject meetingObject, final SenderCallback senderCallback) {
 
-        FC.collection("meetings").add(meetingObject).addOnSuccessListener(new OnSuccessListener<DocumentReference>()
-        {
+        FC.collection("meetings").add(meetingObject).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(final DocumentReference documentReference) {
 
@@ -113,7 +106,7 @@ public class FirebaseControl implements IFirebaseControl {
                     }
                 });
 
-                for (int i = 0; i <meetingObject.getParticipants().size() ; i++) {
+                for (int i = 0; i < meetingObject.getParticipants().size(); i++) {
                     inviteParticipant(meetingObject.getParticipants().get(i), documentReference.getId(), new SenderCallback() {
                         @Override
                         public void onSuccess() {
@@ -123,7 +116,7 @@ public class FirebaseControl implements IFirebaseControl {
 
                         @Override
                         public void onFailure(Exception exception) {
-                        Log.d(TAG, "Participant invite failed");
+                            Log.d(TAG, "Participant invite failed");
                         }
                     });
                 }
@@ -154,7 +147,7 @@ public class FirebaseControl implements IFirebaseControl {
             @Override
             public void onFailure(@NonNull Exception e) {
                 receiverCallback.onFailure(e);
-                Log.d(TAG,"Failed to receive meeting from database");
+                Log.d(TAG, "Failed to receive meeting from database");
             }
         });
     }
@@ -167,30 +160,37 @@ public class FirebaseControl implements IFirebaseControl {
             @Override
             public void onComplete(@NonNull final Task<QuerySnapshot> task) {
                 LocalDatabase.LD.deleteMeetingList();
-                if (task.isSuccessful()){
-                    for(DocumentSnapshot document : task.getResult()){
-                        MeetingIDObject mtObject = document.toObject(MeetingIDObject.class);
-                        getMeeting(mtObject.getMeetingID(), new ReceiverCallback() {
-                            @Override
-                            public void onSuccess(Task<DocumentSnapshot> task1) {
-                                Log.d(TAG,"getMeeting success");
-                                receiverCallback.onSuccess(task);
+                if (task.isSuccessful()) {
+                    if (task.getResult().isEmpty()) {
+                        System.out.println(task.getResult());
+                        receiverCallback.noData();
+                    }
+                    else {
+                        for (DocumentSnapshot document : task.getResult()) {
+                            MeetingIDObject mtObject = document.toObject(MeetingIDObject.class);
+                            getMeeting(mtObject.getMeetingID(), new ReceiverCallback() {
+                                @Override
+                                public void onSuccess(Task<DocumentSnapshot> task1) {
+                                    Log.d(TAG, "getMeeting success");
+                                    receiverCallback.onSuccess(task);
 
-                            }
-                            @Override
-                            public void onFailure(Exception exception) {
-                                Log.d(TAG, "getMeeting failed");
-                            }
-                            @Override
-                            public void noData() {
-                                Log.d(TAG, "meeting does not exist");
-                            }
-                        });
+                                }
+
+                                @Override
+                                public void onFailure(Exception exception) {
+                                    Log.d(TAG, "getMeeting failed");
+                                }
+
+                                @Override
+                                public void noData() {
+                                    Log.d(TAG, "meeting does not exist");
+                                }
+                            });
+                        }
                     }
 
-
                 }
-                if (task.getResult().isEmpty()){
+                if (task.getResult().isEmpty()) {
                     receiverCallback.noData();
                 }
             }
@@ -203,10 +203,10 @@ public class FirebaseControl implements IFirebaseControl {
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot document : task.getResult()){
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
                         MeetingIDObject mtObject = document.toObject(MeetingIDObject.class);
-                        if (mtObject.getMeetingID().equals(meetingId)){
+                        if (mtObject.getMeetingID().equals(meetingId)) {
                             FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings")
                                     .document(mtObject.getDocID()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -261,7 +261,6 @@ public class FirebaseControl implements IFirebaseControl {
     }
 
 
-
     //Invite
 
     @Override
@@ -280,7 +279,7 @@ public class FirebaseControl implements IFirebaseControl {
 
     @Override
     public void getInvite(String inviteUserID, final ReceiverCallback receiverCallback) {
-        DocumentReference dr =FC.collection("users").document(inviteUserID);
+        DocumentReference dr = FC.collection("users").document(inviteUserID);
         dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -322,7 +321,6 @@ public class FirebaseControl implements IFirebaseControl {
         });
     }
 
-
     @Override
     public void retrieveAllMeetingInvites(final CollectionReceiverCallback receiverCallback) {
         FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetingInvites")
@@ -330,31 +328,35 @@ public class FirebaseControl implements IFirebaseControl {
             @Override
             public void onComplete(@NonNull final Task<QuerySnapshot> task) {
                 LocalDatabase.LD.deleteMeetingInviteList();
-                if(task.isSuccessful()){
-                    for (QueryDocumentSnapshot document : task.getResult()){
-                        MeetingIDObject meetingIDObject = document.toObject(MeetingIDObject.class);
-                        getMeetingInvite(meetingIDObject.getMeetingID(), new ReceiverCallback() {
-                            @Override
-                            public void onSuccess(Task<DocumentSnapshot> task1) {
-                                receiverCallback.onSuccess(task);
-                                Log.d(TAG, "Invite successfully retrieved");
-                            }
-
-                            @Override
-                            public void onFailure(Exception exception) {
-                                receiverCallback.onFailure(exception);
-                                Log.d(TAG, "Failed to get invite");
-                            }
-
-                            @Override
-                            public void noData() {
-                                receiverCallback.noData();
-                                Log.d(TAG, "No data received");
-
-                            }
-                        });
+                if (task.isSuccessful()) {
+                    if (task.getResult().isEmpty()){
+                        receiverCallback.noData();
                     }
+                    else {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            MeetingIDObject meetingIDObject = document.toObject(MeetingIDObject.class);
+                            getMeetingInvite(meetingIDObject.getMeetingID(), new ReceiverCallback() {
+                                @Override
+                                public void onSuccess(Task<DocumentSnapshot> task1) {
+                                    receiverCallback.onSuccess(task);
+                                    Log.d(TAG, "Invite successfully retrieved");
+                                }
 
+                                @Override
+                                public void onFailure(Exception exception) {
+                                    receiverCallback.onFailure(exception);
+                                    Log.d(TAG, "Failed to get invite");
+                                }
+
+                                @Override
+                                public void noData() {
+                                    receiverCallback.noData();
+                                    Log.d(TAG, "No data received");
+
+                                }
+                            });
+                        }
+                    }
 
                 }
             }
@@ -397,10 +399,6 @@ public class FirebaseControl implements IFirebaseControl {
 
             }
         });
-
-
-
-
 
 
         deleteMeetingRequest(meetingID, new SenderCallback() {
@@ -452,8 +450,8 @@ public class FirebaseControl implements IFirebaseControl {
             @Override
             public void onComplete(@NonNull final Task<QuerySnapshot> task) {
                 LocalDatabase.LD.deleteInviteList();
-                if(task.isSuccessful()){
-                    for (QueryDocumentSnapshot document : task.getResult()){
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
                         ContactIDObject user = document.toObject(ContactIDObject.class);
                         getInvite(user.getUserID(), new ReceiverCallback() {
                             @Override
@@ -484,7 +482,6 @@ public class FirebaseControl implements IFirebaseControl {
     }
 
 
-
     //Contact
     @Override
     public void acceptContactRequest(final String senderID, final String receiverID, final SenderCallback senderCallback) {
@@ -501,7 +498,7 @@ public class FirebaseControl implements IFirebaseControl {
                         FC.collection("users").document(senderID).collection("contacts").document
                                 (documentReference.getId()).update("docID", receiver.getDocID());
                         senderCallback.onSuccess();
-                        Log.d(TAG,"Contact request accepted");
+                        Log.d(TAG, "Contact request accepted");
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -510,8 +507,6 @@ public class FirebaseControl implements IFirebaseControl {
                 Log.d(TAG, "Contact request accept failed");
             }
         });
-
-
 
 
         FC.collection("users").document(receiverID).collection("contacts").add(sender)
@@ -569,81 +564,186 @@ public class FirebaseControl implements IFirebaseControl {
     }
 
     @Override
-    public void contactRequest(final String rEmail, final SenderCallback senderCallback) {
+    public void contactRequest(final String rEmail, final CollectionReceiverCallback receiverCallback) {
         // Det ID man vil finde
-        final String email =  rEmail;
+        final String email = rEmail;
+
+
         FC.collection("users").whereEqualTo("email", email)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+            public void onComplete(@NonNull final Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    for (DocumentSnapshot document : task.getResult()) {
-                        if (document.getString("email").equals(email)) {
-                            final String contactID = document.getString("userID");
-                            ContactInvite CI = new ContactInvite(FirebaseAuth.getInstance().getUid());
-                            FC.collection("users").document(contactID).collection("contactInvites")
-                                    .add(CI).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                @Override
-                                public void onSuccess(DocumentReference documentReference) {
-                                    FC.collection("users").document(contactID).collection("contactInvites")
-                                            .document(documentReference.getId()).update("docID", documentReference.getId());
-                                    senderCallback.onSuccess();
+                    QuerySnapshot document = task.getResult();
+                    final List<User> emailCorrect = document.toObjects(User.class);
 
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    senderCallback.onFailure(e);
-                                }
-                            });
-                        }
+                    if (rEmail.isEmpty()) {
+                        receiverCallback.noData();
+                    } else if (emailCorrect.isEmpty()) {
+                        Exception e = new Exception("ABVC");
+                        receiverCallback.onFailure(e);
+                    }
+                    // Man kan ikke tilføje sig selv
+                    else if (emailCorrect.get(0).getUserID().equals(FirebaseAuth.getInstance().getUid())) {
+                        Exception e = new Exception("Cannot add own email");
+                        receiverCallback.onFailure(e);
+                    } else {
+                        checkContact(emailCorrect.get(0).getUserID(), new CollectionReceiverCallback() {
+                            @Override
+                            public void onSuccess(final Task<QuerySnapshot> task) {
+                                inviteContact(emailCorrect.get(0).getEmail(), new SenderCallback() {
+                                    @Override
+                                    public void onSuccess() {
+                                        Log.d(TAG, "User successfully invited");
+                                        receiverCallback.onSuccess(task);
+                                    }
+
+                                    @Override
+                                    public void onFailure(Exception exception) {
+
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onFailure(Exception exception) {
+                            }
+
+                            @Override
+                            public void noData() {
+                                Log.d(TAG, "User already contact or invited.");
+                                Exception e = new Exception("User alreadt contact or invited");
+                                receiverCallback.onFailure(e);
+                            }
+                        });
                     }
                 }
+            }
+        });
+    }
+
+
+    @Override
+    public void inviteContact(String email, final SenderCallback senderCallback) {
+
+        FC.collection("users").whereEqualTo("email", email)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull final Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    QuerySnapshot document = task.getResult();
+                    List<User> emailCorrect = document.toObjects(User.class);
+                    final String contactID = emailCorrect.get(0).getUserID();
+                    ContactInvite CI = new ContactInvite(FirebaseAuth.getInstance().getUid());
+                    FC.collection("users").document(contactID).collection("contactInvites")
+                            .add(CI).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            FC.collection("users").document(contactID).collection("contactInvites")
+                                    .document(documentReference.getId()).update("docID", documentReference.getId());
+                            senderCallback.onSuccess();
+                        }
+                    });
+                }
+
             }
         });
     }
 
     @Override
-    public void retriveAllContacts(final CollectionReceiverCallback receiverCallback) {
+    public void checkContact(final String UserID, final CollectionReceiverCallback receiverCallback) {
+        final boolean[] check = new boolean[2];
 
-        FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("contacts")
-        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("contacts").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull final Task<QuerySnapshot> task) {
-                if (task.isSuccessful())
-                    LocalDatabase.LD.deleteContactList();
-                    for( QueryDocumentSnapshot doc : task.getResult()) {
-                        ContactIDObject CIDObject = doc.toObject(ContactIDObject.class);
-                        getUser(CIDObject.getUserID(), new ReceiverCallback() {
-                            @Override
-                            public void onSuccess(Task<DocumentSnapshot> task1) {
-                                receiverCallback.onSuccess(task);
-                                Log.d(TAG, "Contactlist retrived");
-                            }
-                            @Override
-                            public void onFailure(Exception exception) {
-                                Log.d(TAG, "Contact list failed to retrive");
-                            }
-                            @Override
-                            public void noData() {
-                                Log.d(TAG,  "Contact list failed, no data");
-                            }
-                        });
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot snapshot : task.getResult()) {
+                        ContactIDObject user = snapshot.toObject(ContactIDObject.class);
+                        System.out.println("Data" + user.getUserID());
+                        System.out.println("UserID " + UserID);
+
+
+                        if (UserID.equals(user.getUserID())) {
+                            check[0] = true;
+                            break;
+                        } else {
+                            check[0] = false;
+                        }
                     }
-                if (task.getResult().isEmpty()){
-                    receiverCallback.noData();
-                }
 
                 }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                receiverCallback.onFailure(e);
-
             }
         });
+        FC.collection("users").document(UserID).collection("contactInvites").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                ContactIDObject user = documentSnapshot.toObject(ContactIDObject.class);
+                                if (user.getUserID().equals(FirebaseAuth.getInstance().getUid())) {
+                                    check[1] = true;
+                                    break;
 
+                                } else {
+                                    check[1] = false;
+                                }
+                            }
+                        }
+                        if (!check[0] && !check[1]) {
+                            receiverCallback.onSuccess(task);
+                        } else receiverCallback.noData();
+                    }
+
+                });
     }
 
 
-}
+
+
+                @Override
+                public void retriveAllContacts(final CollectionReceiverCallback receiverCallback) {
+
+                    FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("contacts")
+                            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull final Task<QuerySnapshot> task) {
+                            if (task.isSuccessful())
+                                LocalDatabase.LD.deleteContactList();
+                            for( QueryDocumentSnapshot doc : task.getResult()) {
+                                ContactIDObject CIDObject = doc.toObject(ContactIDObject.class);
+                                getUser(CIDObject.getUserID(), new ReceiverCallback() {
+                                    @Override
+                                    public void onSuccess(Task<DocumentSnapshot> task1) {
+                                        receiverCallback.onSuccess(task);
+                                        Log.d(TAG, "Contactlist retrived");
+                                    }
+                                    @Override
+                                    public void onFailure(Exception exception) {
+                                        Log.d(TAG, "Contact list failed to retrive");
+                                    }
+                                    @Override
+                                    public void noData() {
+                                        Log.d(TAG,  "Contact list failed, no data");
+                                    }
+                                });
+                            }
+                            if (task.getResult().isEmpty()){
+                                receiverCallback.noData();
+                            }
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            receiverCallback.onFailure(e);
+
+                        }
+                    });
+
+                }
+
+
+            }

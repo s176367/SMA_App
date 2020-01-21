@@ -50,8 +50,7 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
     private static List<User> inviteList;
     private static List<MeetingObject> meetingInviteList;
     private static User user = new User();
-    Comparator compareByDate, compareByTime;
-    ArrayList<MeetingObject> dateSortedList = new ArrayList<>();
+    Comparator  compareByTime;
 
 
 
@@ -123,26 +122,29 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
             }.getType();
             returnList = gson.fromJson(json, type);
         } else {returnList = new ArrayList<MeetingObject>();}
-        compareByTime = new Comparator<MeetingObject>() {
-            @Override
-            public int compare(MeetingObject o1, MeetingObject o2) {
-               //Sorting code from SO https://stackoverflow.com/questions/4805606/how-to-sort-by-two-fields-in-java
 
-                String x1 = o1.getDate();
-                String x2 = o2.getDate();
+        if (returnList.size()>1) {
+            compareByTime = new Comparator<MeetingObject>() {
+                @Override
+                public int compare(MeetingObject o1, MeetingObject o2) {
+                    //Sorting code from SO https://stackoverflow.com/questions/4805606/how-to-sort-by-two-fields-in-java
 
-                int sComp = x1.compareTo(x2);
+                    String x1 = o1.getDate();
+                    String x2 = o2.getDate();
 
-                if(sComp !=0){
-                    return sComp;
+                    int sComp = x1.compareTo(x2);
+
+                    if (sComp != 0) {
+                        return sComp;
+                    }
+                    return o1.getTime().compareTo(o2.getTime());
                 }
-                return o1.getTime().compareTo(o2.getTime());
-            }
-        };
-
-        returnList.sort(compareByTime);
+            };
 
 
+            returnList.sort(compareByTime);
+
+        }
         return returnList;
     }
 

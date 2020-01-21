@@ -17,6 +17,7 @@ import com.example.sma.Database.SenderCallback;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.User;
 import com.example.sma.R;
+import com.example.sma.RefreshContext;
 
 import java.util.List;
 
@@ -54,6 +55,7 @@ public class MeetingInviteAdapter extends RecyclerView.Adapter<MeetingInviteAdap
         holder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                RefreshContext.setHome(true);
                 FirebaseControl.fc.acceptMeetingRequest(inviteList.get(position).getId(), new SenderCallback() {
                     @Override
                     public void onSuccess() {

@@ -1,6 +1,7 @@
 package com.example.sma.MainActivity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +20,11 @@ import com.example.sma.Database.FirebaseControl;
 import com.example.sma.Database.LocalDatabase;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
+import com.example.sma.RefreshContext;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.sql.Ref;
 import java.util.List;
 
 //import com.example.sma.Model.Contact;
@@ -75,12 +78,9 @@ public class FragmentInvites extends Fragment {
         inviteList = LocalDatabase.LD.retrieveMeetingInviteLst();
 
 
-        checkRefresh();
+        checkRefresh(RefreshContext.getInvites());
 
-        inviteList = LocalDatabase.LD.retrieveMeetingInviteLst();
-        adapter = new MeetingInviteAdapter(getContext(), inviteList);
-        recyclerViewInvites.setAdapter(adapter);
-        refreshSwipe.setRefreshing(false);
+
 
 
 
@@ -97,20 +97,21 @@ public class FragmentInvites extends Fragment {
                 inviteList = LocalDatabase.LD.retrieveMeetingInviteLst();
                 adapter = new MeetingInviteAdapter(getContext(), inviteList);
                 recyclerViewInvites.setAdapter(adapter);
-                refreshSwipe.setRefreshing(false);
                 Log.d(TAG, "Refreshed all contacts");
+                refreshSwipe.setRefreshing(false);
+
             }
 
             @Override
             public void onFailure(Exception exception) {
-                refreshSwipe.setRefreshing(false);
                 Log.d(TAG, "Failed to retrieve contacts" + exception);
+                refreshSwipe.setRefreshing(false);
             }
 
             @Override
             public void noData() {
-                refreshSwipe.setRefreshing(false);
                 Log.d(TAG, "There is no contacts");
+                refreshSwipe.setRefreshing(false);
             }
         });
 
@@ -124,20 +125,26 @@ public class FragmentInvites extends Fragment {
 
     // https://stackoverflow.com/questions/7876043/android-new-intent-starts-particular-method
 
-    public void checkRefresh() {
+    public void checkRefresh(boolean refresh) {
+        if (refresh) {
+            RefreshContext.setInvites(false);
+            refreshSwipe.setRefreshing(true);
+            Handler handler = new Handler();
+            Runnable run = new Runnable() {
+                @Override
+                public void run() {
+                    refreshInvites();
+                }
+            };
 
-        if(refreshFragment){
-            refreshInvites();
-            // refreshFragment = false;
-        }
-        else{
+            handler.postDelayed(run, 500);
+        } else {
             inviteList = LocalDatabase.LD.retrieveMeetingInviteLst();
             adapter = new MeetingInviteAdapter(getContext(), inviteList);
-
             recyclerViewInvites.setAdapter(adapter);
-
-
+            refreshSwipe.setRefreshing(false);
         }
+
     }
 }
 
