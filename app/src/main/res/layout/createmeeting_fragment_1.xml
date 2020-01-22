@@ -24,7 +24,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/titleLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/title"
@@ -34,9 +34,10 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/insert_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:maxLength="25"
             android:hint="Title"
             android:inputType="text"
 
@@ -47,7 +48,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dateLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/titleLayout"
@@ -58,7 +59,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/date"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Date"
@@ -73,7 +74,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/timeLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/dateLayout"
@@ -83,7 +84,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/time"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Time"
@@ -97,7 +98,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/durationLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/timeLayout"
@@ -107,7 +108,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/duration"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:clickable="true"
@@ -122,20 +123,21 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/locationLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/durationLayout"
         android:layout_marginTop="15dp"
-        app:hintTextAppearance="@style/TextInputLayout.HintText"
+        app:hintTextAppearance="@style/AppTheme"
         android:textColorHint="@color/colorPrimaryDark">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/location"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Location"
+            android:maxLength="25"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 

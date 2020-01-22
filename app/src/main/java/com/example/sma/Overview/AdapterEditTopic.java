@@ -51,7 +51,7 @@ public class AdapterEditTopic extends RecyclerView.Adapter<AdapterEditTopic.Topi
         holder.topicTitle.setText(title);
         holder.topicDesc.setText(desc);
 
-
+/*
         //OnClickListener der starter editTopic aktiviteten med de relevante informationer, der sendes med vha. intents.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +64,8 @@ public class AdapterEditTopic extends RecyclerView.Adapter<AdapterEditTopic.Topi
                 context.startActivity(intent);
             }
         });
+        
+ */
     }
 
     @Override

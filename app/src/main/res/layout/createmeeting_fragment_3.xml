@@ -37,20 +37,21 @@
 
     <EditText
         android:id="@+id/topicTitle"
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/topBar4"
-        android:layout_marginTop="70dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
         android:layout_centerInParent="true"
+        android:layout_marginLeft="40dp"
+        android:maxLength="16"
+        android:layout_marginTop="70dp"
+        android:layout_marginRight="40dp"
         android:ems="10"
+        android:gravity="center"
+        android:hint="Topic Title"
         android:inputType="textPersonName"
         android:text=""
         android:textSize="28dp"
-        android:textStyle="bold"
-        android:hint="Topic Title"/>
+        android:textStyle="bold" />
 
     <EditText
 
@@ -58,9 +59,11 @@
         android:layout_width="355dp"
         android:layout_height="85dp"
         android:layout_below="@+id/topicTitle"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="70dp"
         android:layout_marginTop="70dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginRight="70dp"
+        android:maxLength="100"
+
         android:background="#FFFFFF"
         android:ems="10"
         android:gravity="top|left"
