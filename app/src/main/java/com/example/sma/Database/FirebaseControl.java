@@ -22,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.BufferedOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -527,6 +528,81 @@ public class FirebaseControl implements IFirebaseControl {
         });
     }
 
+    @Override
+    public void retriveAllAcceptedParticipants(final ArrayList<String> userIds , final CollectionReceiverCallback receiverCallback) {
+        FC.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull final Task<QuerySnapshot> task) {
+                LocalDatabase.LD.deleteParticipantList();
+                if (task.isSuccessful()) {
+                    boolean next = false;
+                    if (task.getResult().isEmpty()) {
+                        receiverCallback.noData();
+                    } else {
+
+                        for (QueryDocumentSnapshot list : task.getResult()) {
+                                User user = list.toObject(User.class);
+                            for (int i = 0; i <userIds.size() ; i++) {
+                                if (userIds.get(i).equals(user.getUserID())) {
+                                    getParticipant(user.getUserID(), new ReceiverCallback() {
+                                        @Override
+                                        public void onSuccess(Task<DocumentSnapshot> task1) {
+                                            Log.d(TAG, "onSuccess: User addet to participantslist");
+                                        }
+
+                                        @Override
+                                        public void onFailure(Exception exception) {
+                                            Log.d(TAG, "onFailure: " + exception);
+                                            receiverCallback.onFailure(exception);
+
+                                        }
+
+                                        @Override
+                                        public void noData() {
+                                            Log.d(TAG, "noData");
+                                            receiverCallback.noData();
+
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                        receiverCallback.onSuccess(task);
+                    }
+                }
+
+            }
+        });
+    }
+
+   @Override
+   public void getParticipant(String UserId, final ReceiverCallback receiverCallback){
+       FC.collection("users").document(UserId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+           @Override
+           public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+               if (task.isSuccessful()) {
+                   DocumentSnapshot ds = task.getResult();
+                   if (ds.exists()) {
+                       User user = ds.toObject(User.class);
+                       LocalDatabase.LD.addParticipant(user);
+                       receiverCallback.onSuccess(task);
+                       Log.d(TAG, "Database successfully retrived user");
+                   } else {
+                       receiverCallback.noData();
+                   }
+               }
+           }
+
+       }).addOnFailureListener(new OnFailureListener() {
+           @Override
+           public void onFailure(@NonNull Exception e) {
+               receiverCallback.onFailure(e);
+               Log.d(TAG, "Database failed to get user");
+           }
+       });
+
+   }
+
     //Contact
     @Override
     public void acceptContactRequest(final String senderID, final String receiverID, final SenderCallback senderCallback) {
@@ -744,6 +820,8 @@ public class FirebaseControl implements IFirebaseControl {
 
                 });
     }
+
+
 
 
     @Override

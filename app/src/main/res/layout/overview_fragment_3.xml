@@ -3,11 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+
+
+
+
     <ImageView
         android:id="@+id/topBar5"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         app:srcCompat="@color/colorPrimaryDark" />
+
 
 
     <TextView
@@ -23,22 +28,13 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-
-
-
-
-    <TextView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Not implemented yet"
+        android:layout_height="match_parent"
         android:layout_below="@id/topBar5"
-        android:textSize="20dp"
-        android:layout_marginTop="100dp"
-        android:gravity="center"/>
+        android:id="@+id/swipeParticipants">
 
-
-
-   <!-- <ScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/topBar5"
@@ -51,21 +47,16 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_overview"
+                android:id="@+id/recycler_participants"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_below="@id/recycler_overview" />
-
 
 
         </RelativeLayout>
 
 
-    </ScrollView>-->
+    </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 </RelativeLayout>

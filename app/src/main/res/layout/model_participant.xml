@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_marginTop="5dp"
+        android:outlineProvider="bounds"
+        android:background="@color/colorWhite"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/participantName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Full Name"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/participantEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/participantName"
+                android:layout_alignLeft="@id/participantName"
+                android:text="Email@Email.com"
+                android:textSize="20sp" />
+
+
+
+
+
+
+
+            <TextView
+                android:id="@+id/participantPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/participantEmail"
+                android:layout_alignLeft="@id/participantName"
+                android:text="12345678"
+                android:textSize="20sp" />
+
+
+            <TextView
+                android:id="@+id/participantCompany"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/participantPhone"
+                android:layout_alignStart="@id/participantName"
+                android:text="Company"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>

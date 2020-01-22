@@ -1,5 +1,7 @@
 package com.example.sma.Database;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.User;
 
@@ -13,6 +15,7 @@ public interface IFirebaseControl {
     void createMeeting (MeetingObject meetingObject, SenderCallback senderCallback);
 
     void getUser (String userID,  ReceiverCallback receiverCallback);
+    void getParticipant(String UserId, ReceiverCallback receiverCallback);
     void getMeeting(String MeetingId, ReceiverCallback receiverCallback);
     void getInvite (String inviteUserID, ReceiverCallback receiverCallback);
     void getMeetingInvite(String meetingID, ReceiverCallback receiverCallback);
@@ -25,13 +28,14 @@ public interface IFirebaseControl {
     void insertToAcceptedList (String meetingID, SenderCallback senderCallback);
     void inviteParticipant (String userID, String meetingId, SenderCallback senderCallback);
 
+
     void contactRequest (String UserID, CollectionReceiverCallback receiverCallback);
     void inviteContact (String UserID, SenderCallback senderCallback);
 
     void checkContact (String UserID, CollectionReceiverCallback receiverCallback);
 
 
-
+    void retriveAllAcceptedParticipants(ArrayList<String> userIds, CollectionReceiverCallback receiverCallback);
     void retriveAllContacts(CollectionReceiverCallback receiverCallback);
     void retrieveAllMeetings(CollectionReceiverCallback receiverCallback);
     void retriveAllInvites(CollectionReceiverCallback receiverCallback);
