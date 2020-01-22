@@ -114,16 +114,19 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
 
     }
 
-    public ArrayList<MeetingObject> retriveMeetingList() {
+        public ArrayList<MeetingObject> retriveMeetingList() {
         json = prefs.getString("Meetings", "");
         ArrayList<MeetingObject> returnList;
         if (!json.isEmpty()) {
             Type type = new TypeToken<List<MeetingObject>>() {
             }.getType();
             returnList = gson.fromJson(json, type);
-        } else {returnList = new ArrayList<MeetingObject>();}
+        } else {
+            returnList = new ArrayList<MeetingObject>();
+        }
 
-        if (returnList.size()>1) {
+
+        if (returnList.size() > 1) {
             compareByTime = new Comparator<MeetingObject>() {
                 @Override
                 public int compare(MeetingObject o1, MeetingObject o2) {
@@ -143,10 +146,12 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
 
 
             returnList.sort(compareByTime);
-
         }
-        return returnList;
+
+            return returnList;
+
     }
+
 
     public List<User> retriveContactList() {
 

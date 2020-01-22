@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,11 +18,11 @@ import com.example.sma.Database.LocalDatabase;
 //import com.example.sma.Model.Contact;
 import com.example.sma.Database.SenderCallback;
 import com.example.sma.MainActivity.ActivityMain;
-import com.example.sma.MainActivity.InviteToMeetingAdapter;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.User;
 import com.example.sma.R;
 import com.example.sma.RefreshContext;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -66,10 +64,6 @@ public class FragmentAddParticipants extends Fragment {
         adapter = new InviteToMeetingAdapter(getContext(), contactsList, this);
 
 
-
-
-
-
         // Skjuler tekst hvis der ikke er nogle contact requests.
 
         recyclerViewContacts.setAdapter(adapter);
@@ -79,16 +73,19 @@ public class FragmentAddParticipants extends Fragment {
 
     public void addUser(String userId){
         tempMeeting.addParticipant(userId);
-        System.out.println(userId);
     }
 
     public void deleteUser(String userId) {
         tempMeeting.deleteParticipant(userId);
     }
+
+
     public void finishAgenda () {
 
 
-        FirebaseControl.fc.createMeeting(tempMeeting, new SenderCallback() {
+
+
+            FirebaseControl.fc.createMeeting(tempMeeting, new SenderCallback() {
             @Override
             public void onSuccess() {
 
@@ -97,8 +94,6 @@ public class FragmentAddParticipants extends Fragment {
                 startActivity(intent);
 
                 getActivity().finish();
-
-
             }
             @Override
             public void onFailure(Exception exception) {

@@ -53,10 +53,8 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         but_create = view.findViewById(R.id.but_createMeeting);
         but_create.setOnClickListener(this);
-
         but_profile = view.findViewById(R.id.but_profile);
         but_profile.setOnClickListener(this);
 
@@ -71,10 +69,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         });
 
 
-
-
-
-
         checkRefresh(RefreshContext.getHome());
 
         return view;
@@ -87,6 +81,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         if (view == but_create) {
             Intent intent = new Intent(getActivity(), ActivityCreateMeeting.class);
             startActivity(intent);
+            getActivity().finish();
         }
         if (view == but_profile) {
             Intent profile = new Intent(getActivity(), ActivityProfile.class);
@@ -127,12 +122,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     // https://stackoverflow.com/questions/7876043/android-new-intent-starts-particular-method
 
     public void checkRefresh(boolean refresh) {
-        if (!refresh) {
-            meetingList = LocalDatabase.LD.retriveMeetingList();
-            adapter = new MeetingCardAdapter(getContext(), meetingList);
-            recyclerView.setAdapter(adapter);
-            swipe.setRefreshing(false);
-        } else {
+        if (refresh) {
             swipe.setRefreshing(true);
             Handler handler = new Handler();
             Runnable run = new Runnable() {
@@ -141,7 +131,14 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                     refresh();
                 }
             };
-            handler.postDelayed(run,400);
+            handler.postDelayed(run, 500);
+        }
+           else {
+            meetingList = LocalDatabase.LD.retriveMeetingList();
+            adapter = new MeetingCardAdapter(getContext(), meetingList);
+            recyclerView.setAdapter(adapter);
+            swipe.setRefreshing(false);
+
         }
     }
 }
