@@ -15,7 +15,8 @@ import com.example.sma.Database.LocalDatabase;
 import com.example.sma.R;
 
 import java.util.List;
-
+ /*'
+// @Author Gutav Kristensen s180077
 public class ActivityEditTopic extends Activity {
 
     // Denne klasse anvendes til at ændre et emne i en brugers agenda
@@ -79,3 +80,4 @@ public class ActivityEditTopic extends Activity {
         });
     }
 }
+*/

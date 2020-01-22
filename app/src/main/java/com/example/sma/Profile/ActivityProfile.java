@@ -15,6 +15,7 @@ import com.example.sma.Overview.FragmentOverview;
 import com.example.sma.R;
 import com.google.firebase.auth.FirebaseAuth;
 
+// @Author Sercan Bicen s185030
 public class ActivityProfile extends AppCompatActivity {
 
     TextView Fullname, Email, Phone, Company;
@@ -23,15 +24,12 @@ public class ActivityProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_activity);
-
         Fullname = findViewById(R.id.profileName);
         Email = findViewById(R.id.profileEmail);
         Phone = findViewById(R.id.profilePhone);
         Company = findViewById(R.id.profileCompany);
 
         User user;
-
-
         user = LocalDatabase.LD.getUser();
         try {
             Fullname.setText(user.getName());
@@ -40,23 +38,18 @@ public class ActivityProfile extends AppCompatActivity {
             Company.setText(user.getCompany());
         } catch (Exception e) {
             e.printStackTrace();
-
         }
-
     }
 
     public void logout(View v) {
         FirebaseAuth.getInstance().signOut();
         LocalDatabase.LD.deleteMeetingList();
         startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
-
         finish();
-
     }
 
     @Override
     public void onBackPressed() {
-
         Intent intent = new Intent(this, ActivityMain.class);
         startActivity(intent);
     }

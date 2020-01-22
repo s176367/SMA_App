@@ -5,24 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.sma.Model.User;
 import com.example.sma.R;
-
 import java.util.List;
 
+
+// @Author Gutav Kristensen s180077
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ContactViewHolder> {
 
     // Denne adapter bruges til at lave views af brugerens kontakter.
-
-
     private Context mCtx;
     private List<User> contactList;
-
-
 
     public ContactsAdapter(Context mCtx, List<User> contactList) {
         this.mCtx = mCtx;

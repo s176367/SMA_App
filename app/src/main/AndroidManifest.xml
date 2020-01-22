@@ -24,7 +24,6 @@
         >
         <activity android:name=".MainActivity.ActivityAddNewContact" />
         <activity android:name=".Profile.ActivityForgotPassword" />
-        <activity android:name=".CreateMeeting.ActivityEditMeeting"/>
         <activity android:name=".Profile.ActivityLogin"
             android:theme="@style/TextInputLayout.HintText">
         </activity>

@@ -1,5 +1,6 @@
 package com.example.sma.Model;
 
+// @Author Gutav Kristensen s180077
 public class User {
 
     private String name;
@@ -9,7 +10,6 @@ public class User {
     private String userID;
 
     public User(){}
-
 
     public User(String name, String company, String email, String phone) {
         this.name = name;
@@ -49,7 +49,6 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
 
     public String getUserID() {
         return userID;

@@ -10,18 +10,18 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
+
+// @Author Gutav Kristensen s180077
 
 public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnValueChangeListener {
 
@@ -67,9 +67,6 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
                     tempMeeting.setLocation(location.getText().toString());
                     tempMeeting.setDuration(duration.getText().toString());
                     ((ActivityCreateMeeting)getActivity()).setMeeting(tempMeeting);
-
-
-
                     getActivity().getSupportFragmentManager().beginTransaction().replace(container.getId(), new FragmentCreateAgenda()).addToBackStack(null).commit();
                 }
                 else {
@@ -78,7 +75,7 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
                 }
             }
         });
-
+        // Datepicker er lavet af Mads Geertsen 176367
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
@@ -88,7 +85,6 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
 
                 updateLabel();
             }};
-
         dateView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +100,6 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
             public void onClick(View view) {
                 DialogFragment timeFragment = new TimePickerFragment();
                 timeFragment.show(getFragmentManager(), "timepicker");
-
             }
         });
 
@@ -119,13 +114,9 @@ public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnVa
         dateView.setText(sdf.format(calender.getTime()));
     }
 
-
-
     // metode til at tjekke at alle felter er udfyldt.
     public boolean allFilled (){
-
         Boolean returnMe = true;
-
         if (title.getText().toString().isEmpty()){
             returnMe = false;
         }

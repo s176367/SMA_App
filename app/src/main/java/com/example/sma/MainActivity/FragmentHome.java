@@ -3,39 +3,34 @@ package com.example.sma.MainActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.example.sma.CreateMeeting.ActivityCreateMeeting;
 import com.example.sma.Database.CollectionReceiverCallback;
 import com.example.sma.Database.FirebaseControl;
 import com.example.sma.Database.LocalDatabase;
-import com.example.sma.Database.ReceiverCallback;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Profile.ActivityProfile;
 import com.example.sma.R;
 import com.example.sma.RefreshContext;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
+// @Author Gutav Kristensen s180077
 public class FragmentHome extends Fragment implements View.OnClickListener {
 
     // Dette er "hovedaktiviteten" hvor man kan se alle sine møder og starte oprettelsesprocessen af nye møder.
     // Klassen anvender MeetingCardAdapter til at vise de allerede oprettede møder.
-
 
     RecyclerView recyclerView;
     MeetingCardAdapter adapter;
@@ -57,7 +52,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         but_create.setOnClickListener(this);
         but_profile = view.findViewById(R.id.but_profile);
         but_profile.setOnClickListener(this);
-
         swipe = view.findViewById(R.id.swipeContacts);
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -67,7 +61,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
             ;
         });
-
 
         checkRefresh(RefreshContext.getHome());
 
@@ -88,7 +81,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
             startActivity(profile);
         }
     }
-
 
     public void refresh() {
         FirebaseControl.fc.retrieveAllMeetings(new CollectionReceiverCallback() {
@@ -120,7 +112,6 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
 
     // https://stackoverflow.com/questions/7876043/android-new-intent-starts-particular-method
-
     public void checkRefresh(boolean refresh) {
         if (refresh) {
             swipe.setRefreshing(true);
@@ -133,7 +124,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
             };
             handler.postDelayed(run, 500);
         }
-           else {
+        else {
             meetingList = LocalDatabase.LD.retriveMeetingList();
             adapter = new MeetingCardAdapter(getContext(), meetingList);
             recyclerView.setAdapter(adapter);

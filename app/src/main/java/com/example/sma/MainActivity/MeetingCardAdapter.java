@@ -1,32 +1,26 @@
 package com.example.sma.MainActivity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.sma.CreateMeeting.TopicAdapter;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Overview.ActivityOverview;
 import com.example.sma.R;
-
 import java.util.List;
 
+// @Author Gutav Kristensen s180077
 public class MeetingCardAdapter extends RecyclerView.Adapter<MeetingCardAdapter.MeetingViewHolder> {
 
     // Adapter der viser brugers møder udfra en møde liste.
-
-
     private Context mCtx;
     private List<MeetingObject> meetingList;
     private TopicAdapter.ItemClickListener mClickListener;
-
 
     public MeetingCardAdapter(Context mCtx, List<MeetingObject> meetingList) {
         this.mCtx = mCtx;
@@ -58,10 +52,7 @@ public class MeetingCardAdapter extends RecyclerView.Adapter<MeetingCardAdapter.
             public void onClick(View view) {
                 Intent intent = new Intent(mCtx, ActivityOverview.class);
                 intent.putExtra("position", position);
-                System.out.println("card pos" + position);
                 mCtx.startActivity(intent);
-             //   ((Activity)mCtx).finish();
-
             }
         });
     }
@@ -71,11 +62,8 @@ public class MeetingCardAdapter extends RecyclerView.Adapter<MeetingCardAdapter.
         return meetingList.size();
     }
 
-
     class MeetingViewHolder extends RecyclerView.ViewHolder {
         TextView textViewTitle, textViewTime, textViewLocation, textViewPeopleCount,textViewDate;
-
-
         public MeetingViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.meetingTitle);
@@ -85,17 +73,4 @@ public class MeetingCardAdapter extends RecyclerView.Adapter<MeetingCardAdapter.
             textViewDate = itemView.findViewById(R.id.date);
         }
     }
-
-
-
-
-    void setClickListener(TopicAdapter.ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
-    }
-
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
-    }
-
-
 }

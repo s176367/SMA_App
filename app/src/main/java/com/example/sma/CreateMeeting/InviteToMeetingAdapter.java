@@ -17,20 +17,17 @@ import com.example.sma.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//@Author Mads Geertsen 176367
 public class InviteToMeetingAdapter extends RecyclerView.Adapter<InviteToMeetingAdapter.ContactViewHolder> {
 
+
     // Denne adapter bruges til at lave views af brugerens kontakter.
-
-
     private Context mCtx;
     private List<User> contactList;
     CheckBox checkBox;
     Button but_createMeeting;
     ArrayList<String> contactsToInvite = new ArrayList<>();
     FragmentAddParticipants fragment;
-
-
 
     public InviteToMeetingAdapter(Context mCtx, List<User> contactList, FragmentAddParticipants fragment) {
         this.mCtx = mCtx;
@@ -49,7 +46,6 @@ public class InviteToMeetingAdapter extends RecyclerView.Adapter<InviteToMeeting
 
     @Override
     public void onBindViewHolder(@NonNull final ContactViewHolder holder, final int position) {
-
         final User contact = contactList.get(position);
         holder.textViewName.setText(contact.getName());
         holder.textViewMail.setText(contact.getEmail());
@@ -63,10 +59,8 @@ public class InviteToMeetingAdapter extends RecyclerView.Adapter<InviteToMeeting
                 }else {
                     fragment.deleteUser(contact.getUserID());
                 }
-
             }
         });
-
     }
 
     @Override
@@ -75,10 +69,9 @@ public class InviteToMeetingAdapter extends RecyclerView.Adapter<InviteToMeeting
     }
 
 
+
     class ContactViewHolder extends RecyclerView.ViewHolder {
-
         TextView textViewName, textViewMail, textViewPhone, textViewCompany;
-
 
         public ContactViewHolder(@NonNull View itemView) {
             super(itemView);

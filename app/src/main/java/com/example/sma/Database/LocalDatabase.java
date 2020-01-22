@@ -1,39 +1,29 @@
 package com.example.sma.Database;
 
 import android.content.SharedPreferences;
-import android.os.Build;
 
-import androidx.annotation.RequiresApi;
 import androidx.preference.PreferenceManager;
 
-import com.example.sma.CreateMeeting.FragmentCreateMeeting;
 import com.example.sma.MainActivity.ActivityMain;
-import com.example.sma.Model.MeetingIDObject;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONObject;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
-import static java.util.Collections.sort;
 
+// @Author Gutav Kristensen s180077
 public class LocalDatabase {
 
-/*
-Lokal database der virker vha. shared preferences til at gemme lokalt på brugers mobil.
- */
+    /*
+    Lokal database der virker vha. shared preferences til at gemme lokalt på brugers mobil.
+    */
 
     public static LocalDatabase LD = new LocalDatabase();
-
-
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
 
@@ -127,7 +117,7 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
 
     }
 
-        public ArrayList<MeetingObject> retriveMeetingList() {
+    public ArrayList<MeetingObject> retriveMeetingList() {
         json = prefs.getString("Meetings", "");
         ArrayList<MeetingObject> returnList;
         if (!json.isEmpty()) {
@@ -161,7 +151,7 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
             returnList.sort(compareByTime);
         }
 
-            return returnList;
+        return returnList;
 
     }
 
@@ -203,27 +193,9 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
             Type type = new TypeToken<List<MeetingObject>>() {
             }.getType();
             returnList = gson.fromJson(json, type);
-        } else {returnList = new ArrayList<MeetingObject>();}
-        compareByTime = new Comparator<MeetingObject>() {
-            @Override
-            public int compare(MeetingObject o1, MeetingObject o2) {
-                //Sorting code from SO https://stackoverflow.com/questions/4805606/how-to-sort-by-two-fields-in-java
-
-                String x1 = o1.getDate();
-                String x2 = o2.getDate();
-
-                int sComp = x1.compareTo(x2);
-
-                if(sComp !=0){
-                    return sComp;
-                }
-                return o1.getTime().compareTo(o2.getTime());
-            }
-        };
-
-        returnList.sort(compareByTime);
-
-
+        } else {
+            returnList = new ArrayList<MeetingObject>();
+        }
         return returnList;
     }
 
@@ -246,7 +218,7 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
 
 
 
-    public List<User> retriveInviteList() {
+    public List<User> retriveContactInviteList() {
         json = prefs.getString("Invites", "");
         ArrayList<User> returnList;
         if (!json.isEmpty()) {
@@ -258,17 +230,17 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
         return returnList;
     }
 
-    public void addInvite(User inviteUser) {
+    public void addContactInvite(User inviteUser) {
         json = prefs.getString("Invites", "");
-        inviteList = retriveInviteList();
+        inviteList = retriveContactInviteList();
         inviteList.add(inviteUser);
         json = gson.toJson(inviteList);
         editor.putString("Invites", json);
         editor.commit();
     }
 
-    public void deleteInvite(int position) {
-        inviteList = retriveInviteList();
+    public void deleteContactInvite(int position) {
+        inviteList = retriveContactInviteList();
         inviteList.remove(position);
         json = gson.toJson(inviteList);
         editor.putString("Invites", json);
@@ -283,7 +255,7 @@ Lokal database der virker vha. shared preferences til at gemme lokalt på bruger
         editor.remove("Participants").commit();
     }
 
-    public void deleteInviteList() {
+    public void deleteContactInviteList() {
         editor.remove("Invites").commit();
     }
 

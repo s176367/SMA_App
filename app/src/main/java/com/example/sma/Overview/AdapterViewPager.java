@@ -5,13 +5,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
+// @Author Gutav Kristensen s180077
 public class AdapterViewPager extends FragmentPagerAdapter {
 
     // Viewpager der gør så brugeren kan bladre mellem forskellige fragmenter i overview
-
     private Fragment[] childFragments;
-
 
     public AdapterViewPager(@NonNull FragmentManager fm) {
         super(fm);
@@ -19,13 +17,11 @@ public class AdapterViewPager extends FragmentPagerAdapter {
                 new FragmentOverview(), new FragmentAgendaOverview(), new FragmentParticipants()
         };
     }
-
     @NonNull
     @Override
     public Fragment getItem(int position) {
         return childFragments[position];
     }
-
 
     @Override
     public int getCount() {

@@ -1,10 +1,10 @@
 package com.example.sma.Model;
 
+// @Author Gutav Kristensen s180077
 public class MeetingIDObject {
 
-   private String meetingID;
-   private String docID;
-
+    private String meetingID;
+    private String docID;
 
     public MeetingIDObject(String meetingID, String docID) {
         this.meetingID = meetingID;
@@ -14,10 +14,9 @@ public class MeetingIDObject {
     public MeetingIDObject(String meetingID) {
         this.meetingID = meetingID;
     }
-
     public MeetingIDObject(){
 
-   }
+    }
 
     public String getDocID() {
         return docID;

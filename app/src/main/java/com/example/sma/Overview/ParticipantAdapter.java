@@ -5,31 +5,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.sma.Model.User;
 import com.example.sma.R;
-
 import java.util.ArrayList;
-import java.util.List;
 
+
+
+// @Author Gutav Kristensen s180077
 public class ParticipantAdapter extends RecyclerView.Adapter<ParticipantAdapter.ParticipantViewHolder> {
-
     // Denne adapter bruges til at lave views af brugerens kontakter.
 
 
     private Context mCtx;
     private ArrayList<User> participants;
 
-
-
     public ParticipantAdapter(Context mCtx, ArrayList<User> participants) {
         this.mCtx = mCtx;
         this.participants = participants;
     }
-
     @NonNull
     @Override
     public ParticipantViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -47,8 +42,6 @@ public class ParticipantAdapter extends RecyclerView.Adapter<ParticipantAdapter.
         holder.textViewMail.setText(participant.getEmail());
         holder.textViewPhone.setText(participant.getPhone());
         holder.textViewCompany.setText(participant.getCompany());
-
-
     }
 
     @Override
@@ -56,11 +49,9 @@ public class ParticipantAdapter extends RecyclerView.Adapter<ParticipantAdapter.
         return participants.size();
     }
 
-
     class ParticipantViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewName, textViewMail, textViewPhone, textViewCompany;
-
 
         public ParticipantViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -70,7 +61,4 @@ public class ParticipantAdapter extends RecyclerView.Adapter<ParticipantAdapter.
             textViewCompany = itemView.findViewById(R.id.participantCompany);
         }
     }
-
-
-
 }

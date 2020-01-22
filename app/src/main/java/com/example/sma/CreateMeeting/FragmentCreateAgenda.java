@@ -8,21 +8,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.sma.Database.FirebaseControl;
 import com.example.sma.Database.LocalDatabase;
 import com.example.sma.Database.SenderCallback;
-import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 
+// @Author Gutav Kristensen s180077
 public class FragmentCreateAgenda extends Fragment{
     /*
     Dette fragment anvendes til at vise brugeren den agenda der oprettes,
@@ -82,7 +79,7 @@ public class FragmentCreateAgenda extends Fragment{
 
         // Kort man kan trykke på få at tilføje flere emner.
         newTopicCard.setOnClickListener(new View.OnClickListener() {
-           @Override
+            @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(container.getId(), new FragmentAddTopic()).addToBackStack(null).commit();
             }
@@ -90,7 +87,7 @@ public class FragmentCreateAgenda extends Fragment{
 
         // Scroller til bunden af ens emner så man nemmere kan tilføje flere hvis det er.
 
-       scroll.post(new Runnable() {
+        scroll.post(new Runnable() {
             @Override
             public void run() {
                 scroll.fullScroll(View.FOCUS_DOWN);

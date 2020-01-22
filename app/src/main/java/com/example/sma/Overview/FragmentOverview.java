@@ -2,30 +2,27 @@ package com.example.sma.Overview;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.example.sma.Database.FirebaseControl;
 import com.example.sma.Database.LocalDatabase;
 import com.example.sma.Database.SenderCallback;
 import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
-
 import java.util.ArrayList;
 
+// @Author Gutav Kristensen s180077
 public class FragmentOverview extends Fragment implements View.OnClickListener {
 
     // Klasse til at vise de basale informationer som mødet indeholder.
-
-
     TextView title;
     TextView date;
     TextView time;
@@ -35,7 +32,7 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
     int position;
     ArrayList<MeetingObject> list;
     LocalDatabase db;
-
+    String TAG = this.getTag();
 
     @Nullable
     @Override
@@ -52,19 +49,14 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
         db = new LocalDatabase();
         position = ((ActivityOverview)getActivity()).getPosition();
 
-
         list = db.retriveMeetingList();
-
-                title.setText(list.get(position).getTitle());
-                time.setText(list.get(position).getTime());
-                date.setText(list.get(position).getDate());
-                location.setText(list.get(position).getLocation());
-                duration.setText(list.get(position).getDuration());
-
+        title.setText(list.get(position).getTitle());
+        time.setText(list.get(position).getTime());
+        date.setText(list.get(position).getDate());
+        location.setText(list.get(position).getLocation());
+        duration.setText(list.get(position).getDuration());
         return view;
     }
-
-
 
     @Override
     public void onClick(View view) {
@@ -72,24 +64,21 @@ public class FragmentOverview extends Fragment implements View.OnClickListener {
             FirebaseControl.fc.deleteMeeting(list.get(position).getId(), new SenderCallback() {
                 @Override
                 public void onSuccess() {
-
+                    Log.d(TAG, "onSuccess: Meeting deleted");
                 }
 
                 @Override
                 public void onFailure(Exception exception) {
-
+                    Log.d(TAG, "onFailure: " + exception);
                 }
             });
             db.deleteMeeting(position);
-            }
-            Intent intent = new Intent(getContext(), ActivityMain.class);
-            //intent.putExtra("refresh", "refresh");
-            startActivity(intent);
-            getActivity().finish();
-
         }
+        Intent intent = new Intent(getContext(), ActivityMain.class);
+        startActivity(intent);
+        getActivity().finish();
 
-
+    }
 }
 
 

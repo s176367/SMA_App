@@ -1,9 +1,8 @@
 package com.example.sma;
 
-import android.text.BoringLayout;
-
+// @Author Gutav Kristensen s180077
+// Bruges til at fortælle klasser hvorvidt de skal opdateres eller ej.
 public class RefreshContext {
-
     static Boolean home = true;
     static Boolean contacts = true;
     static Boolean invites = true;

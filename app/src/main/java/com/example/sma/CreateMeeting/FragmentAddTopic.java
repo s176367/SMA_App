@@ -19,12 +19,9 @@ import com.example.sma.R;
 
 import java.util.List;
 
+
+// @Author Gutav Kristensen s180077
 public class FragmentAddTopic extends Fragment {
-
-    /*
-    Denne klasses anvendes til at tilføe forskellige emner til vores agenda.
-
-     */
     private Button addTopic;
     private MeetingObject tempMeeting;
     private Topic topic;
@@ -35,18 +32,14 @@ public class FragmentAddTopic extends Fragment {
     private int position;
     private ViewGroup container;
     private Boolean updateTopic = false;
-
     public FragmentAddTopic(){};
 
-
-    // Konstruktør der anvendes hvis bruger vil opdatere emne
     public FragmentAddTopic (String title, String desc,int position){
         this.title = title;
         this.desc = desc;
         this.position = position;
         updateTopic = true;
     }
-
 
     @Nullable
     @Override
@@ -57,10 +50,7 @@ public class FragmentAddTopic extends Fragment {
         topicTitle = view.findViewById(R.id.topicTitle);
         topicDesc = view.findViewById(R.id.topic_description);
         this.container = container;
-
         addTopic = view.findViewById(R.id.but_addTopic);
-
-
         addTopic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,8 +70,6 @@ public class FragmentAddTopic extends Fragment {
                         updateTopic = false;
                     }
                     else tempMeeting.topics.add(topic);
-
-
 
                     getActivity().getSupportFragmentManager().popBackStack();
                 }

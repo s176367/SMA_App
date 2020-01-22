@@ -1,12 +1,11 @@
 package com.example.sma.Model;
 
+
+
+// @Author Gutav Kristensen s180077
 public class ContactIDObject {
-
     String UserId;
-
     String docID;
-
-
 
     public ContactIDObject(String userId) {
         this.UserId = userId;
@@ -22,8 +21,6 @@ public class ContactIDObject {
     public void setUserID(String userId) {
         this.UserId = userId;
     }
-
-
 
     public String getDocID() {
         return docID;

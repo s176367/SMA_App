@@ -26,21 +26,15 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
+
+// @Author Mads Geertsen s176367
 public class FragmentAddParticipants extends Fragment {
-
     // Dette fragment bruges til at vise kontakterne vha. contactsadapteren der indsættes i et recyclerview
-
-
     RecyclerView recyclerViewContacts;
     InviteToMeetingAdapter adapter;
     List<User> contactsList;
     MeetingObject tempMeeting;
     Button but_createMeeting;
-
-
-
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -85,7 +79,7 @@ public class FragmentAddParticipants extends Fragment {
 
 
 
-            FirebaseControl.fc.createMeeting(tempMeeting, new SenderCallback() {
+        FirebaseControl.fc.createMeeting(tempMeeting, new SenderCallback() {
             @Override
             public void onSuccess() {
 

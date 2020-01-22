@@ -2,9 +2,10 @@ package com.example.sma.Model;
 
 import java.util.ArrayList;
 
-public class MeetingObject {
-// Model til de atributter en bruger skal kende til sine møder.
 
+// @Author Gutav Kristensen s180077
+public class MeetingObject {
+    // Model til de atributter en bruger skal kende til sine møder.
     private String id;
     private String title;
     private String time;
@@ -19,18 +20,17 @@ public class MeetingObject {
     }
 
     public int getAcceptedParticipantSize(){
-       return getAcceptedParticipants().size();
+        return getAcceptedParticipants().size();
     }
 
     public ArrayList<String> getParticipants() {
         return participants;
     }
 
-
-
     public void addParticipant(String userID) {
         participants.add(userID);
     }
+
     public void deleteParticipant(String userID){
         for (int i = 0; i < participants.size() ; i++) {
             if (participants.get(i).equals(userID)){

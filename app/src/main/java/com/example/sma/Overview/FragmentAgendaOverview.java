@@ -4,24 +4,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.sma.Database.LocalDatabase;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
-
 import java.util.List;
 
+// @Author Gutav Kristensen s180077
 public class FragmentAgendaOverview extends Fragment {
 
     //Denne klasse viser vha. EditTopic adpateren de forskellige emner der er i mødet.
 
-    LocalDatabase db = new LocalDatabase();
 
     private AdapterEditTopic adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -52,8 +49,8 @@ public class FragmentAgendaOverview extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        LocalDatabase db = new LocalDatabase();
-        meetingList = db.retriveMeetingList();
+
+        meetingList = LocalDatabase.LD.retriveMeetingList();
         tempMeeting = meetingList.get(position);
 
         adapter = new AdapterEditTopic(getContext(), tempMeeting.topics, ((ActivityOverview) getActivity()).position);

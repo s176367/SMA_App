@@ -25,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
+// @Author Gutav Kristensen s180077
 public class MeetingInviteAdapter extends RecyclerView.Adapter<MeetingInviteAdapter.ContactViewHolder> {
 
     // Denne adapter bruges til at lave views af brugerens kontakter.
@@ -69,7 +70,7 @@ public class MeetingInviteAdapter extends RecyclerView.Adapter<MeetingInviteAdap
 
                     @Override
                     public void onFailure(Exception exception) {
-                    Log.d(TAG, "Meeting has not been accepted, something went wrong: " +exception );
+                        Log.d(TAG, "Meeting has not been accepted, something went wrong: " +exception );
                     }
                 });
                 removeAt(position);

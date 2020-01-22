@@ -1,12 +1,12 @@
 package com.example.sma.Model;
 
+
+
+// @Author Gutav Kristensen s180077
+// Kunne nok godt have brugt ContactIDObject Metoden  :)
 public class ContactInvite {
-
-
     String userID;
     String docID;
-
-
 
     public ContactInvite(String userID) {
         this.userID = userID;
@@ -22,7 +22,6 @@ public class ContactInvite {
     public void setUserID(String userID) {
         this.userID = userID;
     }
-
 
     public String getDocID() {
         return docID;

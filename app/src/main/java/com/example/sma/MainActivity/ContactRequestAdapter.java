@@ -6,26 +6,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.sma.Database.FirebaseControl;
 import com.example.sma.Database.LocalDatabase;
-import com.example.sma.Database.ReceiverCallback;
 import com.example.sma.Database.SenderCallback;
 import com.example.sma.Model.User;
 import com.example.sma.R;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
-
 import java.util.List;
 
+// @Author Gutav Kristensen s180077
 public class ContactRequestAdapter extends RecyclerView.Adapter<ContactRequestAdapter.ContactViewHolder> {
 
     // Denne adapter bruges til at lave views af brugerens "venneanmodninger".
-
     private Context mCtx;
     private List<User> inviteList;
     private boolean refresh;
@@ -59,7 +53,7 @@ public class ContactRequestAdapter extends RecyclerView.Adapter<ContactRequestAd
             @Override
             public void onClick(View view) {
                 String senderID = FirebaseAuth.getInstance().getUid();
-                String receiverID = LocalDatabase.LD.retriveInviteList().get(position).getUserID();
+                String receiverID = LocalDatabase.LD.retriveContactInviteList().get(position).getUserID();
                 FirebaseControl.fc.acceptContactRequest(senderID, receiverID, new SenderCallback() {
                     @Override
                     public void onSuccess() {
@@ -75,15 +69,13 @@ public class ContactRequestAdapter extends RecyclerView.Adapter<ContactRequestAd
         holder.no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseControl.fc.deleteContactRequest(LocalDatabase.LD.retriveInviteList().get(position).getUserID(), new SenderCallback() {
+                FirebaseControl.fc.deleteContactRequest(LocalDatabase.LD.retriveContactInviteList().get(position).getUserID(), new SenderCallback() {
 
                     @Override
                     public void onSuccess() {
                         removeAt(position);
                         fragment.refreshContacts();
-
-
-                        }
+                    }
 
                     @Override
                     public void onFailure(Exception exception) {
@@ -98,8 +90,6 @@ public class ContactRequestAdapter extends RecyclerView.Adapter<ContactRequestAd
     public int getItemCount() {
         return inviteList.size();
     }
-
-
 
     class ContactViewHolder extends RecyclerView.ViewHolder {
 
@@ -125,15 +115,5 @@ public class ContactRequestAdapter extends RecyclerView.Adapter<ContactRequestAd
         inviteList.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, inviteList.size());
-
-    }
-
-
-    public boolean isRefresh() {
-        return refresh;
-    }
-
-    public void setRefresh(boolean refresh) {
-        this.refresh = refresh;
     }
 }

@@ -1,6 +1,5 @@
 package com.example.sma.Database;
 
-import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -22,11 +21,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.io.BufferedOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
+// @Author Gutav Kristensen s180077
 public class FirebaseControl implements IFirebaseControl {
 
     FirebaseFirestore FC = FirebaseFirestore.getInstance();
@@ -258,7 +256,7 @@ public class FirebaseControl implements IFirebaseControl {
                         getMeeting(meetingID, new ReceiverCallback() {
                             @Override
                             public void onSuccess(Task<DocumentSnapshot> task) {
-                            senderCallback.onSuccess();
+                                senderCallback.onSuccess();
                             }
 
                             @Override
@@ -321,7 +319,7 @@ public class FirebaseControl implements IFirebaseControl {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     User userInvite = document.toObject(User.class);
-                    LocalDatabase.LD.addInvite(userInvite);
+                    LocalDatabase.LD.addContactInvite(userInvite);
                     receiverCallback.onSuccess(task);
 
                 }
@@ -362,8 +360,8 @@ public class FirebaseControl implements IFirebaseControl {
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull final Task<QuerySnapshot> task) {
-                LocalDatabase.LD.deleteMeetingInviteList();
                 if (task.isSuccessful()) {
+                    LocalDatabase.LD.deleteMeetingInviteList();
                     if (task.getResult().isEmpty()){
                         receiverCallback.noData();
                     }
@@ -373,8 +371,8 @@ public class FirebaseControl implements IFirebaseControl {
                             getMeetingInvite(meetingIDObject.getMeetingID(), new ReceiverCallback() {
                                 @Override
                                 public void onSuccess(Task<DocumentSnapshot> task1) {
-                                    receiverCallback.onSuccess(task);
                                     Log.d(TAG, "Invite successfully retrieved");
+                                    receiverCallback.onSuccess(task);
                                 }
 
                                 @Override
@@ -391,6 +389,7 @@ public class FirebaseControl implements IFirebaseControl {
                                 }
                             });
                         }
+
                     }
 
                 }
@@ -496,7 +495,7 @@ public class FirebaseControl implements IFirebaseControl {
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull final Task<QuerySnapshot> task) {
-                LocalDatabase.LD.deleteInviteList();
+                LocalDatabase.LD.deleteContactInviteList();
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         ContactIDObject user = document.toObject(ContactIDObject.class);
@@ -541,7 +540,7 @@ public class FirebaseControl implements IFirebaseControl {
                     } else {
 
                         for (QueryDocumentSnapshot list : task.getResult()) {
-                                User user = list.toObject(User.class);
+                            User user = list.toObject(User.class);
                             for (int i = 0; i <userIds.size() ; i++) {
                                 if (userIds.get(i).equals(user.getUserID())) {
                                     getParticipant(user.getUserID(), new ReceiverCallback() {
@@ -575,33 +574,33 @@ public class FirebaseControl implements IFirebaseControl {
         });
     }
 
-   @Override
-   public void getParticipant(String UserId, final ReceiverCallback receiverCallback){
-       FC.collection("users").document(UserId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-           @Override
-           public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-               if (task.isSuccessful()) {
-                   DocumentSnapshot ds = task.getResult();
-                   if (ds.exists()) {
-                       User user = ds.toObject(User.class);
-                       LocalDatabase.LD.addParticipant(user);
-                       receiverCallback.onSuccess(task);
-                       Log.d(TAG, "Database successfully retrived user");
-                   } else {
-                       receiverCallback.noData();
-                   }
-               }
-           }
+    @Override
+    public void getParticipant(String UserId, final ReceiverCallback receiverCallback){
+        FC.collection("users").document(UserId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot ds = task.getResult();
+                    if (ds.exists()) {
+                        User user = ds.toObject(User.class);
+                        LocalDatabase.LD.addParticipant(user);
+                        receiverCallback.onSuccess(task);
+                        Log.d(TAG, "Database successfully retrived user");
+                    } else {
+                        receiverCallback.noData();
+                    }
+                }
+            }
 
-       }).addOnFailureListener(new OnFailureListener() {
-           @Override
-           public void onFailure(@NonNull Exception e) {
-               receiverCallback.onFailure(e);
-               Log.d(TAG, "Database failed to get user");
-           }
-       });
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                receiverCallback.onFailure(e);
+                Log.d(TAG, "Database failed to get user");
+            }
+        });
 
-   }
+    }
 
     //Contact
     @Override
@@ -777,26 +776,26 @@ public class FirebaseControl implements IFirebaseControl {
 
         FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("contacts").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot snapshot : task.getResult()) {
-                        ContactIDObject user = snapshot.toObject(ContactIDObject.class);
-                        System.out.println("Data" + user.getUserID());
-                        System.out.println("UserID " + UserID);
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot snapshot : task.getResult()) {
+                                ContactIDObject user = snapshot.toObject(ContactIDObject.class);
+                                System.out.println("Data" + user.getUserID());
+                                System.out.println("UserID " + UserID);
 
 
-                        if (UserID.equals(user.getUserID())) {
-                            check[0] = true;
-                            break;
-                        } else {
-                            check[0] = false;
+                                if (UserID.equals(user.getUserID())) {
+                                    check[0] = true;
+                                    break;
+                                } else {
+                                    check[0] = false;
+                                }
+                            }
+
                         }
                     }
-
-                }
-            }
-        });
+                });
         FC.collection("users").document(UserID).collection("contactInvites").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -827,42 +826,42 @@ public class FirebaseControl implements IFirebaseControl {
     @Override
     public void retriveAllContacts(final CollectionReceiverCallback receiverCallback) {
 
-                    FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("contacts")
-                            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("contacts")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull final Task<QuerySnapshot> task) {
+                if (task.isSuccessful())
+                    LocalDatabase.LD.deleteContactList();
+                for( QueryDocumentSnapshot doc : task.getResult()) {
+                    ContactIDObject CIDObject = doc.toObject(ContactIDObject.class);
+                    getUser(CIDObject.getUserID(), new ReceiverCallback() {
                         @Override
-                        public void onComplete(@NonNull final Task<QuerySnapshot> task) {
-                            if (task.isSuccessful())
-                                LocalDatabase.LD.deleteContactList();
-                            for( QueryDocumentSnapshot doc : task.getResult()) {
-                                ContactIDObject CIDObject = doc.toObject(ContactIDObject.class);
-                                getUser(CIDObject.getUserID(), new ReceiverCallback() {
-                                    @Override
-                                    public void onSuccess(Task<DocumentSnapshot> task1) {
-                                        receiverCallback.onSuccess(task);
-                                        Log.d(TAG, "Contactlist retrived");
-                                    }
-                                    @Override
-                                    public void onFailure(Exception exception) {
-                                        Log.d(TAG, "Contact list failed to retrive");
-                                    }
-                                    @Override
-                                    public void noData() {
-                                        Log.d(TAG,  "Contact list failed, no data");
-                                    }
-                                });
-                            }
-                            if (task.getResult().isEmpty()){
-                                receiverCallback.noData();
-                            }
-
+                        public void onSuccess(Task<DocumentSnapshot> task1) {
+                            receiverCallback.onSuccess(task);
+                            Log.d(TAG, "Contactlist retrived");
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
                         @Override
-                        public void onFailure(@NonNull Exception e) {
-                            receiverCallback.onFailure(e);
-
+                        public void onFailure(Exception exception) {
+                            Log.d(TAG, "Contact list failed to retrive");
+                        }
+                        @Override
+                        public void noData() {
+                            Log.d(TAG,  "Contact list failed, no data");
                         }
                     });
-
                 }
+                if (task.getResult().isEmpty()){
+                    receiverCallback.noData();
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                receiverCallback.onFailure(e);
+
+            }
+        });
+
     }
+}

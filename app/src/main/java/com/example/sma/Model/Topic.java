@@ -1,13 +1,12 @@
 package com.example.sma.Model;
 
+
+// @Author Gutav Kristensen s180077
 public class Topic {
 
     // Model til et emnes attributter.
-
-
- private String topicName;
- private String topicDescription;
-
+    private String topicName;
+    private String topicDescription;
 
     public String getTopicName() {
         return topicName;

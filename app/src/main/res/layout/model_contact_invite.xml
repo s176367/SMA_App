@@ -35,21 +35,23 @@
 
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/btn_check"
                 android:id="@+id/acceptContact_button"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="50dp"
-                android:text="Accept"
+                android:layout_marginRight="25dp"
+                android:layout_centerVertical="true"
                 />
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:id="@+id/denyContact_button"
+                android:background="@drawable/btn_cross"
                android:layout_marginTop="10dp"
-                android:layout_alignRight="@id/acceptContact_button"
-                android:layout_below="@id/acceptContact_button"
-                android:text="Deny"
+                android:layout_toStartOf="@id/acceptContact_button"
+                android:layout_marginEnd="25dp"
+                android:layout_centerVertical="true"
                 />
 
 

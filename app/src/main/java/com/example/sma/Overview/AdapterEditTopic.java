@@ -19,10 +19,11 @@ import com.example.sma.R;
 import java.util.List;
 
 
+// @Author Gutav Kristensen s180077
+// Bruges ikke til at ændre i topic, da vi ikke nåede at implementere det til firestore
+// Bruges derfor kun til at vise ens topics i overview.
 
 public class AdapterEditTopic extends RecyclerView.Adapter<AdapterEditTopic.TopicViewHolder> {
-
-    // Denne klasse anvendes til at vise de emner brugeren har i et møde.
     private int meetingPos;
     private Context context;
     private List<Topic> topicList;
@@ -43,14 +44,13 @@ public class AdapterEditTopic extends RecyclerView.Adapter<AdapterEditTopic.Topi
         return holder;
     }
 
-
-
     public void onBindViewHolder(TopicViewHolder holder, final int position) {
         final String title = topicList.get(position).getTopicName();
         final String desc = topicList.get(position).getTopicDescription();
         holder.topicTitle.setText(title);
         holder.topicDesc.setText(desc);
 
+        // Koden der skulle ændre agenda
 /*
         //OnClickListener der starter editTopic aktiviteten med de relevante informationer, der sendes med vha. intents.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +82,7 @@ public class AdapterEditTopic extends RecyclerView.Adapter<AdapterEditTopic.Topi
     class TopicViewHolder extends RecyclerView.ViewHolder {
         TextView topicTitle, topicDesc;
 
-        public TopicViewHolder(@NonNull View itemView) {
+        private TopicViewHolder(@NonNull View itemView) {
             super(itemView);
             topicTitle = itemView.findViewById(R.id.topicTitle);
             topicDesc = itemView.findViewById(R.id.topic_description);

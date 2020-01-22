@@ -5,28 +5,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.Topic;
 import com.example.sma.R;
-
-import java.util.ArrayList;
 import java.util.List;
 
+// @Author Gutav Kristensen s180077
 public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHolder> {
-
 
     private Context context;
     private List<Topic> topicList;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
-
-
-
 
     public TopicAdapter(Context context, List<Topic> data) {
         this.context = context;
@@ -55,9 +47,9 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               FragmentAddTopic tempTopic = new FragmentAddTopic(title,desc,position);
-                        ((FragmentActivity)view.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                tempTopic).addToBackStack(null).commit();
+                FragmentAddTopic tempTopic = new FragmentAddTopic(title,desc,position);
+                ((FragmentActivity)view.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        tempTopic).addToBackStack(null).commit();
             }
         });
     }

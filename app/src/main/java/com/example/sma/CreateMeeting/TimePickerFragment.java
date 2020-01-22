@@ -2,29 +2,21 @@ package com.example.sma.CreateMeeting;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.TimePicker;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-
 import com.example.sma.R;
-
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.util.Calendar;
+
 
 /*
 Fragment der bruges til at bruger kan vælge hvornår mødet skal starte
  */
-
+// @Author Mads Geertsen s176367
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
-
 
     String modifyHour;
     String modifyMin;
