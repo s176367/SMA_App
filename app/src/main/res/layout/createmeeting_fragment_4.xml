@@ -30,8 +30,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="25dp"
         android:layout_marginRight="25dp"
-        android:background="@drawable/next"
-        android:backgroundTint="@color/colorPrimaryDark"/>
+        android:background="@drawable/btn_check"
+        />
 
 
     <ScrollView

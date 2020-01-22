@@ -143,12 +143,11 @@
 
     <Button
         android:id="@+id/but_create1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/locationLayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/plus"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        />
+        android:layout_marginTop="45dp"
+        android:background="@drawable/btn_arrow_forward" />
 
 </RelativeLayout>
