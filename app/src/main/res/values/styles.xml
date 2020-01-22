@@ -19,8 +19,10 @@
     </style>
 
 
-    <style name="TextInputLayout.HintText">
-        <item name="android:colorAccent">@color/colorWhite</item>
+    <style name="TextInputLayout.HintText" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/colorWhite</item>
+        <item name="colorPrimary">@color/colorWhite</item>
+        <item name="colorControlNormal">@color/colorWhite</item>
         <item name="android:textSize">14sp</item>
     </style>
 
