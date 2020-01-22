@@ -9,7 +9,6 @@ public class MeetingObject {
     private String title;
     private String time;
     private String location;
-    private int antalPersoner;
     private String date;
     private String duration;
     private ArrayList<String> participants = new ArrayList<>();
@@ -18,6 +17,11 @@ public class MeetingObject {
     public ArrayList<String> getAcceptedParticipants() {
         return acceptedParticipants;
     }
+
+    public int getAcceptedParticipantSize(){
+       return getAcceptedParticipants().size();
+    }
+
     public ArrayList<String> getParticipants() {
         return participants;
     }
@@ -85,14 +89,6 @@ public class MeetingObject {
         this.location = location;
     }
 
-    public int getAntalPersoner() {
-        return antalPersoner;
-    }
-
-    public void setAntalPersoner(int antalPersoner) {
-        this.antalPersoner = antalPersoner;
-    }
-
     public String getDate() {
         return date;
     }
@@ -100,12 +96,6 @@ public class MeetingObject {
     public void setDate(String date) {
         this.date = date;
     }
-
-
-
-
-
-
 
 
 

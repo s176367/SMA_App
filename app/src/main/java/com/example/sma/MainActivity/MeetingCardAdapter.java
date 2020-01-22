@@ -49,7 +49,7 @@ public class MeetingCardAdapter extends RecyclerView.Adapter<MeetingCardAdapter.
         holder.textViewTitle.setText(meeting.getTitle());
         holder.textViewTime.setText(meeting.getTime());
         holder.textViewLocation.setText(meeting.getLocation());
-        holder.textViewPeopleCount.setText(String.valueOf(meeting.getAntalPersoner()));
+        holder.textViewPeopleCount.setText(String.valueOf(meeting.getAcceptedParticipantSize()));
         holder.textViewDate.setText(String.valueOf(meeting.getDate()));
 
         // Onclick listener der sender bruger videre til overblikket over det valgte møde.

@@ -22,7 +22,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class FirebaseControl implements IFirebaseControl {
 
@@ -96,6 +98,7 @@ public class FirebaseControl implements IFirebaseControl {
                     @Override
                     public void onSuccess() {
                         Log.d(TAG, "Meeting successfully created in database");
+                        senderCallback.onSuccess();
                     }
 
                     @Override
@@ -106,12 +109,25 @@ public class FirebaseControl implements IFirebaseControl {
                     }
                 });
 
+                insertToAcceptedList(documentReference.getId(), new SenderCallback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d(TAG, "onSuccess:  Meeting owner added to meeting");
+                    }
+
+                    @Override
+                    public void onFailure(Exception exception) {
+                        Log.d(TAG, "onFailure: Owner was not added" + exception);
+
+                    }
+                });
+
                 for (int i = 0; i < meetingObject.getParticipants().size(); i++) {
                     inviteParticipant(meetingObject.getParticipants().get(i), documentReference.getId(), new SenderCallback() {
                         @Override
                         public void onSuccess() {
                             Log.d(TAG, "Participant invited");
-                            senderCallback.onSuccess();
+
                         }
 
                         @Override
@@ -160,9 +176,9 @@ public class FirebaseControl implements IFirebaseControl {
             @Override
             public void onComplete(@NonNull final Task<QuerySnapshot> task) {
                 LocalDatabase.LD.deleteMeetingList();
+
                 if (task.isSuccessful()) {
                     if (task.getResult().isEmpty()) {
-                        System.out.println(task.getResult());
                         receiverCallback.noData();
                     }
                     else {
@@ -178,7 +194,8 @@ public class FirebaseControl implements IFirebaseControl {
 
                                 @Override
                                 public void onFailure(Exception exception) {
-                                    Log.d(TAG, "getMeeting failed");
+                                    Log.d(TAG, "getMeeting failed" + exception);
+                                    receiverCallback.onFailure(exception);
                                 }
 
                                 @Override
@@ -190,9 +207,7 @@ public class FirebaseControl implements IFirebaseControl {
                     }
 
                 }
-                if (task.getResult().isEmpty()) {
-                    receiverCallback.noData();
-                }
+
             }
         });
     }
@@ -230,7 +245,7 @@ public class FirebaseControl implements IFirebaseControl {
 
 
     @Override
-    public void insertMeetingID(final String meetingID, SenderCallback senderCallback) {
+    public void insertMeetingID(final String meetingID, final SenderCallback senderCallback) {
         String userId = LocalDatabase.LD.getUser().getUserID();
         MeetingIDObject meetingIDObject = new MeetingIDObject(meetingID);
         FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("meetings").add(meetingIDObject)
@@ -242,7 +257,7 @@ public class FirebaseControl implements IFirebaseControl {
                         getMeeting(meetingID, new ReceiverCallback() {
                             @Override
                             public void onSuccess(Task<DocumentSnapshot> task) {
-
+                            senderCallback.onSuccess();
                             }
 
                             @Override
@@ -258,6 +273,25 @@ public class FirebaseControl implements IFirebaseControl {
                     }
 
                 });
+    }
+
+    @Override
+    public void insertToAcceptedList(final String meetingID, final SenderCallback senderCallback) {
+
+        FC.collection("meetings").document(meetingID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot doc = task.getResult();
+                    MeetingObject meetingObject = doc.toObject(MeetingObject.class);
+                    meetingObject.getAcceptedParticipants().add(FirebaseAuth.getInstance().getUid());
+
+                    FC.collection("meetings").document(meetingID).update("acceptedParticipants", meetingObject.getAcceptedParticipants());
+                    senderCallback.onSuccess();
+                }
+            }
+        });
+
     }
 
 
@@ -364,13 +398,26 @@ public class FirebaseControl implements IFirebaseControl {
     }
 
     @Override
-    public void acceptMeetingRequest(String meetingID, SenderCallback senderCallback) {
+    public void acceptMeetingRequest(final String meetingID, SenderCallback senderCallback) {
         final MeetingIDObject meeting = new MeetingIDObject(meetingID);
 
 
         insertMeetingID(meetingID, new SenderCallback() {
             @Override
             public void onSuccess() {
+
+                insertToAcceptedList(meetingID, new SenderCallback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d(TAG, "onSuccess: user added to accepted list");
+                    }
+
+                    @Override
+                    public void onFailure(Exception exception) {
+
+                    }
+                });
+
 
             }
 
@@ -399,7 +446,6 @@ public class FirebaseControl implements IFirebaseControl {
 
             }
         });
-
 
         deleteMeetingRequest(meetingID, new SenderCallback() {
             @Override
@@ -480,7 +526,6 @@ public class FirebaseControl implements IFirebaseControl {
             }
         });
     }
-
 
     //Contact
     @Override
@@ -701,10 +746,8 @@ public class FirebaseControl implements IFirebaseControl {
     }
 
 
-
-
-                @Override
-                public void retriveAllContacts(final CollectionReceiverCallback receiverCallback) {
+    @Override
+    public void retriveAllContacts(final CollectionReceiverCallback receiverCallback) {
 
                     FC.collection("users").document(FirebaseAuth.getInstance().getUid()).collection("contacts")
                             .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -744,6 +787,4 @@ public class FirebaseControl implements IFirebaseControl {
                     });
 
                 }
-
-
-            }
+    }

@@ -1,10 +1,12 @@
 package com.example.sma.CreateMeeting;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 
@@ -51,7 +53,8 @@ public class ActivityCreateMeeting extends AppCompatActivity {
         int count = getSupportFragmentManager().getBackStackEntryCount();
 
         if (count == 0) {
-            super.onBackPressed();
+            Intent intent =  new Intent(this, ActivityMain.class);
+            startActivity(intent);
             //additional code
         } else {
             getSupportFragmentManager().popBackStack();
