@@ -1,11 +1,18 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+// Add the Fabric plugin.
+apply plugin: 'io.fabric'
+
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
+
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
         applicationId "com.example.sma"
-        minSdkVersion 15
+        minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -17,13 +24,40 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+
 }
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.preference:preference:1.1.0"
+    implementation 'com.android.support:appcompat-v7:29.+'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.google.firebase:firebase-invites:16.0.4'
     testImplementation 'junit:junit:4.12'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
+    implementation 'com.google.firebase:firebase-messaging:20.1.0'
+    implementation 'com.google.firebase:firebase-firestore:17.1.2'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.android.support:design:29.0.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'io.sentry:sentry-android:1.7.27'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.airbnb.android:lottie:3.3.1'
+    implementation 'com.google.firebase:firebase-database:19.2.0'
+
+    // Add the Firebase Crashlytics dependency.
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+
+
 }

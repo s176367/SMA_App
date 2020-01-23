@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark">
+
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="137dp"
+        android:layout_height="112dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="102dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/logo_m" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_company"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginEnd="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/imageView2"
+        android:textColorHint="@color/specialWhite"
+        app:hintTextAppearance="@style/TextInputLayout.HintText"
+        android:backgroundTint="@android:color/white"
+        android:theme="@style/TextInputLayout.HintText" >
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_ET_company"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Company"
+            android:theme="@style/TextInputLayout.HintText"
+            android:textAppearance="@style/TextInputLayout.HintText"
+            android:textColorHint="@color/colorWhite"
+            android:inputType="text"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@android:color/white"
+            android:drawableLeft="@drawable/baseline_work_white_24"
+            android:drawablePadding="5dp"
+            >
+
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginEnd="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/input_company"
+        android:textColorHint="@color/specialWhite"
+        app:hintTextAppearance="@style/TextInputLayout.HintText"
+        android:theme="@style/TextInputLayout.HintText"
+        android:backgroundTint="@android:color/white">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_ET_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:theme="@style/TextInputLayout.HintText"
+            android:textAppearance="@style/TextInputLayout.HintText"
+            android:inputType="text"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@android:color/white"
+            android:drawableLeft="@drawable/ic_person_black_24dp"
+            android:drawablePadding="5dp"
+
+            >
+
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginEnd="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/input_name"
+        android:textColorHint="@color/specialWhite"
+        app:hintTextAppearance="@style/TextInputLayout.HintText"
+        android:backgroundTint="@android:color/white">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_ET_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            app:hintTextAppearance="@style/TextInputLayout.HintText"
+            android:inputType="textEmailAddress"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@android:color/white"
+            android:drawableLeft="@drawable/baseline_email_white_24"
+            android:drawablePadding="5dp"
+            >
+
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginEnd="16dp"
+        android:layout_below="@+id/input_email"
+        android:layout_centerHorizontal="true"
+        android:textColorHint="@color/specialWhite"
+        app:hintTextAppearance="@style/TextInputLayout.HintText"
+        android:backgroundTint="@android:color/white">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_ET_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone"
+            android:inputType="phone"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@android:color/white"
+            android:drawableLeft="@drawable/baseline_call_white_24"
+            android:drawablePadding="5dp"
+            >
+
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginEnd="16dp"
+        android:layout_below="@+id/input_phone"
+        android:layout_centerHorizontal="true"
+        android:textColorHint="@color/specialWhite"
+        app:hintTextAppearance="@style/TextInputLayout.HintText"
+        android:backgroundTint="@android:color/white">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_ET_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/white"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="@android:color/white"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textCursorDrawable="@color/common_google_signin_btn_text_dark_default"
+            android:drawableLeft="@drawable/ic_lock_black_24dp"
+            android:drawablePadding="5dp">
+
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <TextView
+        android:id="@+id/login_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/input_password"
+        android:layout_alignRight="@id/input_password"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="1dp"
+        android:fontFamily="sans-serif"
+        android:text="Login here, if your are registered!"
+        android:textColor="#FFFFFFFF" />
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/login_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:background="@android:color/transparent"
+        android:text="Register"
+        android:textSize="20dp"
+        android:textColor="@android:color/white" />
+
+
+</RelativeLayout>
+
+</LinearLayout>

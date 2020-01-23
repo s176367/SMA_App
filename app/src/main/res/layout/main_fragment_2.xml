@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/meetingInviteLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    >
+
+    <ImageView
+        android:id="@+id/topBarInvites"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:srcCompat="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/titleInvites"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="27dp"
+        android:gravity="center_horizontal"
+        android:text="Meeting Invites"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@id/topBarInvites"
+    android:id="@+id/refreshInvites">
+
+    <ScrollView
+            android:requiresFadingEdge="vertical"
+            android:fadingEdgeLength="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/topBar"
+        >
+
+            <RelativeLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+               >
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_meeting_invites"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+             />
+
+
+            </RelativeLayout>
+
+
+
+        </ScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</RelativeLayout>
