@@ -69,14 +69,15 @@
                 android:id="@+id/checkBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:scaleX="2"
+                android:clickable="false"
+                android:scaleY="2"
+                android:layout_marginRight="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-
                 android:checked="false"
                 android:ellipsize="middle"
-                android:scrollbarSize="10dp"
-                android:text="Invite"
-                android:textSize="30dp" />
+                android:scrollbarSize="10dp" />
 
         </RelativeLayout>
 

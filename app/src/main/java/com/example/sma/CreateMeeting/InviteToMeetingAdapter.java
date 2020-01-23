@@ -24,9 +24,8 @@ public class InviteToMeetingAdapter extends RecyclerView.Adapter<InviteToMeeting
     // Denne adapter bruges til at lave views af brugerens kontakter.
     private Context mCtx;
     private List<User> contactList;
-    CheckBox checkBox;
     Button but_createMeeting;
-    ArrayList<String> contactsToInvite = new ArrayList<>();
+   ArrayList<String> contactsToInvite = new ArrayList<>();
     FragmentAddParticipants fragment;
 
     public InviteToMeetingAdapter(Context mCtx, List<User> contactList, FragmentAddParticipants fragment) {
@@ -51,17 +50,28 @@ public class InviteToMeetingAdapter extends RecyclerView.Adapter<InviteToMeeting
         holder.textViewMail.setText(contact.getEmail());
         holder.textViewPhone.setText(contact.getPhone());
         holder.textViewCompany.setText(contact.getCompany());
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    fragment.addUser(contact.getUserID());
-                }else {
+            public void onClick(View view) {
+                if (holder.checkBox.isChecked()){
+                    holder.checkBox.setChecked(false);
                     fragment.deleteUser(contact.getUserID());
+
                 }
+                else {
+                    holder.checkBox.setChecked(true);
+                    fragment.addUser(contact.getUserID());
+
+                }
+
             }
+
+
         });
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -69,9 +79,9 @@ public class InviteToMeetingAdapter extends RecyclerView.Adapter<InviteToMeeting
     }
 
 
-
     class ContactViewHolder extends RecyclerView.ViewHolder {
         TextView textViewName, textViewMail, textViewPhone, textViewCompany;
+        CheckBox checkBox;
 
         public ContactViewHolder(@NonNull View itemView) {
             super(itemView);
