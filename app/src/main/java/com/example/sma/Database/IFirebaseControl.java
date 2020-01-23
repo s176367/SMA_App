@@ -6,10 +6,9 @@ import com.example.sma.Model.MeetingObject;
 import com.example.sma.Model.User;
 
 import java.util.ArrayList;
-// @Author Gutav Kristensen s180077 - Fik lidt hjælp af gruppe c4 til vores firebase opsætning
+
+// @Author Gustav Kristensen s180077 - Fik lidt hjælp af gruppe c4 til vores firebase opsætning
 public interface IFirebaseControl {
-
-
 
     void createUser (User user,  SenderCallback senderCallback);
     void createMeeting (MeetingObject meetingObject, SenderCallback senderCallback);

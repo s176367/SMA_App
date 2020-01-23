@@ -2,7 +2,7 @@ package com.example.sma.Model;
 
 
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 public class ContactIDObject {
     String UserId;
     String docID;

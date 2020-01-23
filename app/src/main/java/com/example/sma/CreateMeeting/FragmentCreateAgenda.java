@@ -19,7 +19,7 @@ import com.example.sma.Database.SenderCallback;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 public class FragmentCreateAgenda extends Fragment{
     /*
     Dette fragment anvendes til at vise brugeren den agenda der oprettes,

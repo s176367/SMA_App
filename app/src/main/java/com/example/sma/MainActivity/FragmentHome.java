@@ -26,7 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 public class FragmentHome extends Fragment implements View.OnClickListener {
 
     // Dette er "hovedaktiviteten" hvor man kan se alle sine møder og starte oprettelsesprocessen af nye møder.

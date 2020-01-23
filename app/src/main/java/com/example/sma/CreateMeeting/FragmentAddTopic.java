@@ -20,7 +20,7 @@ import com.example.sma.R;
 import java.util.List;
 
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 public class FragmentAddTopic extends Fragment {
     private Button addTopic;
     private MeetingObject tempMeeting;

@@ -21,7 +21,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 
 public class FragmentCreateMeeting extends Fragment implements NumberPicker.OnValueChangeListener {
 

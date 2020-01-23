@@ -14,7 +14,7 @@ import com.example.sma.Overview.ActivityOverview;
 import com.example.sma.R;
 import java.util.List;
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 public class MeetingCardAdapter extends RecyclerView.Adapter<MeetingCardAdapter.MeetingViewHolder> {
 
     // Adapter der viser brugers møder udfra en møde liste.

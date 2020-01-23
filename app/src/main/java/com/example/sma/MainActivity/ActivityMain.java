@@ -14,7 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-// @Author Gutav Kristensen s180077
+    // @Author Gustav Kristensen s180077
 public class ActivityMain extends AppCompatActivity {
 
     // Denne klasse anvendes til at vise de tre hovedfragmenter i appen, som styres vha. bundnavigation

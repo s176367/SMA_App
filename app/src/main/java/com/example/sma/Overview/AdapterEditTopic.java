@@ -19,7 +19,7 @@ import com.example.sma.R;
 import java.util.List;
 
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 // Bruges ikke til at ændre i topic, da vi ikke nåede at implementere det til firestore
 // Bruges derfor kun til at vise ens topics i overview.
 

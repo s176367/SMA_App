@@ -29,7 +29,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 public class FragmentContacts extends Fragment {
 
     // Dette fragment bruges til at vise kontakterne vha. contactsadapteren der indsættes i et recyclerview

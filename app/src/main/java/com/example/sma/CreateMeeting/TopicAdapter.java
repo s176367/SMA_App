@@ -12,7 +12,7 @@ import com.example.sma.Model.Topic;
 import com.example.sma.R;
 import java.util.List;
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHolder> {
 
     private Context context;

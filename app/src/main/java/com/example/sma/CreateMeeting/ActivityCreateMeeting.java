@@ -8,7 +8,7 @@ import com.example.sma.MainActivity.ActivityMain;
 import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 public class ActivityCreateMeeting extends AppCompatActivity {
 
     // Denne aktivitet bruges til at vise de gældende fragmenter der anvendes til at mødeoprettelsesprocessen.

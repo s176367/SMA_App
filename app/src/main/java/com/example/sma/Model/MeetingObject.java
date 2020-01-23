@@ -3,7 +3,7 @@ package com.example.sma.Model;
 import java.util.ArrayList;
 
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 public class MeetingObject {
     // Model til de atributter en bruger skal kende til sine møder.
     private String id;

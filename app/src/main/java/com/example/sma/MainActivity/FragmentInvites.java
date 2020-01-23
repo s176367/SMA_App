@@ -20,11 +20,9 @@ import com.example.sma.R;
 import com.example.sma.RefreshContext;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
 import java.util.List;
 
-// @Author Gutav Kristensen s180077
+// @Author Guztav Kristensen s180077
 
 public class FragmentInvites extends Fragment {
 

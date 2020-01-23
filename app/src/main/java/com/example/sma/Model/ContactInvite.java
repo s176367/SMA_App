@@ -2,7 +2,7 @@ package com.example.sma.Model;
 
 
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 // Kunne nok godt have brugt ContactIDObject Metoden  :)
 public class ContactInvite {
     String userID;

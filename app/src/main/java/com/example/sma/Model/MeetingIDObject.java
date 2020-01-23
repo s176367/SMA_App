@@ -1,6 +1,6 @@
 package com.example.sma.Model;
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 public class MeetingIDObject {
 
     private String meetingID;

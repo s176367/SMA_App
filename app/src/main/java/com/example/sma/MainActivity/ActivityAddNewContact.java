@@ -16,7 +16,7 @@ import com.example.sma.R;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QuerySnapshot;
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 public class ActivityAddNewContact extends AppCompatActivity {
     public static final String TAG = "TAG";
     private Button btn_emailCheck;

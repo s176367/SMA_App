@@ -19,7 +19,7 @@ import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 import java.util.ArrayList;
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 public class FragmentOverview extends Fragment implements View.OnClickListener {
 
     // Klasse til at vise de basale informationer som mødet indeholder.

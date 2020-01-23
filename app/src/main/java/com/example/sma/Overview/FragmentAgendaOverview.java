@@ -14,7 +14,7 @@ import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 import java.util.List;
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 public class FragmentAgendaOverview extends Fragment {
 
     //Denne klasse viser vha. EditTopic adpateren de forskellige emner der er i mødet.

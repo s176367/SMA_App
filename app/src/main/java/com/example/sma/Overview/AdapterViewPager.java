@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 public class AdapterViewPager extends FragmentPagerAdapter {
 
     // Viewpager der gør så brugeren kan bladre mellem forskellige fragmenter i overview

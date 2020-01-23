@@ -16,7 +16,7 @@ import java.util.Comparator;
 import java.util.List;
 
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 public class LocalDatabase {
 
     /*

@@ -78,7 +78,6 @@ public class InviteToMeetingAdapter extends RecyclerView.Adapter<InviteToMeeting
         return contactList.size();
     }
 
-
     class ContactViewHolder extends RecyclerView.ViewHolder {
         TextView textViewName, textViewMail, textViewPhone, textViewCompany;
         CheckBox checkBox;
@@ -91,7 +90,6 @@ public class InviteToMeetingAdapter extends RecyclerView.Adapter<InviteToMeeting
             textViewCompany = itemView.findViewById(R.id.ContactInviteCompany);
             but_createMeeting = itemView.findViewById(R.id.finish_participants);
             checkBox = itemView.findViewById(R.id.checkBox);
-
         }
     }
 

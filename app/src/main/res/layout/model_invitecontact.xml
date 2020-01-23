@@ -40,12 +40,6 @@
                 android:text="Email@Email.com"
                 android:textSize="20sp" />
 
-
-
-
-
-
-
             <TextView
                 android:id="@+id/ContactInvitePhone"
                 android:layout_width="wrap_content"
@@ -54,7 +48,6 @@
                 android:layout_alignLeft="@id/ContactInviteName"
                 android:text="12345678"
                 android:textSize="20sp" />
-
 
             <TextView
                 android:id="@+id/ContactInviteCompany"

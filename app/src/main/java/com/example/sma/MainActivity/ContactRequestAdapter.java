@@ -16,7 +16,7 @@ import com.example.sma.R;
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.List;
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 public class ContactRequestAdapter extends RecyclerView.Adapter<ContactRequestAdapter.ContactViewHolder> {
 
     // Denne adapter bruges til at lave views af brugerens "venneanmodninger".

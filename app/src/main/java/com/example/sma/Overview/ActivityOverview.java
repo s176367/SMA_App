@@ -12,7 +12,7 @@ import com.example.sma.Model.MeetingObject;
 import com.example.sma.R;
 import com.google.android.material.tabs.TabLayout;
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 public class ActivityOverview extends AppCompatActivity {
 
     int position;
