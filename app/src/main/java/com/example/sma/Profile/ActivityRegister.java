@@ -68,18 +68,6 @@ public class ActivityRegister extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), ActivityProfile.class));
             finish();
 
-            Button crashButton = new Button(this);
-            crashButton.setText("Crash!");
-            crashButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View view) {
-                    Crashlytics.getInstance().crash(); // Force a crash
-                }
-            });
-
-            addContentView(crashButton, new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
-
         }
 
         btn_register.setOnClickListener(new View.OnClickListener() {
