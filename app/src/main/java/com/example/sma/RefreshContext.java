@@ -1,6 +1,6 @@
 package com.example.sma;
 
-// @Author Gutav Kristensen s180077
+// @Author Gustav Kristensen s180077
 // Bruges til at fortælle klasser hvorvidt de skal opdateres eller ej.
 public class RefreshContext {
     static Boolean home = true;
