@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/but_updateTopic"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/plus" />
+
+    <ImageView
+        android:id="@+id/topBar4"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:srcCompat="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/titleMeetings4"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="27dp"
+        android:gravity="center_horizontal"
+        android:text="Edit topic"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+    <EditText
+        android:id="@+id/topicTitle"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topBar4"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textSize="28dp"
+        android:textStyle="bold"
+        android:hint="Topic Title"/>
+
+    <EditText
+
+        android:id="@+id/topic_description"
+        android:layout_width="355dp"
+        android:layout_height="85dp"
+        android:layout_below="@+id/topicTitle"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginRight="30dp"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:gravity="top|left"
+        android:hint="What do you want to discuss?"
+        android:inputType="textMultiLine"
+        android:lines="3"
+        android:maxLines="10"
+        android:minLines="5"
+        android:scrollbars="vertical"
+        />
+</RelativeLayout>
