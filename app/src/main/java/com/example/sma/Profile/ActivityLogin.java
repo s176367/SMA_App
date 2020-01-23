@@ -48,6 +48,10 @@ public class ActivityLogin extends AppCompatActivity {
         email_ET = findViewById(R.id.email_ET);
         password_ET = findViewById(R.id.password_ET);
 
+        //Forud defineret bruger
+        email_ET.setText("test1234@test1234.dk");
+        password_ET.setText("test123");
+
         login_btn = findViewById(R.id.login_btn);
         register = findViewById(R.id.register_text);
         forgotPassword = findViewById(R.id.forgotPassword);
