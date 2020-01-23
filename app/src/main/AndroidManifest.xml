@@ -31,7 +31,6 @@
         <activity android:name=".Profile.ActivityRegister"
             android:theme="@style/TextInputLayout.HintText">
         </activity>
-        <activity android:name=".Overview.ActivityEditTopic" />
         <activity android:name=".MainActivity.ActivityMain" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

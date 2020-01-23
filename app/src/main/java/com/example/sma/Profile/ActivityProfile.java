@@ -1,6 +1,7 @@
 package com.example.sma.Profile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -44,6 +45,10 @@ public class ActivityProfile extends AppCompatActivity {
     public void logout(View v) {
         FirebaseAuth.getInstance().signOut();
         LocalDatabase.LD.deleteMeetingList();
+        LocalDatabase.LD.deleteParticipantList();
+        LocalDatabase.LD.deleteContactList();
+        LocalDatabase.LD.deleteMeetingInviteList();
+        LocalDatabase.LD.deleteContactInviteList();
         startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
         finish();
     }
