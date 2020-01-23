@@ -3,6 +3,7 @@ package com.example.sma.MainActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.crashlytics.android.Crashlytics;
 import com.example.sma.Database.CollectionReceiverCallback;
 import com.example.sma.Database.FirebaseControl;
 import com.example.sma.R;
@@ -63,6 +65,19 @@ public class ActivityAddNewContact extends AppCompatActivity {
                 });
             }
         });
+
+        Button crashButton = new Button(this);
+        crashButton.setText("Crash!");
+        crashButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Crashlytics.getInstance().crash(); // Force a crash
+            }
+        });
+
+        addContentView(crashButton, new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+
     }
 
 

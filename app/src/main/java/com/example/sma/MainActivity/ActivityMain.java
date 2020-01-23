@@ -4,9 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import com.crashlytics.android.Crashlytics;
 import com.example.sma.Profile.ActivityLogin;
 import com.example.sma.R;
 import com.example.sma.RefreshContext;
@@ -29,6 +35,19 @@ public class ActivityMain extends AppCompatActivity {
             Intent i = new Intent(ActivityMain.this, ActivityLogin.class);
             startActivity(i);
             finish();
+
+            Button crashButton = new Button(this);
+            crashButton.setText("Crash!");
+            crashButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    Crashlytics.getInstance().crash(); // Force a crash
+                }
+            });
+
+            addContentView(crashButton, new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
+
         }
 
         super.onCreate(savedInstanceState);

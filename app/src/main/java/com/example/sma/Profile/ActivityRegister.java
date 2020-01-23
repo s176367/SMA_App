@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.crashlytics.android.Crashlytics;
 import com.example.sma.Database.FirebaseControl;
 import com.example.sma.Database.LocalDatabase;
 import com.example.sma.Database.SenderCallback;
@@ -65,6 +67,19 @@ public class ActivityRegister extends AppCompatActivity {
         if (fAuth.getCurrentUser() != null) {
             startActivity(new Intent(getApplicationContext(), ActivityProfile.class));
             finish();
+
+            Button crashButton = new Button(this);
+            crashButton.setText("Crash!");
+            crashButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    Crashlytics.getInstance().crash(); // Force a crash
+                }
+            });
+
+            addContentView(crashButton, new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
+
         }
 
         btn_register.setOnClickListener(new View.OnClickListener() {

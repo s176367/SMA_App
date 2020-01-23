@@ -55,6 +55,8 @@ public class DurationNPFragment extends DialogFragment {
         });
         builder.setView(np);
         return builder.create();
+
+
     }
     public NumberPicker.OnValueChangeListener getValueChangeListener(){
         return valueChangeListener;

@@ -69,14 +69,13 @@ public class FragmentAddParticipants extends Fragment {
         refresh();
 
 
-
-
-
         // Skjuler tekst hvis der ikke er nogle contact requests.
 
 
 
         return view;
+
+
     }
 
     public void addUser(String userId){
